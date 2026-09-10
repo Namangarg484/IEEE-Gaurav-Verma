@@ -1,0 +1,106 @@
+12:01:31 [INFO    ] Device: mps
+12:01:31 [INFO    ] Loading dataset …
+12:01:31 [INFO    ] Patient split — train: 18 patients, val: 4 patients
+12:01:31 [INFO    ] Dataset ready: 704505 rows → 1409 windows of 500 samples.
+12:01:31 [WARNING ] DATA QUALITY: 13/50 probed windows have a CONSTANT PPG_Signal (std≈0). CWT scalograms and phase-space attractors will be uninformative for these windows. Inspect the CSV carefully.
+12:01:31 [INFO    ] Dataset ready: 140441 rows → 280 windows of 500 samples.
+12:01:31 [WARNING ] DATA QUALITY: 12/50 probed windows have a CONSTANT PPG_Signal (std≈0). CWT scalograms and phase-space attractors will be uninformative for these windows. Inspect the CSV carefully.
+12:01:31 [INFO    ] Train windows: 1409  |  Val windows: 280
+12:01:31 [INFO    ] 
+=== SANITY BASELINES ===
+12:01:31 [INFO    ]   [Global Mean] MAE=10.480  RMSE=10.545  ZoneA=100.0%
+12:01:31 [INFO    ]   [Per-Patient Mean] MAE=0.072  RMSE=0.501  ZoneA=100.0%
+/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/sklearn/linear_model/_base.py:293: RuntimeWarning: divide by zero encountered in matmul
+  return X @ coef_ + self.intercept_
+/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/sklearn/linear_model/_base.py:293: RuntimeWarning: overflow encountered in matmul
+  return X @ coef_ + self.intercept_
+/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/sklearn/linear_model/_base.py:293: RuntimeWarning: invalid value encountered in matmul
+  return X @ coef_ + self.intercept_
+12:01:31 [INFO    ]   [Vitals Ridge] MAE=15.187  RMSE=16.816  ZoneA=83.9%  features=['Heart_Rate', 'Systolic_Peak', 'Diastolic_Peak', 'Pulse_Area', 'Age', 'Gender']
+12:01:31 [INFO    ] 
+=== MODALITY ABLATION ===
+12:01:32 [INFO    ]   Training 1D-Only                      | epochs≤100 | device=mps
+12:01:37 [INFO    ]   [1D-Only] Epoch   1  train_mse=13453.20  val_mse=11637.43  val_mae=107.557
+12:02:18 [INFO    ]   [1D-Only] Epoch  10  train_mse=8311.68  val_mse=7102.64  val_mae=83.675
+12:03:03 [INFO    ]   [1D-Only] Epoch  20  train_mse=1813.45  val_mse=1183.29  val_mae=32.292
+12:03:50 [INFO    ]   [1D-Only] Epoch  30  train_mse=200.03  val_mse=100.47  val_mae=9.007
+12:04:35 [INFO    ]   [1D-Only] Epoch  40  train_mse=183.83  val_mse=118.82  val_mae=9.830
+12:04:49 [INFO    ]   [1D-Only] Early stop at epoch 43 (best=28)
+12:04:50 [INFO    ]   [1D-Only] DONE  MAE=7.293  RMSE=9.337  ZoneA=99.6%  time=197s
+12:04:50 [INFO    ]   Training 2D-Only                      | epochs≤100 | device=mps
+12:04:55 [INFO    ]   [2D-Only] Epoch   1  train_mse=13543.64  val_mse=11736.76  val_mae=108.016
+12:05:46 [INFO    ]   [2D-Only] Epoch  10  train_mse=8587.37  val_mse=6813.52  val_mae=81.928
+12:06:42 [INFO    ]   [2D-Only] Epoch  20  train_mse=1968.27  val_mse=1336.21  val_mae=34.111
+12:07:40 [INFO    ]   [2D-Only] Epoch  30  train_mse=189.42  val_mse=136.87  val_mae=9.760
+12:08:37 [INFO    ]   [2D-Only] Epoch  40  train_mse=171.83  val_mse=107.60  val_mae=8.798
+12:09:16 [INFO    ]   [2D-Only] Early stop at epoch 47 (best=32)
+12:09:17 [INFO    ]   [2D-Only] DONE  MAE=8.983  RMSE=9.966  ZoneA=100.0%  time=266s
+12:09:17 [INFO    ]   Training 3D-Only                      | epochs≤100 | device=mps
+12:09:22 [INFO    ]   [3D-Only] Epoch   1  train_mse=13499.93  val_mse=11790.71  val_mae=108.264
+12:10:05 [INFO    ]   [3D-Only] Epoch  10  train_mse=8385.56  val_mse=6741.79  val_mae=81.552
+12:10:54 [INFO    ]   [3D-Only] Epoch  20  train_mse=2280.49  val_mse=1377.89  val_mae=35.092
+12:11:43 [INFO    ]   [3D-Only] Epoch  30  train_mse=217.72  val_mse=112.43  val_mae=9.450
+12:12:57 [INFO    ]   [3D-Only] Epoch  40  train_mse=192.95  val_mse=115.20  val_mae=9.440
+12:13:12 [INFO    ]   [3D-Only] Early stop at epoch 43 (best=28)
+12:13:12 [INFO    ]   [3D-Only] DONE  MAE=7.173  RMSE=9.053  ZoneA=99.3%  time=235s
+12:13:12 [INFO    ]   Training 1D+2D Concat                 | epochs≤100 | device=mps
+12:13:18 [INFO    ]   [1D+2D Concat] Epoch   1  train_mse=13421.07  val_mse=11753.56  val_mae=108.098
+12:14:24 [INFO    ]   [1D+2D Concat] Epoch  10  train_mse=8060.92  val_mse=6648.38  val_mae=80.850
+12:15:34 [INFO    ]   [1D+2D Concat] Epoch  20  train_mse=1707.91  val_mse=1071.49  val_mae=30.591
+12:16:31 [INFO    ]   [1D+2D Concat] Epoch  30  train_mse=230.84  val_mse=171.31  val_mae=10.791
+12:17:25 [INFO    ]   [1D+2D Concat] Epoch  40  train_mse=198.80  val_mse=137.44  val_mae=10.085
+12:18:07 [INFO    ]   [1D+2D Concat] Early stop at epoch 47 (best=32)
+12:18:08 [INFO    ]   [1D+2D Concat] DONE  MAE=8.429  RMSE=9.650  ZoneA=100.0%  time=295s
+12:18:08 [INFO    ]   Training 1D+3D Concat                 | epochs≤100 | device=mps
+12:18:13 [INFO    ]   [1D+3D Concat] Epoch   1  train_mse=13439.62  val_mse=11730.64  val_mae=107.996
+12:19:05 [INFO    ]   [1D+3D Concat] Epoch  10  train_mse=8230.07  val_mse=6608.82  val_mae=80.720
+12:20:03 [INFO    ]   [1D+3D Concat] Epoch  20  train_mse=1574.89  val_mse=884.29  val_mae=27.456
+12:20:59 [INFO    ]   [1D+3D Concat] Epoch  30  train_mse=217.91  val_mse=98.29  val_mae=9.101
+12:21:55 [INFO    ]   [1D+3D Concat] Epoch  40  train_mse=166.43  val_mse=123.91  val_mae=10.209
+12:22:07 [INFO    ]   [1D+3D Concat] Early stop at epoch 42 (best=27)
+12:22:07 [INFO    ]   [1D+3D Concat] DONE  MAE=7.299  RMSE=9.136  ZoneA=99.6%  time=239s
+12:22:07 [INFO    ]   Training 1D+2D+3D Concat              | epochs≤100 | device=mps
+12:22:14 [INFO    ]   [1D+2D+3D Concat] Epoch   1  train_mse=13468.18  val_mse=11708.10  val_mae=107.888
+12:23:09 [INFO    ]   [1D+2D+3D Concat] Epoch  10  train_mse=8207.31  val_mse=6716.98  val_mae=81.427
+12:55:06 [INFO    ]   [1D+2D+3D Concat] Epoch  20  train_mse=1633.97  val_mse=1018.76  val_mae=29.509
+13:12:02 [INFO    ]   [1D+2D+3D Concat] Epoch  30  train_mse=197.43  val_mse=115.86  val_mae=9.304
+13:13:55 [INFO    ]   [1D+2D+3D Concat] Epoch  40  train_mse=170.79  val_mse=102.10  val_mae=9.305
+13:29:21 [INFO    ]   [1D+2D+3D Concat] Early stop at epoch 42 (best=27)
+13:29:22 [INFO    ]   [1D+2D+3D Concat] DONE  MAE=7.739  RMSE=9.000  ZoneA=99.6%  time=4034s
+13:29:22 [INFO    ] 
+=== SOTA BASELINES ===
+13:29:22 [INFO    ]   Training ResNet-1D                    | epochs≤100 | device=mps
+13:29:31 [INFO    ]   [ResNet-1D] Epoch   1  train_mse=13397.25  val_mse=11745.04  val_mae=108.058
+13:30:53 [INFO    ]   [ResNet-1D] Epoch  10  train_mse=8401.58  val_mse=6811.50  val_mae=81.915
+13:47:55 [INFO    ]   [ResNet-1D] Epoch  20  train_mse=2087.33  val_mse=1257.85  val_mae=33.839
+13:49:29 [INFO    ]   [ResNet-1D] Epoch  30  train_mse=340.97  val_mse=92.41  val_mae=8.238
+14:42:27 [INFO    ]   [ResNet-1D] Epoch  40  train_mse=311.80  val_mse=97.10  val_mae=9.123
+14:43:22 [INFO    ]   [ResNet-1D] Epoch  50  train_mse=330.44  val_mse=100.97  val_mae=9.453
+14:43:33 [INFO    ]   [ResNet-1D] Early stop at epoch 52 (best=37)
+14:43:34 [INFO    ]   [ResNet-1D] DONE  MAE=8.686  RMSE=9.561  ZoneA=100.0%  time=4452s
+14:43:34 [INFO    ]   Training CNN-LSTM                     | epochs≤100 | device=mps
+14:43:42 [INFO    ]   [CNN-LSTM] Epoch   1  train_mse=13589.41  val_mse=11986.94  val_mae=109.169
+14:44:42 [INFO    ]   [CNN-LSTM] Epoch  10  train_mse=8880.62  val_mse=7829.06  val_mae=88.087
+14:45:49 [INFO    ]   [CNN-LSTM] Epoch  20  train_mse=1994.55  val_mse=1279.15  val_mae=34.409
+14:46:57 [INFO    ]   [CNN-LSTM] Epoch  30  train_mse=355.16  val_mse=87.98  val_mae=6.914
+14:48:03 [INFO    ]   [CNN-LSTM] Epoch  40  train_mse=358.17  val_mse=83.69  val_mae=8.176
+14:49:07 [INFO    ]   [CNN-LSTM] Epoch  50  train_mse=326.67  val_mse=80.73  val_mae=7.814
+14:50:11 [INFO    ]   [CNN-LSTM] Epoch  60  train_mse=319.52  val_mse=79.74  val_mae=6.863
+14:51:02 [INFO    ]   [CNN-LSTM] Early stop at epoch 68 (best=53)
+14:51:02 [INFO    ]   [CNN-LSTM] DONE  MAE=6.567  RMSE=8.295  ZoneA=100.0%  time=448s
+14:51:02 [INFO    ] 
+=== FULL FUSION MODEL (from checkpoint) ===
+Traceback (most recent call last):
+  File "/Users/namangarg/Desktop/Gaurav Verma/run_ablation_baselines.py", line 730, in <module>
+    # ── Plots ─────────────────────────────────────────────────────────────────
+    ^^^^
+  File "/Users/namangarg/Desktop/Gaurav Verma/run_ablation_baselines.py", line 697, in main
+    batch["2d_spectrogram"].to(DEVICE),
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/namangarg/Desktop/Gaurav Verma/run_ablation_baselines.py", line 409, in eval_only
+    model.load_state_dict(
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/module.py", line 2635, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for _FullModelWrapper:
+	Missing key(s) in state_dict: "net.branch_1d.conv1.0.weight", "net.branch_1d.conv1.1.weight", "net.branch_1d.conv1.1.bias", "net.branch_1d.conv1.1.running_mean", "net.branch_1d.conv1.1.running_var", "net.branch_1d.conv2.0.weight", "net.branch_1d.conv2.1.weight", "net.branch_1d.conv2.1.bias", "net.branch_1d.conv2.1.running_mean", "net.branch_1d.conv2.1.running_var", "net.branch_1d.conv3.0.weight", "net.branch_1d.conv3.1.weight", "net.branch_1d.conv3.1.bias", "net.branch_1d.conv3.1.running_mean", "net.branch_1d.conv3.1.running_var", "net.branch_1d.proj.weight", "net.branch_1d.proj.bias", "net.branch_2d.conv1.0.weight", "net.branch_2d.conv1.1.weight", "net.branch_2d.conv1.1.bias", "net.branch_2d.conv1.1.running_mean", "net.branch_2d.conv1.1.running_var", "net.branch_2d.conv2.0.weight", "net.branch_2d.conv2.1.weight", "net.branch_2d.conv2.1.bias", "net.branch_2d.conv2.1.running_mean", "net.branch_2d.conv2.1.running_var", "net.branch_2d.conv3.0.weight", "net.branch_2d.conv3.1.weight", "net.branch_2d.conv3.1.bias", "net.branch_2d.conv3.1.running_mean", "net.branch_2d.conv3.1.running_var", "net.branch_2d.proj.weight", "net.branch_2d.proj.bias", "net.branch_3d.mlp.0.weight", "net.branch_3d.mlp.1.weight", "net.branch_3d.mlp.1.bias", "net.branch_3d.mlp.1.running_mean", "net.branch_3d.mlp.1.running_var", "net.branch_3d.mlp.3.weight", "net.branch_3d.mlp.4.weight", "net.branch_3d.mlp.4.bias", "net.branch_3d.mlp.4.running_mean", "net.branch_3d.mlp.4.running_var", "net.branch_3d.mlp.6.weight", "net.branch_3d.mlp.7.weight", "net.branch_3d.mlp.7.bias", "net.branch_3d.mlp.7.running_mean", "net.branch_3d.mlp.7.running_var", "net.fusion.query", "net.fusion.projs.0.weight", "net.fusion.projs.1.weight", "net.fusion.projs.2.weight", "net.head.0.weight", "net.head.0.bias", "net.head.1.weight", "net.head.1.bias", "net.head.1.running_mean", "net.head.1.running_var", "net.head.4.weight", "net.head.4.bias", "net.head.6.weight", "net.head.6.bias". 
+	Unexpected key(s) in state_dict: "branch_1d.conv1.0.weight", "branch_1d.conv1.1.weight", "branch_1d.conv1.1.bias", "branch_1d.conv1.1.running_mean", "branch_1d.conv1.1.running_var", "branch_1d.conv1.1.num_batches_tracked", "branch_1d.conv2.0.weight", "branch_1d.conv2.1.weight", "branch_1d.conv2.1.bias", "branch_1d.conv2.1.running_mean", "branch_1d.conv2.1.running_var", "branch_1d.conv2.1.num_batches_tracked", "branch_1d.conv3.0.weight", "branch_1d.conv3.1.weight", "branch_1d.conv3.1.bias", "branch_1d.conv3.1.running_mean", "branch_1d.conv3.1.running_var", "branch_1d.conv3.1.num_batches_tracked", "branch_1d.proj.weight", "branch_1d.proj.bias", "branch_2d.conv1.0.weight", "branch_2d.conv1.1.weight", "branch_2d.conv1.1.bias", "branch_2d.conv1.1.running_mean", "branch_2d.conv1.1.running_var", "branch_2d.conv1.1.num_batches_tracked", "branch_2d.conv2.0.weight", "branch_2d.conv2.1.weight", "branch_2d.conv2.1.bias", "branch_2d.conv2.1.running_mean", "branch_2d.conv2.1.running_var", "branch_2d.conv2.1.num_batches_tracked", "branch_2d.conv3.0.weight", "branch_2d.conv3.1.weight", "branch_2d.conv3.1.bias", "branch_2d.conv3.1.running_mean", "branch_2d.conv3.1.running_var", "branch_2d.conv3.1.num_batches_tracked", "branch_2d.proj.weight", "branch_2d.proj.bias", "branch_3d.mlp.0.weight", "branch_3d.mlp.1.weight", "branch_3d.mlp.1.bias", "branch_3d.mlp.1.running_mean", "branch_3d.mlp.1.running_var", "branch_3d.mlp.1.num_batches_tracked", "branch_3d.mlp.3.weight", "branch_3d.mlp.4.weight", "branch_3d.mlp.4.bias", "branch_3d.mlp.4.running_mean", "branch_3d.mlp.4.running_var", "branch_3d.mlp.4.num_batches_tracked", "branch_3d.mlp.6.weight", "branch_3d.mlp.7.weight", "branch_3d.mlp.7.bias", "branch_3d.mlp.7.running_mean", "branch_3d.mlp.7.running_var", "branch_3d.mlp.7.num_batches_tracked", "fusion.query", "fusion.projs.0.weight", "fusion.projs.1.weight", "fusion.projs.2.weight", "head.0.weight", "head.0.bias", "head.1.weight", "head.1.bias", "head.1.running_mean", "head.1.running_var", "head.1.num_batches_tracked", "head.4.weight", "head.4.bias", "head.6.weight", "head.6.bias". 

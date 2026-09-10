@@ -1,0 +1,13 @@
+# Research Paper Abstract
+
+**Title:** A Novel Multimodal 1D-2D-3D Deep Fusion Network with Cross-Attention for Robust Non-Invasive Blood Glucose Monitoring using Photoplethysmography
+
+**Abstract:**
+
+Non-invasive blood glucose monitoring remains a significant challenge in personalized healthcare due to the inherent signal-to-noise limitations of Photoplethysmography (PPG). While deep learning has shown promise, traditional 1D signal processing often fails to capture the complex, non-linear cardiovascular dynamics associated with glucose variability. In this paper, we propose a novel multimodal fusion architecture that simultaneously analyzes PPG signals across three domains: temporal (1D), time-frequency (2D), and phase-space (3D). 
+
+The proposed system utilizes a parallel branch architecture: (1) a 1D-CNN for temporal morphology extraction, (2) a 2D-CNN integrated with a high-resolution Continuous Wavelet Transform (CWT) for spectral harmonic analysis, and (3) a 3D-CNN based on Takens’ Delay Embedding to capture the chaotic attractor dynamics of the heartbeat. To optimize the integration of these disparate features, we introduce a Cross-Attention Fusion Mechanism that dynamically weights the contribution of each branch based on real-time signal quality. 
+
+The model was evaluated on a large-scale dataset of approximately 840,000 continuous data points. Experimental results demonstrate state-of-the-art performance, achieving a Mean Squared Error (MSE) of 76.42 mg/dL² (RMSE = 8.74 mg/dL) and a Mean Absolute Error (MAE) of 6.85 mg/dL. Clinical validation via Clarke Error Grid Analysis confirms the model’s robustness, with 100.0% of predictions landing in the clinically accurate Zone A. These findings suggest that multidimensional attention-based fusion significantly improves the clinical reliability of non-invasive sensors, paving the way for the next generation of wearable glucose-monitoring devices.
+
+**Keywords:** Non-invasive Glucose Monitoring, PPG, Multimodal Fusion, Continuous Wavelet Transform, Cross-Attention, Deep Learning, Clarke Error Grid.

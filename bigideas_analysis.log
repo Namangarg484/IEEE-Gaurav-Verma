@@ -1,0 +1,40 @@
+2026-05-20 21:23:50,027  INFO      Dataset root: /Users/namangarg/Desktop/Gaurav Verma/physionet.org/files/big-ideas-glycemic-wearable/1.1.3
+2026-05-20 21:23:50,039  INFO      Demographics: 16 subjects | HbA1c 5.3–6.4%
+2026-05-20 21:23:50,039  INFO      Found 1 subject folder(s) to analyse: ['001']
+2026-05-20 21:23:50,039  INFO      
+  ── Subject 001 ──
+2026-05-20 21:23:50,056  INFO          Dexcom: 2561 EGV readings  |  glucose 46.0–155.0 mg/dL
+2026-05-20 21:23:50,165  INFO          Saved: /Users/namangarg/Desktop/Gaurav Verma/BigIdeas_001_Glucose_Timeseries.png
+2026-05-20 21:23:50,165  INFO          Streaming BVP (this may take 1–3 min for large files) ...
+2026-05-20 21:23:50,166  INFO          BVP columns: ts='datetime'  val=' bvp'
+2026-05-20 21:24:56,012  INFO            Streamed 10 M BVP rows, 19412 windows so far ...
+2026-05-20 21:26:03,036  INFO            Streamed 20 M BVP rows, 39768 windows so far ...
+2026-05-20 21:27:10,382  INFO            Streamed 30 M BVP rows, 58607 windows so far ...
+2026-05-20 21:28:18,498  INFO            Streamed 40 M BVP rows, 78966 windows so far ...
+2026-05-20 21:28:22,973  INFO          BVP: 40592838 total rows streamed, 80326 windows extracted
+2026-05-20 21:28:23,028  INFO          SQI threshold: 1.9565  |  clean windows: 74487/78408 (95.0%)
+2026-05-20 21:28:27,563  INFO          Saved: /Users/namangarg/Desktop/Gaurav Verma/BigIdeas_001_BVP_Sample.png
+2026-05-20 21:28:27,774  INFO          Saved: /Users/namangarg/Desktop/Gaurav Verma/BigIdeas_001_Alignment_Timeline.png
+2026-05-20 21:28:27,777  INFO      
+Combined: 78408 windows across 1 subject(s)
+2026-05-20 21:28:27,945  INFO          Archive glucose: mean=115.4, std=19.1
+2026-05-20 21:28:28,043  INFO          Saved: /Users/namangarg/Desktop/Gaurav Verma/BigIdeas_Fig_Glucose_Distribution.png
+2026-05-20 21:28:28,075  INFO      Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-05-20 21:28:28,075  INFO      Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-05-20 21:28:28,229  INFO          Saved: /Users/namangarg/Desktop/Gaurav Verma/BigIdeas_Fig_Full_Analysis.png
+2026-05-20 21:28:28,391  INFO      Saved: bigideas_windows.csv (78408 rows)
+2026-05-20 21:28:28,393  INFO      Saved: /Users/namangarg/Desktop/Gaurav Verma/BigIdeas_Analysis_Report.json
+2026-05-20 21:28:28,393  INFO      
+============================================================
+2026-05-20 21:28:28,394  INFO        BigIdeas Dataset Analysis — Summary
+2026-05-20 21:28:28,394  INFO      ============================================================
+2026-05-20 21:28:28,394  INFO        Subjects analysed:    1 / 16 downloaded
+2026-05-20 21:28:28,394  INFO        Total BVP windows:    78408
+2026-05-20 21:28:28,394  INFO        Clean windows (SQI): 74487 / 78408 (95.0%)
+2026-05-20 21:28:28,394  INFO        Glucose range:       58 – 155 mg/dL
+2026-05-20 21:28:28,394  INFO        Glucose std:         16.32 mg/dL  (within-patient variability!)
+2026-05-20 21:28:28,394  INFO        Archive comparison:  archive within-patient std ≈ 0 mg/dL
+2026-05-20 21:28:28,394  INFO        ➜  BigIdeas enables true within-patient glucose tracking evaluation
+2026-05-20 21:28:28,394  INFO      ============================================================
+2026-05-20 21:28:28,394  INFO        Output files in: /Users/namangarg/Desktop/Gaurav Verma
+2026-05-20 21:28:28,395  INFO      ============================================================

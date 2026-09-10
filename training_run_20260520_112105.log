@@ -1,0 +1,41 @@
+2026-05-20 11:21:06,249  INFO      =================================================================
+2026-05-20 11:21:06,249  INFO        PPG Multimodal Fusion Network — Training
+2026-05-20 11:21:06,249  INFO        Log file : /Users/namangarg/Desktop/Gaurav Verma/training_run.log
+2026-05-20 11:21:06,249  INFO      =================================================================
+2026-05-20 11:21:06,249  INFO      Config  epochs=200   batch=16   lr=0.0005  patience=15  min_delta=0.50
+2026-05-20 11:21:06,257  INFO      Hardware: Apple Silicon GPU (MPS) — using Metal acceleration
+2026-05-20 11:21:06,257  INFO      Loading and splitting dataset: /Users/namangarg/Desktop/Gaurav Verma/Archive_Dataset/clean-dataset.csv
+2026-05-20 11:21:06,503  INFO      Patient split — train: 18 patients, val: 4 patients
+2026-05-20 11:21:06,503  INFO      Dataset ready: 704505 rows → 1409 windows of 500 samples.
+2026-05-20 11:21:06,504  WARNING   DATA QUALITY: 13/50 probed windows have a CONSTANT PPG_Signal (std≈0). CWT scalograms and phase-space attractors will be uninformative for these windows. Inspect the CSV carefully.
+2026-05-20 11:21:06,504  INFO      Dataset ready: 140441 rows → 280 windows of 500 samples.
+2026-05-20 11:21:06,506  WARNING   DATA QUALITY: 12/50 probed windows have a CONSTANT PPG_Signal (std≈0). CWT scalograms and phase-space attractors will be uninformative for these windows. Inspect the CSV carefully.
+2026-05-20 11:21:06,507  INFO      Train windows: 1409   Val windows: 280
+2026-05-20 11:21:06,548  INFO      Running pre-training shape sanity check ...
+Traceback (most recent call last):
+  File "/Users/namangarg/Desktop/Gaurav Verma/train_fusion_model.py", line 395, in <module>
+    train(
+  File "/Users/namangarg/Desktop/Gaurav Verma/train_fusion_model.py", line 254, in train
+    sanity_check(model, device)
+  File "/Users/namangarg/Desktop/Gaurav Verma/train_fusion_model.py", line 100, in sanity_check
+    f1 = model.branch_1d(d1)
+         ^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/namangarg/Desktop/Gaurav Verma/fusion_network_model.py", line 65, in forward
+    x = self.pool(x)
+        ^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/pooling.py", line 1470, in forward
+    return F.adaptive_avg_pool1d(input, self.output_size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Adaptive pool MPS: input sizes must be divisible by output sizes. Non-divisible input sizes are not implemented on MPS device yet. For now, you can manually transfer tensor to cpu in this case. Please refer to [this issue](https://github.com/pytorch/pytorch/issues/96056)

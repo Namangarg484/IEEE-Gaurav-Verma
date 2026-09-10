@@ -1,0 +1,21 @@
+12:08:42 [INFO    ] Device: mps
+12:08:42 [INFO    ] Loading dataset …
+12:08:42 [INFO    ] 
+=== 1. SIGNAL QUALITY INDEX ANALYSIS ===
+12:08:43 [INFO    ] Evaluating model on 232 clean-only val windows …
+12:08:43 [INFO    ] Dataset ready: 116000 rows → 232 windows of 500 samples.
+12:08:43 [INFO    ] Signal quality audit: all 50 probed windows have variance > 0.
+12:08:44 [INFO    ] Clean-only  MAE=6.211  RMSE=8.592
+12:08:44 [INFO    ] Saved: Paper_SQI_Analysis.png
+12:08:44 [INFO    ] Saved: sqi_results.json  {'threshold': 0.24853075276540784, 'train_total': 1409, 'train_pass': 970, 'val_total': 280, 'val_pass': 232, 'train_fail_pct': 31.2, 'val_fail_pct': 17.1, 'mae_clean': 6.211, 'rmse_clean': 8.592}
+12:08:44 [INFO    ] t-SNE skipped.
+12:08:44 [INFO    ] 
+=== 3. ATTRACTOR ANALYSIS ===
+12:08:44 [INFO    ] Loading cached attractor stats from attractor_stats.json
+12:08:44 [INFO    ] Correlation Dimension:  mean=0.558 ± 0.570  |  r vs glucose = -0.072
+12:08:44 [INFO    ] Largest Lyapunov Exp.:  mean=0.0129 ± 0.0034  |  r vs glucose = 0.085
+/Users/namangarg/Desktop/Gaurav Verma/run_extended_analysis.py:550: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  bp = ax3.boxplot(groups, labels=quartiles, patch_artist=True,
+12:08:44 [INFO    ] Saved: Paper_Attractor_Analysis.png
+12:08:44 [INFO    ] 
+All extended analyses complete.

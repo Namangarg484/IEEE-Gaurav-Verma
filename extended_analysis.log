@@ -1,0 +1,3 @@
+usage: run_extended_analysis.py [-h] [--device DEVICE] [--skip-tsne]
+                                [--skip-attractor]
+run_extended_analysis.py: error: unrecognized arguments: --skip_tsne

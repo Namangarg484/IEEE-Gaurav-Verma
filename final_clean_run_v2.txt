@@ -1,0 +1,573 @@
+/Users/namangarg/.matplotlib is not a writable directory
+Matplotlib created a temporary cache directory at /tmp/matplotlib-6ph8ep1u because there was an issue with the default path (/Users/namangarg/.matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+
+Fontconfig error: No writable cache directories
+	/opt/homebrew/var/cache/fontconfig
+	/Users/namangarg/.cache/fontconfig
+	/Users/namangarg/.fontconfig
+
+Fontconfig error: No writable cache directories
+	/opt/homebrew/var/cache/fontconfig
+	/Users/namangarg/.cache/fontconfig
+	/Users/namangarg/.fontconfig
+
+Fontconfig error: No writable cache directories
+	/opt/homebrew/var/cache/fontconfig
+	/Users/namangarg/.cache/fontconfig
+	/Users/namangarg/.fontconfig
+
+Fontconfig error: No writable cache directories
+	/opt/homebrew/var/cache/fontconfig
+	/Users/namangarg/.cache/fontconfig
+	/Users/namangarg/.fontconfig
+Matplotlib is building the font cache; this may take a moment.
+Hardware Acceleration Found: Apple Silicon GPU (MPS)
+
+Loading Dataset and Splitting by Patient ID (No Leakage)...
+Dataset initialized with 1409 continuous windows of size 500.
+Dataset initialized with 280 continuous windows of size 500.
+
+Starting Training Strategy Fusion Model (1D+2D+3D)...
+Max Epochs: 100 | Batch Size: 32 | Training Samples: 1409
+  0%|          | 0/45 [00:00<?, ?it/s]2026-03-20 21:25:34.082 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-2394271586‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:34.267 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-4053383179‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:34.402 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-992986348‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:34.525 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-2094533614‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:34.528 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-2977383071‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:34.642 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-1036905953‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:34.647 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-1201068776‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:34.697 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-3287669842‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:34.821 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-1989627881‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:34.859 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-1270163961‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:34.973 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-2595142610‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:34.975 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-3052792753‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:34.977 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-570634402‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:34.979 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_34-4024784832‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:35.081 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_35-3720851036‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:35.083 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_35-1320500428‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:35.204 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_35-1405578675‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:35.206 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_35-1704832923‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:35.208 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_35-565132571‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:35.211 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_35-61021415‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:35.599 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_35-1503642039‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:35.632 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_35-1188152314‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:35.755 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_35-1533678919‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:36.118 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_36-2581769610‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:36.154 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_36-3867831004‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:36.184 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_36-1538598957‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:36.304 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_36-1566031739‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:36.429 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_36-3447296978‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:36.535 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_36-651833101‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:36.540 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_36-2161969506‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:36.586 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_36-2331761409‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:36.634 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_36-3754078355‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:36.859 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_36-728474361‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:36.902 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_36-2604186871‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:36.946 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_36-3081399776‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:37.101 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_37-3171654799‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:37.103 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_37-988947697‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:37.159 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_37-3773948941‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:37.220 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_37-252980769‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:37.406 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_37-3876493133‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:37.412 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_37-2284468621‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:37.414 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_37-2468328937‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:37.572 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_37-757520768‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:37.711 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_37-2027041425‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:37.842 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_37-1536196176‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:37.955 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_37-1595772718‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:37.957 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_37-1516868141‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.003 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-570384179‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.057 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-736506543‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.059 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-1741112284‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.107 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-451971428‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.165 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-1737866638‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.309 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-1645885781‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.355 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-3779950934‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.439 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-2975858428‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.488 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-2341900153‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.595 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-599599794‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.597 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-210171289‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.599 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-2866583550‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.653 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-2780653213‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.655 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-3035119461‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.657 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-2896939169‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.703 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-2267589955‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.705 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-4137534981‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.773 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-2308493201‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.820 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-705051686‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.932 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-5665296‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:38.988 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_38-4125219230‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.096 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-3482992394‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.098 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-126434511‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.099 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-2418844395‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.193 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-75249932‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.236 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-1961582470‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.238 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-3085729258‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.240 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-1238053470‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.241 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-3877538286‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.282 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-1425069253‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.285 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-3274263571‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.335 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-2766968821‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.337 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-3560809990‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.429 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-2056160465‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.503 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-3787981205‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.505 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-2246276068‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.566 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-2809192012‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.571 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-1262579493‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.668 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-452018178‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.725 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-1148676743‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.727 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-2699661884‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.729 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-2291578402‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.731 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-3933360751‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.782 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-945186584‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.797 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-320459633‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.854 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-197190088‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.906 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-1002767729‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:39.957 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_39-1884381615‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.006 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-2962664492‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.060 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-3320539633‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.114 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-1291543836‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.117 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-51027733‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.121 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-906292159‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.182 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-2744297099‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.245 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-2381112152‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.248 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-270711806‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.249 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-2690767434‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.309 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-3387375573‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.369 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-2131249259‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.435 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-855285369‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.497 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-1606574811‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.499 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-3711383162‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.504 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-452725550‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.556 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-1071470450‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.609 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-1114095077‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.660 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-4191129247‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.710 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-2504621524‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.712 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-3572222074‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.714 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-2384356574‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.716 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-3403927812‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.724 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-3567508130‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.725 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-1682612660‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.727 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-4134261786‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.777 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-1444762157‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.842 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-1061177538‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.845 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-3194411150‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.848 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-1285879016‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.850 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-1625944459‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.854 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-3705341924‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.856 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-2497821343‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.867 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-3855655419‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.895 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-1226117025‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.908 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-69245017‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.914 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-709230723‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.918 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-1386232184‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:40.986 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_40-1934761867‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+  2%|▏         | 1/45 [00:07<05:31,  7.53s/it]  7%|▋         | 3/45 [00:07<01:24,  2.01s/it] 11%|█         | 5/45 [00:07<00:40,  1.02s/it] 16%|█▌        | 7/45 [00:07<00:23,  1.63it/s] 20%|██        | 9/45 [00:08<00:14,  2.45it/s] 24%|██▍       | 11/45 [00:08<00:09,  3.43it/s] 29%|██▉       | 13/45 [00:08<00:06,  4.64it/s] 33%|███▎      | 15/45 [00:08<00:05,  5.93it/s] 38%|███▊      | 17/45 [00:08<00:03,  7.37it/s] 42%|████▏     | 19/45 [00:08<00:02,  8.68it/s] 47%|████▋     | 21/45 [00:08<00:02, 10.05it/s] 51%|█████     | 23/45 [00:09<00:01, 11.02it/s] 56%|█████▌    | 25/45 [00:09<00:01, 11.71it/s] 60%|██████    | 27/45 [00:09<00:01, 12.70it/s] 64%|██████▍   | 29/45 [00:09<00:01, 13.14it/s] 69%|██████▉   | 31/45 [00:09<00:01, 13.82it/s] 73%|███████▎  | 33/45 [00:09<00:00, 13.96it/s] 78%|███████▊  | 35/45 [00:09<00:00, 14.45it/s] 82%|████████▏ | 37/45 [00:10<00:00, 14.32it/s] 87%|████████▋ | 39/45 [00:10<00:00, 14.13it/s] 91%|█████████ | 41/45 [00:10<00:00, 14.55it/s] 96%|█████████▌| 43/45 [00:10<00:00, 14.48it/s]2026-03-20 21:25:44.004 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-1388755421‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.082 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-1535300827‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.088 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-795071239‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.171 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-1371734245‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.173 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-3958359603‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.255 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-433105585‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.257 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-3990287826‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.307 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-3859668455‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.391 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-1655588629‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.394 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-3049737562‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.485 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-4236272543‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.487 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-2574709128‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.576 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-836259748‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.578 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-1582394809‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.652 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-3813017532‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.654 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-472162068‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.735 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-1857182028‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.737 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-518537137‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.738 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-1384180364‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:44.740 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_44-1711536197‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:45.284 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_45-362574445‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:45.320 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_45-483256701‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:45.433 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_45-170512584‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:45.816 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_45-2763779832‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:45.855 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_45-4100689082‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.079 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-1172097855‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.204 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-2851301796‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.244 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-1003077391‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.288 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-3316644299‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.410 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-1961979213‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.413 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-1985298225‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.458 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-3766665543‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.578 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-203670070‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.663 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-2964976059‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.665 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-2187644200‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.809 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-3011587267‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.876 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-1853790571‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.970 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-1308892368‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.973 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-1815980442‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:46.975 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_46-2093385190‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:47.133 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_47-907486478‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:47.255 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_47-4289470025‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:47.385 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_47-1411719689‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:47.505 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_47-2216434179‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:47.507 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_47-2334131221‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:47.628 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_47-2820275935‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:47.630 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_47-3656110172‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:47.751 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_47-2626529544‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:47.809 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_47-1270379338‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:47.949 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_47-1822553774‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:47.954 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_47-2769736383‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.031 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-1877473871‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.032 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-1463092078‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.139 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2402750916‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.141 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-3923340764‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.142 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-825377969‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.144 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-1714965658‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.146 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2728758685‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.148 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-770781260‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.150 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2972208105‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.155 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-490366738‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.219 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2110692915‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.221 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2268282701‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.312 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-430973110‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.314 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-1461676774‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.416 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-3280303186‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.421 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2549790717‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.423 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2973612538‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.424 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-1422648883‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.426 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-667772845‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.428 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-1619528977‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.430 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2433487813‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.432 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2841588860‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.474 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-1854857843‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.476 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-3189394304‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.521 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-465000886‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.523 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2872209392‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.609 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2767237801‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.681 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-336090633‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.682 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2340817796‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.747 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-3111427182‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.749 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-1014906697‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.837 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-3309731889‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.839 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2973220339‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.840 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-3613448911‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.842 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2922209762‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.844 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-1953562723‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:48.846 python3[43262:595032] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-2658075649‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+100%|██████████| 45/45 [00:15<00:00,  1.27it/s]                                               2026-03-20 21:25:48.944 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_48-1869551670‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.495 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-53793408‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.497 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-1610186040‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.535 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-2335544901‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.537 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-4237860136‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.539 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-1947112119‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.540 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-1287643230‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.542 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-2444420706‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.544 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-372565356‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.546 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-1922015177‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.547 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-2909377883‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.549 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-1326274388‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.554 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-869619835‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.555 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-1086872872‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.557 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-403318984‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.558 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-142498208‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.560 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-665032617‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.562 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-127531046‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.563 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-2952865326‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.565 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-2271582884‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.566 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-2612114929‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.769 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-1923427207‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.770 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-786516479‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.771 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-3813167970‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.868 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-928097325‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.871 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-3785864235‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.873 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-2441491499‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+2026-03-20 21:25:49.980 python3[43262:594492] Error creating directory 
+ You don‚Äôt have permission. You don‚Äôt have permission to save the file ‚Äúmpsgraph-43262-2026-03-20_21_25_49-30278412‚Äù in the folder ‚Äúcom.apple.MetalPerformanceShadersGraph‚Äù.
+
+Epoch [1/100] | Time: 16.59s | Train MSE: 2707.8490 | Val MSE: 280.8180 | Val MAE: 13.2854
+  -> Validation loss improved! Saving model.
+  0%|          | 0/45 [00:00<?, ?it/s]  2%|▏         | 1/45 [00:00<00:04,  9.25it/s]  7%|▋         | 3/45 [00:00<00:03, 11.59it/s] 11%|█         | 5/45 [00:00<00:02, 13.38it/s] 16%|█▌        | 7/45 [00:00<00:02, 13.59it/s] 20%|██        | 9/45 [00:00<00:02, 13.61it/s] 24%|██▍       | 11/45 [00:00<00:02, 13.38it/s] 29%|██▉       | 13/45 [00:00<00:02, 13.74it/s] 33%|███▎      | 15/45 [00:01<00:02, 14.15it/s] 38%|███▊      | 17/45 [00:01<00:01, 14.29it/s] 42%|████▏     | 19/45 [00:01<00:01, 14.53it/s] 47%|████▋     | 21/45 [00:01<00:01, 14.15it/s] 51%|█████     | 23/45 [00:01<00:01, 13.89it/s] 56%|█████▌    | 25/45 [00:01<00:01, 13.67it/s] 60%|██████    | 27/45 [00:01<00:01, 14.15it/s] 64%|██████▍   | 29/45 [00:02<00:01, 14.04it/s] 69%|██████▉   | 31/45 [00:02<00:01, 13.94it/s] 73%|███████▎  | 33/45 [00:02<00:00, 14.33it/s] 78%|███████▊  | 35/45 [00:02<00:00, 13.63it/s] 82%|████████▏ | 37/45 [00:02<00:00, 13.61it/s] 87%|████████▋ | 39/45 [00:02<00:00, 13.82it/s] 91%|█████████ | 41/45 [00:02<00:00, 14.19it/s] 96%|█████████▌| 43/45 [00:03<00:00, 13.96it/s]                                               
+Epoch [2/100] | Time: 3.69s | Train MSE: 252.9813 | Val MSE: 349.0710 | Val MAE: 16.6147
+  -> No improvement. Patience: 1/5
+  0%|          | 0/45 [00:00<?, ?it/s]  4%|▍         | 2/45 [00:00<00:02, 14.80it/s]  9%|▉         | 4/45 [00:00<00:02, 14.45it/s] 13%|█▎        | 6/45 [00:00<00:02, 13.93it/s] 18%|█▊        | 8/45 [00:00<00:02, 14.44it/s] 22%|██▏       | 10/45 [00:00<00:02, 14.38it/s] 27%|██▋       | 12/45 [00:00<00:02, 14.14it/s] 31%|███       | 14/45 [00:00<00:02, 14.55it/s] 36%|███▌      | 16/45 [00:01<00:01, 14.54it/s] 40%|████      | 18/45 [00:01<00:01, 14.86it/s] 44%|████▍     | 20/45 [00:01<00:01, 14.58it/s] 49%|████▉     | 22/45 [00:01<00:01, 14.24it/s] 53%|█████▎    | 24/45 [00:01<00:01, 14.03it/s] 58%|█████▊    | 26/45 [00:01<00:01, 13.86it/s] 62%|██████▏   | 28/45 [00:01<00:01, 13.90it/s] 67%|██████▋   | 30/45 [00:02<00:01, 14.12it/s] 71%|███████   | 32/45 [00:02<00:00, 14.38it/s] 76%|███████▌  | 34/45 [00:02<00:00, 14.48it/s] 80%|████████  | 36/45 [00:02<00:00, 14.66it/s] 84%|████████▍ | 38/45 [00:02<00:00, 14.54it/s] 89%|████████▉ | 40/45 [00:02<00:00, 14.23it/s] 93%|█████████▎| 42/45 [00:02<00:00, 14.62it/s] 98%|█████████▊| 44/45 [00:03<00:00, 14.54it/s]                                               
+Epoch [3/100] | Time: 3.58s | Train MSE: 255.9345 | Val MSE: 233.3092 | Val MAE: 13.9051
+  -> Validation loss improved! Saving model.
+  0%|          | 0/45 [00:00<?, ?it/s]  4%|▍         | 2/45 [00:00<00:03, 13.61it/s]  9%|▉         | 4/45 [00:00<00:02, 14.18it/s] 13%|█▎        | 6/45 [00:00<00:02, 13.83it/s] 18%|█▊        | 8/45 [00:00<00:02, 13.71it/s] 22%|██▏       | 10/45 [00:00<00:02, 14.01it/s] 27%|██▋       | 12/45 [00:00<00:02, 14.23it/s] 31%|███       | 14/45 [00:01<00:02, 13.98it/s] 36%|███▌      | 16/45 [00:01<00:02, 14.21it/s] 40%|████      | 18/45 [00:01<00:02, 13.21it/s] 44%|████▍     | 20/45 [00:01<00:01, 13.38it/s] 49%|████▉     | 22/45 [00:01<00:01, 13.47it/s] 53%|█████▎    | 24/45 [00:01<00:01, 13.47it/s] 58%|█████▊    | 26/45 [00:01<00:01, 13.60it/s] 62%|██████▏   | 28/45 [00:02<00:01, 13.66it/s] 67%|██████▋   | 30/45 [00:02<00:01, 13.66it/s] 71%|███████   | 32/45 [00:02<00:00, 14.07it/s] 76%|███████▌  | 34/45 [00:02<00:00, 14.25it/s] 80%|████████  | 36/45 [00:02<00:00, 14.55it/s] 84%|████████▍ | 38/45 [00:02<00:00, 14.56it/s] 89%|████████▉ | 40/45 [00:02<00:00, 14.89it/s] 93%|█████████▎| 42/45 [00:02<00:00, 14.78it/s] 98%|█████████▊| 44/45 [00:03<00:00, 14.54it/s]                                               
+Epoch [4/100] | Time: 3.69s | Train MSE: 214.6462 | Val MSE: 78.8364 | Val MAE: 7.1337
+  -> Validation loss improved! Saving model.
+  0%|          | 0/45 [00:00<?, ?it/s]  4%|▍         | 2/45 [00:00<00:03, 13.78it/s]  9%|▉         | 4/45 [00:00<00:02, 14.49it/s] 13%|█▎        | 6/45 [00:00<00:02, 13.85it/s] 18%|█▊        | 8/45 [00:00<00:02, 13.65it/s] 22%|██▏       | 10/45 [00:00<00:02, 13.88it/s] 27%|██▋       | 12/45 [00:00<00:02, 13.69it/s] 31%|███       | 14/45 [00:01<00:02, 13.70it/s] 36%|███▌      | 16/45 [00:01<00:02, 13.64it/s] 40%|████      | 18/45 [00:01<00:01, 14.00it/s] 44%|████▍     | 20/45 [00:01<00:01, 13.98it/s] 49%|████▉     | 22/45 [00:01<00:01, 14.21it/s] 53%|█████▎    | 24/45 [00:01<00:01, 14.37it/s] 58%|█████▊    | 26/45 [00:01<00:01, 13.93it/s] 62%|██████▏   | 28/45 [00:02<00:01, 13.49it/s] 67%|██████▋   | 30/45 [00:02<00:01, 13.79it/s] 71%|███████   | 32/45 [00:02<00:00, 14.15it/s] 76%|███████▌  | 34/45 [00:02<00:00, 13.97it/s] 80%|████████  | 36/45 [00:02<00:00, 14.21it/s] 84%|████████▍ | 38/45 [00:02<00:00, 14.45it/s] 89%|████████▉ | 40/45 [00:02<00:00, 14.21it/s] 93%|█████████▎| 42/45 [00:02<00:00, 14.23it/s] 98%|█████████▊| 44/45 [00:03<00:00, 13.57it/s]                                               
+Epoch [5/100] | Time: 3.70s | Train MSE: 193.6148 | Val MSE: 76.4178 | Val MAE: 6.8500
+  -> Validation loss improved! Saving model.
+  0%|          | 0/45 [00:00<?, ?it/s]  4%|▍         | 2/45 [00:00<00:03, 13.95it/s]  9%|▉         | 4/45 [00:00<00:02, 14.06it/s] 13%|█▎        | 6/45 [00:00<00:02, 14.28it/s] 18%|█▊        | 8/45 [00:00<00:02, 13.44it/s] 22%|██▏       | 10/45 [00:00<00:02, 13.15it/s] 27%|██▋       | 12/45 [00:00<00:02, 13.79it/s] 31%|███       | 14/45 [00:01<00:02, 13.50it/s] 36%|███▌      | 16/45 [00:01<00:02, 13.48it/s] 40%|████      | 18/45 [00:01<00:01, 14.04it/s] 44%|████▍     | 20/45 [00:01<00:01, 13.99it/s] 49%|████▉     | 22/45 [00:01<00:01, 14.16it/s] 53%|█████▎    | 24/45 [00:01<00:01, 14.32it/s] 58%|█████▊    | 26/45 [00:01<00:01, 14.27it/s] 62%|██████▏   | 28/45 [00:02<00:01, 14.34it/s] 67%|██████▋   | 30/45 [00:02<00:01, 14.55it/s] 71%|███████   | 32/45 [00:02<00:00, 14.17it/s] 76%|███████▌  | 34/45 [00:02<00:00, 14.29it/s] 80%|████████  | 36/45 [00:02<00:00, 14.04it/s] 84%|████████▍ | 38/45 [00:02<00:00, 14.27it/s] 89%|████████▉ | 40/45 [00:02<00:00, 14.47it/s] 93%|█████████▎| 42/45 [00:02<00:00, 14.23it/s] 98%|█████████▊| 44/45 [00:03<00:00, 14.41it/s]                                               
+Epoch [6/100] | Time: 3.64s | Train MSE: 201.2960 | Val MSE: 115.2569 | Val MAE: 10.3909
+  -> No improvement. Patience: 1/5
+  0%|          | 0/45 [00:00<?, ?it/s]  4%|▍         | 2/45 [00:00<00:05,  8.47it/s]  9%|▉         | 4/45 [00:00<00:03, 11.45it/s] 13%|█▎        | 6/45 [00:00<00:03, 12.03it/s] 18%|█▊        | 8/45 [00:00<00:02, 12.64it/s] 22%|██▏       | 10/45 [00:00<00:02, 13.56it/s] 27%|██▋       | 12/45 [00:00<00:02, 13.74it/s] 31%|███       | 14/45 [00:01<00:02, 13.63it/s] 36%|███▌      | 16/45 [00:01<00:02, 13.62it/s] 40%|████      | 18/45 [00:01<00:01, 14.19it/s] 44%|████▍     | 20/45 [00:01<00:01, 14.25it/s] 49%|████▉     | 22/45 [00:01<00:01, 13.97it/s] 53%|█████▎    | 24/45 [00:01<00:01, 14.07it/s] 58%|█████▊    | 26/45 [00:01<00:01, 14.21it/s] 62%|██████▏   | 28/45 [00:02<00:01, 14.38it/s] 67%|██████▋   | 30/45 [00:02<00:01, 14.09it/s] 71%|███████   | 32/45 [00:02<00:00, 14.29it/s] 76%|███████▌  | 34/45 [00:02<00:00, 14.56it/s] 80%|████████  | 36/45 [00:02<00:00, 14.25it/s] 84%|████████▍ | 38/45 [00:02<00:00, 14.39it/s] 89%|████████▉ | 40/45 [00:02<00:00, 14.31it/s] 93%|█████████▎| 42/45 [00:03<00:00, 13.87it/s] 98%|█████████▊| 44/45 [00:03<00:00, 13.48it/s]                                               
+Epoch [7/100] | Time: 3.76s | Train MSE: 194.6318 | Val MSE: 290.3138 | Val MAE: 15.7135
+  -> No improvement. Patience: 2/5
+  0%|          | 0/45 [00:00<?, ?it/s]  4%|▍         | 2/45 [00:00<00:03, 13.78it/s]  9%|▉         | 4/45 [00:00<00:02, 14.38it/s] 13%|█▎        | 6/45 [00:00<00:02, 13.66it/s] 18%|█▊        | 8/45 [00:00<00:02, 13.90it/s] 22%|██▏       | 10/45 [00:00<00:02, 13.45it/s] 27%|██▋       | 12/45 [00:00<00:02, 13.68it/s] 31%|███       | 14/45 [00:01<00:02, 14.07it/s] 36%|███▌      | 16/45 [00:01<00:02, 13.72it/s] 40%|████      | 18/45 [00:01<00:01, 14.23it/s] 44%|████▍     | 20/45 [00:01<00:01, 14.21it/s] 49%|████▉     | 22/45 [00:01<00:01, 14.19it/s] 53%|█████▎    | 24/45 [00:01<00:01, 14.36it/s] 58%|█████▊    | 26/45 [00:01<00:01, 13.95it/s] 62%|██████▏   | 28/45 [00:01<00:01, 14.30it/s] 67%|██████▋   | 30/45 [00:02<00:01, 14.22it/s] 71%|███████   | 32/45 [00:02<00:00, 14.26it/s] 76%|███████▌  | 34/45 [00:02<00:00, 14.42it/s] 80%|████████  | 36/45 [00:02<00:00, 13.77it/s] 84%|████████▍ | 38/45 [00:02<00:00, 13.97it/s] 89%|████████▉ | 40/45 [00:02<00:00, 14.27it/s] 93%|█████████▎| 42/45 [00:02<00:00, 13.88it/s] 98%|█████████▊| 44/45 [00:03<00:00, 14.22it/s]                                               
+Epoch [8/100] | Time: 3.68s | Train MSE: 215.2643 | Val MSE: 77.0227 | Val MAE: 6.9688
+  -> No improvement. Patience: 3/5
+  0%|          | 0/45 [00:00<?, ?it/s]  4%|▍         | 2/45 [00:00<00:04, 10.45it/s]  9%|▉         | 4/45 [00:00<00:03, 12.49it/s] 13%|█▎        | 6/45 [00:00<00:03, 12.50it/s] 18%|█▊        | 8/45 [00:00<00:03, 12.22it/s] 22%|██▏       | 10/45 [00:00<00:02, 13.24it/s] 27%|██▋       | 12/45 [00:00<00:02, 13.54it/s] 31%|███       | 14/45 [00:01<00:02, 13.58it/s] 36%|███▌      | 16/45 [00:01<00:02, 14.14it/s] 40%|████      | 18/45 [00:01<00:01, 14.24it/s] 44%|████▍     | 20/45 [00:01<00:01, 14.17it/s] 49%|████▉     | 22/45 [00:01<00:01, 14.02it/s] 53%|█████▎    | 24/45 [00:01<00:01, 14.32it/s] 58%|█████▊    | 26/45 [00:01<00:01, 14.14it/s] 62%|██████▏   | 28/45 [00:02<00:01, 14.52it/s] 67%|██████▋   | 30/45 [00:02<00:01, 14.34it/s] 71%|███████   | 32/45 [00:02<00:00, 14.12it/s] 76%|███████▌  | 34/45 [00:02<00:00, 14.34it/s] 80%|████████  | 36/45 [00:02<00:00, 14.34it/s] 84%|████████▍ | 38/45 [00:02<00:00, 14.44it/s] 89%|████████▉ | 40/45 [00:02<00:00, 13.92it/s] 93%|█████████▎| 42/45 [00:03<00:00, 14.20it/s] 98%|█████████▊| 44/45 [00:03<00:00, 14.50it/s]                                               
+Epoch [9/100] | Time: 3.68s | Train MSE: 207.2838 | Val MSE: 87.8748 | Val MAE: 8.5875
+  -> No improvement. Patience: 4/5
+  0%|          | 0/45 [00:00<?, ?it/s]  4%|▍         | 2/45 [00:00<00:03, 13.63it/s]  9%|▉         | 4/45 [00:00<00:02, 14.79it/s] 13%|█▎        | 6/45 [00:00<00:02, 14.40it/s] 18%|█▊        | 8/45 [00:00<00:02, 14.07it/s] 22%|██▏       | 10/45 [00:00<00:02, 14.50it/s] 27%|██▋       | 12/45 [00:00<00:02, 14.25it/s] 31%|███       | 14/45 [00:00<00:02, 13.78it/s] 36%|███▌      | 16/45 [00:01<00:02, 14.03it/s] 40%|████      | 18/45 [00:01<00:01, 13.85it/s] 44%|████▍     | 20/45 [00:01<00:01, 14.31it/s] 49%|████▉     | 22/45 [00:01<00:01, 13.72it/s] 53%|█████▎    | 24/45 [00:01<00:01, 13.89it/s] 58%|█████▊    | 26/45 [00:01<00:01, 13.71it/s] 62%|██████▏   | 28/45 [00:02<00:01, 13.57it/s] 67%|██████▋   | 30/45 [00:02<00:01,  9.74it/s] 71%|███████   | 32/45 [00:02<00:01, 10.64it/s] 76%|███████▌  | 34/45 [00:02<00:00, 11.41it/s] 80%|████████  | 36/45 [00:02<00:00, 11.94it/s] 84%|████████▍ | 38/45 [00:02<00:00, 12.30it/s] 89%|████████▉ | 40/45 [00:03<00:00, 12.66it/s] 93%|█████████▎| 42/45 [00:03<00:00, 11.95it/s] 98%|█████████▊| 44/45 [00:03<00:00, 12.35it/s]                                               
+Epoch [10/100] | Time: 3.97s | Train MSE: 208.3437 | Val MSE: 109.9557 | Val MAE: 10.1087
+  -> No improvement. Patience: 5/5
+
+🛑 EARLY STOPPING TRIGGERED! Validation loss hasn't improved for 5 epochs.
+
+✅ Training Complete! The OPTIMAL number of epochs was 5.
+The best model has been saved to: /Users/namangarg/Desktop/Gaurav Verma/fusion_model_v2_mac.pth
+
+Running Clinical Validation on Best Model (Clarke Error Grid)...
+Total Points: 280
+Zone A: 280 (100.00%)
+Zone B: 0 (0.00%)
+Zone C: 0 (0.00%)
+Zone D: 0 (0.00%)
+Zone E: 0 (0.00%)
+Saved plot to 'clarke_error_grid.png'

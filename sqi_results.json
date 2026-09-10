@@ -1,0 +1,11 @@
+{
+  "threshold": 0.24853075276540784,
+  "train_total": 1409,
+  "train_pass": 970,
+  "val_total": 280,
+  "val_pass": 232,
+  "train_fail_pct": 31.2,
+  "val_fail_pct": 17.1,
+  "mae_clean": 6.211,
+  "rmse_clean": 8.592
+}

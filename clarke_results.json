@@ -1,0 +1,17 @@
+{
+  "total_points": 280,
+  "zone_A_count": 277,
+  "zone_A_pct": 98.92857142857143,
+  "zone_B_count": 3,
+  "zone_B_pct": 1.0714285714285714,
+  "zone_C_count": 0,
+  "zone_C_pct": 0.0,
+  "zone_D_count": 0,
+  "zone_D_pct": 0.0,
+  "zone_E_count": 0,
+  "zone_E_pct": 0.0,
+  "optimal_epoch": 27,
+  "best_val_mse": 82.46830471583775,
+  "best_val_mae": 6.89489631652832,
+  "best_val_rmse": 9.08120612671234
+}

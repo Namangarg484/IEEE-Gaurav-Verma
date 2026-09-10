@@ -1,0 +1,2242 @@
+[
+  {
+    "window_idx": 0,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.472
+  },
+  {
+    "window_idx": 1,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.5
+  },
+  {
+    "window_idx": 2,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 3,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 4,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 5,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": 0.2857,
+    "lle": 0.021008,
+    "raw_std": 1.481
+  },
+  {
+    "window_idx": 6,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": 0.625,
+    "lle": 0.014365,
+    "raw_std": 0.81
+  },
+  {
+    "window_idx": 7,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": 0.3907,
+    "lle": 0.014424,
+    "raw_std": 1.258
+  },
+  {
+    "window_idx": 8,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 9,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": 0.4162,
+    "lle": 0.013176,
+    "raw_std": 0.313
+  },
+  {
+    "window_idx": 10,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 11,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": 0.3456,
+    "lle": 0.006921,
+    "raw_std": 0.283
+  },
+  {
+    "window_idx": 12,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 13,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 14,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.679
+  },
+  {
+    "window_idx": 15,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": 0.4135,
+    "lle": 0.013176,
+    "raw_std": 1.629
+  },
+  {
+    "window_idx": 16,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": 0.4076,
+    "lle": 0.018459,
+    "raw_std": 1.541
+  },
+  {
+    "window_idx": 17,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": 0.4352,
+    "lle": 0.013176,
+    "raw_std": 0.719
+  },
+  {
+    "window_idx": 18,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.5
+  },
+  {
+    "window_idx": 19,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": null,
+    "lle": -0.0,
+    "raw_std": 0.089
+  },
+  {
+    "window_idx": 20,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": 0.3831,
+    "lle": 0.013176,
+    "raw_std": 0.389
+  },
+  {
+    "window_idx": 21,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": 0.0766,
+    "lle": -0.043469,
+    "raw_std": 0.171
+  },
+  {
+    "window_idx": 22,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 23,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": null,
+    "lle": -0.0,
+    "raw_std": 0.186
+  },
+  {
+    "window_idx": 24,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": null,
+    "lle": 0.014472,
+    "raw_std": 1.198
+  },
+  {
+    "window_idx": 25,
+    "patient_id": 20,
+    "glucose": 126.66,
+    "corr_dim": 0.4331,
+    "lle": 0.013176,
+    "raw_std": 1.032
+  },
+  {
+    "window_idx": 26,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": 0.4274,
+    "lle": 0.015292,
+    "raw_std": 1.423
+  },
+  {
+    "window_idx": 27,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": 0.0844,
+    "lle": 0.013176,
+    "raw_std": 0.423
+  },
+  {
+    "window_idx": 28,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": null,
+    "lle": 0.020255,
+    "raw_std": 0.633
+  },
+  {
+    "window_idx": 29,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 30,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": 0.0791,
+    "lle": 0.013176,
+    "raw_std": 0.627
+  },
+  {
+    "window_idx": 31,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 32,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 33,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 34,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 1.061
+  },
+  {
+    "window_idx": 35,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": 0.6772,
+    "lle": 0.019758,
+    "raw_std": 1.204
+  },
+  {
+    "window_idx": 36,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": 0.3713,
+    "lle": 0.013176,
+    "raw_std": 1.414
+  },
+  {
+    "window_idx": 37,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": 0.2899,
+    "lle": -0.018745,
+    "raw_std": 0.209
+  },
+  {
+    "window_idx": 38,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.479
+  },
+  {
+    "window_idx": 39,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.454
+  },
+  {
+    "window_idx": 40,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": null,
+    "lle": 0.035784,
+    "raw_std": 0.186
+  },
+  {
+    "window_idx": 41,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.412
+  },
+  {
+    "window_idx": 42,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.472
+  },
+  {
+    "window_idx": 43,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.636
+  },
+  {
+    "window_idx": 44,
+    "patient_id": 20,
+    "glucose": 126.64,
+    "corr_dim": 0.4076,
+    "lle": 0.013176,
+    "raw_std": 1.694
+  },
+  {
+    "window_idx": 45,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": 0.3941,
+    "lle": 0.013176,
+    "raw_std": 1.433
+  },
+  {
+    "window_idx": 46,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": 0.4106,
+    "lle": 0.013176,
+    "raw_std": 0.4
+  },
+  {
+    "window_idx": 47,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.494
+  },
+  {
+    "window_idx": 48,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.499
+  },
+  {
+    "window_idx": 49,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.5
+  },
+  {
+    "window_idx": 50,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 51,
+    "patient_id": 20,
+    "glucose": 126.68,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 52,
+    "patient_id": 20,
+    "glucose": 126.65,
+    "corr_dim": null,
+    "lle": 0.013207,
+    "raw_std": 1.439
+  },
+  {
+    "window_idx": 53,
+    "patient_id": 20,
+    "glucose": 126.67,
+    "corr_dim": 0.7515,
+    "lle": 0.008499,
+    "raw_std": 0.532
+  },
+  {
+    "window_idx": 54,
+    "patient_id": 20,
+    "glucose": 118.24,
+    "corr_dim": 1.2852,
+    "lle": 0.005955,
+    "raw_std": 2.54
+  },
+  {
+    "window_idx": 55,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.4347,
+    "lle": 0.013176,
+    "raw_std": 0.699
+  },
+  {
+    "window_idx": 56,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.3546,
+    "lle": 0.013176,
+    "raw_std": 0.4
+  },
+  {
+    "window_idx": 57,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.0766,
+    "lle": 0.013176,
+    "raw_std": 0.5
+  },
+  {
+    "window_idx": 58,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.007946,
+    "raw_std": 2.106
+  },
+  {
+    "window_idx": 59,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 1.0538,
+    "lle": 0.010359,
+    "raw_std": 3.362
+  },
+  {
+    "window_idx": 60,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.018265,
+    "raw_std": 1.005
+  },
+  {
+    "window_idx": 61,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.073,
+    "lle": 0.013176,
+    "raw_std": 0.491
+  },
+  {
+    "window_idx": 62,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.4356,
+    "lle": 0.013176,
+    "raw_std": 0.343
+  },
+  {
+    "window_idx": 63,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.040632,
+    "raw_std": 0.176
+  },
+  {
+    "window_idx": 64,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.7942,
+    "lle": 0.008407,
+    "raw_std": 2.244
+  },
+  {
+    "window_idx": 65,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 1.1115,
+    "lle": 0.007564,
+    "raw_std": 1.826
+  },
+  {
+    "window_idx": 66,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.0844,
+    "lle": 0.013176,
+    "raw_std": 0.813
+  },
+  {
+    "window_idx": 67,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.452
+  },
+  {
+    "window_idx": 68,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 69,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.1638,
+    "lle": 0.010617,
+    "raw_std": 1.803
+  },
+  {
+    "window_idx": 70,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 1.0238,
+    "lle": 0.011861,
+    "raw_std": 3.032
+  },
+  {
+    "window_idx": 71,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.0754,
+    "lle": 0.020837,
+    "raw_std": 0.861
+  },
+  {
+    "window_idx": 72,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.5
+  },
+  {
+    "window_idx": 73,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.3588,
+    "lle": 0.013176,
+    "raw_std": 0.398
+  },
+  {
+    "window_idx": 74,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 75,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.4212,
+    "lle": 0.007668,
+    "raw_std": 2.469
+  },
+  {
+    "window_idx": 76,
+    "patient_id": 21,
+    "glucose": 106.49,
+    "corr_dim": 1.1071,
+    "lle": 0.010486,
+    "raw_std": 3.196
+  },
+  {
+    "window_idx": 77,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.013216,
+    "raw_std": 1.159
+  },
+  {
+    "window_idx": 78,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.426
+  },
+  {
+    "window_idx": 79,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.3753,
+    "lle": 0.013176,
+    "raw_std": 0.392
+  },
+  {
+    "window_idx": 80,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 81,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.5142,
+    "lle": 0.008905,
+    "raw_std": 2.423
+  },
+  {
+    "window_idx": 82,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 1.2261,
+    "lle": 0.009866,
+    "raw_std": 2.178
+  },
+  {
+    "window_idx": 83,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.3156,
+    "lle": 0.012597,
+    "raw_std": 1.256
+  },
+  {
+    "window_idx": 84,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.020255,
+    "raw_std": 0.632
+  },
+  {
+    "window_idx": 85,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 86,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.011333,
+    "raw_std": 1.073
+  },
+  {
+    "window_idx": 87,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 1.09,
+    "lle": 0.010722,
+    "raw_std": 2.326
+  },
+  {
+    "window_idx": 88,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.8204,
+    "lle": 0.013047,
+    "raw_std": 0.756
+  },
+  {
+    "window_idx": 89,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.3069,
+    "lle": 0.01562,
+    "raw_std": 0.575
+  },
+  {
+    "window_idx": 90,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.767
+  },
+  {
+    "window_idx": 91,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.469
+  },
+  {
+    "window_idx": 92,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.4583,
+    "lle": 0.012285,
+    "raw_std": 2.627
+  },
+  {
+    "window_idx": 93,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 1.4892,
+    "lle": 0.005419,
+    "raw_std": 2.117
+  },
+  {
+    "window_idx": 94,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.458,
+    "lle": 0.013183,
+    "raw_std": 1.417
+  },
+  {
+    "window_idx": 95,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.4356,
+    "lle": 0.013176,
+    "raw_std": 0.666
+  },
+  {
+    "window_idx": 96,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.421
+  },
+  {
+    "window_idx": 97,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.010438,
+    "raw_std": 1.877
+  },
+  {
+    "window_idx": 98,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 1.1397,
+    "lle": 0.006713,
+    "raw_std": 3.843
+  },
+  {
+    "window_idx": 99,
+    "patient_id": 21,
+    "glucose": 106.49,
+    "corr_dim": 0.4255,
+    "lle": 0.014697,
+    "raw_std": 1.869
+  },
+  {
+    "window_idx": 100,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.798
+  },
+  {
+    "window_idx": 101,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.4235,
+    "lle": 0.013176,
+    "raw_std": 0.32
+  },
+  {
+    "window_idx": 102,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.010689,
+    "raw_std": 1.022
+  },
+  {
+    "window_idx": 103,
+    "patient_id": 21,
+    "glucose": 106.51,
+    "corr_dim": 1.2653,
+    "lle": 0.010593,
+    "raw_std": 3.076
+  },
+  {
+    "window_idx": 104,
+    "patient_id": 21,
+    "glucose": 106.49,
+    "corr_dim": 0.0844,
+    "lle": 0.022932,
+    "raw_std": 1.337
+  },
+  {
+    "window_idx": 105,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.3869,
+    "lle": 0.013176,
+    "raw_std": 0.42
+  },
+  {
+    "window_idx": 106,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.504
+  },
+  {
+    "window_idx": 107,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.014427,
+    "raw_std": 1.31
+  },
+  {
+    "window_idx": 108,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 1.0395,
+    "lle": 0.014768,
+    "raw_std": 2.331
+  },
+  {
+    "window_idx": 109,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.644,
+    "lle": 0.011999,
+    "raw_std": 0.897
+  },
+  {
+    "window_idx": 110,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.3943,
+    "lle": 0.01042,
+    "raw_std": 0.96
+  },
+  {
+    "window_idx": 111,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.751
+  },
+  {
+    "window_idx": 112,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.585
+  },
+  {
+    "window_idx": 113,
+    "patient_id": 21,
+    "glucose": 106.49,
+    "corr_dim": 0.9525,
+    "lle": 0.010959,
+    "raw_std": 1.998
+  },
+  {
+    "window_idx": 114,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 1.1923,
+    "lle": 0.007494,
+    "raw_std": 1.915
+  },
+  {
+    "window_idx": 115,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.0718,
+    "lle": 0.020131,
+    "raw_std": 0.887
+  },
+  {
+    "window_idx": 116,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.3943,
+    "lle": 0.013176,
+    "raw_std": 0.42
+  },
+  {
+    "window_idx": 117,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.488
+  },
+  {
+    "window_idx": 118,
+    "patient_id": 21,
+    "glucose": 106.5,
+    "corr_dim": 0.4356,
+    "lle": 0.007721,
+    "raw_std": 2.414
+  },
+  {
+    "window_idx": 119,
+    "patient_id": 21,
+    "glucose": 106.51,
+    "corr_dim": 0.6502,
+    "lle": 0.011306,
+    "raw_std": 2.553
+  },
+  {
+    "window_idx": 120,
+    "patient_id": 21,
+    "glucose": 106.6,
+    "corr_dim": 0.7996,
+    "lle": 0.007478,
+    "raw_std": 0.846
+  },
+  {
+    "window_idx": 121,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.3943,
+    "lle": 0.013176,
+    "raw_std": 0.756
+  },
+  {
+    "window_idx": 122,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.345
+  },
+  {
+    "window_idx": 123,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.471
+  },
+  {
+    "window_idx": 124,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": 0.013553,
+    "raw_std": 0.984
+  },
+  {
+    "window_idx": 125,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.7377,
+    "lle": 0.011598,
+    "raw_std": 1.457
+  },
+  {
+    "window_idx": 126,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.8144,
+    "lle": 0.00933,
+    "raw_std": 1.596
+  },
+  {
+    "window_idx": 127,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.4291,
+    "lle": 0.018979,
+    "raw_std": 1.168
+  },
+  {
+    "window_idx": 128,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.4347,
+    "lle": 0.013176,
+    "raw_std": 0.725
+  },
+  {
+    "window_idx": 129,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": null,
+    "lle": 0.013377,
+    "raw_std": 0.659
+  },
+  {
+    "window_idx": 130,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.491
+  },
+  {
+    "window_idx": 131,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": 0.01317,
+    "raw_std": 0.476
+  },
+  {
+    "window_idx": 132,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.6972,
+    "lle": 0.009138,
+    "raw_std": 1.568
+  },
+  {
+    "window_idx": 133,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 1.0641,
+    "lle": 0.00862,
+    "raw_std": 1.737
+  },
+  {
+    "window_idx": 134,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.4235,
+    "lle": 0.013632,
+    "raw_std": 1.217
+  },
+  {
+    "window_idx": 135,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.4347,
+    "lle": 0.013176,
+    "raw_std": 0.715
+  },
+  {
+    "window_idx": 136,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.757
+  },
+  {
+    "window_idx": 137,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.4274,
+    "lle": 0.013176,
+    "raw_std": 0.614
+  },
+  {
+    "window_idx": 138,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.977
+  },
+  {
+    "window_idx": 139,
+    "patient_id": 22,
+    "glucose": 106.74,
+    "corr_dim": 0.9247,
+    "lle": 0.010492,
+    "raw_std": 1.58
+  },
+  {
+    "window_idx": 140,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.7294,
+    "lle": 0.011701,
+    "raw_std": 1.373
+  },
+  {
+    "window_idx": 141,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.3287,
+    "lle": 0.01008,
+    "raw_std": 1.192
+  },
+  {
+    "window_idx": 142,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.3713,
+    "lle": 0.006272,
+    "raw_std": 0.646
+  },
+  {
+    "window_idx": 143,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": 0.015396,
+    "raw_std": 0.461
+  },
+  {
+    "window_idx": 144,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.497
+  },
+  {
+    "window_idx": 145,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 1.053
+  },
+  {
+    "window_idx": 146,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.7534,
+    "lle": 0.008384,
+    "raw_std": 1.824
+  },
+  {
+    "window_idx": 147,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.5189,
+    "lle": 0.013872,
+    "raw_std": 0.902
+  },
+  {
+    "window_idx": 148,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.3026,
+    "lle": 0.013176,
+    "raw_std": 1.095
+  },
+  {
+    "window_idx": 149,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.2941,
+    "lle": -0.017102,
+    "raw_std": 0.214
+  },
+  {
+    "window_idx": 150,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.0817,
+    "lle": 0.013176,
+    "raw_std": 0.593
+  },
+  {
+    "window_idx": 151,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 152,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": null,
+    "lle": 0.016821,
+    "raw_std": 1.551
+  },
+  {
+    "window_idx": 153,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.9183,
+    "lle": 0.008935,
+    "raw_std": 2.137
+  },
+  {
+    "window_idx": 154,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.4106,
+    "lle": 0.013176,
+    "raw_std": 0.673
+  },
+  {
+    "window_idx": 155,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.3672,
+    "lle": 0.009006,
+    "raw_std": 1.277
+  },
+  {
+    "window_idx": 156,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.363,
+    "lle": 0.003374,
+    "raw_std": 0.271
+  },
+  {
+    "window_idx": 157,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.0804,
+    "lle": 0.013176,
+    "raw_std": 0.753
+  },
+  {
+    "window_idx": 158,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.3869,
+    "lle": 0.013176,
+    "raw_std": 0.387
+  },
+  {
+    "window_idx": 159,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.3869,
+    "lle": 0.014914,
+    "raw_std": 1.876
+  },
+  {
+    "window_idx": 160,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.9689,
+    "lle": 0.008356,
+    "raw_std": 2.691
+  },
+  {
+    "window_idx": 161,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.3713,
+    "lle": 0.013176,
+    "raw_std": 0.404
+  },
+  {
+    "window_idx": 162,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.4255,
+    "lle": 0.013176,
+    "raw_std": 1.031
+  },
+  {
+    "window_idx": 163,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": 0.024506,
+    "raw_std": 0.255
+  },
+  {
+    "window_idx": 164,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.499
+  },
+  {
+    "window_idx": 165,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.487
+  },
+  {
+    "window_idx": 166,
+    "patient_id": 22,
+    "glucose": 106.74,
+    "corr_dim": 0.4135,
+    "lle": 0.007395,
+    "raw_std": 2.387
+  },
+  {
+    "window_idx": 167,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 1.1556,
+    "lle": 0.008556,
+    "raw_std": 2.777
+  },
+  {
+    "window_idx": 168,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.398
+  },
+  {
+    "window_idx": 169,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.2503,
+    "lle": 0.023305,
+    "raw_std": 1.196
+  },
+  {
+    "window_idx": 170,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": 0.014263,
+    "raw_std": 0.292
+  },
+  {
+    "window_idx": 171,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.5
+  },
+  {
+    "window_idx": 172,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 173,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.3113,
+    "lle": 0.010613,
+    "raw_std": 2.213
+  },
+  {
+    "window_idx": 174,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 1.0686,
+    "lle": 0.006203,
+    "raw_std": 2.556
+  },
+  {
+    "window_idx": 175,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.073,
+    "lle": 0.013176,
+    "raw_std": 0.59
+  },
+  {
+    "window_idx": 176,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.0791,
+    "lle": 0.025585,
+    "raw_std": 0.894
+  },
+  {
+    "window_idx": 177,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.308
+  },
+  {
+    "window_idx": 178,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.5
+  },
+  {
+    "window_idx": 179,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 180,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.3503,
+    "lle": 0.010677,
+    "raw_std": 2.237
+  },
+  {
+    "window_idx": 181,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 1.0968,
+    "lle": 0.009269,
+    "raw_std": 2.809
+  },
+  {
+    "window_idx": 182,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.346,
+    "lle": 0.010679,
+    "raw_std": 0.746
+  },
+  {
+    "window_idx": 183,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.2454,
+    "lle": 0.023001,
+    "raw_std": 1.091
+  },
+  {
+    "window_idx": 184,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.479
+  },
+  {
+    "window_idx": 185,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.4135,
+    "lle": 0.013176,
+    "raw_std": 0.659
+  },
+  {
+    "window_idx": 186,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 187,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 1.028
+  },
+  {
+    "window_idx": 188,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.9344,
+    "lle": 0.009022,
+    "raw_std": 2.101
+  },
+  {
+    "window_idx": 189,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.7639,
+    "lle": 0.020632,
+    "raw_std": 0.897
+  },
+  {
+    "window_idx": 190,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 6.0,
+    "lle": 0.015859,
+    "raw_std": 1.358
+  },
+  {
+    "window_idx": 191,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.0804,
+    "lle": 0.013176,
+    "raw_std": 0.447
+  },
+  {
+    "window_idx": 192,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": null,
+    "lle": 0.013202,
+    "raw_std": 0.507
+  },
+  {
+    "window_idx": 193,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 194,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 195,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.2999,
+    "lle": 0.007361,
+    "raw_std": 2.093
+  },
+  {
+    "window_idx": 196,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 1.0153,
+    "lle": 0.007866,
+    "raw_std": 2.39
+  },
+  {
+    "window_idx": 197,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.757
+  },
+  {
+    "window_idx": 198,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.5872,
+    "lle": 0.023305,
+    "raw_std": 1.106
+  },
+  {
+    "window_idx": 199,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.734
+  },
+  {
+    "window_idx": 200,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.4306,
+    "lle": 0.010549,
+    "raw_std": 0.506
+  },
+  {
+    "window_idx": 201,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.3969,
+    "lle": 0.007558,
+    "raw_std": 0.265
+  },
+  {
+    "window_idx": 202,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 203,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.4162,
+    "lle": 0.009895,
+    "raw_std": 2.162
+  },
+  {
+    "window_idx": 204,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 1.198,
+    "lle": 0.009175,
+    "raw_std": 2.961
+  },
+  {
+    "window_idx": 205,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.2983,
+    "lle": 0.019542,
+    "raw_std": 0.723
+  },
+  {
+    "window_idx": 206,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.6711,
+    "lle": 0.021591,
+    "raw_std": 1.502
+  },
+  {
+    "window_idx": 207,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": 0.016547,
+    "raw_std": 0.566
+  },
+  {
+    "window_idx": 208,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.782
+  },
+  {
+    "window_idx": 209,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": null,
+    "lle": 0.053283,
+    "raw_std": 0.125
+  },
+  {
+    "window_idx": 210,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.409
+  },
+  {
+    "window_idx": 211,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.478
+  },
+  {
+    "window_idx": 212,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": null,
+    "lle": 0.010038,
+    "raw_std": 1.664
+  },
+  {
+    "window_idx": 213,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.933,
+    "lle": 0.008414,
+    "raw_std": 2.626
+  },
+  {
+    "window_idx": 214,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": 0.4356,
+    "lle": 0.013176,
+    "raw_std": 0.347
+  },
+  {
+    "window_idx": 215,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": 0.432,
+    "lle": 0.013176,
+    "raw_std": 0.993
+  },
+  {
+    "window_idx": 216,
+    "patient_id": 22,
+    "glucose": 106.63,
+    "corr_dim": 0.4135,
+    "lle": 0.013575,
+    "raw_std": 0.391
+  },
+  {
+    "window_idx": 217,
+    "patient_id": 22,
+    "glucose": 106.66,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.488
+  },
+  {
+    "window_idx": 218,
+    "patient_id": 22,
+    "glucose": 106.7,
+    "corr_dim": null,
+    "lle": 0.010247,
+    "raw_std": 0.963
+  },
+  {
+    "window_idx": 219,
+    "patient_id": 22,
+    "glucose": 105.87,
+    "corr_dim": 0.432,
+    "lle": 0.018127,
+    "raw_std": 1.994
+  },
+  {
+    "window_idx": 220,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.4306,
+    "lle": 0.013176,
+    "raw_std": 0.713
+  },
+  {
+    "window_idx": 221,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 222,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.3156,
+    "lle": 0.013176,
+    "raw_std": 0.413
+  },
+  {
+    "window_idx": 223,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.4106,
+    "lle": 0.013176,
+    "raw_std": 0.376
+  },
+  {
+    "window_idx": 224,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.494
+  },
+  {
+    "window_idx": 225,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.423
+  },
+  {
+    "window_idx": 226,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 227,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.4235,
+    "lle": 0.013176,
+    "raw_std": 0.69
+  },
+  {
+    "window_idx": 228,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.475
+  },
+  {
+    "window_idx": 229,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.498
+  },
+  {
+    "window_idx": 230,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 231,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.496
+  },
+  {
+    "window_idx": 232,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.499
+  },
+  {
+    "window_idx": 233,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.427
+  },
+  {
+    "window_idx": 234,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.491
+  },
+  {
+    "window_idx": 235,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.496
+  },
+  {
+    "window_idx": 236,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.448
+  },
+  {
+    "window_idx": 237,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 238,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.5
+  },
+  {
+    "window_idx": 239,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.3943,
+    "lle": 0.009289,
+    "raw_std": 0.657
+  },
+  {
+    "window_idx": 240,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.0791,
+    "lle": 0.022704,
+    "raw_std": 0.975
+  },
+  {
+    "window_idx": 241,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.016547,
+    "raw_std": 0.556
+  },
+  {
+    "window_idx": 242,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 243,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 244,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.491
+  },
+  {
+    "window_idx": 245,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.3243,
+    "lle": 0.006008,
+    "raw_std": 0.544
+  },
+  {
+    "window_idx": 246,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.3943,
+    "lle": 0.013176,
+    "raw_std": 0.417
+  },
+  {
+    "window_idx": 247,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.815
+  },
+  {
+    "window_idx": 248,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.488
+  },
+  {
+    "window_idx": 249,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 250,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.2857,
+    "lle": 0.012961,
+    "raw_std": 0.483
+  },
+  {
+    "window_idx": 251,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.428
+  },
+  {
+    "window_idx": 252,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.773
+  },
+  {
+    "window_idx": 253,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.383,
+    "lle": 0.011447,
+    "raw_std": 0.397
+  },
+  {
+    "window_idx": 254,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.3287,
+    "lle": 0.006138,
+    "raw_std": 0.612
+  },
+  {
+    "window_idx": 255,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.465
+  },
+  {
+    "window_idx": 256,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 257,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 258,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.4291,
+    "lle": 0.013176,
+    "raw_std": 0.361
+  },
+  {
+    "window_idx": 259,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.472
+  },
+  {
+    "window_idx": 260,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013203,
+    "raw_std": 0.396
+  },
+  {
+    "window_idx": 261,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.799
+  },
+  {
+    "window_idx": 262,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.469
+  },
+  {
+    "window_idx": 263,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.3243,
+    "lle": 0.013176,
+    "raw_std": 0.495
+  },
+  {
+    "window_idx": 264,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 265,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 266,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.418
+  },
+  {
+    "window_idx": 267,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.444
+  },
+  {
+    "window_idx": 268,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.2857,
+    "lle": 0.02396,
+    "raw_std": 0.879
+  },
+  {
+    "window_idx": 269,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.349
+  },
+  {
+    "window_idx": 270,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 271,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 272,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.023949,
+    "raw_std": 0.262
+  },
+  {
+    "window_idx": 273,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.717
+  },
+  {
+    "window_idx": 274,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.3793,
+    "lle": 0.013176,
+    "raw_std": 0.444
+  },
+  {
+    "window_idx": 275,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": 0.0817,
+    "lle": 0.013176,
+    "raw_std": 0.8
+  },
+  {
+    "window_idx": 276,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.013176,
+    "raw_std": 0.426
+  },
+  {
+    "window_idx": 277,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  },
+  {
+    "window_idx": 278,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": 0.0107,
+    "raw_std": 0.255
+  },
+  {
+    "window_idx": 279,
+    "patient_id": 23,
+    "glucose": 104.0,
+    "corr_dim": null,
+    "lle": null,
+    "raw_std": 0.0
+  }
+]

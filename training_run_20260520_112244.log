@@ -1,0 +1,27 @@
+2026-05-20 11:22:45,667  INFO      =================================================================
+2026-05-20 11:22:45,667  INFO        PPG Multimodal Fusion Network — Training
+2026-05-20 11:22:45,667  INFO        Log file : /Users/namangarg/Desktop/Gaurav Verma/training_run.log
+2026-05-20 11:22:45,667  INFO      =================================================================
+2026-05-20 11:22:45,667  INFO      Config  epochs=200   batch=16   lr=0.0005  patience=15  min_delta=0.50
+2026-05-20 11:22:45,677  INFO      Hardware: Apple Silicon GPU (MPS) — using Metal acceleration
+2026-05-20 11:22:45,677  INFO      Loading and splitting dataset: /Users/namangarg/Desktop/Gaurav Verma/Archive_Dataset/clean-dataset.csv
+2026-05-20 11:22:45,962  INFO      Patient split — train: 18 patients, val: 4 patients
+2026-05-20 11:22:45,963  INFO      Dataset ready: 704505 rows → 1409 windows of 500 samples.
+2026-05-20 11:22:45,964  WARNING   DATA QUALITY: 13/50 probed windows have a CONSTANT PPG_Signal (std≈0). CWT scalograms and phase-space attractors will be uninformative for these windows. Inspect the CSV carefully.
+2026-05-20 11:22:45,964  INFO      Dataset ready: 140441 rows → 280 windows of 500 samples.
+2026-05-20 11:22:45,966  WARNING   DATA QUALITY: 12/50 probed windows have a CONSTANT PPG_Signal (std≈0). CWT scalograms and phase-space attractors will be uninformative for these windows. Inspect the CSV carefully.
+2026-05-20 11:22:45,967  INFO      Train windows: 1409   Val windows: 280
+2026-05-20 11:22:46,023  INFO      Running pre-training shape sanity check ...
+2026-05-20 11:22:46,991  INFO        Branch1D : (2, 256)  OK
+2026-05-20 11:22:46,991  INFO        Branch2D : (2, 256)  OK
+2026-05-20 11:22:46,991  INFO        Branch3D : (2, 256)  OK
+2026-05-20 11:22:46,991  INFO        Output   : (2, 1)  OK
+2026-05-20 11:22:46,991  INFO      Sanity check PASSED
+2026-05-20 11:22:46,993  INFO      Trainable parameters: 548,801
+Traceback (most recent call last):
+  File "/Users/namangarg/Desktop/Gaurav Verma/train_fusion_model.py", line 395, in <module>
+    train(
+  File "/Users/namangarg/Desktop/Gaurav Verma/train_fusion_model.py", line 264, in train
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ReduceLROnPlateau.__init__() got an unexpected keyword argument 'verbose'

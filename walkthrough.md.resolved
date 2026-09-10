@@ -1,0 +1,79 @@
+# Complete Audit Walkthrough
+
+## Code Fixes (8 files)
+
+| File | Fix |
+|------|-----|
+| [generate_extra_figures.py](file:///Users/namangarg/Desktop/Gaurav%20Verma/generate_extra_figures.py) | Replaced **fabricated** SNR/attention data with real experiments |
+| [plot_clarke_error_grid.py](file:///Users/namangarg/Desktop/Gaurav%20Verma/plot_clarke_error_grid.py) | Fixed Zone D/E overlap (E checked before D now) |
+| [plot_overlay_comparison.py](file:///Users/namangarg/Desktop/Gaurav%20Verma/plot_overlay_comparison.py) | `iloc[:, 3]` → `'PPG_Signal'` |
+| [generate_paper_figures.py](file:///Users/namangarg/Desktop/Gaurav%20Verma/generate_paper_figures.py) | Same fix |
+| [train_fusion_model.py](file:///Users/namangarg/Desktop/Gaurav%20Verma/train_fusion_model.py) | `weights_only=True`, added MSE + epoch to Clarke JSON |
+| [eval_mae.py](file:///Users/namangarg/Desktop/Gaurav%20Verma/eval_mae.py) | `weights_only=True` |
+| [test_integrity.py](file:///Users/namangarg/Desktop/Gaurav%20Verma/test_integrity.py) | Rewritten with 8 comprehensive checks |
+| [expand_latex.py](file:///Users/namangarg/Desktop/Gaurav%20Verma/expand_latex.py) | **Deleted** (pseudoscience injector) |
+
+---
+
+## Fresh Training Results
+
+| Metric | Value |
+|--------|-------|
+| Optimal Epoch | **5** (stopped at 10) |
+| Val MSE | **76.42** mg/dL² |
+| Val MAE | **6.85** mg/dL |
+| RMSE | **8.74** mg/dL |
+| Zone A | **100.0%** (280/280) |
+| LR at best epoch | 0.000815 (γ=0.95) |
+
+---
+
+## Paper Corrections ([ieee_paper.tex](file:///Users/namangarg/Desktop/Gaurav%20Verma/ieee_paper.tex))
+
+### Numbers Updated
+
+| Where | Old | New |
+|-------|-----|-----|
+| Abstract MSE | 82.17 | **76.42** |
+| Abstract RMSE/MAE | missing | **8.74 / 6.85** |
+| Optimal epoch | 7th (stopped 12) | **5th (stopped 10)** |
+| SOTA table RMSE/MAE | 9.06 / 8.34 | **8.74 / 6.85** |
+| Ablation baseline | 82.17 | **76.42** |
+| Ablation deltas | +146%, +43%, +78% | **+346%, +160%, +100%** |
+
+### False Claims Removed
+
+| Claim | Issue | Fix |
+|-------|-------|-----|
+| "order-4 Chebyshev Bandpass [0.5, 8.0 Hz]" | **No filter exists in code** — only Z-score normalization | Removed, replaced with accurate description |
+| "Q/K/V multi-head attention" equation | Code uses **learnable-query dot-product**, not Q/K/V | Rewrote equation, pseudocode, and all references |
+| "2D ResNet CNN" | Code is plain **3-layer Conv2D** | Fixed in TikZ diagram |
+| "multi-headed Cross-Attention" | Single learnable query vector | Changed to "learnable-query" |
+| "mathematically guarantees" | Overstated | Softened to "enables" |
+| Pseudoscience section | "Information Entropy and Topological Mapping" | **Removed entirely** |
+| Dropout(0.4) | Code uses 0.3 | **Fixed to 0.3** |
+
+### Limitations Expanded
+
+Added two new critical limitations:
+1. **Glucose range disparity** — Validation set only covers 88–136 mg/dL vs training's 88–183 mg/dL, meaning 100% Zone A may not generalize to hyperglycemia
+2. **Attention weight imbalance** — 2D branch gets ~100% weight; 1D/3D branches contribute negligibly
+
+---
+
+## Verification
+
+All 8 integrity checks pass:
+```
+✅ 1. Training log: 10 epochs, monotonic
+✅ 2. LR Scheduler present  
+✅ 3. No random data in Clarke plot
+✅ 4. No fabricated data in extra figures
+✅ 5. Named column access everywhere
+✅ 6. weights_only=True in all torch.load
+✅ 7. Clarke results: 280 points, sums correct
+✅ 8. Patient split: 18/4, no overlap
+```
+
+All 6 paper numbers verified as **exact matches** to [training_log.csv](file:///Users/namangarg/Desktop/Gaurav%20Verma/training_log.csv) and [clarke_results.json](file:///Users/namangarg/Desktop/Gaurav%20Verma/clarke_results.json).
+LR schedule verified for all 10 epochs (γ=0.95 from 0.001).

@@ -1,0 +1,91 @@
+2026-05-20 11:24:31,703  INFO      =================================================================
+2026-05-20 11:24:31,703  INFO        PPG Multimodal Fusion Network — Training
+2026-05-20 11:24:31,703  INFO        Log file : /Users/namangarg/Desktop/Gaurav Verma/training_run.log
+2026-05-20 11:24:31,703  INFO      =================================================================
+2026-05-20 11:24:31,703  INFO      Config  epochs=200   batch=16   lr=0.0005  patience=15  min_delta=0.50
+2026-05-20 11:24:31,712  INFO      Hardware: Apple Silicon GPU (MPS) — using Metal acceleration
+2026-05-20 11:24:31,712  INFO      Loading and splitting dataset: /Users/namangarg/Desktop/Gaurav Verma/Archive_Dataset/clean-dataset.csv
+2026-05-20 11:24:32,025  INFO      Patient split — train: 18 patients, val: 4 patients
+2026-05-20 11:24:32,025  INFO      Dataset ready: 704505 rows → 1409 windows of 500 samples.
+2026-05-20 11:24:32,027  WARNING   DATA QUALITY: 13/50 probed windows have a CONSTANT PPG_Signal (std≈0). CWT scalograms and phase-space attractors will be uninformative for these windows. Inspect the CSV carefully.
+2026-05-20 11:24:32,027  INFO      Dataset ready: 140441 rows → 280 windows of 500 samples.
+2026-05-20 11:24:32,028  WARNING   DATA QUALITY: 12/50 probed windows have a CONSTANT PPG_Signal (std≈0). CWT scalograms and phase-space attractors will be uninformative for these windows. Inspect the CSV carefully.
+2026-05-20 11:24:32,030  INFO      Train windows: 1409   Val windows: 280
+2026-05-20 11:24:32,077  INFO      Running pre-training shape sanity check ...
+2026-05-20 11:24:32,399  INFO        Branch1D : (2, 256)  OK
+2026-05-20 11:24:32,400  INFO        Branch2D : (2, 256)  OK
+2026-05-20 11:24:32,400  INFO        Branch3D : (2, 256)  OK
+2026-05-20 11:24:32,400  INFO        Output   : (2, 1)  OK
+2026-05-20 11:24:32,400  INFO      Sanity check PASSED
+2026-05-20 11:24:32,401  INFO      Trainable parameters: 548,801
+2026-05-20 11:24:32,858  INFO      
+2026-05-20 11:24:32,858  INFO      Epoch  | Time(s)  | Train MSE  | Val MSE    | Val MAE    | LR         | Status
+2026-05-20 11:24:32,858  INFO      ---------------------------------------------------------------------------
+2026-05-20 11:24:39,565  INFO      1      |      6.7 | 10205.1735 |  6050.8139 |    77.0398 |   5.00e-04 | <-- BEST  saved
+2026-05-20 11:24:45,487  INFO      2      |      5.9 |  3855.7319 |   571.5443 |    18.7520 |   5.00e-04 | <-- BEST  saved
+2026-05-20 11:24:51,644  INFO      3      |      6.1 |   715.1684 |   252.5139 |    13.0428 |   5.00e-04 | <-- BEST  saved
+2026-05-20 11:24:57,655  INFO      4      |      6.0 |   395.2248 |   218.1006 |    11.6877 |   5.00e-04 | <-- BEST  saved
+2026-05-20 11:25:03,445  INFO      5      |      5.8 |   329.6708 |   191.8075 |     9.9299 |   5.00e-04 | <-- BEST  saved
+2026-05-20 11:25:09,261  INFO      6      |      5.8 |   308.8956 |   141.5107 |     8.7299 |   5.00e-04 | <-- BEST  saved
+2026-05-20 11:25:14,829  INFO      7      |      5.6 |   286.4425 |   147.8600 |     9.7171 |   5.00e-04 | no improve 1/15
+2026-05-20 11:25:20,227  INFO      8      |      5.4 |   285.6722 |   282.5572 |    14.4630 |   5.00e-04 | no improve 2/15
+2026-05-20 11:25:25,838  INFO      9      |      5.6 |   273.2097 |   196.5126 |    10.2986 |   5.00e-04 | no improve 3/15
+2026-05-20 11:25:31,594  INFO      10     |      5.7 |   260.5756 |   104.6724 |     8.6944 |   5.00e-04 | <-- BEST  saved
+2026-05-20 11:25:37,527  INFO      11     |      5.9 |   262.4471 |   218.5479 |    12.9374 |   5.00e-04 | no improve 1/15
+2026-05-20 11:25:43,376  INFO      12     |      5.8 |   265.6056 |   107.2834 |     9.0476 |   5.00e-04 | no improve 2/15
+2026-05-20 11:25:49,124  INFO      13     |      5.7 |   256.9279 |   102.0724 |     7.5395 |   5.00e-04 | <-- BEST  saved
+2026-05-20 11:25:54,695  INFO      14     |      5.6 |   256.9103 |   105.0746 |     8.4654 |   5.00e-04 | no improve 1/15
+2026-05-20 11:26:00,322  INFO      15     |      5.6 |   246.9910 |   177.5489 |    10.8534 |   5.00e-04 | no improve 2/15
+2026-05-20 11:26:06,024  INFO      16     |      5.7 |   244.7229 |   104.2209 |     7.5219 |   5.00e-04 | no improve 3/15
+2026-05-20 11:26:11,711  INFO      17     |      5.7 |   233.2950 |   105.7780 |     9.0713 |   5.00e-04 | no improve 4/15
+2026-05-20 11:26:17,475  INFO      18     |      5.8 |   230.7251 |   121.2271 |     9.1001 |   5.00e-04 | no improve 5/15
+2026-05-20 11:26:23,627  INFO      19     |      6.2 |   224.1654 |   112.1063 |     8.6648 |   2.50e-04 | no improve 6/15
+2026-05-20 11:26:29,616  INFO      20     |      6.0 |   226.2741 |   100.6599 |     7.6966 |   2.50e-04 | <-- BEST  saved
+2026-05-20 11:26:35,535  INFO      21     |      5.9 |   214.7124 |   111.0291 |     8.7891 |   2.50e-04 | no improve 1/15
+2026-05-20 11:26:41,718  INFO      22     |      6.2 |   230.8847 |   100.7345 |     7.6852 |   2.50e-04 | no improve 2/15
+2026-05-20 11:26:47,862  INFO      23     |      6.1 |   209.6681 |    88.8415 |     7.5613 |   2.50e-04 | <-- BEST  saved
+2026-05-20 11:26:53,960  INFO      24     |      6.1 |   208.3895 |    93.1541 |     8.2352 |   2.50e-04 | no improve 1/15
+2026-05-20 11:27:00,093  INFO      25     |      6.1 |   210.9998 |   103.1750 |     8.2518 |   2.50e-04 | no improve 2/15
+2026-05-20 11:27:06,009  INFO      26     |      5.9 |   221.2959 |   159.9983 |    11.3735 |   2.50e-04 | no improve 3/15
+2026-05-20 11:27:11,815  INFO      27     |      5.8 |   208.0311 |    82.4683 |     6.8949 |   2.50e-04 | <-- BEST  saved
+2026-05-20 11:27:17,387  INFO      28     |      5.6 |   214.1180 |    97.9249 |     8.1666 |   2.50e-04 | no improve 1/15
+2026-05-20 11:27:23,114  INFO      29     |      5.7 |   207.1968 |   124.5740 |     9.5305 |   2.50e-04 | no improve 2/15
+2026-05-20 11:27:28,768  INFO      30     |      5.7 |   197.5598 |   112.9634 |     9.0955 |   2.50e-04 | no improve 3/15
+2026-05-20 11:27:34,540  INFO      31     |      5.8 |   205.6172 |   127.7538 |    10.3798 |   2.50e-04 | no improve 4/15
+2026-05-20 11:27:40,271  INFO      32     |      5.7 |   212.2215 |   100.6139 |     8.0064 |   2.50e-04 | no improve 5/15
+2026-05-20 11:27:45,991  INFO      33     |      5.7 |   201.8833 |   124.0666 |     9.5564 |   1.25e-04 | no improve 6/15
+2026-05-20 11:27:51,801  INFO      34     |      5.8 |   207.3758 |   105.2163 |     8.8935 |   1.25e-04 | no improve 7/15
+2026-05-20 11:27:57,342  INFO      35     |      5.5 |   200.9560 |    89.0166 |     7.6087 |   1.25e-04 | no improve 8/15
+2026-05-20 11:28:02,924  INFO      36     |      5.6 |   197.7731 |   105.5004 |     8.5186 |   1.25e-04 | no improve 9/15
+2026-05-20 11:28:08,685  INFO      37     |      5.8 |   192.7070 |    91.8532 |     7.6385 |   1.25e-04 | no improve 10/15
+2026-05-20 11:28:14,277  INFO      38     |      5.6 |   191.9162 |   102.2490 |     8.0756 |   6.25e-05 | no improve 11/15
+2026-05-20 11:28:20,357  INFO      39     |      6.1 |   190.8921 |    96.8720 |     7.7670 |   6.25e-05 | no improve 12/15
+2026-05-20 11:28:26,113  INFO      40     |      5.8 |   191.2956 |    98.7164 |     8.4074 |   6.25e-05 | no improve 13/15
+2026-05-20 11:28:31,873  INFO      41     |      5.8 |   191.6288 |   102.5615 |     8.5170 |   6.25e-05 | no improve 14/15
+2026-05-20 11:28:37,631  INFO      42     |      5.8 |   193.4331 |   105.0068 |     7.8899 |   6.25e-05 | no improve 15/15
+2026-05-20 11:28:37,632  INFO      Early stopping: no improvement for 15 consecutive epochs.
+2026-05-20 11:28:37,632  INFO      
+2026-05-20 11:28:37,632  INFO      =================================================================
+2026-05-20 11:28:37,632  INFO      Training finished.
+2026-05-20 11:28:37,632  INFO        Optimal epoch  : 27
+2026-05-20 11:28:37,632  INFO        Best Val MSE   : 82.4683  mg/dL²
+2026-05-20 11:28:37,632  INFO        Best Val RMSE  : 9.0812  mg/dL
+2026-05-20 11:28:37,632  INFO        Best Val MAE   : 6.8949  mg/dL
+2026-05-20 11:28:37,632  INFO        Model saved to : /Users/namangarg/Desktop/Gaurav Verma/fusion_model_v2_mac.pth
+2026-05-20 11:28:37,632  INFO        Full log at    : /Users/namangarg/Desktop/Gaurav Verma/training_run.log
+2026-05-20 11:28:37,632  INFO      =================================================================
+2026-05-20 11:28:37,632  INFO      Loading best checkpoint for clinical evaluation: fusion_model_v2_mac.pth
+2026-05-20 11:28:38,758  INFO      Clarke Error Grid — 280 points
+2026-05-20 11:28:38,759  INFO        Zone A:  277 ( 98.9%)
+2026-05-20 11:28:38,759  INFO        Zone B:    3 (  1.1%)
+2026-05-20 11:28:38,759  INFO        Zone C:    0 (  0.0%)
+2026-05-20 11:28:38,759  INFO        Zone D:    0 (  0.0%)
+2026-05-20 11:28:38,759  INFO        Zone E:    0 (  0.0%)
+2026-05-20 11:28:38,759  INFO      Saved: /Users/namangarg/Desktop/Gaurav Verma/clarke_error_grid.png
+2026-05-20 11:28:38,759  INFO      Clarke Error Grid:
+2026-05-20 11:28:38,759  INFO        Zone A:  277 ( 98.9%)
+2026-05-20 11:28:38,759  INFO        Zone B:    3 (  1.1%)
+2026-05-20 11:28:38,759  INFO        Zone C:    0 (  0.0%)
+2026-05-20 11:28:38,759  INFO        Zone D:    0 (  0.0%)
+2026-05-20 11:28:38,759  INFO        Zone E:    0 (  0.0%)
+2026-05-20 11:28:38,759  INFO      Saved: clarke_results.json  +  clarke_error_grid.png

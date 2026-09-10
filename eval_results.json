@@ -1,0 +1,18 @@
+{
+  "mse": 82.46829986572266,
+  "rmse": 9.081205859670986,
+  "mae": 6.894896507263184,
+  "r2": -0.20646179451936542,
+  "mard_pct": 6.018779754638672,
+  "total_points": 280,
+  "zone_A_count": 277,
+  "zone_A_pct": 98.92857142857143,
+  "zone_B_count": 3,
+  "zone_B_pct": 1.0714285714285714,
+  "zone_C_count": 0,
+  "zone_C_pct": 0.0,
+  "zone_D_count": 0,
+  "zone_D_pct": 0.0,
+  "zone_E_count": 0,
+  "zone_E_pct": 0.0
+}

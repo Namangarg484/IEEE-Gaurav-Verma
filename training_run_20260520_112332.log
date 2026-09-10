@@ -1,0 +1,64 @@
+2026-05-20 11:23:33,465  INFO      =================================================================
+2026-05-20 11:23:33,465  INFO        PPG Multimodal Fusion Network — Training
+2026-05-20 11:23:33,465  INFO        Log file : /Users/namangarg/Desktop/Gaurav Verma/training_run.log
+2026-05-20 11:23:33,465  INFO      =================================================================
+2026-05-20 11:23:33,465  INFO      Config  epochs=200   batch=16   lr=0.0005  patience=15  min_delta=0.50
+2026-05-20 11:23:33,474  INFO      Hardware: Apple Silicon GPU (MPS) — using Metal acceleration
+2026-05-20 11:23:33,475  INFO      Loading and splitting dataset: /Users/namangarg/Desktop/Gaurav Verma/Archive_Dataset/clean-dataset.csv
+2026-05-20 11:23:33,779  INFO      Patient split — train: 18 patients, val: 4 patients
+2026-05-20 11:23:33,779  INFO      Dataset ready: 704505 rows → 1409 windows of 500 samples.
+2026-05-20 11:23:33,780  WARNING   DATA QUALITY: 13/50 probed windows have a CONSTANT PPG_Signal (std≈0). CWT scalograms and phase-space attractors will be uninformative for these windows. Inspect the CSV carefully.
+2026-05-20 11:23:33,780  INFO      Dataset ready: 140441 rows → 280 windows of 500 samples.
+2026-05-20 11:23:33,782  WARNING   DATA QUALITY: 12/50 probed windows have a CONSTANT PPG_Signal (std≈0). CWT scalograms and phase-space attractors will be uninformative for these windows. Inspect the CSV carefully.
+2026-05-20 11:23:33,784  INFO      Train windows: 1409   Val windows: 280
+2026-05-20 11:23:33,836  INFO      Running pre-training shape sanity check ...
+2026-05-20 11:23:34,150  INFO        Branch1D : (2, 256)  OK
+2026-05-20 11:23:34,150  INFO        Branch2D : (2, 256)  OK
+2026-05-20 11:23:34,150  INFO        Branch3D : (2, 256)  OK
+2026-05-20 11:23:34,150  INFO        Output   : (2, 1)  OK
+2026-05-20 11:23:34,150  INFO      Sanity check PASSED
+2026-05-20 11:23:34,152  INFO      Trainable parameters: 548,801
+2026-05-20 11:23:34,628  INFO      
+2026-05-20 11:23:34,628  INFO      Epoch  | Time(s)  | Train MSE  | Val MSE    | Val MAE    | LR         | Status
+2026-05-20 11:23:34,628  INFO      ---------------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/namangarg/Desktop/Gaurav Verma/train_fusion_model.py", line 395, in <module>
+    train(
+  File "/Users/namangarg/Desktop/Gaurav Verma/train_fusion_model.py", line 295, in train
+    train_mse, _     = run_epoch(
+                       ^^^^^^^^^^
+  File "/Users/namangarg/Desktop/Gaurav Verma/train_fusion_model.py", line 147, in run_epoch
+    preds = model(b1, b2, b3)
+            ^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/namangarg/Desktop/Gaurav Verma/fusion_network_model.py", line 237, in forward
+    return self.head(fused)
+           ^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/container.py", line 253, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 194, in forward
+    return F.batch_norm(
+           ^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/functional.py", line 2841, in batch_norm
+    _verify_batch_size(input.size())
+  File "/opt/homebrew/Caskroom/miniconda/base/envs/ai_core/lib/python3.12/site-packages/torch/nn/functional.py", line 2806, in _verify_batch_size
+    raise ValueError(
+ValueError: Expected more than 1 value per channel when training, got input size torch.Size([1, 256])

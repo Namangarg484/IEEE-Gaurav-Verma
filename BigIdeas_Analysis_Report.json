@@ -1,0 +1,136 @@
+{
+  "dataset": "BIG IDEAs Lab Glycemic Variability & Wearable Device Dataset v1.1.3",
+  "doi": "10.13026/aw6y-fc44",
+  "bvp_hz": 64,
+  "cgm_interval_min": 5,
+  "window_samples": 500,
+  "window_sec": 7.81,
+  "downloaded_subjects": 1,
+  "total_subjects_in_dataset": 16,
+  "demographics": [
+    {
+      "ID": 13,
+      "Gender": "MALE",
+      "HbA1c": 5.7
+    },
+    {
+      "ID": 1,
+      "Gender": "FEMALE",
+      "HbA1c": 5.5
+    },
+    {
+      "ID": 3,
+      "Gender": "FEMALE",
+      "HbA1c": 5.9
+    },
+    {
+      "ID": 4,
+      "Gender": "FEMALE",
+      "HbA1c": 6.4
+    },
+    {
+      "ID": 5,
+      "Gender": "FEMALE",
+      "HbA1c": 5.7
+    },
+    {
+      "ID": 2,
+      "Gender": "MALE",
+      "HbA1c": 5.6
+    },
+    {
+      "ID": 6,
+      "Gender": "FEMALE",
+      "HbA1c": 5.8
+    },
+    {
+      "ID": 7,
+      "Gender": "FEMALE",
+      "HbA1c": 5.3
+    },
+    {
+      "ID": 8,
+      "Gender": "FEMALE",
+      "HbA1c": 5.6
+    },
+    {
+      "ID": 10,
+      "Gender": "FEMALE",
+      "HbA1c": 6.0
+    },
+    {
+      "ID": 9,
+      "Gender": "MALE",
+      "HbA1c": 6.1
+    },
+    {
+      "ID": 11,
+      "Gender": "MALE",
+      "HbA1c": 6.0
+    },
+    {
+      "ID": 12,
+      "Gender": "MALE",
+      "HbA1c": 5.6
+    },
+    {
+      "ID": 14,
+      "Gender": "MALE",
+      "HbA1c": 5.5
+    },
+    {
+      "ID": 15,
+      "Gender": "FEMALE",
+      "HbA1c": 5.5
+    },
+    {
+      "ID": 16,
+      "Gender": "MALE",
+      "HbA1c": 5.5
+    }
+  ],
+  "total_windows": 78408,
+  "total_subjects_with_windows": 1,
+  "glucose_stats": {
+    "mean": 106.77253596571778,
+    "std": 16.31813823019537,
+    "min": 58.0,
+    "max": 155.0,
+    "cv_pct": 15.283085751035033
+  },
+  "comparison_with_archive": {
+    "archive_within_patient_glucose_std": "\u22480 mg/dL (label essentially constant per patient)",
+    "bigideas_within_patient_glucose_std": "16.3 mg/dL",
+    "advantage": "BigIdeas provides true within-patient glucose dynamics \u2014 directly addresses the primary limitation of our archive dataset"
+  },
+  "per_subject": [
+    {
+      "subject_id": "001",
+      "cgm": {
+        "n_readings": 2561,
+        "duration_days": 9.020729166666667,
+        "glucose_mean": 106.09371339320577,
+        "glucose_std": 15.771011639060665,
+        "glucose_min": 46.0,
+        "glucose_max": 155.0,
+        "glucose_cv": 14.865170738825926,
+        "time_in_normal": 99.14096056228036,
+        "time_hypo": 0.8590394377196408,
+        "time_hyper": 0.0
+      },
+      "bvp": {
+        "n_windows_total": 78408,
+        "n_windows_clean": 74487,
+        "pct_clean": 94.99923477196205,
+        "sqi_threshold": 1.956527376174927,
+        "bvp_mean_sqi": 17.72566537606696
+      },
+      "windows": {
+        "glucose_mean_windowed": 106.77253596571778,
+        "glucose_std_windowed": 16.31813823019537,
+        "glucose_min_windowed": 58.0,
+        "glucose_max_windowed": 155.0
+      }
+    }
+  ]
+}

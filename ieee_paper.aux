@@ -1,0 +1,117 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{idf2021}
+\citation{allen2007ppg}
+\citation{hina2021noninvasive,dinh2022ppg}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{I}{1}{Introduction}{section.1}{}}
+\citation{hina2021noninvasive}
+\citation{dinh2022ppg}
+\citation{almarshad2021}
+\citation{li2020ecg}
+\citation{takens1981}
+\citation{qi2017pointnet}
+\citation{vaswani2017attention}
+\citation{ppgdataset2023}
+\citation{bigideas2023}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{II}{2}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Non-Invasive Glucose Sensing via PPG}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Time-Frequency Representations in Biosignal Analysis}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Phase-Space Reconstruction and PointNet}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Attention-Based Fusion}{2}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}Dataset and Preprocessing}{2}{section.3}\protected@file@percent }
+\newlabel{sec:data}{{III}{2}{Dataset and Preprocessing}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}PPG-Glucose Dataset}{2}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Windowing and Patient-Level Split}{2}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Data Quality Audit}{2}{subsection.3.3}\protected@file@percent }
+\citation{takens1981}
+\citation{he2015init}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}PhysioNet BIG~IDEAs Dataset (Cross-Dataset Validation)}{3}{subsection.3.4}\protected@file@percent }
+\newlabel{sec:bigideas}{{\mbox  {III-D}}{3}{PhysioNet BIG~IDEAs Dataset (Cross-Dataset Validation)}{subsection.3.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Methodology}{3}{section.4}\protected@file@percent }
+\newlabel{sec:method}{{IV}{3}{Methodology}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Signal Modality Generation}{3}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-A}1}1D Temporal Signal}{3}{subsubsection.4.1.1}\protected@file@percent }
+\newlabel{eq:zscore}{{1}{3}{1D Temporal Signal}{equation.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-A}2}2D CWT Scalogram}{3}{subsubsection.4.1.2}\protected@file@percent }
+\newlabel{eq:cwt}{{2}{3}{2D CWT Scalogram}{equation.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-A}3}3D Phase-Space Point Cloud}{3}{subsubsection.4.1.3}\protected@file@percent }
+\newlabel{eq:takens}{{3}{3}{3D Phase-Space Point Cloud}{equation.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Network Architecture}{3}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}1}Branch 1D: Temporal CNN}{3}{subsubsection.4.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}2}Branch 2D: Spectral CNN}{3}{subsubsection.4.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}3}Branch 3D: Phase-Space PointNet}{3}{subsubsection.4.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {IV-B}4}Cross-Attention Fusion}{3}{subsubsection.4.2.4}\protected@file@percent }
+\newlabel{eq:attn_key}{{4}{3}{Cross-Attention Fusion}{equation.4}{}}
+\newlabel{eq:attn}{{7}{3}{Cross-Attention Fusion}{equation.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Training Protocol}{3}{subsection.4.3}\protected@file@percent }
+\citation{clarke1987}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Experiments and Results}{4}{section.5}\protected@file@percent }
+\newlabel{sec:results}{{V}{4}{Experiments and Results}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Training Convergence}{4}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Regression Metrics}{4}{subsection.5.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Validation Set Performance (280 Windows, Patients 19--22)}}{4}{table.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:metrics}{{I}{4}{Validation Set Performance (280 Windows, Patients 19--22)}{table.caption.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}Clarke Error Grid Analysis}{4}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}Comprehensive Ablation Study}{4}{subsection.5.4}\protected@file@percent }
+\newlabel{sec:ablation}{{\mbox  {V-D}}{4}{Comprehensive Ablation Study}{subsection.5.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Ablation Study: Val Set (280 Windows, Patients 19--22)}}{4}{table.caption.2}\protected@file@percent }
+\newlabel{tab:ablation}{{II}{4}{Ablation Study: Val Set (280 Windows, Patients 19--22)}{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-E}}Cross-Attention Weight Analysis}{4}{subsection.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-F}}SNR Robustness}{5}{subsection.5.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces RMSE (mg/dL) vs.\ SNR Level: Fusion vs.\ 1D-Only Baseline}}{5}{table.caption.3}\protected@file@percent }
+\newlabel{tab:snr}{{III}{5}{RMSE (mg/dL) vs.\ SNR Level: Fusion vs.\ 1D-Only Baseline}{table.caption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-G}}Signal Quality Index Filtering}{5}{subsection.5.7}\protected@file@percent }
+\newlabel{sec:sqi}{{\mbox  {V-G}}{5}{Signal Quality Index Filtering}{subsection.5.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-H}}Latent Space Identity Ablation (t-SNE)}{5}{subsection.5.8}\protected@file@percent }
+\newlabel{sec:tsne}{{\mbox  {V-H}}{5}{Latent Space Identity Ablation (t-SNE)}{subsection.5.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-I}}Cardiovascular Attractor Analysis}{5}{subsection.5.9}\protected@file@percent }
+\newlabel{sec:attractor}{{\mbox  {V-I}}{5}{Cardiovascular Attractor Analysis}{subsection.5.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-J}}Cross-Dataset Generalisation}{5}{subsection.5.10}\protected@file@percent }
+\newlabel{sec:crossdataset}{{\mbox  {V-J}}{5}{Cross-Dataset Generalisation}{subsection.5.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Cross-Dataset Generalisation Results (PhysioNet BIG~IDEAs Subject~001, 411~Test Windows)}}{5}{table.caption.4}\protected@file@percent }
+\newlabel{tab:crossdataset}{{IV}{5}{Cross-Dataset Generalisation Results (PhysioNet BIG~IDEAs Subject~001, 411~Test Windows)}{table.caption.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Discussion}{6}{section.6}\protected@file@percent }
+\newlabel{sec:discussion}{{VI}{6}{Discussion}{section.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Conclusion}{6}{section.7}\protected@file@percent }
+\newlabel{sec:conclusion}{{VII}{6}{Conclusion}{section.7}{}}
+\bibcite{idf2021}{1}
+\bibcite{allen2007ppg}{2}
+\bibcite{hina2021noninvasive}{3}
+\bibcite{dinh2022ppg}{4}
+\bibcite{almarshad2021}{5}
+\bibcite{takens1981}{6}
+\bibcite{qi2017pointnet}{7}
+\bibcite{vaswani2017attention}{8}
+\bibcite{he2015init}{9}
+\bibcite{li2020ecg}{10}
+\bibcite{clarke1987}{11}
+\bibcite{ppgdataset2023}{12}
+\bibcite{vandermaaten2008tsne}{13}
+\bibcite{bigideas2023}{14}
+\@writefile{toc}{\contentsline {section}{References}{7}{section*.15}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Proposed Multimodal 1D+2D+3D Fusion Network architecture. The raw PPG signal is simultaneously transformed into three heterogeneous representations feeding equal-dimension (256-d) branch encoders. A cross-attention module with a learnable query vector fuses the branches into a 768-d representation passed to the FC regression head.}}{8}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:architecture}{{1}{8}{Proposed Multimodal 1D+2D+3D Fusion Network architecture. The raw PPG signal is simultaneously transformed into three heterogeneous representations feeding equal-dimension (256-d) branch encoders. A cross-attention module with a learnable query vector fuses the branches into a 768-d representation passed to the FC regression head}{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Example multimodal transformation of a single PPG window (sample index 350, glucose $\approx $115~mg/dL). \textbf  {(A)} Z-score normalised 1D temporal signal; \textbf  {(B)} 2D CWT time-frequency scalogram ($64\times 64$ pixels, Mexican hat wavelet); \textbf  {(C)} 3D Takens delay-embedding phase-space attractor ($\tau =5$, $N_p=256$ points), coloured by the third coordinate.}}{8}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:pipeline}{{2}{8}{Example multimodal transformation of a single PPG window (sample index 350, glucose $\approx $115~mg/dL). \textbf {(A)} Z-score normalised 1D temporal signal; \textbf {(B)} 2D CWT time-frequency scalogram ($64\times 64$ pixels, Mexican hat wavelet); \textbf {(C)} 3D Takens delay-embedding phase-space attractor ($\tau =5$, $N_p=256$ points), coloured by the third coordinate}{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Training convergence over 42 epochs (early stopped). ReduceLROnPlateau halved the LR at epochs 19 and 33 (vertical arrows not shown). Best validation MSE of 82.47~mg/dL² achieved at epoch~27.}}{9}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:loss}{{3}{9}{Training convergence over 42 epochs (early stopped). ReduceLROnPlateau halved the LR at epochs 19 and 33 (vertical arrows not shown). Best validation MSE of 82.47~mg/dL² achieved at epoch~27}{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Clarke Error Grid for 280 validation predictions. 277 points (98.9\%) lie in Zone~A; 3 points (1.1\%) lie in Zone~B; zero points in Zones C--E, indicating strong estimation agreement under the evaluated conditions.}}{9}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:clarke}{{4}{9}{Clarke Error Grid for 280 validation predictions. 277 points (98.9\%) lie in Zone~A; 3 points (1.1\%) lie in Zone~B; zero points in Zones C--E, indicating strong estimation agreement under the evaluated conditions}{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Predicted vs.\ reference glucose scatter (left) and residual histogram (right) for the 280-window validation set. Points are colour-coded by patient (patients 19--22). MAE~=~6.89~mg/dL, RMSE~=~9.08~mg/dL. The residual distribution is approximately zero-centred, indicating minimal systematic bias.}}{9}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:overlay}{{5}{9}{Predicted vs.\ reference glucose scatter (left) and residual histogram (right) for the 280-window validation set. Points are colour-coded by patient (patients 19--22). MAE~=~6.89~mg/dL, RMSE~=~9.08~mg/dL. The residual distribution is approximately zero-centred, indicating minimal systematic bias}{figure.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Cross-attention branch weight distribution across 280 validation windows. Left: mean $\pm $ std bar chart; Right: violin plots. The 1D temporal branch receives the highest mean weight ($0.515\pm 0.124$), followed by the 3D phase-space branch ($0.303\pm 0.075$) and the 2D CWT branch ($0.182\pm 0.084$).}}{9}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:attention}{{6}{9}{Cross-attention branch weight distribution across 280 validation windows. Left: mean $\pm $ std bar chart; Right: violin plots. The 1D temporal branch receives the highest mean weight ($0.515\pm 0.124$), followed by the 3D phase-space branch ($0.303\pm 0.075$) and the 2D CWT branch ($0.182\pm 0.084$)}{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Signal Quality Index analysis. \textbf  {Left}: distribution of per-window raw PPG standard deviation across all windows (threshold $\tau =0.25$, dashed red). \textbf  {Centre}: per-patient SQI pass rates (patients 19--22). \textbf  {Right}: SQI vs.\ glucose scatter; flatlines are not glucose-biased, confirming artefact-random occurrence.}}{9}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:sqi}{{7}{9}{Signal Quality Index analysis. \textbf {Left}: distribution of per-window raw PPG standard deviation across all windows (threshold $\tau =0.25$, dashed red). \textbf {Centre}: per-patient SQI pass rates (patients 19--22). \textbf {Right}: SQI vs.\ glucose scatter; flatlines are not glucose-biased, confirming artefact-random occurrence}{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces t-SNE of the 768-d fused latent space ($n=280$ val windows). \textbf  {Left}: coloured by patient ID; silhouette score $-0.067$ confirms no patient-identity clustering. \textbf  {Right}: coloured by glucose label, showing a diffuse glucose gradient rather than sharp identity-driven boundaries.}}{10}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:tsne}{{8}{10}{t-SNE of the 768-d fused latent space ($n=280$ val windows). \textbf {Left}: coloured by patient ID; silhouette score $-0.067$ confirms no patient-identity clustering. \textbf {Right}: coloured by glucose label, showing a diffuse glucose gradient rather than sharp identity-driven boundaries}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Cardiovascular attractor analysis for SQI-clean validation windows. \textbf  {Top row}: correlation dimension $D_2$ and largest Lyapunov exponent (LLE) versus glucose (Pearson $r=-0.072$ / $r=+0.085$). \textbf  {Bottom row}: example 3D Takens attractors for low, mid, and high glucose windows.}}{10}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:attractor}{{9}{10}{Cardiovascular attractor analysis for SQI-clean validation windows. \textbf {Top row}: correlation dimension $D_2$ and largest Lyapunov exponent (LLE) versus glucose (Pearson $r=-0.072$ / $r=+0.085$). \textbf {Bottom row}: example 3D Takens attractors for low, mid, and high glucose windows}{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Cross-dataset generalisation experiment (PhysioNet BIG~IDEAs, Subject~001, Empatica~E4 BVP 64~Hz). \textbf  {(A)} MAE comparison: in-distribution Archive validation (6.89~mg/dL, blue); zero-shot transfer with all weights frozen (15.20~mg/dL, orange); fine-tuned cross-attention and head only (13.99~mg/dL, green). The $\Delta $MAE arrow shows $-1.21$~mg/dL improvement from fine-tuning. \textbf  {(B)} Per-epoch validation MAE during 15-epoch fine-tuning (Adam, $\eta $=$10^{-3}$, batch~32). Best val MAE 13.25~mg/dL at epoch~11; final reported MAE 13.99~mg/dL at epoch~15. Orange dashed: zero-shot baseline (15.20~mg/dL).}}{10}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:crossdataset}{{10}{10}{Cross-dataset generalisation experiment (PhysioNet BIG~IDEAs, Subject~001, Empatica~E4 BVP 64~Hz). \textbf {(A)} MAE comparison: in-distribution Archive validation (6.89~mg/dL, blue); zero-shot transfer with all weights frozen (15.20~mg/dL, orange); fine-tuned cross-attention and head only (13.99~mg/dL, green). The $\Delta $MAE arrow shows $-1.21$~mg/dL improvement from fine-tuning. \textbf {(B)} Per-epoch validation MAE during 15-epoch fine-tuning (Adam, $\eta $=$10^{-3}$, batch~32). Best val MAE 13.25~mg/dL at epoch~11; final reported MAE 13.99~mg/dL at epoch~15. Orange dashed: zero-shot baseline (15.20~mg/dL)}{figure.caption.14}{}}
+\gdef \@abspage@last{10}

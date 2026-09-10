@@ -1,0 +1,95 @@
+[
+  {
+    "name": "Global Mean Baseline",
+    "mae": 10.48,
+    "rmse": 10.545,
+    "zone_a_pct": 100.0,
+    "best_epoch": "N/A"
+  },
+  {
+    "name": "Per-Patient Oracle",
+    "mae": 0.072,
+    "rmse": 0.501,
+    "zone_a_pct": 100.0,
+    "best_epoch": "N/A",
+    "note": "dataset characterisation only \u2014 uses val labels"
+  },
+  {
+    "name": "Vitals Ridge Regression",
+    "mae": 15.187,
+    "rmse": 16.816,
+    "zone_a_pct": 83.9,
+    "best_epoch": "N/A"
+  },
+  {
+    "name": "1D-Only",
+    "mae": 7.293,
+    "rmse": 9.337,
+    "zone_a_pct": 99.6,
+    "best_epoch": 28
+  },
+  {
+    "name": "2D-Only",
+    "mae": 8.983,
+    "rmse": 9.966,
+    "zone_a_pct": 100.0,
+    "best_epoch": 32
+  },
+  {
+    "name": "3D-Only",
+    "mae": 7.173,
+    "rmse": 9.053,
+    "zone_a_pct": 99.3,
+    "best_epoch": 28
+  },
+  {
+    "name": "1D+2D (Concat)",
+    "mae": 8.429,
+    "rmse": 9.65,
+    "zone_a_pct": 100.0,
+    "best_epoch": 32
+  },
+  {
+    "name": "1D+3D (Concat)",
+    "mae": 7.299,
+    "rmse": 9.136,
+    "zone_a_pct": 99.6,
+    "best_epoch": 27
+  },
+  {
+    "name": "1D+2D+3D (Concat)",
+    "mae": 7.739,
+    "rmse": 9.0,
+    "zone_a_pct": 99.6,
+    "best_epoch": 27
+  },
+  {
+    "name": "ResNet-1D (SOTA)",
+    "mae": 8.686,
+    "rmse": 9.561,
+    "zone_a_pct": 100.0,
+    "best_epoch": 37
+  },
+  {
+    "name": "CNN-LSTM (SOTA)",
+    "mae": 6.567,
+    "rmse": 8.295,
+    "zone_a_pct": 100.0,
+    "best_epoch": 53
+  },
+  {
+    "name": "1D+2D+3D Cross-Attention (Ours)",
+    "mae": 6.895,
+    "rmse": 9.081,
+    "zone_a_pct": 98.9,
+    "best_epoch": "pretrained (epoch 27)"
+  },
+  {
+    "name": "1D+2D+3D Cross-Attention (Ours, SQI-filtered)",
+    "mae": 6.211,
+    "rmse": 8.592,
+    "zone_a_pct": null,
+    "best_epoch": "pretrained",
+    "note": "232/280 windows pass SQI"
+  }
+]
