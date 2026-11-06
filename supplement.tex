@@ -1,0 +1,419 @@
+\documentclass[journal,onecolumn]{IEEEtran}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+\else
+  \usepackage{fontspec}
+  \setmainfont{texgyretermes}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+\fi
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{cite}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage[hidelinks]{hyperref}
+\graphicspath{{./figures/}}
+\input{results_macros}
+\newcommand{\m}[1]{\ifcsname #1\endcsname\csname #1\endcsname\else\textcolor{red}{--}\fi}
+\input{supp_tables}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+
+\begin{document}
+\title{Supplementary Material: A Validated Leakage Audit for Wearable
+Physiological Regression, with Application to PPG-Based Glucose and
+Blood-Pressure Estimation}
+\author{Gaurav Verma}
+\maketitle
+
+\section*{S1. TRIPOD+AI checklist}
+Items of the TRIPOD+AI statement~\cite{collins2024tripod} and where each is
+addressed (main paper: Sec.~I--VI; supplement: S2--S8).  Items that do not
+apply to an evaluation of public data are marked n/a.
+
+\begin{longtable}{@{}p{1.2cm}p{7.2cm}p{6.5cm}@{}}
+\toprule
+\textbf{Item} & \textbf{Requirement} & \textbf{Where} \\
+\midrule
+1 & Title identifies study as developing/evaluating prediction models & Title, Abstract \\
+2 & Abstract: objectives, data, methods, results, conclusions & Structured abstract \\
+3a--b & Background, rationale, objectives & Sec.~I \\
+4 & Data sources, dates, setting & Sec.~IV-A; S3 \\
+5a & Participants: eligibility, recruitment & Sec.~IV-A, S3 (as reported by dataset authors) \\
+5b--c & Treatment / care pathway & n/a \\
+6 & Data preparation: cleaning, windowing, missing data & Sec.~IV-A; S2; loaders in code \\
+7 & Outcome definition and measurement & Sec.~IV-A; S3 (fingerstick meter; Dexcom G6; cuff BP) \\
+8 & Predictors: definition and measurement & Sec.~IV-A; S2 \\
+9 & Sample size justification & Sec.~III (power of the decision rule); S5 \\
+10 & Missing-data handling & S2 (gap-free windows only) \\
+11 & Analytical methods: model type, hyper-parameters, selection & Sec.~IV-A; S2 \\
+12a & Evaluation: splits, protocol, leakage control & Sec.~II-C, II-D; Table~I; frozen folds in code \\
+12b & Model performance measures & Sec.~II-E \\
+12c & Model comparison and null models & Sec.~II-E; S8 \\
+12d & Uncertainty (CIs, tests) & Sec.~II-E; Tables~II--III; S6, S8 \\
+12e & Fairness / subgroup analysis & Per-subject results (Fig.~\ref{fig:bigideas}b); sex not analysed (n too small) \\
+13 & Class imbalance / outcome distribution & S3; glucose ranges and hypo-/hyperglycaemic counts \\
+14 & Open science: code, data, protocol & Title footnote; README (incl.\ encoder weight sources and licences) \\
+15 & Patient and public involvement & n/a (public data) \\
+16--17 & Participant flow, characteristics & Sec.~IV-A; S3 \\
+18a--f & Model performance, comparisons, uncertainty, subgroups & Sec.~IV-B, IV-C; S6--S8 \\
+19 & Model updating & n/a \\
+20 & Interpretation; comparison with prior work & Sec.~V; Table~\ref{tab:prior} \\
+21 & Limitations & Sec.~V \\
+22 & Usability: inputs, outputs, intended use & S2 (intended use; nulls per use case in Sec.~II-E) \\
+23 & Funding, conflicts & To be completed by the author \\
+\bottomrule
+\end{longtable}
+
+\section*{S2. Model information sheet}
+\begin{longtable}{@{}p{2.6cm}p{5.5cm}@{}}
+\toprule
+\textbf{Field} & \textbf{Value} \\
+\midrule
+Task & Regression of blood / interstitial glucose (mg/dL) from a 5-s PPG window (networks, classical) or 10--30-s segments (frozen encoders); systolic and diastolic blood pressure (mmHg) from 2.1-s PPG-BP segments \\
+Intended use & Benchmark only; no clinical use \\
+Inputs & 320 samples at 64 Hz, 0.5--8 Hz band-passed, z-scored per window (variants in Table~\ref{tab:preproc}) \\
+Outputs & One glucose value per window; averaged per reference measurement \\
+Training data & Kermani--Esmaeili recordings (LOSO folds); BIG~IDEAs training periods; STUBA ePPG (LOSO); PPG-BP (5-fold subject-wise and random-segment folds) \\
+Hyper-parameters & AdamW, lr $10^{-3}$, wd $10^{-4}$, one-cycle, \m{mendEpochs}/\m{bigEpochs} epochs, batch 16/64, grad-clip 1, smooth-L1 on standardised target \\
+Seeds & Kermani--Esmaeili networks: \m{mendFusionSeeds}; STUBA 1-D CNN: \m{stubaOneDSeeds}, other STUBA networks one; BIG~IDEAs residual 1-D CNN: \m{bigOneDResSeeds}, other BIG~IDEAs rows one; encoder probes and classical models are deterministic (one run) \\
+Null models & Train mean; subject train mean; time of day; persistence \\
+Leakage controls & Named protocols with asserted guarantees; frozen folds; guard gap; label-construction detector, whole-column and block scan \\
+Known failure modes & Predicts near the (subject) mean; no event sensitivity \\
+Pretrained encoders & PaPaGei-S (\m{fmPapageiParams}, 125~Hz, 10-s), Pulse-PPG (\m{fmPulseParams}, 50~Hz, 10--30-s), AnyPPG (\m{fmAnyppgParams}, 125~Hz, 10-s); frozen released weights loaded weights-only; 0.5--12~Hz Chebyshev-II, resample, z-score; 512-d embeddings averaged per reference; RidgeCV ($\alpha\in[10^{-2},10^{4}]$) on training-fold-standardised features \\
+Licences & Data: Kermani--Esmaeili CC BY 4.0 (Mendeley Data); BIG~IDEAs PhysioNet ODC-By; STUBA ePPG CC0; PPG-BP CC0 (figshare).  Encoders: PaPaGei code BSD-3-Clause, weights Zenodo 13983110 (no licence stated); Pulse-PPG MIT (code and weights, Zenodo 17345536); AnyPPG checkpoint from GitHub PKUDigitalHealth/AnyPPG (no licence file) \\
+\bottomrule
+\end{longtable}
+
+\section*{S3. Cohort characteristics}
+{\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{2.6cm}p{2.9cm}p{2.9cm}p{3.1cm}p{2.9cm}@{}}
+\toprule
+ & \textbf{Kermani--Esmaeili} & \textbf{BIG~IDEAs} & \textbf{STUBA ePPG} & \textbf{PPG-BP} \\
+\midrule
+Subjects & \m{mendNSubjects} & \m{bigNSubjects} & \m{stubaNSubjects} & \m{bpNSubjects} \\
+Male / female & \m{mendNMale} / \m{mendNFemale} & \m{bigNMale} / \m{bigNFemale} & \m{stubaNMale} / \m{stubaNFemale} & see~\cite{liang2018ppgbp} \\
+Age (years) & \m{mendAgeMin}--\m{mendAgeMax} & 35--65 (inclusion criterion) & \m{stubaAgeMin}--\m{stubaAgeMax} & 21--86 \\
+Diabetes & not stated & HbA1c \m{bigHbAOneCMin}--\m{bigHbAOneCMax}\% & \m{stubaNDiabetic} T1DM & not an outcome \\
+Reference & Accu-Chek Active & Dexcom G6 CGM & Beurer GL49 & cuff (Omron HEM-7201) \\
+Reference measurements & \m{mendNRecords} & \m{bigNRecordsAll} & \m{stubaNRecords} & \m{bpNSubjects} (\m{bpNSegments} segments) \\
+Glucose range (mg/dL) & \m{mendGlucoseMinAll}--\m{mendGlucoseMaxAll} & \m{bigGlucoseMinAll}--\m{bigGlucoseMaxAll} & \m{stubaGlucoseMinAll}--\m{stubaGlucoseMaxAll} & -- \\
+$<70$ / $>180$ mg/dL & \m{mendHypoNAll} / \m{mendHyperNAll} & \m{bigHypoNAll} / \m{bigHyperNAll} & \m{stubaHypoNAll} / \m{stubaHyperNAll} & -- \\
+Sensor & finger, 550 nm, 2175 Hz & wrist E4 BVP, 64 Hz & finger, 530/655/940 nm, 100 Hz & finger, 1000 Hz, 2.1-s segments \\
+\bottomrule
+\end{tabular}
+}
+
+\section*{S4. Validation of the label-construction detector}
+Synthetic label columns of 20 subjects, 200 rows per reference value; a
+corrupted subject has a contiguous fraction of its rows replaced by the
+cross-join pattern (its $k$ reference values cycled row by row).  Thirty
+replicates per condition.  The detector is \texttt{detect\_label\_cycling}
+(whole column) and \texttt{detect\_label\_cycling\_local} (block scan,
+$b=256$, stride 128, $\tau=0.98$, $\ell_{\max}=32$) in
+\texttt{ppgbench.integrity}; the experiment is \texttt{validate\_detectors.py}.
+Residual misses at $k=2$ are draws in which a subject's two reference values
+coincide, so that the column contains no cycle to detect.
+
+\suppDetectorTable
+
+\section*{S5. Validation of the null-anchored decision rule}
+Each synthetic cohort has 16 subjects $\times$ 12 records $\times$ three
+overlapping 5-s windows generated by a pulse model with heart-rate
+variability, respiration and noise.  Label $=$ subject offset
+($\mathcal{N}(120, 20^2)$, not encoded in the signal) $+\,g\,(\mathrm{HR}-70)$
+$+\,\mathcal{N}(0, 3^2)$, with within-subject HR SD 8~bpm.  Each subject has
+a label-independent pulse-shape fingerprint (second-harmonic amplitude
+$\sim U(0.15, 0.75)$, notch amplitude $\sim U(0.05, 0.45)$).  Models use the
+nine hand-crafted features of the main paper; predictions are averaged per
+record and scored with 2\,000 subject-cluster bootstrap draws.
+
+\suppRuleTable
+
+\section*{S6. PPG-BP: full results}
+\suppPpgbpTable
+
+\section*{S7. PPG $\to$ glucose: detailed results}
+Tables and figures that support Sec.~IV-B of the main paper.  The fusion
+network is shown in Fig.~\ref{fig:architecture}; published results on the
+Kermani--Esmaeili recordings are in Table~\ref{tab:prior}; the full
+leakage ladder is in Table~\ref{tab:ladder}.
+
+\begin{table}[h!]
+  \caption{Published results on the Kermani--Esmaeili recordings (23 subjects,
+           67 fingerstick references) and the null-anchored result of this
+           paper.  MAE in mg/dL.}
+  \label{tab:prior}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{@{}p{2.45cm}p{2.1cm}p{2.3cm}c@{}}
+    \toprule
+    \textbf{Study} & \textbf{Model} & \textbf{Split} & \textbf{MAE} \\
+    \midrule
+    Soliman 2024~\cite{soliman2024} & CNN--GRU & augment, then shuffle & 2.96 \\
+    Kermani \& Esmaeili 2025~\cite{kermani2025} & SDF-MFCC + SVR & 5-fold, level unstated & 4.0$^\dagger$ \\
+    Syamsul \& Kim 2026~\cite{syamsul2026} & attention CNN--GRU & subject-level (stated) & 11.59 \\
+    Syamsul \& Kim 2026~\cite{syamsul2026} & 1-D CNN baseline & subject-level (stated) & 13.45 \\
+    Zeynali 2025~\cite{zeynali2025} & ResNet-34, VitalDB-trained & external test & 14.8 \\
+    Ramesh 2026~\cite{ramesh2026} & train-mean null, VitalDB & external test & 16.0 \\
+    \midrule
+    This paper & train-mean null & LOSO, recording level & \m{mendMeanMAE} \\
+    This paper & 1-D CNN, 3 seeds & LOSO, recording level & \m{mendOneDMAE} \\
+    \bottomrule
+    \multicolumn{4}{p{0.95\columnwidth}}{$^\dagger$reported together with RMSE 26.0 and MARD 0.195\%, which are mutually inconsistent.}
+  \end{tabular}
+\end{table}
+
+\begin{table}[h!]
+  \caption{Leakage ladder, 1-D CNN and nulls; MAE in mg/dL.  Null: train
+           mean for the Kermani--Esmaeili recordings and the Kaggle
+           derivative; each subject's own training-period mean for
+           BIG~IDEAs, which coincides with the leaky subject mean.  K--E
+           window, recording and LOSO rungs: three seeds (mean\,$\pm$\,std,
+           the LOSO rung being the experiment of Table~\ref{tab:mendeley});
+           all other rungs: one seed.  The BIG~IDEAs random-readings rung is
+           scored on all \m{bigNRecordsAll} pooled out-of-fold readings, the
+           chronological rungs on the \m{bigNRecords} held-out readings.}
+  \label{tab:ladder}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{llccc}
+    \toprule
+    \textbf{Cohort} & \textbf{Protocol} & \textbf{Null} & \textbf{Leaky subj.\ mean} & \textbf{1-D CNN} \\
+    \midrule
+    \multirow{4}{*}{K--E}
+      & random windows      & \m{mendLadderWindowMean}  & \m{mendLadderWindowSubjMean}  & \m{mendLadderWindowOneD} \\
+      & random recordings   & \m{mendLadderRecordMean}  & \m{mendLadderRecordSubjMean}  & \m{mendLadderRecordOneD} \\
+      & subject-wise (LOSO) & \m{mendLadderSubjectMean} & --                            & \m{mendLadderSubjectOneD} \\
+    \midrule
+    \multirow{2}{*}{Kaggle deriv.}
+      & random windows      & \m{mendLadderDerivativeRecordMean}  & \m{derivOracleMAE} & \m{mendLadderDerivativeRecordOneD} \\
+      & subject-wise (LOSO) & \m{mendLadderDerivativeSubjectMean} & --                                     & \m{mendLadderDerivativeSubjectOneD} \\
+    \midrule
+    \multirow{3}{*}{BIG~IDEAs}
+      & random readings     & \m{bigLadderReadingMean}     & \m{bigLadderReadingSubjMean} & \m{bigLadderReadingOneD} \\
+      & chronological, no gap & \m{bigLadderChronoNoGapMean} & --                        & \m{bigLadderChronoNoGapOneD} \\
+      & chronological, 1-h gap & \m{bigLadderChronoMean}    & --                          & \m{bigLadderChronoOneD} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.9\textwidth]{architecture_diagram.pdf}
+  \caption{The 1D--2D--3D fusion network evaluated as one row of the
+           benchmark.  One PPG window is presented as a waveform, a wavelet
+           scalogram and a Takens phase-space point cloud; three equal-width
+           encoders feed a learnable-query attention that weights the branches
+           before a regression head.}
+  \label{fig:architecture}
+\end{figure}
+
+\begin{table}[h!]
+  \caption{Leave-one-subject-out results on the Kermani--Esmaeili recordings
+           (\m{mendNRecords} recordings, \m{mendNSubjects} subjects, recording
+           level).  MAE and RMSE in mg/dL; A and A+B are Clarke fractions in
+           \%.  Networks: MAE, RMSE, $r$ and zones are mean\,$\pm$\,std over
+           \m{mendFusionSeeds} seeds; $\Delta$ and its 95\% subject-cluster
+           bootstrap interval are computed on the seed-ensemble prediction
+           (mean of the seeds' predictions per recording), whose MAE is
+           given in parentheses, against the train-mean null.  The primary
+           comparison is marked $\star$; other rows are exploratory.}
+  \label{tab:mendeley}
+  \centering
+  \small
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{llcccccc}
+    \toprule
+    & \textbf{Model} & \textbf{MAE} & \textbf{RMSE} & \textbf{$r$} & \textbf{A} & \textbf{A+B} & \textbf{$\Delta$ vs.\ null [95\% CI]} \\
+    \midrule
+    \multirow{5}{*}{\rotatebox{90}{\scriptsize baseline}}
+      & Train mean (null)        & \m{mendMeanMAE} & \m{mendMeanRMSE} & \m{mendMeanR} & \m{mendMeanZoneA} & \m{mendMeanZoneAB} & -- \\
+      & Reference-noise floor (ISO 15197) & \m{mendNoiseFloorMAE} & -- & -- & -- & -- & -- \\
+      & Ridge, demographics      & \m{mendDemoMAE} & \m{mendDemoRMSE} & \m{mendDemoR} & \m{mendDemoZoneA} & \m{mendDemoZoneAB} & \m{mendDemoDiff} \m{mendDemoDiffCI} \\
+      & Ridge, PPG features      & \m{mendRidgeMAE} & \m{mendRidgeRMSE} & \m{mendRidgeR} & \m{mendRidgeZoneA} & \m{mendRidgeZoneAB} & \m{mendRidgeDiff} \m{mendRidgeDiffCI} \\
+      & Gradient boosting, PPG + demogr. & \m{mendGbmDemoMAE} & \m{mendGbmDemoRMSE} & \m{mendGbmDemoR} & \m{mendGbmDemoZoneA} & \m{mendGbmDemoZoneAB} & \m{mendGbmDemoDiff} \m{mendGbmDemoDiffCI} \\
+    \midrule
+    \multirow{5}{*}{\rotatebox{90}{\scriptsize network}}
+      & 1-D CNN $\star$          & \m{mendOneDMAE} (\m{mendOneDEnsMAE}) & \m{mendOneDRMSE} & \m{mendOneDR} & \m{mendOneDZoneA} & \m{mendOneDZoneAB} & \m{mendOneDDiff} \m{mendOneDDiffCI} \\
+      & 2-D CNN (CWT)            & \m{mendTwoDMAE} (\m{mendTwoDEnsMAE}) & \m{mendTwoDRMSE} & \m{mendTwoDR} & \m{mendTwoDZoneA} & \m{mendTwoDZoneAB} & \m{mendTwoDDiff} \m{mendTwoDDiffCI} \\
+      & PointNet (Takens)        & \m{mendThreeDMAE} (\m{mendThreeDEnsMAE}) & \m{mendThreeDRMSE} & \m{mendThreeDR} & \m{mendThreeDZoneA} & \m{mendThreeDZoneAB} & \m{mendThreeDDiff} \m{mendThreeDDiffCI} \\
+      & ResNet-1D~\cite{zeynali2025} & \m{mendResNetMAE} (\m{mendResNetEnsMAE}) & \m{mendResNetRMSE} & \m{mendResNetR} & \m{mendResNetZoneA} & \m{mendResNetZoneAB} & \m{mendResNetDiff} \m{mendResNetDiffCI} \\
+      & CNN--LSTM~\cite{syamsul2026} & \m{mendCnnLstmMAE} (\m{mendCnnLstmEnsMAE}) & \m{mendCnnLstmRMSE} & \m{mendCnnLstmR} & \m{mendCnnLstmZoneA} & \m{mendCnnLstmZoneAB} & \m{mendCnnLstmDiff} \m{mendCnnLstmDiffCI} \\
+    \midrule
+      & 1D+2D+3D cross-attention & \m{mendFusionMAE} (\m{mendFusionEnsMAE}) & \m{mendFusionRMSE} & \m{mendFusionR} & \m{mendFusionZoneA} & \m{mendFusionZoneAB} & \m{mendFusionDiff} \m{mendFusionDiffCI} \\
+    \midrule
+    \multirow{3}{*}{\rotatebox{90}{\scriptsize probe}}
+      & PaPaGei-S + ridge~\cite{papagei2025} & \m{mendPapageiMAE} & \m{mendPapageiRMSE} & \m{mendPapageiR} & \m{mendPapageiZoneA} & \m{mendPapageiZoneAB} & \m{mendPapageiDiff} \m{mendPapageiDiffCI} \\
+      & Pulse-PPG + ridge~\cite{pulseppg2025} & \m{mendPulseMAE} & \m{mendPulseRMSE} & \m{mendPulseR} & \m{mendPulseZoneA} & \m{mendPulseZoneAB} & \m{mendPulseDiff} \m{mendPulseDiffCI} \\
+      & AnyPPG + ridge~\cite{anyppg2026} & \m{mendAnyppgMAE} & \m{mendAnyppgRMSE} & \m{mendAnyppgR} & \m{mendAnyppgZoneA} & \m{mendAnyppgZoneAB} & \m{mendAnyppgDiff} \m{mendAnyppgDiffCI} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.9\textwidth]{fig_mendeley_loso.pdf}
+  \caption{Leave-one-subject-out results on the Kermani--Esmaeili recordings.
+           (a)~Clarke error grid of the fusion network's out-of-fold
+           recording-level predictions: the predictions occupy a narrow band
+           around the training mean.  (b)~Recording-level MAE of every model;
+           grey bars are baselines that do not see the PPG waveform through a
+           network.}
+  \label{fig:mendeley}
+\end{figure}
+
+\begin{table}[h!]
+  \caption{Within-subject chronological split with 1-h guard gap on BIG~IDEAs
+           (\m{bigNRecords} held-out CGM readings, \m{bigNSubjects} subjects).
+           MAE and RMSE in mg/dL, MARD in \%; $r_w$: median within-subject
+           correlation.  $\Delta$: paired MAE difference against the
+           subject-mean null with its 95\% subject-cluster bootstrap interval,
+           computed on the readings both rows predict.  The encoder probes
+           exclude 7 of \m{bigNRecordsAll} readings that have no 10-s
+           segment passing the quality check, which moves the chronological
+           cut so that 4 of the \m{bigNRecords} held-out readings differ
+           (probe rows are scored on \m{bigPapageiN} readings).  1-D CNN,
+           residual: mean\,$\pm$\,std over \m{bigOneDResSeeds} seeds; all
+           other rows one run.}
+  \label{tab:bigideas}
+  \centering
+  \small
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{llcccccc}
+    \toprule
+    & \textbf{Model} & \textbf{MAE} & \textbf{RMSE} & \textbf{MARD} & \textbf{$r$} & \textbf{$r_w$} & \textbf{$\Delta$ [95\% CI]} \\
+    \midrule
+    \multirow{4}{*}{\rotatebox{90}{\scriptsize null}}
+      & Subject train mean      & \m{bigMeanMAE} & \m{bigMeanRMSE} & \m{bigMeanMARD} & \m{bigMeanR} & -- & -- \\
+      & Reference-noise floor (MARD 9\%) & \m{bigNoiseFloorMAE} & -- & \m{bigNoiseFloorMARD} & -- & -- & -- \\
+      & Time of day + subject   & \m{bigTodMAE} & \m{bigTodRMSE} & \m{bigTodMARD} & \m{bigTodR} & \m{bigTodWithinR} & \m{bigTodDiff} \m{bigTodDiffCI} \\
+      & Persistence             & \m{bigPersistMAE} & \m{bigPersistRMSE} & \m{bigPersistMARD} & \m{bigPersistR} & -- & \m{bigPersistDiff} \m{bigPersistDiffCI} \\
+    \midrule
+    \multirow{5}{*}{\rotatebox{90}{\scriptsize population}}
+      & Ridge, PPG features     & \m{bigRidgeMAE} & \m{bigRidgeRMSE} & \m{bigRidgeMARD} & \m{bigRidgeR} & \m{bigRidgeWithinR} & \m{bigRidgeDiff} \m{bigRidgeDiffCI} \\
+      & 1-D CNN                 & \m{bigOneDMAE} & \m{bigOneDRMSE} & \m{bigOneDMARD} & \m{bigOneDR} & \m{bigOneDWithinR} & \m{bigOneDDiff} \m{bigOneDDiffCI} \\
+      & 2-D CNN (CWT)           & \m{bigTwoDMAE} & \m{bigTwoDRMSE} & \m{bigTwoDMARD} & \m{bigTwoDR} & \m{bigTwoDWithinR} & \m{bigTwoDDiff} \m{bigTwoDDiffCI} \\
+      & PointNet (Takens)       & \m{bigThreeDMAE} & \m{bigThreeDRMSE} & \m{bigThreeDMARD} & \m{bigThreeDR} & \m{bigThreeDWithinR} & \m{bigThreeDDiff} \m{bigThreeDDiffCI} \\
+      & 1D+2D+3D cross-attention & \m{bigFusionMAE} & \m{bigFusionRMSE} & \m{bigFusionMARD} & \m{bigFusionR} & \m{bigFusionWithinR} & \m{bigFusionDiff} \m{bigFusionDiffCI} \\
+    \midrule
+    \multirow{3}{*}{\rotatebox{90}{\scriptsize personal.}}
+      & Ridge, residual         & \m{bigRidgeResMAE} & \m{bigRidgeResRMSE} & \m{bigRidgeResMARD} & \m{bigRidgeResR} & \m{bigRidgeResWithinR} & \m{bigRidgeResDiff} \m{bigRidgeResDiffCI} \\
+      & 1-D CNN, residual       & \m{bigOneDResMAE} & \m{bigOneDResRMSE} & \m{bigOneDResMARD} & \m{bigOneDResR} & \m{bigOneDResWithinR} & \m{bigOneDResDiff} \m{bigOneDResDiffCI} \\
+      & Fusion, residual        & \m{bigFusionResMAE} & \m{bigFusionResRMSE} & \m{bigFusionResMARD} & \m{bigFusionResR} & \m{bigFusionResWithinR} & \m{bigFusionResDiff} \m{bigFusionResDiffCI} \\
+    \midrule
+    \multirow{6}{*}{\rotatebox{90}{\scriptsize probe}}
+      & PaPaGei-S + ridge       & \m{bigPapageiMAE} & \m{bigPapageiRMSE} & \m{bigPapageiMARD} & \m{bigPapageiR} & \m{bigPapageiWithinR} & \m{bigPapageiDiff} \m{bigPapageiDiffCI} \\
+      & Pulse-PPG + ridge       & \m{bigPulseMAE} & \m{bigPulseRMSE} & \m{bigPulseMARD} & \m{bigPulseR} & \m{bigPulseWithinR} & \m{bigPulseDiff} \m{bigPulseDiffCI} \\
+      & AnyPPG + ridge          & \m{bigAnyppgMAE} & \m{bigAnyppgRMSE} & \m{bigAnyppgMARD} & \m{bigAnyppgR} & \m{bigAnyppgWithinR} & \m{bigAnyppgDiff} \m{bigAnyppgDiffCI} \\
+      & PaPaGei-S, residual     & \m{bigPapageiResMAE} & \m{bigPapageiResRMSE} & \m{bigPapageiResMARD} & \m{bigPapageiResR} & \m{bigPapageiResWithinR} & \m{bigPapageiResDiff} \m{bigPapageiResDiffCI} \\
+      & Pulse-PPG, residual     & \m{bigPulseResMAE} & \m{bigPulseResRMSE} & \m{bigPulseResMARD} & \m{bigPulseResR} & \m{bigPulseResWithinR} & \m{bigPulseResDiff} \m{bigPulseResDiffCI} \\
+      & AnyPPG, residual        & \m{bigAnyppgResMAE} & \m{bigAnyppgResRMSE} & \m{bigAnyppgResMARD} & \m{bigAnyppgResR} & \m{bigAnyppgResWithinR} & \m{bigAnyppgResDiff} \m{bigAnyppgResDiffCI} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.9\textwidth]{fig_bigideas_tracking.pdf}
+  \caption{Within-subject tracking on BIG~IDEAs.  (a)~Dexcom~G6 reference and
+           prediction of the population 1D--2D--3D fusion network over the
+           held-out final 30\% of one subject's
+           recording.  (b)~Per-subject MAE of the model against each
+           subject's own training-period mean.}
+  \label{fig:bigideas}
+\end{figure}
+
+\begin{table}[h!]
+  \caption{STUBA ePPG, leave-one-subject-out, by channel; MAE in mg/dL.
+           Null: train mean.  1-D CNN: mean\,$\pm$\,std over
+           \m{stubaOneDSeeds} seeds; other cells one run.  Paired intervals
+           for the IR1 rows are given in Table~II of the main paper and
+           all comparisons in Sec.~S8.}
+  \label{tab:stuba_wl}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    \textbf{Channel} & \textbf{Null} & \textbf{Ridge} & \textbf{GBM} & \textbf{1-D CNN} \\
+    \midrule
+    940 nm, site 1 (IR1) & \m{stubaMeanMAE} & \m{stubaRidgeMAE} & \m{stubaGbmMAE} & \m{stubaOneDMAE} \\
+    940 nm, site 2 (IR2) & \m{stubaIrBMeanMAE} & \m{stubaIrBRidgeMAE} & \m{stubaIrBGbmMAE} & -- \\
+    655 nm, site 1 (R1)  & \m{stubaRedAMeanMAE} & \m{stubaRedARidgeMAE} & \m{stubaRedAGbmMAE} & -- \\
+    655 nm, site 2 (R2)  & \m{stubaRedBMeanMAE} & \m{stubaRedBRidgeMAE} & \m{stubaRedBGbmMAE} & -- \\
+    530 nm, site 1 (G1)  & \m{stubaGreenAMeanMAE} & \m{stubaGreenARidgeMAE} & \m{stubaGreenAGbmMAE} & -- \\
+    530 nm, site 2 (G2)  & \m{stubaGreenBMeanMAE} & \m{stubaGreenBRidgeMAE} & \m{stubaGreenBGbmMAE} & -- \\
+    six-channel average  & \m{stubaAvgMeanMAE} & \m{stubaAvgRidgeMAE} & \m{stubaAvgGbmMAE} & -- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[h!]
+  \caption{Controls through the identical pipeline and protocol (1-D CNN;
+           Kermani--Esmaeili rows mean\,$\pm$\,std over three seeds,
+           BIG~IDEAs row one seed).  MAE in target units; $r$: Pearson.}
+  \label{tab:controls}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{2pt}
+  \begin{tabular}{@{}llcccc@{}}
+    \toprule
+    \textbf{Cohort} & \textbf{Target} & \textbf{Expected} & \textbf{MAE} & \textbf{Null} & \textbf{$r$} \\
+    \midrule
+    K--E & heart rate (bpm)   & recoverable & \m{ctlHrMAE}   & \m{ctlHrNull}   & \m{ctlHrR} \\
+    K--E & age (years)        & weak / none & \m{ctlAgeMAE}  & \m{ctlAgeNull}  & \m{ctlAgeR} \\
+    K--E & glucose            & (task)      & \m{ctlGlucoseMAE} & \m{ctlGlucoseNull} & \m{ctlGlucoseR} \\
+    K--E & glucose, permuted  & null        & \m{ctlPermMAE} & \m{ctlPermNull} & \m{ctlPermR} \\
+    K--E & glucose, noise input & null      & \m{ctlNoiseMAE} & \m{ctlNoiseNull} & \m{ctlNoiseR} \\
+    BIG~IDEAs & heart rate (bpm) & recoverable & \m{ctlBigHrMAE} & \m{ctlBigHrNull} & \m{ctlBigHrR} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[h!]
+  \caption{Representation sensitivity on BIG~IDEAs (guarded chronological
+           split, residual targets).  MAE in mg/dL; $r_w$: median
+           within-subject correlation.  One window per reading and one seed
+           per row (Table~\ref{tab:bigideas} uses two windows and three seeds,
+           hence the slightly different default row); longer windows keep
+           only readings with a gap-free window of that length.}
+  \label{tab:preproc}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{2pt}
+  \begin{tabular}{lccccc}
+    \toprule
+    \textbf{Representation} & \textbf{Null} & \textbf{Ridge} & \textbf{$r_w$} & \textbf{1-D CNN} & \textbf{$r_w$} \\
+    \midrule
+    5 s, 0.5--8 Hz, z-score (default) & \m{preDefaultMeanMAE} & \m{preDefaultRidgeMAE} & \m{preDefaultRidgeWithinR} & \m{preDefaultOneDMAE} & \m{preDefaultOneDWithinR} \\
+    10 s                              & \m{preWTenMeanMAE} & \m{preWTenRidgeMAE} & \m{preWTenRidgeWithinR} & \m{preWTenOneDMAE} & \m{preWTenOneDWithinR} \\
+    30 s (+ HRV features)             & \m{preWThirtyMeanMAE} & \m{preWThirtyRidgeMAE} & \m{preWThirtyRidgeWithinR} & \m{preWThirtyOneDMAE} & \m{preWThirtyOneDWithinR} \\
+    60 s (+ HRV features)             & \m{preWSixtyMeanMAE} & \m{preWSixtyRidgeMAE} & \m{preWSixtyRidgeWithinR} & \m{preWSixtyOneDMAE} & \m{preWSixtyOneDWithinR} \\
+    5 s, 0.1--12 Hz                   & \m{preBandWideMeanMAE} & \m{preBandWideRidgeMAE} & \m{preBandWideRidgeWithinR} & \m{preBandWideOneDMAE} & \m{preBandWideOneDWithinR} \\
+    5 s, amplitude retained           & \m{preAmpMeanMAE} & \m{preAmpRidgeMAE} & \m{preAmpRidgeWithinR} & \m{preAmpOneDMAE} & \m{preAmpOneDWithinR} \\
+    60 s, 0.1--12 Hz, amplitude, HRV  & \m{preWSixtyAmpMeanMAE} & \m{preWSixtyAmpRidgeMAE} & \m{preWSixtyAmpRidgeWithinR} & \m{preWSixtyAmpOneDMAE} & \m{preWSixtyAmpOneDWithinR} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\clearpage
+\section*{S8. All paired glucose comparisons against the null}
+Every model-versus-null comparison in the paper (\m{nPairedComparisons} in total; $\star$: the pre-specified primary
+comparison, all others exploratory).  MAE of the (seed-ensemble) prediction in mg/dL; $\Delta$: paired MAE difference
+against the cohort's null (train mean; subject training-period mean on BIG~IDEAs) with its 95\% subject-cluster
+bootstrap interval.  ``better''/``worse'': interval entirely below/above zero.  \m{nSigBetter} intervals lie below zero and
+\m{nSigWorse} above; no correction for multiplicity is applied.
+
+\input{results_comparisons}
+
+
+\input{refs_supp}
+
+\end{document}

@@ -1,0 +1,30 @@
+mendeley/ridge         r -0.027 CI [-0.19,+0.17]  within-r 0.392821179083998  wilcoxon p 0.5911215035822175  worse 11/23 (p=1.000)  r(y<=140) +0.062
+mendeley/demo          r -0.168 CI [-0.35,+0.08]  within-r None  wilcoxon p 0.34376726516801226  worse 7/23 (p=0.093)  r(y<=140) -0.250
+mendeley/ridge+demo    r +0.035 CI [-0.20,+0.31]  within-r 0.3070777839607553  wilcoxon p 0.8611534315781348  worse 8/23 (p=0.210)  r(y<=140) -0.039
+mendeley/gbm           r -0.062 CI [-0.27,+0.14]  within-r -0.24451730209150732  wilcoxon p 0.08813209494639655  worse 14/23 (p=0.405)  r(y<=140) -0.087
+mendeley/gbm+demo      r -0.050 CI [-0.28,+0.20]  within-r 0.12838389158271313  wilcoxon p 0.4534971616569935  worse 14/23 (p=0.405)  r(y<=140) -0.070
+mendeley/1d            r +0.331 CI [+0.17,+0.50]  within-r 0.056043580072777675  wilcoxon p 0.1274633612034787  worse 8/23 (p=0.210)  r(y<=140) +0.268
+mendeley/2d            r +0.223 CI [-0.00,+0.43]  within-r 0.04690042357993807  wilcoxon p 0.3026831422765526  worse 8/23 (p=0.210)  r(y<=140) +0.123
+mendeley/3d            r +0.144 CI [-0.03,+0.32]  within-r 0.34420745137549996  wilcoxon p 0.1455396145812295  worse 10/23 (p=0.678)  r(y<=140) +0.136
+mendeley/fusion        r +0.137 CI [-0.18,+0.42]  within-r -0.2006430747948588  wilcoxon p 0.9452179878097564  worse 10/23 (p=0.678)  r(y<=140) -0.069
+mendeley/resnet1d      r +0.198 CI [+0.00,+0.39]  within-r -0.06307770761362928  wilcoxon p 0.7595394391538044  worse 13/23 (p=0.678)  r(y<=140) +0.024
+mendeley/cnnlstm       r +0.191 CI [-0.07,+0.43]  within-r -0.13912034327742562  wilcoxon p 0.04982692852199463  worse 8/23 (p=0.210)  r(y<=140) +0.177
+bigideas/ridge         r +0.052 CI [-0.03,+0.16]  within-r 0.045469888340429865  wilcoxon p 5.661423733938986e-101  worse 10/16 (p=0.454)
+bigideas/1d            r +0.212 CI [+0.10,+0.34]  within-r 0.043083247175851346  wilcoxon p 1.4147655670495675e-87  worse 13/16 (p=0.021)
+bigideas/2d            r +0.189 CI [+0.09,+0.31]  within-r 0.033330961099334394  wilcoxon p 1.7380624993932836e-86  worse 12/16 (p=0.077)
+bigideas/3d            r +0.196 CI [+0.07,+0.34]  within-r 0.028136982534035668  wilcoxon p 9.805968430055502e-91  worse 13/16 (p=0.021)
+bigideas/fusion        r +0.252 CI [+0.14,+0.37]  within-r 0.027973725568300085  wilcoxon p 3.5669783511292624e-60  worse 11/16 (p=0.210)
+bigideas/tod           r +0.412 CI [+0.21,+0.54]  within-r -0.005704876144023419  wilcoxon p 0.5400015614224706  worse 8/16 (p=1.000)
+bigideas/persist       r +0.208 CI [-0.08,+0.40]  within-r None  wilcoxon p 0.0  worse 12/16 (p=0.077)
+bigideas/ridge_res     r +0.436 CI [+0.26,+0.55]  within-r 0.05615960330092165  wilcoxon p 1.040843136342582e-12  worse 7/16 (p=0.804)
+bigideas/1d_res        r +0.438 CI [+0.25,+0.56]  within-r 0.03685620102309492  wilcoxon p 1.8078234160700645e-09  worse 7/16 (p=0.804)
+bigideas/2d_res        r +0.437 CI [+0.25,+0.55]  within-r 0.07409790787461666  wilcoxon p 2.8125807916579217e-06  worse 9/16 (p=0.804)
+bigideas/3d_res        r +0.438 CI [+0.25,+0.55]  within-r 0.02185031177952026  wilcoxon p 1.7807842786981689e-12  worse 6/16 (p=0.454)
+bigideas/fusion_res    r +0.438 CI [+0.26,+0.56]  within-r 0.0749404140020152  wilcoxon p 9.336222990191414e-06  worse 7/16 (p=0.804)
+stuba/ridge            r -0.221 CI [-0.36,-0.17]  within-r -0.21908358210807072  wilcoxon p 0.0012969152977248912  worse 17/24 (p=0.064)
+stuba/gbm              r -0.187 CI [-0.24,+0.10]  within-r -0.2381172940256766  wilcoxon p 0.006647222967151355  worse 18/24 (p=0.023)
+stuba/1d               r -0.168 CI [-0.23,+0.12]  within-r -0.3705685165619988  wilcoxon p 0.0034344183088511294  worse 15/24 (p=0.307)
+mendeley/mde {'half_width': 1.4829574513346744, 'n_records': 67}
+bigideas/mde {'half_width': 1.3281524729854706, 'n_records': 8664}
+bigideas/mde_res {'half_width': 0.46082265447874055, 'n_records': 8664}
+stuba/mde {'half_width': 2.6751582599395096, 'n_records': 125}

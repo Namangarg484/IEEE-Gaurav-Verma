@@ -1,0 +1,34 @@
+01:34:53 Mendeley: 201 windows, 67 records, 23 subjects, glucose 88-183 (mean 115.0 +/- 18.6) mg/dL
+01:43:42 CONTROL mendeley_hr_seed0      MAE 20.44 (null 41.93)  r 0.743  target sd 44.6  (526 s)
+01:52:48 CONTROL mendeley_hr_seed1      MAE 20.25 (null 41.93)  r 0.747  target sd 44.6  (546 s)
+02:03:27 CONTROL mendeley_hr_seed2      MAE 20.89 (null 41.93)  r 0.727  target sd 44.6  (639 s)
+02:12:01 CONTROL mendeley_age_seed0     MAE 8.83 (null 8.10)  r -0.087  target sd 9.4  (514 s)
+02:20:55 CONTROL mendeley_age_seed1     MAE 9.01 (null 8.10)  r -0.100  target sd 9.4  (534 s)
+02:29:50 CONTROL mendeley_age_seed2     MAE 8.84 (null 8.10)  r -0.080  target sd 9.4  (535 s)
+02:39:17 CONTROL mendeley_perm_seed0    MAE 15.18 (null 14.66)  r 0.013  target sd 18.6  (567 s)
+02:48:29 CONTROL mendeley_perm_seed1    MAE 15.87 (null 14.64)  r -0.285  target sd 18.6  (552 s)
+02:57:52 CONTROL mendeley_perm_seed2    MAE 15.65 (null 14.57)  r -0.030  target sd 18.6  (564 s)
+03:08:32 CONTROL mendeley_noise_seed0   MAE 15.01 (null 14.71)  r -0.171  target sd 18.6  (639 s)
+03:17:56 CONTROL mendeley_noise_seed1   MAE 14.57 (null 14.71)  r 0.044  target sd 18.6  (564 s)
+03:26:28 CONTROL mendeley_noise_seed2   MAE 14.08 (null 14.71)  r -0.080  target sd 18.6  (512 s)
+03:34:43 CONTROL mendeley_glucose_seed0 MAE 12.77 (null 14.71)  r 0.350  target sd 18.6  (495 s)
+03:42:52 CONTROL mendeley_glucose_seed1 MAE 13.53 (null 14.71)  r 0.308  target sd 18.6  (488 s)
+03:50:52 CONTROL mendeley_glucose_seed2 MAE 13.87 (null 14.71)  r 0.317  target sd 18.6  (481 s)
+03:51:11 BIG IDEAs sub_001: 2056/2561 CGM readings have gap-free BVP
+03:51:11 BIG IDEAs sub_002: 1877/2119 CGM readings have gap-free BVP
+03:51:12 BIG IDEAs sub_003: 1392/2302 CGM readings have gap-free BVP
+03:51:12 BIG IDEAs sub_004: 1355/2164 CGM readings have gap-free BVP
+03:51:12 BIG IDEAs sub_005: 2385/2558 CGM readings have gap-free BVP
+03:51:13 BIG IDEAs sub_006: 1639/2847 CGM readings have gap-free BVP
+03:51:13 BIG IDEAs sub_007: 2062/2207 CGM readings have gap-free BVP
+03:51:14 BIG IDEAs sub_008: 2142/2505 CGM readings have gap-free BVP
+03:51:14 BIG IDEAs sub_009: 2090/2306 CGM readings have gap-free BVP
+03:51:14 BIG IDEAs sub_010: 2025/2148 CGM readings have gap-free BVP
+03:51:15 BIG IDEAs sub_011: 2160/2843 CGM readings have gap-free BVP
+03:51:15 BIG IDEAs sub_012: 1935/2169 CGM readings have gap-free BVP
+03:51:15 BIG IDEAs sub_013: 1876/1979 CGM readings have gap-free BVP
+03:51:15 BIG IDEAs sub_014: 1554/2240 CGM readings have gap-free BVP
+03:51:16 BIG IDEAs sub_015: 495/1673 CGM readings have gap-free BVP
+03:51:16 BIG IDEAs sub_016: 1824/2277 CGM readings have gap-free BVP
+03:51:17 BIG IDEAs: 57727 windows, 28867 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+04:04:50 CONTROL bigideas_hr_seed0      MAE 9.71 (null 14.23)  r 0.627  target sd 20.6  (399 s)

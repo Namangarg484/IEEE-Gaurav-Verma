@@ -1,0 +1,26 @@
+00:31:55 BIG IDEAs sub_001: 2056/2561 CGM readings have gap-free BVP
+00:31:56 BIG IDEAs sub_002: 1877/2119 CGM readings have gap-free BVP
+00:31:56 BIG IDEAs sub_003: 1392/2302 CGM readings have gap-free BVP
+00:31:56 BIG IDEAs sub_004: 1355/2164 CGM readings have gap-free BVP
+00:31:56 BIG IDEAs sub_005: 2385/2558 CGM readings have gap-free BVP
+00:31:57 BIG IDEAs sub_006: 1639/2847 CGM readings have gap-free BVP
+00:31:57 BIG IDEAs sub_007: 2062/2207 CGM readings have gap-free BVP
+00:31:58 BIG IDEAs sub_008: 2142/2505 CGM readings have gap-free BVP
+00:31:58 BIG IDEAs sub_009: 2090/2306 CGM readings have gap-free BVP
+00:31:58 BIG IDEAs sub_010: 2025/2148 CGM readings have gap-free BVP
+00:31:59 BIG IDEAs sub_011: 2160/2843 CGM readings have gap-free BVP
+00:31:59 BIG IDEAs sub_012: 1935/2169 CGM readings have gap-free BVP
+00:31:59 BIG IDEAs sub_013: 1876/1979 CGM readings have gap-free BVP
+00:31:59 BIG IDEAs sub_014: 1554/2240 CGM readings have gap-free BVP
+00:32:00 BIG IDEAs sub_015: 495/1673 CGM readings have gap-free BVP
+00:32:00 BIG IDEAs sub_016: 1824/2277 CGM readings have gap-free BVP
+00:32:00 BIG IDEAs: 57727 windows, 28867 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+00:40:05 LADDER bigideas reading  mean     seed 0  MAE 14.97  r 0.433  zoneA 77.7  (0 s)
+00:40:06 LADDER bigideas reading  subjmean seed 0  MAE 14.97  r 0.433  zoneA 77.7  (0 s)
+01:15:56 LADDER bigideas reading  1d       seed 0  MAE 16.07  r 0.249  zoneA 75.7  (2150 s)
+01:15:56 LADDER bigideas chrono0  mean     seed 0  MAE 15.24  r 0.431  zoneA 78.7  (0 s)
+01:15:56 LADDER bigideas chrono0  subjmean seed 0  MAE 15.24  r 0.431  zoneA 78.7  (0 s)
+01:24:46 LADDER bigideas chrono0  1d       seed 0  MAE 16.94  r 0.218  zoneA 75.2  (529 s)
+01:24:46 LADDER bigideas chrono   mean     seed 0  MAE 15.28  r 0.429  zoneA 78.8  (0 s)
+01:24:46 LADDER bigideas chrono   subjmean seed 0  MAE 15.28  r 0.429  zoneA 78.8  (0 s)
+01:33:38 LADDER bigideas chrono   1d       seed 0  MAE 16.94  r 0.212  zoneA 75.0  (531 s)

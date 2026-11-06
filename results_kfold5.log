@@ -1,0 +1,32 @@
+04:10:15 Mendeley: 201 windows, 67 records, 23 subjects, glucose 88-183 (mean 115.0 +/- 18.6) mg/dL
+04:10:17 views computed in 1.4 s: {'x1': (201, 1, 320), 'x2': (201, 1, 64, 64), 'x3': (201, 3, 256)}
+04:10:17 mean       seed 0 fold  1/5 held-out ['01' '06' '14' '15']  MAE(win) 14.8
+04:10:17 mean       seed 0 fold  2/5 held-out ['05' '09' '16' '19']  MAE(win) 14.2
+04:10:17 mean       seed 0 fold  3/5 held-out ['03' '04' '13' '18' '21']  MAE(win) 17.7
+04:10:17 mean       seed 0 fold  4/5 held-out ['02' '10' '11' '12' '22']  MAE(win) 12.6
+04:10:17 mean       seed 0 fold  5/5 held-out ['07' '08' '17' '20' '23']  MAE(win) 13.2
+04:10:17 RESULT kfold5_mean_seed0 MAE 14.57  RMSE 18.91  R2 -0.034  r -0.243  zoneA 85.1%  (0 s)
+04:10:17 ridge      seed 0 fold  1/5 held-out ['01' '06' '14' '15']  MAE(win) 14.1
+04:10:17 ridge      seed 0 fold  2/5 held-out ['05' '09' '16' '19']  MAE(win) 13.2
+04:10:17 ridge      seed 0 fold  3/5 held-out ['03' '04' '13' '18' '21']  MAE(win) 18.0
+04:10:17 ridge      seed 0 fold  4/5 held-out ['02' '10' '11' '12' '22']  MAE(win) 14.0
+04:10:17 ridge      seed 0 fold  5/5 held-out ['07' '08' '17' '20' '23']  MAE(win) 13.7
+04:10:17 RESULT kfold5_ridge_seed0 MAE 14.60  RMSE 19.05  R2 -0.049  r -0.052  zoneA 85.1%  (0 s)
+04:10:36 1d         seed 0 fold  1/5 held-out ['01' '06' '14' '15']  MAE(win) 13.6
+04:10:51 1d         seed 0 fold  2/5 held-out ['05' '09' '16' '19']  MAE(win) 18.0
+04:11:06 1d         seed 0 fold  3/5 held-out ['03' '04' '13' '18' '21']  MAE(win) 20.9
+04:11:23 1d         seed 0 fold  4/5 held-out ['02' '10' '11' '12' '22']  MAE(win) 13.9
+04:11:40 1d         seed 0 fold  5/5 held-out ['07' '08' '17' '20' '23']  MAE(win) 13.8
+04:11:40 RESULT kfold5_1d_seed0 MAE 14.75  RMSE 19.91  R2 -0.146  r 0.157  zoneA 77.6%  (83 s)
+04:11:56 1d         seed 1 fold  1/5 held-out ['01' '06' '14' '15']  MAE(win) 15.0
+04:12:12 1d         seed 1 fold  2/5 held-out ['05' '09' '16' '19']  MAE(win) 16.6
+04:12:26 1d         seed 1 fold  3/5 held-out ['03' '04' '13' '18' '21']  MAE(win) 20.8
+04:12:42 1d         seed 1 fold  4/5 held-out ['02' '10' '11' '12' '22']  MAE(win) 12.1
+04:12:58 1d         seed 1 fold  5/5 held-out ['07' '08' '17' '20' '23']  MAE(win) 12.4
+04:12:58 RESULT kfold5_1d_seed1 MAE 14.18  RMSE 19.25  R2 -0.071  r 0.229  zoneA 77.6%  (78 s)
+04:13:13 1d         seed 2 fold  1/5 held-out ['01' '06' '14' '15']  MAE(win) 16.1
+04:13:29 1d         seed 2 fold  2/5 held-out ['05' '09' '16' '19']  MAE(win) 15.5
+04:13:45 1d         seed 2 fold  3/5 held-out ['03' '04' '13' '18' '21']  MAE(win) 20.6
+04:14:01 1d         seed 2 fold  4/5 held-out ['02' '10' '11' '12' '22']  MAE(win) 12.7
+04:14:18 1d         seed 2 fold  5/5 held-out ['07' '08' '17' '20' '23']  MAE(win) 13.1
+04:14:18 RESULT kfold5_1d_seed2 MAE 14.30  RMSE 19.45  R2 -0.094  r 0.198  zoneA 77.6%  (80 s)

@@ -1,0 +1,4 @@
+02:15:31 Mendeley: 201 windows, 67 records, 23 subjects, glucose 88-183 (mean 115.0 +/- 18.6) mg/dL
+02:19:49 LADDER mendeley window   fusion   seed 0  MAE 10.68  r 0.710  zoneA 92.5  (256 s)
+02:23:34 LADDER mendeley record   fusion   seed 0  MAE 14.87  r 0.231  zoneA 79.1  (225 s)
+02:48:41 LADDER mendeley subject  fusion   seed 0  MAE 14.48  r 0.174  zoneA 77.6  (1508 s)

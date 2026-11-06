@@ -1,0 +1,24 @@
+02:15:08 BIG IDEAs sub_001: 2056/2561 CGM readings have gap-free BVP
+02:15:09 BIG IDEAs sub_002: 1877/2119 CGM readings have gap-free BVP
+02:15:09 BIG IDEAs sub_003: 1392/2302 CGM readings have gap-free BVP
+02:15:10 BIG IDEAs sub_004: 1355/2164 CGM readings have gap-free BVP
+02:15:10 BIG IDEAs sub_005: 2385/2558 CGM readings have gap-free BVP
+02:15:11 BIG IDEAs sub_006: 1639/2847 CGM readings have gap-free BVP
+02:15:12 BIG IDEAs sub_007: 2062/2207 CGM readings have gap-free BVP
+02:15:12 BIG IDEAs sub_008: 2142/2505 CGM readings have gap-free BVP
+02:15:13 BIG IDEAs sub_009: 2090/2306 CGM readings have gap-free BVP
+02:15:13 BIG IDEAs sub_010: 2025/2148 CGM readings have gap-free BVP
+02:15:14 BIG IDEAs sub_011: 2160/2843 CGM readings have gap-free BVP
+02:15:14 BIG IDEAs sub_012: 1935/2169 CGM readings have gap-free BVP
+02:15:15 BIG IDEAs sub_013: 1876/1979 CGM readings have gap-free BVP
+02:15:16 BIG IDEAs sub_014: 1554/2240 CGM readings have gap-free BVP
+02:15:16 BIG IDEAs sub_015: 495/1673 CGM readings have gap-free BVP
+02:15:17 BIG IDEAs sub_016: 1824/2277 CGM readings have gap-free BVP
+02:15:18 BIG IDEAs: 57727 windows, 28867 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+02:25:27 views computed in 609 s for 57727 windows
+02:40:57 3d      seed 0 fold 1/1  n_train 40022 n_test 17325  MAE(win) 15.1
+02:40:58 RESULT within_3d_res_seed0  MAE 15.04 RMSE 21.86 MARD 12.3% R2 +0.148 r 0.438 zoneA 79.9% (930 s)
+03:10:06 2d      seed 0 fold 1/1  n_train 40022 n_test 17325  MAE(win) 15.1
+03:10:07 RESULT within_2d_res_seed0  MAE 15.09 RMSE 21.91 MARD 12.4% R2 +0.144 r 0.437 zoneA 79.7% (1750 s)
+03:47:11 fusion  seed 0 fold 1/1  n_train 40022 n_test 17325  MAE(win) 15.2
+03:47:12 RESULT within_fusion_res_seed0 MAE 15.07 RMSE 21.88 MARD 12.3% R2 +0.147 r 0.438 zoneA 79.8% (2225 s)

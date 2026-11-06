@@ -1,0 +1,123 @@
+experiment/model                 MAE [95% CI]      diff vs null [95% CI]  P(better)
+mendeley/ridge          14.62 [12.46, 17.46]    -0.09 [-0.64, +0.62]      0.621
+mendeley/demo           15.57 [12.92, 18.52]    +0.86 [-0.32, +2.27]      0.090
+mendeley/ridge+demo     15.23 [12.57, 18.63]    +0.52 [-1.17, +2.57]      0.302
+mendeley/gbm            16.61 [13.81, 19.43]    +1.89 [+0.15, +3.47]      0.018
+mendeley/gbm+demo       15.49 [12.18, 19.21]    +0.78 [-1.28, +2.99]      0.243
+mendeley/1d             13.31 [11.12, 15.78]    -1.41 [-2.99, -0.03]      0.978
+mendeley/1d/seed0       12.77 [10.53, 15.32]    -1.94 [-3.36, -0.75]      0.999
+mendeley/1d/seed1       13.53 [11.37, 15.92]    -1.18 [-2.90, +0.35]      0.936
+mendeley/1d/seed2       13.87 [11.62, 16.27]    -0.84 [-2.61, +0.72]      0.858
+mendeley/2d             13.91 [11.50, 16.39]    -0.81 [-2.51, +0.75]      0.851
+mendeley/2d/seed0       13.94 [11.75, 16.47]    -0.77 [-2.37, +0.81]      0.832
+mendeley/2d/seed1       13.75 [11.26, 16.39]    -0.97 [-2.70, +0.79]      0.872
+mendeley/2d/seed2       14.16 [11.74, 16.71]    -0.56 [-2.38, +1.06]      0.757
+mendeley/3d             14.01 [11.20, 17.18]    -0.70 [-1.83, +0.38]      0.890
+mendeley/3d/seed0       13.97 [11.24, 17.16]    -0.75 [-1.88, +0.36]      0.903
+mendeley/3d/seed1       13.97 [11.23, 17.16]    -0.74 [-1.95, +0.41]      0.892
+mendeley/3d/seed2       14.18 [11.49, 17.38]    -0.54 [-1.61, +0.54]      0.842
+mendeley/fusion         14.66 [12.23, 17.32]    -0.05 [-1.48, +1.25]      0.533
+mendeley/fusion/seed0   14.48 [12.16, 17.09]    -0.24 [-1.62, +1.04]      0.634
+mendeley/fusion/seed1   14.80 [12.29, 17.42]    +0.08 [-1.58, +1.41]      0.453
+mendeley/fusion/seed2   15.12 [12.84, 18.04]    +0.40 [-1.10, +1.93]      0.303
+mendeley/resnet1d       15.01 [12.59, 17.74]    +0.30 [-1.42, +2.01]      0.376
+mendeley/resnet1d/seed0  14.83 [12.52, 17.67]    +0.11 [-1.34, +1.64]      0.450
+mendeley/resnet1d/seed1  14.68 [12.23, 17.44]    -0.03 [-1.99, +1.93]      0.538
+mendeley/resnet1d/seed2  15.68 [13.08, 18.60]    +0.96 [-0.97, +2.89]      0.166
+mendeley/cnnlstm        13.34 [10.93, 16.02]    -1.37 [-2.95, +0.23]      0.951
+mendeley/cnnlstm/seed0  13.38 [10.93, 16.08]    -1.33 [-2.95, +0.41]      0.934
+mendeley/cnnlstm/seed1  13.81 [11.37, 16.41]    -0.91 [-2.68, +0.68]      0.861
+mendeley/cnnlstm/seed2  13.35 [10.87, 16.27]    -1.36 [-2.89, +0.10]      0.965
+bigideas/ridge          17.32 [14.96, 19.83]    +2.04 [+0.65, +3.86]      0.000
+bigideas/1d             16.94 [14.85, 19.12]    +1.66 [+0.48, +3.13]      0.000
+bigideas/2d             16.97 [14.80, 19.14]    +1.69 [+0.53, +3.15]      0.000
+bigideas/3d             16.98 [14.81, 19.21]    +1.70 [+0.51, +3.15]      0.000
+bigideas/fusion         16.68 [14.73, 18.76]    +1.40 [+0.23, +2.85]      0.005
+bigideas/tod            15.29 [13.54, 17.15]    +0.01 [-0.50, +0.54]      0.493
+bigideas/persist        31.35 [19.33, 45.78]   +16.07 [+3.94, +30.50]      0.000
+bigideas/ridge_res      15.13 [13.55, 16.76]    -0.15 [-0.37, +0.08]      0.897
+bigideas/1d_res         15.04 [13.48, 16.62]    -0.24 [-0.69, +0.23]      0.835
+bigideas/1d_res/seed0   15.04 [13.50, 16.59]    -0.24 [-0.70, +0.21]      0.839
+bigideas/1d_res/seed1   15.05 [13.52, 16.69]    -0.23 [-0.72, +0.24]      0.835
+bigideas/1d_res/seed2   15.06 [13.48, 16.59]    -0.22 [-0.70, +0.26]      0.816
+bigideas/2d_res         15.09 [13.50, 16.67]    -0.19 [-0.68, +0.32]      0.757
+bigideas/3d_res         15.04 [13.45, 16.62]    -0.24 [-0.67, +0.19]      0.851
+bigideas/fusion_res     15.07 [13.45, 16.68]    -0.21 [-0.74, +0.31]      0.780
+stuba/ridge             44.39 [14.44, 52.32]    +0.89 [+0.34, +1.23]      0.001
+stuba/gbm               48.33 [17.13, 56.73]    +4.83 [+1.74, +9.07]      0.000
+stuba/1d                49.55 [17.10, 58.31]    +6.05 [+2.39, +7.64]      0.001
+stuba/1d/seed0          51.20 [17.67, 60.33]    +7.70 [+2.89, +9.63]      0.000
+stuba/1d/seed1          48.00 [15.81, 56.70]    +4.50 [+1.55, +5.80]      0.002
+stuba/1d/seed2          49.79 [18.07, 58.58]    +6.29 [+2.95, +8.06]      0.000
+stuba/2d                48.61 [17.45, 56.67]    +5.10 [+2.71, +6.44]      0.000
+stuba/3d                43.20 [13.95, 50.74]    -0.30 [-1.21, +1.94]      0.680
+stuba/fusion            47.52 [16.19, 55.72]    +4.01 [+1.39, +5.14]      0.006
+mendeley/ridge         r -0.027 CI [-0.19,+0.17]  within-r 0.392821179083998  wilcoxon p 0.5911215035822175  worse 11/23 (p=1.000)  r(y<=140) +0.062
+mendeley/demo          r -0.168 CI [-0.35,+0.08]  within-r None  wilcoxon p 0.34376726516801226  worse 7/23 (p=0.093)  r(y<=140) -0.250
+mendeley/ridge+demo    r +0.035 CI [-0.20,+0.31]  within-r 0.3070777839607553  wilcoxon p 0.8611534315781348  worse 8/23 (p=0.210)  r(y<=140) -0.039
+mendeley/gbm           r -0.062 CI [-0.27,+0.14]  within-r -0.24451730209150732  wilcoxon p 0.08813209494639655  worse 14/23 (p=0.405)  r(y<=140) -0.087
+mendeley/gbm+demo      r -0.050 CI [-0.28,+0.20]  within-r 0.12838389158271313  wilcoxon p 0.4534971616569935  worse 14/23 (p=0.405)  r(y<=140) -0.070
+mendeley/1d            r +0.331 CI [+0.17,+0.50]  within-r 0.056043580072777675  wilcoxon p 0.1274633612034787  worse 8/23 (p=0.210)  r(y<=140) +0.268
+mendeley/2d            r +0.223 CI [-0.00,+0.43]  within-r 0.04690042357993807  wilcoxon p 0.3026831422765526  worse 8/23 (p=0.210)  r(y<=140) +0.123
+mendeley/3d            r +0.144 CI [-0.03,+0.32]  within-r 0.34420745137549996  wilcoxon p 0.1455396145812295  worse 10/23 (p=0.678)  r(y<=140) +0.136
+mendeley/fusion        r +0.137 CI [-0.18,+0.42]  within-r -0.2006430747948588  wilcoxon p 0.9452179878097564  worse 10/23 (p=0.678)  r(y<=140) -0.069
+mendeley/resnet1d      r +0.198 CI [+0.00,+0.39]  within-r -0.06307770761362928  wilcoxon p 0.7595394391538044  worse 13/23 (p=0.678)  r(y<=140) +0.024
+mendeley/cnnlstm       r +0.191 CI [-0.07,+0.43]  within-r -0.13912034327742562  wilcoxon p 0.04982692852199463  worse 8/23 (p=0.210)  r(y<=140) +0.177
+bigideas/ridge         r +0.052 CI [-0.03,+0.16]  within-r 0.045469888340429865  wilcoxon p 5.661423733938986e-101  worse 10/16 (p=0.454)
+bigideas/1d            r +0.212 CI [+0.10,+0.34]  within-r 0.043083247175851346  wilcoxon p 1.4147655670495675e-87  worse 13/16 (p=0.021)
+bigideas/2d            r +0.189 CI [+0.09,+0.31]  within-r 0.033330961099334394  wilcoxon p 1.7380624993932836e-86  worse 12/16 (p=0.077)
+bigideas/3d            r +0.196 CI [+0.07,+0.34]  within-r 0.028136982534035668  wilcoxon p 9.805968430055502e-91  worse 13/16 (p=0.021)
+bigideas/fusion        r +0.252 CI [+0.14,+0.37]  within-r 0.027973725568300085  wilcoxon p 3.5669783511292624e-60  worse 11/16 (p=0.210)
+bigideas/tod           r +0.412 CI [+0.21,+0.54]  within-r -0.005704876144023419  wilcoxon p 0.5400015614224706  worse 8/16 (p=1.000)
+bigideas/persist       r +0.208 CI [-0.08,+0.40]  within-r None  wilcoxon p 0.0  worse 12/16 (p=0.077)
+bigideas/ridge_res     r +0.436 CI [+0.26,+0.55]  within-r 0.05615960330092165  wilcoxon p 1.040843136342582e-12  worse 7/16 (p=0.804)
+bigideas/1d_res        r +0.438 CI [+0.25,+0.56]  within-r 0.03685620102309492  wilcoxon p 1.8078234160700645e-09  worse 7/16 (p=0.804)
+bigideas/2d_res        r +0.437 CI [+0.25,+0.55]  within-r 0.07409790787461666  wilcoxon p 2.8125807916579217e-06  worse 9/16 (p=0.804)
+bigideas/3d_res        r +0.438 CI [+0.25,+0.55]  within-r 0.02185031177952026  wilcoxon p 1.7807842786981689e-12  worse 6/16 (p=0.454)
+bigideas/fusion_res    r +0.438 CI [+0.26,+0.56]  within-r 0.0749404140020152  wilcoxon p 9.336222990191414e-06  worse 7/16 (p=0.804)
+stuba/ridge            r -0.221 CI [-0.36,-0.17]  within-r -0.21908358210807072  wilcoxon p 0.0012969152977248912  worse 17/24 (p=0.064)
+stuba/gbm              r -0.187 CI [-0.24,+0.10]  within-r -0.2381172940256766  wilcoxon p 0.006647222967151355  worse 18/24 (p=0.023)
+stuba/1d               r -0.161 CI [-0.22,+0.11]  within-r -0.3929896499513084  wilcoxon p 0.002767536338821455  worse 15/24 (p=0.307)
+stuba/2d               r -0.220 CI [-0.27,+0.12]  within-r 0.03710378893793215  wilcoxon p 0.0010536470967956954  worse 15/24 (p=0.307)
+stuba/3d               r -0.127 CI [-0.28,+0.11]  within-r 0.0013236163930525223  wilcoxon p 0.779076091117666  worse 10/24 (p=0.541)
+stuba/fusion           r -0.240 CI [-0.29,+0.16]  within-r -0.38330976497670477  wilcoxon p 0.003327172959913826  worse 15/24 (p=0.307)
+mendeley/mde {'half_width': 1.4829574513346744, 'n_records': 67}
+bigideas/mde {'half_width': 1.3281524729854706, 'n_records': 8664}
+bigideas/mde_res {'half_width': 0.46082265447874055, 'n_records': 8664}
+stuba/mde {'half_width': 2.6276176670902336, 'n_records': 125}
+mendeley/mean          hypo 0/0  hyper 0/2  TIR agree 0.970  Clarke A 83.6  Parkes A 88.1
+mendeley/ridge         hypo 0/0  hyper 0/2  TIR agree 0.970  Clarke A 86.6  Parkes A 86.6
+mendeley/demo          hypo 0/0  hyper 0/2  TIR agree 0.970  Clarke A 86.6  Parkes A 88.1
+mendeley/1d            hypo 0/0  hyper 0/2  TIR agree 0.970  Clarke A 80.6  Parkes A 88.1
+mendeley/2d            hypo 0/0  hyper 0/2  TIR agree 0.970  Clarke A 83.6  Parkes A 86.6
+mendeley/3d            hypo 0/0  hyper 0/2  TIR agree 0.970  Clarke A 86.6  Parkes A 91.0
+mendeley/fusion        hypo 0/0  hyper 0/2  TIR agree 0.970  Clarke A 79.1  Parkes A 79.1
+mendeley/cnnlstm       hypo 0/0  hyper 0/2  TIR agree 0.970  Clarke A 83.6  Parkes A 85.1
+mendeley/resnet1d      hypo 0/0  hyper 0/2  TIR agree 0.970  Clarke A 79.1  Parkes A 83.6
+mendeley/gbm           hypo 0/0  hyper 0/2  TIR agree 0.970  Clarke A 79.1  Parkes A 85.1
+mendeley/noise_floor   {'kind': 'iso15197', 'mae': 7.080142744676275, 'mard_pct': 6.161967984714429}
+mendeley/reference_range {'n': 67, 'hypo_n': 0, 'hyper_n': 2, 'in_range_pct': 97.01492537313433}
+bigideas/mean          hypo 0/68  hyper 0/150  TIR agree 0.975  Clarke A 78.8  Parkes A 82.6
+bigideas/ridge         hypo 0/68  hyper 0/150  TIR agree 0.975  Clarke A 73.6  Parkes A 76.7
+bigideas/1d            hypo 0/68  hyper 0/150  TIR agree 0.975  Clarke A 75.0  Parkes A 77.9
+bigideas/2d            hypo 0/68  hyper 0/150  TIR agree 0.975  Clarke A 74.7  Parkes A 78.1
+bigideas/3d            hypo 0/68  hyper 0/150  TIR agree 0.975  Clarke A 74.5  Parkes A 77.6
+bigideas/fusion        hypo 0/68  hyper 0/150  TIR agree 0.975  Clarke A 75.9  Parkes A 78.9
+bigideas/tod           hypo 0/68  hyper 0/150  TIR agree 0.975  Clarke A 78.6  Parkes A 82.5
+bigideas/persist       hypo 0/68  hyper 48/150  TIR agree 0.864  Clarke A 59.0  Parkes A 60.1
+bigideas/ridge_res     hypo 0/68  hyper 0/150  TIR agree 0.975  Clarke A 78.9  Parkes A 82.8
+bigideas/1d_res        hypo 0/68  hyper 0/150  TIR agree 0.975  Clarke A 79.8  Parkes A 82.8
+bigideas/2d_res        hypo 0/68  hyper 0/150  TIR agree 0.975  Clarke A 79.7  Parkes A 82.8
+bigideas/3d_res        hypo 0/68  hyper 0/150  TIR agree 0.975  Clarke A 79.9  Parkes A 82.9
+bigideas/fusion_res    hypo 0/68  hyper 0/150  TIR agree 0.975  Clarke A 79.8  Parkes A 82.9
+bigideas/noise_floor   {'kind': 'g6', 'mae': 10.484014616380085, 'mard_pct': 8.99607306118459}
+bigideas/reference_range {'n': 8664, 'hypo_n': 68, 'hyper_n': 150, 'in_range_pct': 97.48384118190212}
+stuba/mean             hypo 0/34  hyper 0/18  TIR agree 0.584  Clarke A 34.4  Parkes A 35.2
+stuba/ridge            hypo 0/34  hyper 0/18  TIR agree 0.584  Clarke A 34.4  Parkes A 34.4
+stuba/gbm              hypo 0/34  hyper 0/18  TIR agree 0.592  Clarke A 32.8  Parkes A 34.4
+stuba/1d               hypo 0/34  hyper 0/18  TIR agree 0.584  Clarke A 31.2  Parkes A 32.8
+stuba/2d               hypo 0/34  hyper 0/18  TIR agree 0.576  Clarke A 31.2  Parkes A 36.0
+stuba/3d               hypo 0/34  hyper 0/18  TIR agree 0.584  Clarke A 34.4  Parkes A 38.4
+stuba/fusion           hypo 0/34  hyper 0/18  TIR agree 0.592  Clarke A 32.8  Parkes A 36.8
+stuba/noise_floor      {'kind': 'iso15197', 'mae': 7.734291196311867, 'mard_pct': 7.8489022735298235}
+stuba/reference_range  {'n': 125, 'hypo_n': 34, 'hyper_n': 18, 'in_range_pct': 58.4}

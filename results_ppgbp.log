@@ -1,0 +1,34 @@
+15:13:40 PPG-BP (SBP): 657 windows, 219 records, 219 subjects, SBP 80-182 (mean 127.9 +/- 20.3) mg/dL
+15:13:41 RESULT sbp_segment_random_mean_seed0        MAE 16.26  r -0.162  delta --
+15:13:44 RESULT sbp_segment_random_ridge_seed0       MAE 14.99  r 0.353  delta -1.27 [-1.84,-0.72]
+15:13:45 RESULT sbp_segment_random_demo_seed0        MAE 13.70  r 0.468  delta -2.56 [-3.65,-1.51]
+15:13:47 RESULT sbp_segment_random_ridge+demo_seed0  MAE 13.60  r 0.507  delta -2.66 [-3.71,-1.65]
+15:13:51 RESULT sbp_segment_random_gbm+demo_seed0    MAE 9.42  r 0.825  delta -6.84 [-8.28,-5.53]
+15:15:22 RESULT sbp_segment_random_1d_seed0          MAE 12.43  r 0.621  delta -3.83 [-5.14,-2.55]
+16:17:07 RESULT sbp_segment_random_1d_seed1          MAE 12.10  r 0.636  delta -4.16 [-5.50,-2.84]
+16:17:49 RESULT sbp_segment_random_1d_seed2          MAE 12.03  r 0.649  delta -4.23 [-5.52,-2.93]
+16:17:49 RESULT sbp_subject_kfold_mean_seed0         MAE 16.25  r -0.117  delta --
+16:17:49 RESULT sbp_subject_kfold_ridge_seed0        MAE 15.12  r 0.309  delta -1.13 [-1.73,-0.55]
+16:17:49 RESULT sbp_subject_kfold_demo_seed0         MAE 13.87  r 0.440  delta -2.38 [-3.47,-1.30]
+16:17:50 RESULT sbp_subject_kfold_ridge+demo_seed0   MAE 13.85  r 0.466  delta -2.40 [-3.48,-1.35]
+16:17:51 RESULT sbp_subject_kfold_gbm+demo_seed0     MAE 14.55  r 0.439  delta -1.69 [-3.13,-0.30]
+16:18:33 RESULT sbp_subject_kfold_1d_seed0           MAE 13.47  r 0.533  delta -2.78 [-4.21,-1.36]
+16:19:15 RESULT sbp_subject_kfold_1d_seed1           MAE 13.22  r 0.551  delta -3.03 [-4.50,-1.64]
+16:19:58 RESULT sbp_subject_kfold_1d_seed2           MAE 13.37  r 0.545  delta -2.88 [-4.33,-1.44]
+16:19:59 PPG-BP (DBP): 657 windows, 219 records, 219 subjects, DBP 42-107 (mean 71.8 +/- 11.1) mg/dL
+16:19:59 RESULT dbp_segment_random_mean_seed0        MAE 8.72  r -0.058  delta --
+16:20:00 RESULT dbp_segment_random_ridge_seed0       MAE 8.64  r 0.174  delta -0.08 [-0.25,+0.09]
+16:20:00 RESULT dbp_segment_random_demo_seed0        MAE 8.41  r 0.264  delta -0.31 [-0.65,+0.03]
+16:20:01 RESULT dbp_segment_random_ridge+demo_seed0  MAE 8.12  r 0.354  delta -0.60 [-1.01,-0.18]
+16:20:02 RESULT dbp_segment_random_gbm+demo_seed0    MAE 5.53  r 0.779  delta -3.19 [-3.89,-2.48]
+16:20:49 RESULT dbp_segment_random_1d_seed0          MAE 7.36  r 0.526  delta -1.36 [-2.02,-0.72]
+16:21:42 RESULT dbp_segment_random_1d_seed1          MAE 7.05  r 0.584  delta -1.67 [-2.35,-0.98]
+16:22:35 RESULT dbp_segment_random_1d_seed2          MAE 7.22  r 0.532  delta -1.50 [-2.19,-0.80]
+16:22:35 RESULT dbp_subject_kfold_mean_seed0         MAE 8.73  r -0.054  delta --
+16:22:36 RESULT dbp_subject_kfold_ridge_seed0        MAE 8.74  r 0.074  delta +0.01 [-0.16,+0.19]
+16:22:36 RESULT dbp_subject_kfold_demo_seed0         MAE 8.54  r 0.226  delta -0.18 [-0.53,+0.16]
+16:22:37 RESULT dbp_subject_kfold_ridge+demo_seed0   MAE 8.37  r 0.295  delta -0.36 [-0.81,+0.07]
+16:22:38 RESULT dbp_subject_kfold_gbm+demo_seed0     MAE 8.17  r 0.385  delta -0.56 [-1.25,+0.12]
+16:23:57 RESULT dbp_subject_kfold_1d_seed0           MAE 7.98  r 0.412  delta -0.74 [-1.43,-0.08]
+16:25:11 RESULT dbp_subject_kfold_1d_seed1           MAE 8.01  r 0.405  delta -0.72 [-1.39,-0.05]
+16:26:20 RESULT dbp_subject_kfold_1d_seed2           MAE 7.85  r 0.429  delta -0.87 [-1.55,-0.20]

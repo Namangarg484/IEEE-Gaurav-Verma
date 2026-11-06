@@ -1,0 +1,20 @@
+{
+  "papagei": {
+    "input_rate_hz": 125,
+    "params": 5785612,
+    "licence": "code BSD-3-Clause; weights Zenodo 13983110 (no licence stated)",
+    "segment_s": 10.0
+  },
+  "anyppg": {
+    "input_rate_hz": 125,
+    "params": 4044272,
+    "licence": "checkpoint from GitHub PKUDigitalHealth/AnyPPG (no licence file)",
+    "segment_s": 10.0
+  },
+  "pulseppg": {
+    "input_rate_hz": 50,
+    "params": 28497920,
+    "licence": "MIT (code and weights, Zenodo 17345536)",
+    "segment_s": "whole record / 20 s"
+  }
+}

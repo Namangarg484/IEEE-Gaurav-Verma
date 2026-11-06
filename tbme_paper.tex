@@ -1,0 +1,480 @@
+\documentclass[journal]{IEEEtran}
+
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+\else
+  \usepackage{fontspec}
+  \setmainfont{texgyretermes}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold, ItalicFont=*-italic, BoldItalicFont=*-bolditalic]  % Times clone, as IEEEtran expects
+\fi
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{cite}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{./figures/}}
+\input{results_macros}
+% \m{name} prints a generated result macro, or a red dash if it is missing.
+\newcommand{\m}[1]{\ifcsname #1\endcsname\csname #1\endcsname\else\textcolor{red}{--}\fi}
+
+\begin{document}
+
+\title{A Validated Leakage Audit for Wearable Physiological Regression,
+       with Application to PPG-Based Glucose and Blood-Pressure Estimation}
+
+\author{Gaurav~Verma%
+\thanks{G.~Verma is with the Department of Electronics and Communication
+Engineering, [Institution Name] (e-mail: [author.email@institution.edu]).
+Code, frozen folds, integrity tests and all out-of-fold predictions:
+[repository URL].}}
+
+\markboth{IEEE Transactions on Biomedical Engineering (submitted)}{Verma: A Validated Leakage Audit for Wearable Physiological Regression}
+
+\maketitle
+
+\begin{abstract}
+\textit{Objective:} Reported accuracies of cuffless physiological estimation
+from photoplethysmography (PPG) are often inflated by data leakage that
+standard subject-wise splitting does not detect.  We develop and validate an
+audit that detects, measures and bounds such leakage.
+\textit{Methods:} The audit comprises (i)~a detector for label-construction
+leaks (labels replicated across signal rows when public tables are built),
+(ii)~machine-checked split protocols, (iii)~a leakage ladder that measures
+how much each mechanism inflates a metric, and (iv)~a null-anchored decision
+rule using subject-cluster bootstrap intervals with positive and negative
+controls.  It was validated on synthetic cohorts of known ground truth and
+applied to PPG$\to$glucose (three public cohorts,
+\m{mendNSubjects}+\m{bigNSubjects}+\m{stubaNSubjects} subjects) and
+PPG$\to$blood pressure (\m{bpNSubjects} subjects).
+\textit{Results:} The block-scan detector found every corrupted subject for
+cycle lengths $k\ge3$ with no false alarm on \m{valRealNegSubjects} real subjects,
+and flagged \m{valRealPosFlagged}/\m{valRealPosEligible} patients of a public
+glucose derivative.  Under honest splits the decision rule's false-claim
+rate stayed at or below the nominal 2.5\%; under leaky splits it reached
+\m{valLeakyGbmGZeroRej}\%.  A 1-D CNN estimated
+systolic pressure ($\Delta$MAE \m{bpSbpSubjOneDDiff}~mmHg vs.\ null), yet no
+model, including frozen PPG foundation models, improved glucose estimation
+by more than a fraction of the reference's own noise.
+\textit{Conclusion:} Leakage-aware, null-anchored evaluation separates
+genuine physiological signal from artefact.
+\textit{Significance:} The audit and its open implementation give
+wearable-sensing studies a reproducible test for leakage before results are
+reported.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Photoplethysmography, data leakage, evaluation methodology, blood glucose,
+blood pressure, cross-validation, wearable sensing, reproducibility.
+\end{IEEEkeywords}
+
+% =============================================================================
+\section{Introduction}
+\IEEEPARstart{C}{uffless} estimation of blood pressure, glucose and other
+physiological variables from photoplethysmography (PPG) is an active
+engineering target, and reported errors often approach those of regulated
+devices~\cite{soliman2024,syamsul2026,chen2024mvcft}.  Evaluation is the weak
+link.  Record-wise splits of autocorrelated wearable signals inflate
+accuracy~\cite{yoshizawa2023,mehta2024,cheung2024}, and recent re-evaluations
+of PPG-based glucose estimation found that published models do not beat a
+mean predictor once subjects are separated~\cite{ramesh2026,seyedebrahimi2026}.
+Subject-wise splitting is now the recommended
+remedy~\cite{saeb2017,collins2024tripod}, but it is not sufficient: leaks
+introduced while a dataset is \emph{constructed} survive any split, and the
+magnitude of a leak depends on the model as well as on the protocol.
+
+This paper treats evaluation as an engineering problem with a method that can
+itself be validated.  Its contributions are:
+\begin{enumerate}
+  \item \textbf{An audit method} (Sec.~\ref{sec:method}) with four
+        components: a detector for label-construction leaks with a block-scan
+        variant for partial corruption, split protocols whose no-leak
+        guarantee is asserted in code before training, a leakage ladder that
+        measures inflation mechanism by mechanism, and a null-anchored decision
+        rule with controls.
+  \item \textbf{Validation on known ground truth} (Sec.~\ref{sec:validation}):
+        detector sensitivity and specificity under injected corruption, and
+        the false-claim rate and power of the decision rule under honest and
+        leaky protocols.
+  \item \textbf{Two applications} (Sec.~\ref{sec:apps}).  For
+        PPG$\to$glucose the audit uncovers a previously unreported
+        label-replication artefact in a public derivative and bounds what
+        three cohorts support; for PPG$\to$blood pressure it recovers a
+        genuine signal with the same model that fails on glucose, showing the
+        negative glucose result is a property of the target, not of the audit.
+\end{enumerate}
+
+% =============================================================================
+\section{Audit Method}
+\label{sec:method}
+
+\subsection{Setting and leak taxonomy}
+A dataset is a set of windows $w$, each with a signal segment, a reference
+label $y$, a \emph{record} (one independent reference measurement), a
+\emph{subject} and, for longitudinal data, a time $t$.  A split protocol
+produces folds $(\mathcal{T}_f,\mathcal{E}_f)$.  We distinguish five leak
+levels (Table~\ref{tab:taxonomy}): window, record, subject and temporal leaks
+arise from the split; label-construction leaks arise before any split, when a
+table pairs signal rows with labels so that a label no longer belongs to the
+signal it accompanies.  Kapoor and Narayanan's taxonomy~\cite{kapoor2023leakage}
+covers the first four; the fifth is closest to their duplicates type but acts
+on the label column.
+
+\begin{table}[t]
+  \caption{Leak levels, the protocol that removes each, and the audit check.}
+  \label{tab:taxonomy}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{@{}p{1.6cm}p{2.5cm}p{1.7cm}p{2.3cm}@{}}
+    \toprule
+    \textbf{Leak level} & \textbf{Mechanism} & \textbf{Protocol} & \textbf{Audit check} \\
+    \midrule
+    Window & overlapping windows of one record on both sides & record-wise or stricter & set intersection of windows \\
+    Record & records of one subject on both sides & subject-wise & set intersection of records \\
+    Subject & identity learnt, label = subject mean & subject-wise & set intersection of subjects \\
+    Temporal & neighbouring readings across the cut & chronological + guard gap $g$ & min.\ time distance $>g$ \\
+    Label construction & labels cycled over signal rows (cross-join) & none (pre-split) & cycle detector, global and block scan \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Label-construction detector}
+\label{sec:detector}
+A cross-join of a subject's $k$ reference values with its signal rows produces
+a label column with $y_i=y_{i-k}$ for almost all $i$, whereas a genuine table
+is record-structured (runs of one label per record).  For a label column
+$y_{1:n}$ we compute the lag-$\ell$ match fraction
+$\phi(\ell)=\frac{1}{n-\ell}\sum_{i>\ell}\mathbb{1}[y_i=y_{i-\ell}]$ for
+$\ell=1,\dots,\ell_{\max}$ and report the smallest $\ell$ with
+$\phi(\ell)>\tau$ ($\tau=0.98$).  $\ell=1$ indicates runs (genuine); $\ell\ge2$
+indicates cycling.  Because a corrupted stretch covering a fraction $p$ of a
+subject's rows is diluted to $\phi(k)\approx p+(1-p)(1-k/m)$ for run length
+$m$, the whole-column test misses partial corruption; the \emph{block scan}
+applies the same test to contiguous blocks of $b$ rows (stride $b/2$).  On a
+record-structured column any block is a single run or crosses a run boundary,
+so $\phi(1)\ge1-1/b>\tau$ whenever $b>1/(1-\tau)$ and $b>\ell_{\max}$: the
+block scan cannot raise a false alarm on genuine record-structured labels.
+
+\subsection{Split protocols with asserted guarantees}
+Each protocol declares the leak level it removes (Table~\ref{tab:taxonomy}).
+Before any model is trained, the folds are checked by exact set arithmetic on
+window, record and subject identifiers and, for the temporal level, by the
+minimum distance between a test reading and any training reading of the same
+subject.  A violation aborts the run.  Folds are frozen to files with a
+fingerprint so a third-party model is scored on identical folds.
+
+\subsection{Leakage ladder}
+The same model is evaluated under a sequence of protocols that leak
+progressively less (random windows $\to$ random records $\to$ subjects; or
+random readings $\to$ chronological $\to$ chronological with guard gap).  The
+difference in a metric between adjacent rungs measures the inflation due to
+one mechanism, separately from the others.
+
+\subsection{Null-anchored decision rule and controls}
+\label{sec:rule}
+Window predictions are averaged per record.  Every model is compared with the
+null appropriate to the use case: the training mean for cross-subject
+estimation; each subject's training mean, a time-of-day model and persistence
+for within-subject tracking.  The paired MAE difference $\Delta$ is bootstrapped
+by resampling \emph{subjects} with replacement (5\,000 draws), and a model is
+declared better than the null only if the 95\% interval of $\Delta$ lies
+entirely below zero.  One comparison per cohort is pre-specified as primary;
+the others are exploratory.  Positive controls (quantities that must be
+recoverable, e.g.\ heart rate) and negative controls (permuted labels,
+noise input) are run through the identical pipeline, and the reference
+device's own error (ISO~15197 meter, CGM MARD) is reported as a noise floor.
+
+% =============================================================================
+\section{Validation on Known Ground Truth}
+\label{sec:validation}
+
+\textbf{Detector.}  We generated label columns for 20 subjects, corrupted a
+fraction (10--100\%) of them with cross-joins of cycle length $k\in\{2,\dots,10\}$
+over 25, 50 or 100\% of their rows, and left the rest record-structured.
+Fig.~\ref{fig:validation}a shows subject-level sensitivity.  Both detectors
+had \m{valLocalMinSpec}\% specificity in every condition.  The whole-column
+test detected fully corrupted subjects (sensitivity $\ge$\m{valGlobalFullSens}\%)
+but missed partial corruption for long cycles (minimum \m{valGlobalPartialMinSens}\%);
+the block scan detected every corrupted subject for $k\ge3$
+(\m{valLocalMinSensKThree}\%) and at least \m{valLocalPartialMinSens}\% overall,
+the residual misses at $k=2$ being draws in which the two reference values
+coincide and the cycle is invisible.  On the label columns of
+\m{valRealNegSubjects} real subjects from three clean cohorts it raised
+\m{valRealNegFlagged} alarms; on the public glucose derivative of
+Sec.~\ref{sec:glucose} it flagged \m{valRealPosFlagged} of the
+\m{valRealPosEligible} patients with more than one reference value.
+
+\textbf{Decision rule.}  We generated \m{valReps} synthetic cohorts per
+condition (16 subjects, 12 records of three 5-s windows each).  Each label is
+a subject offset (SD 20~mg/dL, unlearnable from the signal) plus $g$ times
+the heart-rate deviation encoded in the waveform plus reference noise.  Each
+subject also has a pulse-shape fingerprint unrelated to the label, so a
+flexible model can learn identity, and hence the offset, whenever a protocol
+lets a subject's windows into training.  Fig.~\ref{fig:validation}b shows how
+often the rule declared a ridge or a gradient-boosting (GBM) model better
+than the train-mean null.  At $g=0$ under the honest subject-wise protocol
+the false-claim rate was \m{valHonestRidgeGZeroRej}\% (ridge) and
+\m{valHonestGbmGZeroRej}\% (GBM), at or below the nominal 2.5\%.  Under the
+leaky random-window protocol it rose to \m{valLeakyRidgeGZeroRej}\% and
+\m{valLeakyGbmGZeroRej}\%, the GBM \emph{appearing} to improve on the null by
+\m{valLeakyGbmGZeroDiff}~mg/dL with no signal present.  This is why the rule
+is only valid together with an asserted protocol.  With signal present the
+honest rule's power rose with $g$, to \m{valHonestRidgeGFourRej}\% (ridge) and
+\m{valHonestGbmGFourRej}\% (GBM) at $g=4$.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.92\textwidth]{fig_validation.pdf}
+  \caption{Validation on known ground truth.  (a)~Subject-level sensitivity of
+           the cross-join detector, whole-column versus block scan, by cycle
+           length $k$ and fraction of corrupted rows; specificity was 100\%
+           throughout.  (b)~Rate at which the decision rule declares a model
+           better than the null, versus the true learnable signal $g$
+           (mg/dL per bpm), under the honest subject-wise and the leaky
+           random-window protocol; dotted line: nominal one-sided 2.5\%.}
+  \label{fig:validation}
+\end{figure*}
+
+% =============================================================================
+\section{Applications}
+\label{sec:apps}
+
+\subsection{Data and models}
+\textbf{Glucose.}  Kermani--Esmaeili finger PPG~\cite{kermani2023data}
+(\m{mendNRecords} 10-s recordings, \m{mendNSubjects} subjects, fingerstick
+reference); BIG~IDEAs wrist BVP with Dexcom~G6 CGM~\cite{cho2026bigideas,bent2021}
+(\m{bigNSubjects} subjects, \m{bigNRecordsAll} readings, HbA1c
+\m{bigHbAOneCMin}--\m{bigHbAOneCMax}\%); and STUBA ePPG~\cite{stuba2026}
+(\m{stubaNRecords} records, \m{stubaNSubjects} subjects, \m{stubaNDiabetic} with
+type-1 diabetes).  \textbf{Blood pressure.}  PPG-BP~\cite{liang2018ppgbp}:
+\m{bpNSubjects} subjects, one cuff reading and three 2.1-s finger-PPG
+segments each.  Signals are band-passed 0.5--8~Hz, resampled to 64~Hz and
+z-scored per window (5~s for glucose).  Models: nulls; ridge and gradient
+boosting on nine hand-crafted PPG features, with and without demographics;
+a 1-D CNN, 2-D wavelet-scalogram CNN, Takens-embedding PointNet and their
+cross-attention fusion~\cite{takens1981,qi2017pointnet,vaswani2017attention};
+re-implemented ResNet-1D and CNN--LSTM~\cite{zeynali2025,syamsul2026}; and
+ridge probes on frozen embeddings of three PPG foundation models
+(PaPaGei-S~\cite{papagei2025}, Pulse-PPG~\cite{pulseppg2025},
+AnyPPG~\cite{anyppg2026}).  Networks use one shared configuration (AdamW,
+fixed budget, no early stopping on held-out data) and three seeds.
+Protocols: leave-one-subject-out (fingerstick cohorts), chronological 70/30
+with a 1-h guard gap (BIG~IDEAs; plus a personalised arm trained on the
+residual to each subject's training mean), and 5-fold subject-wise (PPG-BP).
+Full tables are in the supplement.
+
+\subsection{PPG $\to$ glucose}
+\label{sec:glucose}
+\textbf{Label-construction leak.}  A widely shared Kaggle derivative of the
+Kermani--Esmaeili recordings~\cite{kaggle_ppg} cycles each patient's
+reference values row by row (Fig.~\ref{fig:artifact}), which the detector
+flags for every patient with more than one value.  Every window of that file
+inherits the patient mean, so a per-patient oracle scores MAE
+\m{derivOracleMAE}~mg/dL with $r=\m{derivOracleR}$ under a random split,
+and a correct subject-wise split cannot reveal the problem.  An earlier,
+unpublished draft of this work trained on the file and reported MAE
+6.89~mg/dL; those numbers are not carried forward.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.8\textwidth]{fig_label_artifact.pdf}
+  \caption{Label-construction leak in a public glucose derivative.  (a)~The
+           label of subject~1 cycles through the subject's seven reference
+           values on consecutive rows.  (b)~The raw recordings of that subject
+           carry one reference each.}
+  \label{fig:artifact}
+\end{figure*}
+
+\textbf{Ladder.}  On the raw recordings the 1-D CNN scores
+\m{mendLadderWindowOneD}~mg/dL ($r=\m{mendLadderWindowOneDR}$) under random
+windows, but \m{mendLadderRecordOneD} and \m{mendLadderSubjectOneD} once
+recordings or subjects are separated, against a null of \m{mendMeanMAE}
+(Fig.~\ref{fig:ladder}a): on this cohort window-neighbour leakage, not
+identity leakage, produces the inflation, because most subjects contribute
+one or two recordings.  On BIG~IDEAs the ladder is nearly flat
+(\m{bigLadderReadingOneD}, \m{bigLadderChronoNoGapOneD},
+\m{bigLadderChronoOneD}~mg/dL) and every rung stays above the subject-mean null.
+
+\textbf{Bounds.}  Table~\ref{tab:glucose} summarises the honest protocols.
+On the fingerstick cohort the pre-specified primary comparison (1-D CNN)
+gives $\Delta$ \m{mendOneDDiff}~mg/dL (95\%~CI \m{mendOneDDiffCI}), nominally
+significant for \m{mendOneDSeedSigN} of \m{mendOneDSeedN} seeds and shrinking
+to \m{mendKfoldOneDMAE} vs.\ \m{mendKfoldMeanMAE} under 5-fold splitting.  On
+BIG~IDEAs every population model is worse than each subject's own mean; with
+the personalised arm the best model, a Pulse-PPG probe, reaches $\Delta$
+\m{bigPulseResDiff}~mg/dL (\m{bigPulseResDiffCI}), one of \m{nSigBetter} of
+\m{nPairedComparisons} intervals below zero and an order of magnitude below
+the CGM noise floor (\m{bigNoiseFloorMAE}~mg/dL); median within-subject
+correlation stays below 0.2 for every model.  On STUBA no model beats the
+null.  No model detects any of the \m{bigHypoN}+\m{stubaHypoNAll}
+hypoglycaemic references.  Positive controls behave as required: heart rate
+is recovered from the same windows ($r=\m{ctlHrR}$), while permuted labels
+and noise inputs return to the null.
+
+\begin{table}[t]
+  \caption{PPG$\to$glucose under the honest protocols (selected rows; all
+           \m{nPairedComparisons} comparisons in the supplement).  MAE in mg/dL;
+           $\Delta$: paired MAE difference vs.\ the null with 95\%
+           subject-cluster CI.  $\star$: pre-specified primary comparison.}
+  \label{tab:glucose}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{@{}llccc@{}}
+    \toprule
+    \textbf{Cohort} & \textbf{Model} & \textbf{MAE} & \textbf{$r$} & \textbf{$\Delta$ [95\% CI]} \\
+    \midrule
+    \multirow{5}{*}{\shortstack[l]{K--E\\(LOSO)}}
+      & Train mean (null) & \m{mendMeanMAE} & -- & -- \\
+      & Ridge, PPG features & \m{mendRidgeMAE} & \m{mendRidgeR} & \m{mendRidgeDiff} \m{mendRidgeDiffCI} \\
+      & 1-D CNN $\star$ & \m{mendOneDEnsMAE} & \m{mendOneDR} & \m{mendOneDDiff} \m{mendOneDDiffCI} \\
+      & 1D+2D+3D fusion & \m{mendFusionEnsMAE} & \m{mendFusionR} & \m{mendFusionDiff} \m{mendFusionDiffCI} \\
+      & Pulse-PPG probe & \m{mendPulseMAE} & \m{mendPulseR} & \m{mendPulseDiff} \m{mendPulseDiffCI} \\
+    \midrule
+    \multirow{5}{*}{\shortstack[l]{BIG\\IDEAs\\(chrono.)}}
+      & Subject mean (null) & \m{bigMeanMAE} & -- & -- \\
+      & 1-D CNN & \m{bigOneDMAE} & \m{bigOneDR} & \m{bigOneDDiff} \m{bigOneDDiffCI} \\
+      & 1D+2D+3D fusion & \m{bigFusionMAE} & \m{bigFusionR} & \m{bigFusionDiff} \m{bigFusionDiffCI} \\
+      & 1-D CNN, residual & \m{bigOneDResMAE} & \m{bigOneDResR} & \m{bigOneDResDiff} \m{bigOneDResDiffCI} \\
+      & Pulse-PPG, residual & \m{bigPulseResMAE} & \m{bigPulseResR} & \m{bigPulseResDiff} \m{bigPulseResDiffCI} \\
+    \midrule
+    \multirow{4}{*}{\shortstack[l]{STUBA\\(LOSO)}}
+      & Train mean (null) & \m{stubaMeanMAE} & -- & -- \\
+      & 1-D CNN & \m{stubaOneDMAE} & \m{stubaOneDR} & \m{stubaOneDDiff} \m{stubaOneDDiffCI} \\
+      & PointNet (Takens) & \m{stubaThreeDMAE} & \m{stubaThreeDR} & \m{stubaThreeDDiff} \m{stubaThreeDDiffCI} \\
+      & AnyPPG probe & \m{stubaAnyppgMAE} & \m{stubaAnyppgR} & \m{stubaAnyppgDiff} \m{stubaAnyppgDiffCI} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.92\textwidth]{fig_leakage_ladder.pdf}
+  \caption{Leakage ladder for PPG$\to$glucose.  (a)~Kermani--Esmaeili: random
+           windows, random recordings, subject-wise.  (b)~BIG~IDEAs: random
+           readings, chronological, chronological with 1-h guard gap.
+           Error bars: std over three seeds where available.}
+  \label{fig:ladder}
+\end{figure*}
+
+\subsection{PPG $\to$ blood pressure}
+\label{sec:bp}
+The same audit applied to PPG-BP (Table~\ref{tab:bp}, Fig.~\ref{fig:bp})
+recovers a genuine signal.  Under the honest subject-wise split the 1-D CNN
+estimates systolic pressure with MAE \m{bpSbpSubjOneDMAE} against
+\m{bpSbpSubjMeanMAE}~mmHg for the null ($\Delta$ \m{bpSbpSubjOneDDiff}, CI
+\m{bpSbpSubjOneDDiffCI}; $r=\m{bpSbpSubjOneDR}$), and ridge on PPG features
+alone also clears the null ($\Delta$ \m{bpSbpSubjRidgeDiff}, \m{bpSbpSubjRidgeDiffCI}).
+The architecture that cannot beat the null for glucose therefore detects
+blood-pressure information in shorter PPG segments under the same protocol
+and statistics: the glucose result is a property of the target.  Diastolic
+pressure is weaker: only the 1-D CNN clears the null, and narrowly
+($\Delta$ \m{bpDbpSubjOneDDiff}, \m{bpDbpSubjOneDDiffCI}).
+
+The ladder shows that leakage inflation depends on model capacity.  A random
+split over segments places a subject's other segments, and hence its label,
+in training.  Linear ridge cannot memorise subjects and barely changes
+(\m{bpSbpSegRidgeDemoMAE} vs.\ \m{bpSbpSubjRidgeDemoMAE}~mmHg), whereas
+gradient boosting does: its systolic MAE falls from \m{bpSbpSubjGbmDemoMAE}
+to \m{bpSbpSegGbmDemoMAE}~mmHg and its correlation rises from
+\m{bpSbpSubjGbmDemoR} to \m{bpSbpSegGbmDemoR} (diastolic:
+\m{bpDbpSubjGbmDemoMAE} to \m{bpDbpSegGbmDemoMAE}~mmHg).  A leak therefore
+cannot be characterised by the protocol alone; the audit has to measure it
+for the model being reported.
+
+\begin{table}[t]
+  \caption{PPG$\to$blood pressure (\m{bpNSubjects} subjects): MAE (mmHg) under
+           the leaky random-segment and the honest subject-wise split;
+           $\Delta$ vs.\ the train-mean null with 95\% subject-cluster CI
+           (honest split; CNN: 3 seeds, most conservative interval).}
+  \label{tab:bp}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{@{}llccc@{}}
+    \toprule
+    & \textbf{Model} & \textbf{Leaky} & \textbf{Honest} & \textbf{$\Delta$ honest [95\% CI]} \\
+    \midrule
+    \multirow{5}{*}{SBP}
+      & Null & \m{bpSbpSegMeanMAE} & \m{bpSbpSubjMeanMAE} & -- \\
+      & Ridge, PPG & \m{bpSbpSegRidgeMAE} & \m{bpSbpSubjRidgeMAE} & \m{bpSbpSubjRidgeDiff} \m{bpSbpSubjRidgeDiffCI} \\
+      & Ridge, PPG+demo. & \m{bpSbpSegRidgeDemoMAE} & \m{bpSbpSubjRidgeDemoMAE} & \m{bpSbpSubjRidgeDemoDiff} \m{bpSbpSubjRidgeDemoDiffCI} \\
+      & GBM, PPG+demo. & \m{bpSbpSegGbmDemoMAE} & \m{bpSbpSubjGbmDemoMAE} & \m{bpSbpSubjGbmDemoDiff} \m{bpSbpSubjGbmDemoDiffCI} \\
+      & 1-D CNN & \m{bpSbpSegOneDMAE} & \m{bpSbpSubjOneDMAE} & \m{bpSbpSubjOneDDiff} \m{bpSbpSubjOneDDiffCI} \\
+    \midrule
+    \multirow{5}{*}{DBP}
+      & Null & \m{bpDbpSegMeanMAE} & \m{bpDbpSubjMeanMAE} & -- \\
+      & Ridge, PPG & \m{bpDbpSegRidgeMAE} & \m{bpDbpSubjRidgeMAE} & \m{bpDbpSubjRidgeDiff} \m{bpDbpSubjRidgeDiffCI} \\
+      & Ridge, PPG+demo. & \m{bpDbpSegRidgeDemoMAE} & \m{bpDbpSubjRidgeDemoMAE} & \m{bpDbpSubjRidgeDemoDiff} \m{bpDbpSubjRidgeDemoDiffCI} \\
+      & GBM, PPG+demo. & \m{bpDbpSegGbmDemoMAE} & \m{bpDbpSubjGbmDemoMAE} & \m{bpDbpSubjGbmDemoDiff} \m{bpDbpSubjGbmDemoDiffCI} \\
+      & 1-D CNN & \m{bpDbpSegOneDMAE} & \m{bpDbpSubjOneDMAE} & \m{bpDbpSubjOneDDiff} \m{bpDbpSubjOneDDiffCI} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.92\textwidth]{fig_bp_ladder.pdf}
+  \caption{PPG$\to$blood pressure: MAE of the same models under the leaky
+           random-segment split and the honest subject-wise split.  Linear
+           models are barely affected by the leak; flexible models are.}
+  \label{fig:bp}
+\end{figure*}
+
+% =============================================================================
+\section{Discussion}
+\textbf{What the audit adds.}  Subject-wise splitting, the standard remedy,
+did not detect the largest problem we found: a label-construction leak in a
+public table, which the detector finds in seconds from the label column
+alone.  The ladder separates mechanisms that are usually conflated: on the
+glucose recordings window overlap, not identity, inflated the result; on
+PPG-BP identity leakage mattered only for flexible models.  The
+null-anchored rule held its false-claim rate under honest protocols in
+simulation and correctly declared the blood-pressure signal while rejecting
+the glucose claims.  Ramesh \emph{et~al.}~\cite{ramesh2026} released a
+re-implementation pipeline with participant-aware splits; the audit differs
+in asserting each protocol's guarantee in code, detecting construction leaks,
+measuring inflation per mechanism, and validating its own decision rule.
+
+\textbf{What the applications show.}  On public PPG data, a 5--60-s segment
+carries usable information about systolic blood pressure but, under every
+architecture tested including frozen foundation models, at most a weak and
+protocol-dependent cross-subject correlation with glucose and no measurable
+within-subject tracking; no model detected a hypo- or hyperglycaemic
+reading.  These are statements about the public cohorts, which are small and
+largely non-diabetic.
+
+\textbf{Recommendations.}  Run a construction-leak check on every derived
+table; name the protocol and the leak it removes, and freeze folds; measure
+the ladder for the reported model; report a null and the reference noise
+floor next to every result, with subject-cluster intervals and a
+pre-specified primary comparison; and include positive controls.
+
+\textbf{Limitations.}  The detector targets the cycling form of label
+construction; other construction errors (e.g.\ shifted joins) need their own
+tests.  The validation cohorts are synthetic and moderate in size.  Networks
+shared one configuration; encoder probes were linear and used one common
+preprocessing.  The glucose cohorts contain few diabetic subjects and few
+hypoglycaemic references.
+
+% =============================================================================
+\section{Conclusion}
+We presented and validated an audit for leakage in wearable physiological
+regression.  On known ground truth its detector found label-construction
+leaks without false alarms and its decision rule held its false-claim rate
+under honest protocols.  Applied to public PPG data it uncovered a
+label-construction leak in a glucose derivative, recovered genuine
+blood-pressure information, and bounded the glucose information to a
+fraction of the reference's own noise.  The implementation, frozen folds and
+all predictions are released so that any new claim can be audited the same
+way.
+
+% =============================================================================
+\input{refs_tbme}
+
+\end{document}

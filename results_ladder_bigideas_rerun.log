@@ -1,0 +1,23 @@
+03:02:03 BIG IDEAs sub_001: 2056/2561 CGM readings have gap-free BVP
+03:02:04 BIG IDEAs sub_002: 1877/2119 CGM readings have gap-free BVP
+03:02:04 BIG IDEAs sub_003: 1392/2302 CGM readings have gap-free BVP
+03:02:04 BIG IDEAs sub_004: 1355/2164 CGM readings have gap-free BVP
+03:02:05 BIG IDEAs sub_005: 2385/2558 CGM readings have gap-free BVP
+03:02:06 BIG IDEAs sub_006: 1639/2847 CGM readings have gap-free BVP
+03:02:07 BIG IDEAs sub_007: 2062/2207 CGM readings have gap-free BVP
+03:02:08 BIG IDEAs sub_008: 2142/2505 CGM readings have gap-free BVP
+03:02:09 BIG IDEAs sub_009: 2090/2306 CGM readings have gap-free BVP
+03:02:09 BIG IDEAs sub_010: 2025/2148 CGM readings have gap-free BVP
+03:02:10 BIG IDEAs sub_011: 2160/2843 CGM readings have gap-free BVP
+03:02:10 BIG IDEAs sub_012: 1935/2169 CGM readings have gap-free BVP
+03:02:11 BIG IDEAs sub_013: 1876/1979 CGM readings have gap-free BVP
+03:02:11 BIG IDEAs sub_014: 1554/2240 CGM readings have gap-free BVP
+03:02:11 BIG IDEAs sub_015: 495/1673 CGM readings have gap-free BVP
+03:02:12 BIG IDEAs sub_016: 1824/2277 CGM readings have gap-free BVP
+03:02:13 BIG IDEAs: 57727 windows, 28867 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+03:13:01 LADDER bigideas chrono0  mean     seed 0  MAE 15.24  r 0.431  zoneA 78.7  (0 s)
+03:13:02 LADDER bigideas chrono0  subjmean seed 0  MAE 15.24  r 0.431  zoneA 78.7  (0 s)
+03:21:32 LADDER bigideas chrono0  1d       seed 0  MAE 16.94  r 0.218  zoneA 75.2  (510 s)
+03:21:33 LADDER bigideas chrono   mean     seed 0  MAE 15.28  r 0.429  zoneA 78.8  (0 s)
+03:21:33 LADDER bigideas chrono   subjmean seed 0  MAE 15.28  r 0.429  zoneA 78.8  (0 s)
+03:29:39 LADDER bigideas chrono   1d       seed 0  MAE 16.94  r 0.212  zoneA 75.0  (486 s)

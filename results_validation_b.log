@@ -1,0 +1,26 @@
+16:33:15 B gain 0.0 subject_kfold  ridge claims 0.010  mean diff +1.71
+16:33:15 B gain 0.0 subject_kfold  gbm   claims 0.010  mean diff +3.11
+16:33:15 B gain 0.0 window_random  ridge claims 0.190  mean diff -1.86
+16:33:15 B gain 0.0 window_random  gbm   claims 1.000  mean diff -9.32
+16:33:15 gain 0.0 done in 227 s
+16:36:38 B gain 1.0 subject_kfold  ridge claims 0.055  mean diff +0.12
+16:36:38 B gain 1.0 subject_kfold  gbm   claims 0.020  mean diff +1.66
+16:36:38 B gain 1.0 window_random  ridge claims 0.530  mean diff -3.89
+16:36:38 B gain 1.0 window_random  gbm   claims 1.000  mean diff -11.58
+16:36:38 gain 1.0 done in 203 s
+16:40:05 B gain 2.0 subject_kfold  ridge claims 0.315  mean diff -4.44
+16:40:05 B gain 2.0 subject_kfold  gbm   claims 0.205  mean diff -2.87
+16:40:05 B gain 2.0 window_random  ridge claims 0.955  mean diff -8.56
+16:40:05 B gain 2.0 window_random  gbm   claims 1.000  mean diff -16.48
+16:40:05 gain 2.0 done in 207 s
+16:43:30 B gain 3.0 subject_kfold  ridge claims 0.800  mean diff -11.31
+16:43:30 B gain 3.0 subject_kfold  gbm   claims 0.690  mean diff -10.34
+16:43:30 B gain 3.0 window_random  ridge claims 1.000  mean diff -15.26
+16:43:30 B gain 3.0 window_random  gbm   claims 1.000  mean diff -23.31
+16:43:30 gain 3.0 done in 205 s
+16:47:01 B gain 4.0 subject_kfold  ridge claims 0.965  mean diff -18.72
+16:47:01 B gain 4.0 subject_kfold  gbm   claims 0.930  mean diff -17.34
+16:47:01 B gain 4.0 window_random  ridge claims 1.000  mean diff -22.28
+16:47:01 B gain 4.0 window_random  gbm   claims 1.000  mean diff -30.10
+16:47:01 gain 4.0 done in 211 s
+16:47:01 part B done in 1053 s

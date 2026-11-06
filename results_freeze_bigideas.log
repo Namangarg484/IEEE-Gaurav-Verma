@@ -1,0 +1,5 @@
+bigideas  chronological        seed 0  level=time     folds=  1  fingerprint=75870ff1a2273c84  -> results/folds/bigideas__chronological__seed0.json
+bigideas  chronological_nogap  seed 0  level=time     folds=  1  fingerprint=1e63ca4711dd8bca  -> results/folds/bigideas__chronological_nogap__seed0.json
+bigideas  personal             seed 0  level=time     folds= 16  fingerprint=87ddf5dd4ac05c00  -> results/folds/bigideas__personal__seed0.json
+bigideas  record_kfold         seed 0  level=record   folds=  5  fingerprint=adc79ac01cc2d79b  -> results/folds/bigideas__record_kfold__seed0.json
+bigideas  subject_loso         seed 0  level=subject  folds= 16  fingerprint=d6e2e4acd022eec2  -> results/folds/bigideas__subject_loso__seed0.json

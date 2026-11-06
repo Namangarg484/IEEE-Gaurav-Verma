@@ -1,0 +1,4 @@
+01:21:58 Kaggle derivative: 3356 windows, 3356 records, 22 subjects, glucose 95-149 (mean 115.4 +/- 11.9) mg/dL
+01:22:38 LADDER derivative subject  mean     seed 0  MAE 10.22  r -0.915  zoneA 96.8  (0 s)
+01:22:38 LADDER derivative subject  subjmean seed 0  MAE 10.22  r -0.915  zoneA 96.8  (0 s)
+01:52:04 LADDER derivative subject  1d       seed 0  MAE 10.24  r -0.519  zoneA 96.0  (1765 s)

@@ -1,0 +1,140 @@
+02:15:53 BIG IDEAs sub_001: 2056/2561 CGM readings have gap-free BVP
+02:15:53 BIG IDEAs sub_002: 1877/2119 CGM readings have gap-free BVP
+02:15:54 BIG IDEAs sub_003: 1392/2302 CGM readings have gap-free BVP
+02:15:54 BIG IDEAs sub_004: 1355/2164 CGM readings have gap-free BVP
+02:15:55 BIG IDEAs sub_005: 2385/2558 CGM readings have gap-free BVP
+02:15:55 BIG IDEAs sub_006: 1639/2847 CGM readings have gap-free BVP
+02:15:56 BIG IDEAs sub_007: 2062/2207 CGM readings have gap-free BVP
+02:15:57 BIG IDEAs sub_008: 2142/2505 CGM readings have gap-free BVP
+02:15:57 BIG IDEAs sub_009: 2090/2306 CGM readings have gap-free BVP
+02:15:58 BIG IDEAs sub_010: 2025/2148 CGM readings have gap-free BVP
+02:15:58 BIG IDEAs sub_011: 2160/2843 CGM readings have gap-free BVP
+02:15:59 BIG IDEAs sub_012: 1935/2169 CGM readings have gap-free BVP
+02:16:00 BIG IDEAs sub_013: 1876/1979 CGM readings have gap-free BVP
+02:16:00 BIG IDEAs sub_014: 1554/2240 CGM readings have gap-free BVP
+02:16:01 BIG IDEAs sub_015: 495/1673 CGM readings have gap-free BVP
+02:16:01 BIG IDEAs sub_016: 1824/2277 CGM readings have gap-free BVP
+02:16:02 BIG IDEAs: 28867 windows, 28867 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+02:16:04 PREPROC default  mean   seed 0  MAE 15.28  r 0.429  within-r None  (0 s)
+02:16:05 PREPROC default  ridge  seed 0  MAE 15.10  r 0.437  within-r 0.04140463860188009  (0 s)
+02:20:03 PREPROC default  1d     seed 0  MAE 15.07  r 0.435  within-r 0.0234881757614123  (238 s)
+02:20:03 BIG IDEAs sub_001: 2055/2561 CGM readings have gap-free BVP
+02:20:04 BIG IDEAs sub_002: 1877/2119 CGM readings have gap-free BVP
+02:20:04 BIG IDEAs sub_003: 1391/2302 CGM readings have gap-free BVP
+02:20:05 BIG IDEAs sub_004: 1355/2164 CGM readings have gap-free BVP
+02:20:05 BIG IDEAs sub_005: 2384/2558 CGM readings have gap-free BVP
+02:20:06 BIG IDEAs sub_006: 1638/2847 CGM readings have gap-free BVP
+02:20:06 BIG IDEAs sub_007: 2062/2207 CGM readings have gap-free BVP
+02:20:07 BIG IDEAs sub_008: 2142/2505 CGM readings have gap-free BVP
+02:20:07 BIG IDEAs sub_009: 2089/2306 CGM readings have gap-free BVP
+02:20:08 BIG IDEAs sub_010: 2025/2148 CGM readings have gap-free BVP
+02:20:08 BIG IDEAs sub_011: 2160/2843 CGM readings have gap-free BVP
+02:20:09 BIG IDEAs sub_012: 1935/2169 CGM readings have gap-free BVP
+02:20:09 BIG IDEAs sub_013: 1875/1979 CGM readings have gap-free BVP
+02:20:10 BIG IDEAs sub_014: 1553/2240 CGM readings have gap-free BVP
+02:20:10 BIG IDEAs sub_015: 495/1673 CGM readings have gap-free BVP
+02:20:11 BIG IDEAs sub_016: 1824/2277 CGM readings have gap-free BVP
+02:20:12 BIG IDEAs: 28860 windows, 28860 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+02:20:16 PREPROC w10      mean   seed 0  MAE 15.29  r 0.429  within-r None  (0 s)
+02:20:16 PREPROC w10      ridge  seed 0  MAE 15.10  r 0.437  within-r 0.05442615900342352  (0 s)
+02:24:34 PREPROC w10      1d     seed 0  MAE 15.06  r 0.436  within-r 0.023456901846475527  (258 s)
+02:24:35 BIG IDEAs sub_001: 2054/2561 CGM readings have gap-free BVP
+02:24:35 BIG IDEAs sub_002: 1876/2119 CGM readings have gap-free BVP
+02:24:36 BIG IDEAs sub_003: 1391/2302 CGM readings have gap-free BVP
+02:24:36 BIG IDEAs sub_004: 1353/2164 CGM readings have gap-free BVP
+02:24:37 BIG IDEAs sub_005: 2381/2558 CGM readings have gap-free BVP
+02:24:37 BIG IDEAs sub_006: 1636/2847 CGM readings have gap-free BVP
+02:24:38 BIG IDEAs sub_007: 2061/2207 CGM readings have gap-free BVP
+02:24:38 BIG IDEAs sub_008: 2141/2505 CGM readings have gap-free BVP
+02:24:39 BIG IDEAs sub_009: 2087/2306 CGM readings have gap-free BVP
+02:24:39 BIG IDEAs sub_010: 2023/2148 CGM readings have gap-free BVP
+02:24:40 BIG IDEAs sub_011: 2158/2843 CGM readings have gap-free BVP
+02:24:40 BIG IDEAs sub_012: 1933/2169 CGM readings have gap-free BVP
+02:24:41 BIG IDEAs sub_013: 1871/1979 CGM readings have gap-free BVP
+02:24:41 BIG IDEAs sub_014: 1552/2240 CGM readings have gap-free BVP
+02:24:41 BIG IDEAs sub_015: 494/1673 CGM readings have gap-free BVP
+02:24:42 BIG IDEAs sub_016: 1824/2277 CGM readings have gap-free BVP
+02:24:44 BIG IDEAs: 28835 windows, 28835 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+02:25:06 PREPROC w30      mean   seed 0  MAE 15.29  r 0.429  within-r None  (0 s)
+02:25:06 PREPROC w30      ridge  seed 0  MAE 15.08  r 0.438  within-r 0.05579291192285661  (0 s)
+02:33:06 PREPROC w30      1d     seed 0  MAE 15.00  r 0.439  within-r 0.038089167937646454  (479 s)
+02:33:06 BIG IDEAs sub_001: 2053/2561 CGM readings have gap-free BVP
+02:33:07 BIG IDEAs sub_002: 1873/2119 CGM readings have gap-free BVP
+02:33:07 BIG IDEAs sub_003: 1388/2302 CGM readings have gap-free BVP
+02:33:07 BIG IDEAs sub_004: 1352/2164 CGM readings have gap-free BVP
+02:33:08 BIG IDEAs sub_005: 2378/2558 CGM readings have gap-free BVP
+02:33:08 BIG IDEAs sub_006: 1635/2847 CGM readings have gap-free BVP
+02:33:09 BIG IDEAs sub_007: 2061/2207 CGM readings have gap-free BVP
+02:33:09 BIG IDEAs sub_008: 2139/2505 CGM readings have gap-free BVP
+02:33:09 BIG IDEAs sub_009: 2085/2306 CGM readings have gap-free BVP
+02:33:10 BIG IDEAs sub_010: 2021/2148 CGM readings have gap-free BVP
+02:33:10 BIG IDEAs sub_011: 2156/2843 CGM readings have gap-free BVP
+02:33:11 BIG IDEAs sub_012: 1933/2169 CGM readings have gap-free BVP
+02:33:11 BIG IDEAs sub_013: 1871/1979 CGM readings have gap-free BVP
+02:33:11 BIG IDEAs sub_014: 1552/2240 CGM readings have gap-free BVP
+02:33:12 BIG IDEAs sub_015: 494/1673 CGM readings have gap-free BVP
+02:33:12 BIG IDEAs sub_016: 1823/2277 CGM readings have gap-free BVP
+02:33:17 BIG IDEAs: 28814 windows, 28814 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+02:34:28 PREPROC w60      mean   seed 0  MAE 15.29  r 0.429  within-r None  (0 s)
+02:34:29 PREPROC w60      ridge  seed 0  MAE 15.07  r 0.438  within-r 0.06601755968508916  (0 s)
+02:46:07 PREPROC w60      1d     seed 0  MAE 14.96  r 0.445  within-r 0.08010847804543976  (698 s)
+02:46:15 BIG IDEAs sub_001: 2056/2561 CGM readings have gap-free BVP
+02:46:22 BIG IDEAs sub_002: 1877/2119 CGM readings have gap-free BVP
+02:46:27 BIG IDEAs sub_003: 1392/2302 CGM readings have gap-free BVP
+02:46:32 BIG IDEAs sub_004: 1355/2164 CGM readings have gap-free BVP
+02:46:40 BIG IDEAs sub_005: 2385/2558 CGM readings have gap-free BVP
+02:46:46 BIG IDEAs sub_006: 1639/2847 CGM readings have gap-free BVP
+02:46:53 BIG IDEAs sub_007: 2062/2207 CGM readings have gap-free BVP
+02:47:02 BIG IDEAs sub_008: 2142/2505 CGM readings have gap-free BVP
+02:47:12 BIG IDEAs sub_009: 2090/2306 CGM readings have gap-free BVP
+02:47:21 BIG IDEAs sub_010: 2025/2148 CGM readings have gap-free BVP
+02:47:31 BIG IDEAs sub_011: 2160/2843 CGM readings have gap-free BVP
+02:47:38 BIG IDEAs sub_012: 1935/2169 CGM readings have gap-free BVP
+02:47:46 BIG IDEAs sub_013: 1876/1979 CGM readings have gap-free BVP
+02:47:52 BIG IDEAs sub_014: 1554/2240 CGM readings have gap-free BVP
+02:47:54 BIG IDEAs sub_015: 495/1673 CGM readings have gap-free BVP
+02:48:01 BIG IDEAs sub_016: 1824/2277 CGM readings have gap-free BVP
+02:48:02 BIG IDEAs: 28867 windows, 28867 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+02:48:05 PREPROC band012  mean   seed 0  MAE 15.28  r 0.429  within-r None  (0 s)
+02:48:06 PREPROC band012  ridge  seed 0  MAE 15.11  r 0.436  within-r 0.03284787956001715  (0 s)
+02:52:38 PREPROC band012  1d     seed 0  MAE 15.10  r 0.434  within-r 0.019249224262776327  (273 s)
+02:52:39 BIG IDEAs sub_001: 2056/2561 CGM readings have gap-free BVP
+02:52:39 BIG IDEAs sub_002: 1877/2119 CGM readings have gap-free BVP
+02:52:40 BIG IDEAs sub_003: 1392/2302 CGM readings have gap-free BVP
+02:52:40 BIG IDEAs sub_004: 1355/2164 CGM readings have gap-free BVP
+02:52:41 BIG IDEAs sub_005: 2385/2558 CGM readings have gap-free BVP
+02:52:42 BIG IDEAs sub_006: 1639/2847 CGM readings have gap-free BVP
+02:52:42 BIG IDEAs sub_007: 2062/2207 CGM readings have gap-free BVP
+02:52:43 BIG IDEAs sub_008: 2142/2505 CGM readings have gap-free BVP
+02:52:43 BIG IDEAs sub_009: 2090/2306 CGM readings have gap-free BVP
+02:52:44 BIG IDEAs sub_010: 2025/2148 CGM readings have gap-free BVP
+02:52:44 BIG IDEAs sub_011: 2160/2843 CGM readings have gap-free BVP
+02:52:45 BIG IDEAs sub_012: 1935/2169 CGM readings have gap-free BVP
+02:52:45 BIG IDEAs sub_013: 1876/1979 CGM readings have gap-free BVP
+02:52:46 BIG IDEAs sub_014: 1554/2240 CGM readings have gap-free BVP
+02:52:46 BIG IDEAs sub_015: 495/1673 CGM readings have gap-free BVP
+02:52:47 BIG IDEAs sub_016: 1824/2277 CGM readings have gap-free BVP
+02:52:47 BIG IDEAs: 28867 windows, 28867 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+02:52:50 PREPROC amp      mean   seed 0  MAE 15.28  r 0.429  within-r None  (0 s)
+02:52:50 PREPROC amp      ridge  seed 0  MAE 15.10  r 0.438  within-r 0.06782504255995214  (0 s)
+02:57:56 PREPROC amp      1d     seed 0  MAE 15.09  r 0.433  within-r 0.040928365742834365  (306 s)
+02:58:04 BIG IDEAs sub_001: 2053/2561 CGM readings have gap-free BVP
+02:58:11 BIG IDEAs sub_002: 1873/2119 CGM readings have gap-free BVP
+02:58:16 BIG IDEAs sub_003: 1388/2302 CGM readings have gap-free BVP
+02:58:22 BIG IDEAs sub_004: 1352/2164 CGM readings have gap-free BVP
+02:58:31 BIG IDEAs sub_005: 2378/2558 CGM readings have gap-free BVP
+02:58:37 BIG IDEAs sub_006: 1635/2847 CGM readings have gap-free BVP
+02:58:45 BIG IDEAs sub_007: 2061/2207 CGM readings have gap-free BVP
+02:58:55 BIG IDEAs sub_008: 2139/2505 CGM readings have gap-free BVP
+02:59:06 BIG IDEAs sub_009: 2085/2306 CGM readings have gap-free BVP
+02:59:13 BIG IDEAs sub_010: 2021/2148 CGM readings have gap-free BVP
+02:59:22 BIG IDEAs sub_011: 2156/2843 CGM readings have gap-free BVP
+02:59:29 BIG IDEAs sub_012: 1933/2169 CGM readings have gap-free BVP
+02:59:36 BIG IDEAs sub_013: 1871/1979 CGM readings have gap-free BVP
+02:59:42 BIG IDEAs sub_014: 1552/2240 CGM readings have gap-free BVP
+02:59:44 BIG IDEAs sub_015: 494/1673 CGM readings have gap-free BVP
+02:59:51 BIG IDEAs sub_016: 1823/2277 CGM readings have gap-free BVP
+02:59:58 BIG IDEAs: 28814 windows, 28814 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+03:01:13 PREPROC w60amp   mean   seed 0  MAE 15.29  r 0.429  within-r None  (0 s)
+03:01:13 PREPROC w60amp   ridge  seed 0  MAE 15.05  r 0.442  within-r 0.0998945954742651  (0 s)
+03:12:54 PREPROC w60amp   1d     seed 0  MAE 14.96  r 0.440  within-r 0.05086021075010991  (701 s)

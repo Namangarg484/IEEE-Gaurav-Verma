@@ -1,1012 +1,1312 @@
-\documentclass[conference]{IEEEtran}
+\documentclass[journal]{IEEEtran}
 
-% ── packages ─────────────────────────────────────────────────────────────────
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{url}
 \usepackage{cite}
 \usepackage{xcolor}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{subcaption}
-\usepackage{siunitx}
 \usepackage[hidelinks]{hyperref}
 
 \graphicspath{{./figures/}}
+\input{results_macros}
+% \m{name} prints the generated macro, or a visible red dash if that result
+% has not been computed yet, so the manuscript never carries a typed number.
+\newcommand{\m}[1]{\ifcsname #1\endcsname\csname #1\endcsname\else\textcolor{red}{--}\fi}
 
-% ── document ─────────────────────────────────────────────────────────────────
 \begin{document}
 
-\title{Multimodal 1D--2D--3D Deep Fusion of Photoplethysmography Signals
-       for Glucose Level Estimation}
+\title{A Label-Replication Artefact, a Measured Leakage Ladder and a
+       Null-Anchored Benchmark for PPG-Based Blood Glucose Estimation}
 
-\author{
-  \IEEEauthorblockN{Gaurav Verma$^{1}$}
-  \IEEEauthorblockA{$^{1}$Department of Electronics and Communication Engineering\\
-  \textit{[Institution Name]}\\
-  Email: [author.email@institution.edu]}
-}
+\author{Gaurav~Verma%
+\thanks{G.~Verma is with the Department of Electronics and Communication
+Engineering, [Institution Name] (e-mail: [author.email@institution.edu]).
+Code, frozen folds, integrity tests and all out-of-fold predictions:
+[repository URL].}}
+
+\markboth{Preprint, \today\ --- prepared for IEEE J.\ Biomed.\ Health Inform.}{Verma: Artefact, Leakage Ladder and Null-Anchored Benchmark for PPG Glucose Estimation}
 
 \maketitle
 
-% ─────────────────────────────────────────────────────────────────────────────
 \begin{abstract}
-Non-invasive blood glucose monitoring is a clinically critical open problem.
-Existing wearable approaches rely predominantly on near-infrared spectroscopy or
-single-channel photoplethysmography (PPG) processed with conventional
-one-dimensional (1D) convolutional neural networks, leaving substantial
-complementary information unexploited.  We propose a novel
-\textbf{Multimodal 1D+2D+3D Deep Fusion Network} that simultaneously extracts
-three heterogeneous feature representations from a single PPG waveform:
-(1) raw temporal morphology via a 1D-CNN branch;
-(2) time-frequency structure via a 2D-CNN branch applied to a
-    continuous wavelet transform (CWT) scalogram; and
-(3) nonlinear cardiovascular dynamics via a PointNet branch applied to a
-    Takens delay-embedding phase-space reconstruction.
-The three branch embeddings (each projected to $\mathbb{R}^{256}$) are fused
-through a learnable cross-attention module that dynamically weights branch
-contributions per sample.
-Trained and evaluated on a 22-patient PPG-glucose dataset
-(1,409 training windows / 280 validation windows, patient-level split),
-our model achieves a Mean Absolute Error (MAE) of \textbf{6.89 mg/dL},
-RMSE of \textbf{9.08 mg/dL}, with \textbf{98.9\%} of predictions falling in
-Clarke Error Grid Zone~A, indicating strong agreement under the evaluated
-conditions.
-Comprehensive ablation confirms that cross-attention fusion (MAE~6.89)
-outperforms na\"ive concatenation of the same three branches (MAE~7.74),
-and that the 3D phase-space branch is the strongest single modality (MAE~7.17).
-The strongest single-modal SOTA baseline, CNN-LSTM, achieves a competitive
-MAE of 6.57~mg/dL; however, on SQI-filtered clean windows our model achieves
-MAE~6.21~mg/dL and exhibits five-fold better noise robustness at 10~dB SNR,
-demonstrating that multimodal cross-attention is most beneficial under
-realistic wearable-sensor noise conditions.
-A signal-quality-index filter and t-SNE identity ablation further verify
-data integrity and rule out patient-identity memorisation.
-A preliminary cross-dataset generalisation study on the PhysioNet BIG~IDEAs
-Glycemic Variability dataset (Empatica~E4 BVP, 64~Hz, Subject~001) confirms
-device-agnostic representation learning: zero-shot MAE~=~15.20~mg/dL improves
-to 13.99~mg/dL by fine-tuning only the cross-attention and regression head
-(312,321 of 548,801 parameters, 57\%), leaving the branch encoders fully frozen.
-While the dataset exhibits limited intra-subject glucose variability,
-the results demonstrate strong cross-subject estimation capability across the
-four held-out patients.
-All results are obtained from a single trained checkpoint with
-548,801 parameters and are independently verifiable against the training log
-and saved checkpoint.
+Reported accuracies for blood-glucose estimation from a single
+photoplethysmography (PPG) channel often rival regulated glucose monitors,
+and two concurrent studies have now shown that such numbers largely
+disappear under subject-wise evaluation.  This paper adds what those studies
+do not provide.  First, we characterise a \emph{label-replication artefact},
+for which we found no prior report, in a public Kaggle derivative of the
+Kermani--Esmaeili PPG--glucose recordings: within each subject the glucose
+label cycles row by row through the subject's reference values, so every
+window inherits the subject mean and a per-subject oracle reaches MAE
+\m{derivOracleMAE}~mg/dL.  This is a label-construction leak that subject-wise
+splitting cannot detect; we release a full-file detector for it.  Second, we
+measure a \emph{leakage ladder}: the same 1-D CNN scores MAE
+\m{mendLadderWindowOneD}~mg/dL ($r=\m{mendLadderWindowOneDR}$) under a
+random-window split but \m{mendLadderRecordOneD} and
+\m{mendLadderSubjectOneD} once recordings or subjects are separated, against
+\m{mendMeanMAE} for the train-mean null on the raw recordings
+(\m{mendNRecords} recordings, \m{mendNSubjects} subjects): on this cohort
+window-neighbour leakage, not identity leakage, inflates the result.  Third, we release
+\textsc{ppgbench}, a benchmark harness with machine-checked no-leak split
+protocols, frozen folds, null, classical, published-architecture and frozen
+pretrained-encoder rows (PaPaGei-S, Pulse-PPG, AnyPPG), subject-cluster
+bootstrap confidence intervals,
+positive controls and clinical anchoring (Parkes zones, hypo/hyper event
+sensitivity, reference-noise floors).  On the PhysioNet BIG~IDEAs wearable
+cohort (\m{bigNSubjects} subjects, \m{bigNRecords} held-out CGM readings,
+chronological split with a 1-h guard gap) a population model is significantly
+worse than each subject's own mean (1-D CNN $\Delta$MAE \m{bigOneDDiff}~mg/dL,
+95\%~CI \m{bigOneDDiffCI}); a personalised arm that gives the models the same
+subject information as the null reaches \m{bigOneDResMAE}~mg/dL against
+\m{bigMeanMAE}; frozen probes of three PPG foundation models (PaPaGei-S,
+Pulse-PPG, AnyPPG) do not materially improve on it, the best (Pulse-PPG)
+reaching a paired difference of \m{bigPulseResDiff}~mg/dL (95\%~CI
+\m{bigPulseResDiffCI}), far below the reference-noise floor of
+\m{bigNoiseFloorMAE}~mg/dL; and no PPG model detects any of the \m{bigHypoN} hypo- or
+\m{bigHyperN} hyperglycaemic readings.  Every benchmark number in this paper is generated from the
+released prediction files.
 \end{abstract}
 
 \begin{IEEEkeywords}
-photoplethysmography, blood glucose monitoring, non-invasive sensing, deep
-learning, multimodal fusion, continuous wavelet transform, phase-space
-reconstruction, PointNet, cross-attention, Clarke Error Grid,
-cross-dataset generalisation
+photoplethysmography, blood glucose, non-invasive sensing, data leakage,
+benchmark, subject-wise cross-validation, null model, Clarke and Parkes error
+grids, reproducibility.
 \end{IEEEkeywords}
 
 % =============================================================================
 \section{Introduction}
 \label{sec:intro}
-% =============================================================================
 
-Diabetes mellitus affects over 537 million adults worldwide, with projections
-exceeding 783 million by 2045~\cite{idf2021}.  Accurate glucose monitoring is
-the cornerstone of glycaemic management, yet the invasive fingerprick paradigm
-imposes a significant adherence burden on patients.  Continuous glucose monitors
-(CGMs) partially address this through subcutaneous electrochemical sensing, but
-still require periodic recalibration via fingerprick and carry inherent infection
-risk at the insertion site.
+\IEEEPARstart{A}{n} optical wearable that reports blood glucose would remove
+the fingerprick burden from the roughly 589 million adults living with
+diabetes~\cite{idf2025}.  Photoplethysmography (PPG) is the obvious candidate
+signal: it is already captured continuously by consumer wristbands, and
+glucose affects blood viscosity, vascular compliance and erythrocyte
+deformability, which leave traces in pulse morphology~\cite{allen2007ppg}.
+Published PPG-only deep regressors report mean absolute errors (MAE) of
+3--12~mg/dL~\cite{soliman2024,syamsul2026,chen2024mvcft} and MARD of
+18\%~\cite{ali2025jbhi}, close to the accuracy of regulated continuous
+glucose monitors (CGM); the U.S.\ FDA
+has nonetheless warned consumers that no smartwatch or ring measures glucose
+non-invasively~\cite{fda2024}.
 
-This work does not aim to provide a deployable clinical solution, but rather
-investigates a framework for extracting glucose-correlated representations
-from PPG under constrained label variability.
+Two studies published while this work was under way explain much of that
+gap.  Ramesh \emph{et~al.}~\cite{ramesh2026} re-implemented five published
+PPG-glucose methods on VitalDB (4\,626 participants) and found near-zero or
+negative $R^2$, no better than a mean predictor, once splits were
+participant-aware.  Seyedebrahimi \emph{et~al.}~\cite{seyedebrahimi2026}
+showed on the BIG~IDEAs wrist cohort that adding PPG, electrodermal activity,
+temperature and acceleration does not improve on a cohort-mean or
+time-of-day predictor under subject-grouped cross-validation.  Ramesh
+\emph{et~al.} further report that more than 90\% of the mean predictor's
+outputs fall in Clarke zones A+B, so zone statistics alone do not separate
+a model from its null.  The message that random splits inflate PPG-glucose results is therefore no
+longer new, and this paper does not claim it.
 
-Photoplethysmography (PPG) offers a compelling non-invasive alternative:
-low-cost optical sensors embedded in commercially available wristbands
-(e.g.\ Fitbit, Apple Watch) already capture high-quality PPG waveforms
-continuously.  The physiological rationale connecting PPG to blood glucose is
-multifactorial: glucose modulates blood viscosity, vascular wall compliance, and
-erythrocyte deformability, all of which are encoded in PPG morphological
-features such as augmentation index, pulse transit time, and the
-diastolic-to-systolic amplitude ratio~\cite{allen2007ppg}.
-
-However, extracting glucose from PPG is ill-posed: the glucose-induced changes
-in PPG are subtle and confounded by motion, respiration, and cardiovascular
-state.  Most prior deep learning approaches treat the problem as 1D
-sequence regression~\cite{hina2021noninvasive,dinh2022ppg}, discarding the
-rich temporal structure visible in the frequency domain and in the
-nonlinear dynamics of the cardiovascular attractor.
-
-\textbf{Our contributions are threefold:}
+What this paper adds is the material that makes such a message actionable:
 \begin{enumerate}
-  \item We introduce the first architecture that simultaneously processes PPG
-        as a 1D sequence, a 2D time-frequency image, and a 3D Takens
-        phase-space point cloud --- capturing complementary information from a
-        single sensor channel.
-  \item We design a balanced cross-attention fusion module with a learnable
-        query vector that assigns per-sample, per-branch weights without any
-        hand-crafted fusion rule, discovering at inference time that the 1D
-        temporal branch carries $51.5\pm12.4\%$ of the predictive weight,
-        the 3D dynamics branch $30.3\pm7.5\%$, and the 2D CWT
-        branch $18.2\pm8.4\%$.
-  \item We provide a fully reproducible implementation (complete training log,
-        saved checkpoint, and integrity test suite with 12 automated checks)
-        demonstrating strong estimation performance: MAE~6.89~mg/dL,
-        Zone~A~98.9\% on held-out patients.
-  \item We conduct the first cross-hardware generalisation experiment for
-        this architecture: freezing the three branch encoders and fine-tuning
-        only the cross-attention and head on the PhysioNet BIG~IDEAs
-        Glycemic Variability dataset (Empatica~E4, 64~Hz) yields
-        MAE~13.99~mg/dL from a 15.20~mg/dL zero-shot baseline, confirming
-        that branch representations are device-agnostic.
+  \item \textbf{A label-replication artefact} in a public Kaggle derivative of
+        the Kermani--Esmaeili recordings~\cite{kermani2023data,kaggle_ppg}
+        (Sec.~\ref{sec:artifact}).  Within each subject the label cycles row
+        by row through that subject's reference values; every multi-row window
+        therefore carries the subject mean, and a per-subject oracle scores MAE
+        \m{derivOracleMAE}~mg/dL.  In the taxonomy of Kapoor and
+        Narayanan~\cite{kapoor2023leakage} the nearest type is duplication,
+        but the mechanism is replication of the label column rather than of
+        rows, and it survives a perfectly subject-wise split.  We release a
+        full-file detector.  An earlier, unpublished draft of this work trained
+        on that file; its numbers are not carried forward.
+  \item \textbf{A measured leakage ladder} (Sec.~\ref{sec:ladder}): the same
+        models evaluated under random-window, random-recording,
+        subject-wise and derivative-file protocols on one dataset, and under
+        random-reading, chronological and guarded-chronological protocols on
+        a wearable CGM cohort.  Ramesh \emph{et~al.}~\cite{ramesh2026}
+        already compare random, participant-aware and
+        leave-some-participants-out splits with a mean baseline on VitalDB,
+        and other reports give single before/after
+        pairs~\cite{yoshizawa2023,mehta2024,brookshire2024}; the ladder here
+        adds the rungs those studies lack: overlapping-window versus
+        recording separation on 10-s recordings, a label-construction rung on
+        the derivative file, leave-one-subject-out on the 23-subject cohort
+        itself, and random-reading versus guarded-chronological splits on a
+        CGM cohort.
+  \item \textbf{\textsc{ppgbench}, a null-anchored benchmark harness}
+        (Sec.~\ref{sec:bench}): named split protocols with machine-checked
+        no-leak assertions and frozen fold files; null, classical,
+        published-architecture and frozen pretrained-encoder rows under one
+        protocol; subject-cluster bootstrap intervals with a pre-specified
+        primary comparison and a stated minimum detectable effect; positive
+        and negative controls; and clinical anchoring (Parkes zones,
+        hypo/hyper event sensitivity, reference-noise floors).  Ramesh
+        \emph{et~al.}~\cite{ramesh2026} release a reproducible evaluation
+        pipeline for five re-implemented methods on VitalDB;
+        \textsc{ppgbench} differs in asserting each protocol's no-leak
+        guarantee in code, freezing folds, and adding subject-cluster
+        intervals, controls, within-subject nulls and pretrained-encoder rows.
+  \item \textbf{A fair within-subject test} on BIG~IDEAs
+        (Sec.~\ref{sec:bigideas}): a chronological split with a guard gap
+        against each subject's own mean, time-of-day and persistence nulls,
+        and a personalised arm that gives the models the same subject
+        information as the null, so that the remaining gap is attributable
+        to the PPG channel rather than to the design.
 \end{enumerate}
-
-It should be noted that the publicly available PPG-glucose dataset used in this
-work exhibits limited intra-subject glucose variability: glucose labels are
-nearly constant within each subject, effectively framing the task as
-\emph{cross-subject baseline estimation} rather than dynamic intra-subject
-glucose tracking.
-This work focuses on this well-defined problem and clearly flags dynamic
-within-patient glucose tracking as the primary direction for future work.
 
 % =============================================================================
 \section{Related Work}
 \label{sec:related}
-% =============================================================================
 
-\subsection{Non-Invasive Glucose Sensing via PPG}
-Early work mapped hand-crafted PPG features (pulse rise time, area under the
-curve, systolic peak amplitude) to glucose using linear regression or support
-vector machines~\cite{hina2021noninvasive}.  These methods report MAE in the
-range 15--25~mg/dL and are sensitive to sensor placement and subject variability.
+\subsection{Reported PPG-glucose accuracy on public data}
+Table~\ref{tab:prior} lists results reported on the same 23-subject
+Kermani--Esmaeili recordings used here, with the split each study describes.
+The spread (MAE 3--16~mg/dL) is explained by the split rather than by the
+model: the sub-10~mg/dL results come from protocols that place windows or
+augmented copies of one recording on both sides of the split, and every
+study that evaluates on unseen subjects, including Syamsul and Kim's
+held-out subjects without a null row, lands within about 3~mg/dL of the
+train-mean null (\m{mendMeanMAE}).  On larger data, multi-view fusion
+transformers~\cite{chen2024mvcft} and multi-view attention
+networks~\cite{ali2025jbhi} published in this journal report 88\% of
+predictions in Clarke zone~A and 99\% in zones A+B, respectively, without a
+null-model row; Ramesh \emph{et~al.}~\cite{ramesh2026} show that zone A+B
+fractions above 90\% are reached by the mean predictor, so a zone fraction
+without a null row is uninterpretable.  Studies that do obtain subject-wise accuracy use per-user
+calibration readings~\cite{chu2021,chu2025} or minute-scale multimodal
+features with food logs~\cite{bent2021}.
 
-Convolutional approaches applied directly to raw PPG segments reduced MAE to
-approximately 10--15~mg/dL by learning morphological features
-automatically~\cite{dinh2022ppg}.  Recurrent architectures (LSTM, GRU) have
-been explored for capturing longer temporal dependencies but suffer from vanishing
-gradients on 500-sample windows without extensive augmentation.
-
-Multimodal approaches combining PPG with acceleration or skin impedance have
-shown promise~\cite{almarshad2021} but require additional hardware.  To our
-knowledge, no prior work exploits all three of the 1D temporal, 2D
-time-frequency, and 3D phase-space representations simultaneously from a single
-PPG channel.
-
-\subsection{Time-Frequency Representations in Biosignal Analysis}
-CWT scalograms have been applied to ECG~\cite{li2020ecg} and EEG classification
-with strong results.  The Mexican hat (``mexh'') wavelet is particularly suited
-to PPG due to its sensitivity to pulse onset and peak morphology.  For glucose
-prediction, 2D-CNN approaches on CWT representations remain underexplored.
-pp
-\subsection{Phase-Space Reconstruction and PointNet}
-Takens' embedding theorem~\cite{takens1981} provides a rigorous theoretical
-basis for reconstructing the attractor of a dynamical system from a scalar
-time series using delay coordinates.  Applied to PPG, the delay-embedded
-attractor encodes information about vascular wall compliance that is not
-directly visible in either the time or frequency domain.
-PointNet~\cite{qi2017pointnet}, originally designed for 3D object recognition,
-processes unordered point sets with permutation-invariant MLPs and global
-max-pooling, making it directly applicable to phase-space point clouds.
-
-\subsection{Attention-Based Fusion}
-Transformer-style attention~\cite{vaswani2017attention} has been adapted for
-multimodal medical imaging by learning which modalities are most informative for
-a given input sample.  Our cross-attention module extends this concept to
-heterogeneous signal representations from a single sensor.
-
-% =============================================================================
-\section{Dataset and Preprocessing}
-\label{sec:data}
-% =============================================================================
-
-\subsection{PPG-Glucose Dataset}
-We use the publicly available \emph{PPG Glucose Dataset}~\cite{ppgdataset2023}
-comprising continuous PPG recordings from 22 subjects (7 female, 15 male;
-age 21--55 years) collected under standardised resting conditions using a
-reflective pulse oximeter.  Concurrent venous blood glucose reference
-measurements were obtained at regular intervals via a calibrated glucometer.
-
-The cleaned dataset (file: \texttt{clean-dataset.csv}) contains 844,946 rows
-with columns: \textit{PPG\_Signal} (ADC counts), \textit{Glucose\_level}
-(mg/dL), \textit{Patient\_Id}, along with ancillary vital signs
-(\textit{Heart\_Rate}, \textit{Systolic\_Peak}, \textit{Diastolic\_Peak}).
-
-\subsection{Windowing and Patient-Level Split}
-We segment each patient's recording into non-overlapping windows of
-$W=500$ samples ($\approx$5~s at 100~Hz).  This yields 1,409 training windows
-from patients 1--18 and 280 validation windows from patients 19--22.
-The split is \emph{strictly patient-level}: no window from a validation patient
-is seen during training, preventing the data leakage that has affected several
-published results in this domain.
-
-\textbf{Dataset limitation.}
-We observe that glucose labels remain nearly constant within each subject in
-the validation set (per-patient oracle MAE~=~0.072~mg/dL;
-see Sec.~\ref{sec:discussion}), effectively framing the task as
-\emph{cross-subject baseline estimation} rather than dynamic intra-subject
-glucose tracking.
-This known constraint is explicitly acknowledged in all evaluation claims.
-
-\subsection{Data Quality Audit}
-An automated quality check (executed at dataset load time) revealed that
-approximately 26\% of probed windows contain a constant
-\texttt{PPG\_Signal} value (\textit{std}$\approx$0), likely from sensor
-saturation or disconnection artefacts.  These windows are retained in the
-dataset (the label remains valid) but are flagged with a \texttt{WARNING}
-in the training log.  Their CWT scalograms are uniformly dark and their
-phase-space attractors collapse to a single point, so the 1D temporal branch
-bears the full predictive burden for such windows --- consistent with the
-observed 51.5\% mean attention weight on the 1D branch.
-
-\subsection{PhysioNet BIG~IDEAs Dataset (Cross-Dataset Validation)}
-\label{sec:bigideas}
-
-To assess cross-hardware generalisation we use the BIG~IDEAs Lab Glycemic
-Variability \& Wearable Device Dataset~\cite{bigideas2023}
-(PhysioNet v1.1.3, doi:10.13026/aw6y-fc44), which pairs Empatica~E4
-Blood Volume Pulse (BVP) signals at 64~Hz with Dexcom~G6 CGM readings at
-5-minute intervals across 16 subjects (HbA1c~5.3--6.4\%).
-Subject~001 (Female, HbA1c~5.5\%) provides 9.02~continuous days of data:
-2,561 EGV CGM readings (glucose 46--155~mg/dL,
-mean~$106.1\pm15.8$~mg/dL, 99.1\% time-in-normal-range).
-Unlike the Archive dataset (per-patient constant glucose labels),
-Subject~001 exhibits genuine within-patient glycaemic dynamics
-(std~$=15.8$~mg/dL), directly addressing the primary limitation identified
-in Sec.~\ref{sec:discussion}.
-
-\textbf{Alignment protocol.}
-For each CGM timestamp $t$ we extract the immediately preceding 5-second BVP
-window ($5\times64=320$ samples), resample to 500 samples via
-\texttt{scipy.signal.resample} to match the model's input format,
-and discard windows with fewer than 288 BVP samples.
-This yields 2,055 matched windows from 2,561 CGM readings
-(506 skipped due to recording gaps, 19.8\%),
-covering glucose 58--155~mg/dL (mean~$106.7\pm16.3$~mg/dL).
-
-% =============================================================================
-\section{Methodology}
-\label{sec:method}
-% =============================================================================
-
-\subsection{Signal Modality Generation}
-
-\subsubsection{1D Temporal Signal}
-Each 500-sample window is Z-score normalised:
-\begin{equation}
-  \hat{x}[n] = \frac{x[n] - \mu_x}{\sigma_x + \epsilon}, \quad \epsilon=10^{-8}
-  \label{eq:zscore}
-\end{equation}
-preserving morphological information (pulse width, slope, area) while removing
-DC offset and amplitude scale variability between patients.
-
-\subsubsection{2D CWT Scalogram}
-The Mexican hat CWT is applied across 64 logarithmically spaced scales:
-\begin{equation}
-  \mathcal{W}(a, b) = \frac{1}{\sqrt{a}} \int_{-\infty}^{\infty}
-    \hat{x}(t)\, \psi\!\left(\frac{t-b}{a}\right) dt
-  \label{eq:cwt}
-\end{equation}
-where $\psi$ is the Mexican hat wavelet.
-The resulting coefficient matrix is resized to $64\times64$ pixels via
-bicubic interpolation and normalised to $[0,1]$.
-
-\subsubsection{3D Phase-Space Point Cloud}
-Using Takens' time-delay embedding~\cite{takens1981} with delay $\tau=5$
-samples, each normalised signal $\hat{x}$ is embedded in $\mathbb{R}^3$:
-\begin{equation}
-  \mathbf{p}_i = \bigl[\hat{x}[i],\; \hat{x}[i+\tau],\; \hat{x}[i+2\tau]\bigr]
-                 \in \mathbb{R}^3
-  \label{eq:takens}
-\end{equation}
-yielding a point cloud of $N_{p}=256$ three-dimensional coordinates that
-traces the PPG attractor in phase space.
-
-These three transformations enable complementary representations of the same
-physiological signal, capturing temporal morphology, spectral characteristics,
-and nonlinear dynamics respectively --- each exposing a distinct aspect of
-glucose-correlated cardiovascular variation.
-
-\subsection{Network Architecture}
-
-Fig.~\ref{fig:architecture} illustrates the complete network.  The three
-branches are designed with exactly equal embedding dimension (256) so that
-no branch dominates the fusion by virtue of raw dimension alone.
-
-\subsubsection{Branch 1D: Temporal CNN}
-A three-layer 1D-CNN with strided convolutions and Batch Normalisation:
-\begin{itemize}
-  \item Conv1d(1$\to$32, $k$=7, $s$=2) $\to$ BN $\to$ ReLU
-  \item Conv1d(32$\to$64, $k$=5, $s$=2) $\to$ BN $\to$ ReLU
-  \item Conv1d(64$\to$128, $k$=3, $s$=2) $\to$ BN $\to$ ReLU
-  \item Global AdaptiveAvgPool1d(1) $\to$ Linear(128$\to$256)
-\end{itemize}
-
-\subsubsection{Branch 2D: Spectral CNN}
-A three-layer 2D-CNN on the CWT scalogram:
-\begin{itemize}
-  \item Conv2d(1$\to$32, $k$=3, pad=1) $\to$ BN $\to$ ReLU $\to$ MaxPool2d(2)
-  \item Conv2d(32$\to$64, $k$=3, pad=1) $\to$ BN $\to$ ReLU $\to$ MaxPool2d(2)
-  \item Conv2d(64$\to$128, $k$=3, pad=1) $\to$ BN $\to$ ReLU $\to$ MaxPool2d(2)
-  \item Global AdaptiveAvgPool2d(1) $\to$ Linear(128$\to$256)
-\end{itemize}
-
-\subsubsection{Branch 3D: Phase-Space PointNet}
-A PointNet MLP on the Takens point cloud:
-\begin{itemize}
-  \item Shared MLP: Conv1d(3$\to$64) $\to$ BN $\to$ ReLU
-  \item Shared MLP: Conv1d(64$\to$128) $\to$ BN $\to$ ReLU
-  \item Shared MLP: Conv1d(128$\to$256) $\to$ BN $\to$ ReLU
-  \item Global max-pooling over $N_p$ points $\to$ $\mathbb{R}^{256}$
-\end{itemize}
-
-\subsubsection{Cross-Attention Fusion}
-Let $\mathbf{f}_i \in \mathbb{R}^{256}$ for $i \in \{1,2,3\}$ denote the
-branch embeddings of the 1D temporal, 2D CWT, and 3D phase-space branches
-respectively.  Each embedding is projected to a 128-d key space via a
-\emph{branch-specific} linear map, then scored against a single learnable
-query $\mathbf{q} \in \mathbb{R}^{128}$:
-\begin{align}
-  \mathbf{k}_i &= W_i\, \mathbf{f}_i, \quad
-  W_i \in \mathbb{R}^{128\times256}, \quad i \in \{1,2,3\} \label{eq:attn_key}\\
-  e_i           &= \frac{\mathbf{q}^\top \mathbf{k}_i}{\sqrt{128}} \\
-  \alpha_i       &= \frac{\exp(e_i)}{\sum_{j=1}^{3} \exp(e_j)}\quad\text{(softmax)} \\
-  \mathbf{z}    &= \bigl[\alpha_1\mathbf{f}_1;\;
-                          \alpha_2\mathbf{f}_2;\;
-                          \alpha_3\mathbf{f}_3\bigr] \in \mathbb{R}^{768}
-  \label{eq:attn}
-\end{align}
-Crucially, the attention weights $\alpha_i$ modulate the \emph{original}
-256-d branch features $\mathbf{f}_i$ (not a separate value projection),
-so the full representational capacity of each branch is preserved.  Each
-branch has its own independent key matrix $W_i$; there is no shared key
-projection across branches.
-The concatenated attended representation $\mathbf{z}$ passes through a fully
-connected head: Linear(768$\to$256) $\to$ BN $\to$ ReLU $\to$ Dropout(0.3)
-$\to$ Linear(256$\to$64) $\to$ BN $\to$ ReLU $\to$ Linear(64$\to$1).
-
-\subsection{Training Protocol}
-
-All weights are initialised with Kaiming normal
-initialisation~\cite{he2015init}.  The network is trained end-to-end with:
-\begin{itemize}
-  \item \textbf{Loss:} Mean Squared Error (MSE) on glucose in mg/dL
-  \item \textbf{Optimiser:} Adam, initial learning rate $\eta=5\times10^{-4}$
-  \item \textbf{Scheduler:} ReduceLROnPlateau (factor~0.5, patience~4 epochs)
-        --- the LR was halved at epoch 19 to $2.5\times10^{-4}$ and again at
-        epoch 33 to $1.25\times10^{-4}$
-  \item \textbf{Gradient clipping:} max-norm 1.0 to prevent instability
-  \item \textbf{Early stopping:} patience~15 epochs, min\_delta~0.5~mg/dL²
-  \item \textbf{Batch size:} 16, \texttt{drop\_last=True} (prevents
-        batch-size-1 BatchNorm failure)
-  \item \textbf{Hardware:} Apple M-series GPU (Metal Performance Shaders),
-        training time $\approx4$~min for 42 epochs
-\end{itemize}
-
-% =============================================================================
-\section{Experiments and Results}
-\label{sec:results}
-% =============================================================================
-
-\subsection{Training Convergence}
-Fig.~\ref{fig:loss} shows the training and validation MSE curves over 42
-epochs.  The model converges rapidly: MSE drops from $6050$~mg/dL² at epoch~1
-to $141$~mg/dL² at epoch~6.  The ReduceLROnPlateau scheduler halved the
-learning rate twice (at epochs~19 and~33), enabling a second refinement phase
-that pushed the validation MSE to the global minimum of $82.47$~mg/dL²
-at epoch~27.  Early stopping triggered at epoch~42 (no improvement for
-15 consecutive epochs).
-
-\subsection{Regression Metrics}
-Table~\ref{tab:metrics} summarises the quantitative performance on the
-280-window validation set (patients 19--22, never seen during training).
-
-\begin{table}[htbp]
-  \caption{Validation Set Performance (280 Windows, Patients 19--22)}
-  \label{tab:metrics}
+\begin{table}[t]
+  \caption{Published results on the Kermani--Esmaeili recordings (23 subjects,
+           67 fingerstick references) and the null-anchored result of this
+           paper.  MAE in mg/dL.}
+  \label{tab:prior}
   \centering
-  \begin{tabular}{lc}
+  \scriptsize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{@{}p{2.45cm}p{2.1cm}p{2.3cm}c@{}}
     \toprule
-    \textbf{Metric} & \textbf{Value} \\
+    \textbf{Study} & \textbf{Model} & \textbf{Split} & \textbf{MAE} \\
     \midrule
-    Mean Absolute Error (MAE)     & 6.89 mg/dL  \\
-    Root Mean Square Error (RMSE) & 9.08 mg/dL  \\
-    Mean Squared Error (MSE)      & 82.47 mg/dL² \\
-    Clarke Zone A                 & 98.9\% (277/280) \\
-    Clarke Zone B                 & 1.1\%  (3/280)   \\
-    Clarke Zone C                 & 0.0\%             \\
-    Clarke Zone D                 & 0.0\%             \\
-    Clarke Zone E                 & 0.0\%             \\
-    Best epoch                    & 27                \\
-    Total parameters              & 548,801           \\
+    Soliman 2024~\cite{soliman2024} & CNN--GRU & augment, then shuffle & 2.96 \\
+    Kermani \& Esmaeili 2025~\cite{kermani2025} & SDF-MFCC + SVR & 5-fold, level unstated & 4.0$^\dagger$ \\
+    Syamsul \& Kim 2026~\cite{syamsul2026} & attention CNN--GRU & subject-level (stated) & 11.59 \\
+    Syamsul \& Kim 2026~\cite{syamsul2026} & 1-D CNN baseline & subject-level (stated) & 13.45 \\
+    Zeynali 2025~\cite{zeynali2025} & ResNet-34, VitalDB-trained & external test & 14.8 \\
+    Ramesh 2026~\cite{ramesh2026} & train-mean null, VitalDB & external test & 16.0 \\
+    \midrule
+    This paper & train-mean null & LOSO, recording level & \m{mendMeanMAE} \\
+    This paper & 1-D CNN, 3 seeds & LOSO, recording level & \m{mendOneDMAE} \\
+    \bottomrule
+    \multicolumn{4}{p{0.95\columnwidth}}{$^\dagger$reported together with RMSE 26.0 and MARD 0.195\%, which are mutually inconsistent.}
+  \end{tabular}
+\end{table}
+
+\subsection{Leakage and evaluation in physiological machine learning}
+Record-wise splits of autocorrelated signals are the best-documented leak in
+wearable regression: segment- and record-level splits inflate the Pearson
+correlation of PPG-based mean-BP estimation by 0.56 and 0.40 relative to a
+subject-level split~\cite{yoshizawa2023}, and the error standard deviation
+of a published PPG-to-BP network rises from 8 (overlapping windows) through
+16 (record-wise) to 23~mmHg (subject-wise)~\cite{mehta2024};
+EEG decoding accuracy drops from 99.8\% to 53\%~\cite{brookshire2024}; and
+42\% of wearable blood-pressure studies in a recent meta-analysis use
+record-level splits~\cite{cheung2024}.  Guidance exists on approximating the
+use case in the split~\cite{saeb2017}, on identity confounding and
+subject-level permutation tests~\cite{chaibubneto2019}, on the width of
+error bars at small $n$~\cite{varoquaux2018} and on the distributional bias
+of leave-one-out estimates~\cite{austin2025}, and reporting standards now
+ask for the generalisation level to be
+stated~\cite{collins2024tripod,carlson2025nerve}.  Kapoor and
+Narayanan~\cite{kapoor2023leakage} classify leaks into eight types; the
+artefact reported here is closest to their duplicates type but arises during
+the construction of the label column of a public table, which none of the
+types names explicitly.
+
+\subsection{Multi-view PPG representations and pretrained encoders}
+Wavelet scalograms and Takens delay embeddings expose time--frequency and
+phase-space structure~\cite{takens1981}, and PointNet~\cite{qi2017pointnet}
+encodes the resulting point clouds.  The network evaluated here fuses these
+views with a learnable-query attention~\cite{vaswani2017attention}.
+Self-supervised PPG encoders trained on $10^4$--$10^5$ hours of data
+(PaPaGei~\cite{papagei2025}, Pulse-PPG~\cite{pulseppg2025},
+AnyPPG~\cite{anyppg2026}) now exist; linear probes of all three on
+emergency-department PPG give glucose $R^2$ of 0.03--0.07 (0.08 for the
+PPG-LM encoder itself)~\cite{ppglm2026}.  We probe all three under the
+benchmark's protocols, so that the null is tested against three openly
+available pretrained representations and not only against a small CNN.
+
+% =============================================================================
+\section{Datasets}
+\label{sec:data}
+
+\subsection{Kermani--Esmaeili finger-PPG recordings}
+\label{sec:mendeley}
+The dataset of Kermani and Esmaeili~\cite{kermani2023data,kermani2025}
+(Mendeley Data, v3/v4; the \texttt{.csv} layout of v3 is read here) contains
+\m{mendNRecords} recordings from \m{mendNSubjects} adults (\m{mendNMale}~male,
+\m{mendNFemale}~female, \m{mendAgeMin}--\m{mendAgeMax}~years from the label files).  Each recording is 21\,900 samples of an
+index-finger pulse sensor (550-nm green LED, APDS-9008 photodiode), i.e.\
+10~s at 2175~Hz, with one concurrent capillary reference from an Accu-Chek
+Active meter, plus age, sex, height and weight.  Diabetes status is not
+stated by the dataset authors.  Subjects contributed one to seven
+recordings at different times (\m{mendSubjectsLeTwo} of \m{mendNSubjects}
+contributed at most two), so the
+raw data carry within-subject variation: subject~01 spans 99--136~mg/dL over
+seven recordings (Fig.~\ref{fig:artifact}b).  The reference ranges from
+\m{mendGlucoseMin} to \m{mendGlucoseMax}~mg/dL (mean
+$\m{mendGlucoseMean}\pm\m{mendGlucoseStd}$); \m{mendHyperN} recordings exceed
+180~mg/dL and none is below 70.  The \texttt{Labels} folder holds 68 files
+because \texttt{Total.csv} concatenates the 67 per-recording labels.  The raw
+pulsatile amplitude is 2--6 ADC counts on a $\sim$512-count offset, so
+band-pass filtering precedes every representation.
+
+\subsection{The Kaggle derivative and its label-replication artefact}
+\label{sec:artifact}
+A derivative of these recordings is distributed on Kaggle as ``PPG signal
+with Blood sugar level data''~\cite{kaggle_ppg}: a single
+\texttt{clean-dataset.csv} (844\,946 rows, 46.8~MB) with columns
+\texttt{PPG\_Signal}, \texttt{Patient\_Id}, \texttt{Heart\_Rate},
+\texttt{Systolic\_Peak}, \texttt{Diastolic\_Peak}, \texttt{Pulse\_Area},
+\texttt{Gender}, \texttt{Age}, \texttt{Glucose\_level}, \texttt{Height},
+\texttt{Weight} and \texttt{pl}, without Mendeley provenance.  It was the
+training source of the first version of this work.  Inspecting it row by row
+(Fig.~\ref{fig:artifact}a) shows that within each subject
+\texttt{Glucose\_level} cycles through the subject's $k$ reference values
+with period $k$ while \texttt{PPG\_Signal} advances one sample per row and
+\texttt{pl} counts $1,\dots,k$: the table is a cross-join of each subject's
+signal with its label list.  Any window of $W \gg k$ rows therefore has a
+mean label equal to the subject mean, and the within-subject variation
+visible in the raw recordings is removed.  Two consequences follow.  A
+per-subject oracle that predicts each window with the mean of its own
+subject's labels achieves MAE \m{derivOracleMAE}~mg/dL with
+$r=\m{derivOracleR}$ and \m{derivOracleZoneA}\% zone~A
+(Sec.~\ref{sec:ladder}), which an earlier, unpublished draft of this work
+had reported as a ``dataset property''.  And a model trained on this file
+only ever learns to map PPG morphology to a subject constant, so a correct
+subject-level split evaluates between-subject baseline estimation on a few
+held-out subjects whose means happen to lie close together; that draft's
+MAE of 6.89~mg/dL and 98.9\% zone~A on four held-out subjects are artefacts
+of this file and are not carried forward.  We found no peer-reviewed paper
+that uses this derivative; the published results on this cohort
+(Table~\ref{tab:prior}) use the raw Mendeley files.  The released integrity
+test streams the entire file and asserts the period-$k$ cycling for every
+subject, and asserts the one-label-per-recording property of the raw data.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{fig_label_artifact.pdf}
+  \caption{The label-replication artefact.  (a)~In the Kaggle derivative the
+           glucose label of subject~1 cycles through the subject's seven
+           reference values on consecutive rows while the PPG column holds a
+           single sample value; any multi-row window averages to the subject
+           mean.  (b)~The raw recordings of the same subject carry one
+           reference value each and span 99--136~mg/dL.}
+  \label{fig:artifact}
+\end{figure}
+
+\subsection{PhysioNet BIG~IDEAs wearable cohort}
+\label{sec:bigideas_data}
+The BIG~IDEAs Lab Glycemic Variability and Wearable Device dataset
+(PhysioNet v1.1.3)~\cite{cho2026bigideas,bent2021} pairs an Empatica~E4
+wristband (blood-volume pulse, BVP, 64~Hz) with a Dexcom~G6 CGM (one reading
+per 5~min) in \m{bigNSubjects} adults (\m{bigNFemale}~female, \m{bigNMale}~male;
+HbA1c \m{bigHbAOneCMin}--\m{bigHbAOneCMax}\%, i.e.\ high-normal to
+prediabetic; \texttt{Demographics.csv}) over 8--10 days of free living.  Bent \emph{et~al.}~\cite{bent2021} reported on this cohort
+that personalised gradient-boosted models using minute-scale heart-rate,
+electrodermal, temperature and accelerometer features together with food
+logs predict interstitial glucose better than naive mean and median
+baselines; we test the PPG channel alone.  Each subject's BVP file
+($\approx$1.4~GB) is streamed once and the two minutes of BVP around every
+CGM timestamp are kept.  For modelling we use the last two gap-free 5-s
+windows within the 60~s preceding each reading; windows after the reading
+are never used, and the interstitial lag of the reference (3--4~min for the
+G6~\cite{welsh2022lag}) is not compensated.  The resulting cohort comprises
+\m{bigNRecords} held-out and \m{bigNRecordsAll} total CGM readings with
+glucose \m{bigGlucoseMin}--\m{bigGlucoseMax}~mg/dL (mean
+$\m{bigGlucoseMean}\pm\m{bigGlucoseStd}$); the held-out period contains
+\m{bigHypoN} readings below 70 and \m{bigHyperN} above 180~mg/dL.
+
+\subsection{STUBA ePPG multi-wavelength recordings}
+\label{sec:stuba}
+As a third cohort we use the ePPG dataset~\cite{stuba2026} (Zenodo, CC0):
+six-channel finger PPG (530, 655 and 940~nm at two sites) at 100~Hz in 30-s
+records with a Beurer~GL49 fingerstick reference, \m{stubaNSubjects} subjects
+(\m{stubaNMale}~male, \m{stubaNFemale}~female, \m{stubaAgeMin}--\m{stubaAgeMax}~years;
+\m{stubaNDiabetic} with type-1 diabetes) and \m{stubaNRecords} records with
+glucose \m{stubaGlucoseMin}--\m{stubaGlucoseMax}~mg/dL, including
+\m{stubaHypoNAll} hypo- and \m{stubaHyperNAll} hyperglycaemic references.
+Two diabetic subjects contributed 32 and 53 records; \m{stubaSubjectsLeTwo}
+subjects contributed at most two.  The 940-nm channel (IR1) is used by
+default.  It is evaluated with the same leave-one-subject-out protocol as the
+Kermani--Esmaeili data and provides a replication on a second device, a
+per-wavelength ablation, and the only cohort with hypoglycaemic references.
+
+% =============================================================================
+\section{Benchmark design}
+\label{sec:bench}
+
+\subsection{Common representation}
+Every source is mapped to one representation: band-pass 0.5--8~Hz
+(fourth-order Butterworth, zero phase) at the native rate, polyphase
+resampling to $f_s=64$~Hz, 5-s windows of $W=320$ samples, z-scored per
+window.  Kermani--Esmaeili recordings yield three windows each with 50\%
+overlap (\m{mendNWindows}); BIG~IDEAs readings yield two windows.  Each window
+feeds three views: the waveform ($1\times320$), a Mexican-hat wavelet
+scalogram over 64 scales resized to $64\times64$ and min--max scaled, and a
+Takens embedding $\mathbf{p}_i=[\hat{x}[i],\hat{x}[i+5],\hat{x}[i+10]]$
+with 256 points.  Views are computed once and cached, so a fold only indexes
+tensors.  This representation deliberately discards DC/perfusion amplitude,
+vasomotion and heart-rate variability; Sec.~\ref{sec:preproc} reports how
+the conclusions change when they are retained.
+
+\subsection{Split protocols with machine-checked no-leak guarantees}
+\label{sec:protocols}
+\textsc{ppgbench} names every protocol and asserts its guarantee before any
+model is trained: \texttt{window\_random} (overlapping windows of one
+recording may fall on both sides), \texttt{record\_random} (recordings
+separated, subjects shared), \texttt{subject\_kfold} and
+\texttt{subject\_loso} (subjects separated), \texttt{chronological} (per
+subject, the first 70\% of readings by time train, the rest test, with a
+guard gap of $g$ seconds removed from the training side) and
+\texttt{personal} (chronological, one model per subject).  Folds are frozen
+to JSON files shipped with the code, and a \texttt{leak\_report} counts
+shared windows, recordings, subjects and time overlaps per fold.  The
+primary protocols are \texttt{subject\_loso} for the fingerstick cohorts
+and \texttt{chronological} with $g=3600$~s for BIG~IDEAs; the others are
+rungs of the ladder.
+
+\subsection{Models}
+\textbf{Nulls.}  Train-mean (fingerstick cohorts); each subject's own
+training-period mean, a time-of-day ridge (sin/cos of hour plus subject
+offset) and persistence (the subject's last training-period value)
+(BIG~IDEAs).  \textbf{Classical.}  Ridge and gradient boosting on nine
+hand-crafted PPG features (Welch heart rate, three relative band powers, log
+power, skewness, kurtosis, mean absolute derivative, zero-crossing rate of
+the derivative), with and without demographics.  \textbf{Networks.}  The
+1D--2D--3D cross-attention fusion network of our earlier draft
+(Fig.~\ref{fig:architecture}; \m{fusionNParams} parameters) and its single-view
+branches; re-implemented ResNet-1D and CNN--LSTM regressors as used in the
+PPG-glucose literature~\cite{zeynali2025,syamsul2026}.  \textbf{Frozen
+pretrained encoders.}  PaPaGei-S~\cite{papagei2025} (\m{fmPapageiParams}
+parameters, 125~Hz), Pulse-PPG~\cite{pulseppg2025} (\m{fmPulseParams}, 50~Hz)
+and AnyPPG~\cite{anyppg2026} (\m{fmAnyppgParams}, 125~Hz), each with the
+authors' released weights, frozen.  Every segment is band-passed
+0.5--12~Hz (fourth-order Chebyshev type~II, the band-pass stage of
+PaPaGei's pyPPG preprocessing, without its 50-ms smoothing) at the native
+rate, resampled to the encoder's rate and z-scored.  One pipeline is used
+for all three encoders; it differs from AnyPPG's pretraining filter
+(0.5--8~Hz Butterworth) and from Pulse-PPG's (unfiltered, person-normalised
+4-min windows), and Pulse-PPG therefore receives far shorter inputs than it
+was pretrained on.  PaPaGei-S and AnyPPG receive 10-s segments: the whole
+Kermani--Esmaeili recording, three per 30-s STUBA record, and the two most
+recent gap-free 10-s segments of the 60~s before each BIG~IDEAs reading;
+Pulse-PPG, which pools over time, receives the whole record (10~s
+Kermani--Esmaeili, 30~s STUBA) or, on BIG~IDEAs, those two segments
+concatenated (not necessarily contiguous; 10~s when only one passes).  Segment embeddings (512-d) are averaged per reference measurement
+and a ridge regression (penalty by internal cross-validation, features
+standardised on the training fold) is fitted under the same protocol as
+every other row.  \textbf{Personalised arm.}
+On BIG~IDEAs, networks and ridge are additionally trained on the residual
+$y-\bar{y}_s^{\mathrm{train}}$ and the subject's training mean is added back,
+so that they hold exactly the information the subject-mean null holds.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.9\textwidth]{architecture_diagram.pdf}
+  \caption{The 1D--2D--3D fusion network evaluated as one row of the
+           benchmark.  One PPG window is presented as a waveform, a wavelet
+           scalogram and a Takens phase-space point cloud; three equal-width
+           encoders feed a learnable-query attention that weights the branches
+           before a regression head.}
+  \label{fig:architecture}
+\end{figure*}
+
+\subsection{Training}
+Every network in a fold is trained from scratch for a fixed budget
+(\m{mendEpochs} epochs on the fingerstick cohorts, \m{bigEpochs} on
+BIG~IDEAs) with AdamW (learning rate $10^{-3}$, weight decay $10^{-4}$), a
+one-cycle schedule, batch size 16 (64 on BIG~IDEAs), gradient clipping at
+norm~1 and a smooth-L1 loss on the target standardised with the
+\emph{training} statistics of that fold.  There is no early stopping and no
+selection on the held-out subject.  One shared configuration is used for all
+networks and no model was tuned individually; Sec.~\ref{sec:fairness} argues
+from the paired-interval half-width why this does not change the conclusions.
+
+\subsection{Metrics and statistics}
+\label{sec:stats}
+Window predictions are averaged per reference measurement, and every metric
+is computed on the out-of-fold measurement-level predictions: MAE, RMSE,
+MARD, Pearson~$r$, within-subject~$r$ (median over subjects), and Clarke and
+Parkes/Consensus zones~\cite{clarke1987,parkes2000}.  Because measurements
+within a subject are correlated, uncertainty is estimated with a cluster
+bootstrap that resamples subjects with replacement (5\,000 draws): for each
+model we report the 95\% percentile interval of its MAE and of its
+\emph{paired} MAE difference against the null, computed on the same resampled
+subjects, and a two-sided sign test on the per-subject paired MAE
+differences (reported as the number of subjects for which the model is worse
+than the null).  Per-measurement tests are not used because measurements
+within a subject are not independent.  The primary comparison is
+pre-specified as \emph{1-D CNN versus the null}; all other rows are
+exploratory.  The half-width of the paired interval approximates the
+smallest difference that would exclude zero at the 95\% level (the
+percentile interval is not symmetric; about
+\m{mendMDE}~mg/dL for the fingerstick primary comparison, \m{bigMDE} for the
+BIG~IDEAs population comparison and \m{bigMDERes} for the personalised arm);
+we use it as a design-sensitivity bound, not as a power calculation.
+Networks are run with several seeds; MAE, RMSE and $r$ are reported as mean
+$\pm$ standard deviation over seeds, while the paired difference and its
+interval are computed on the seed-ensemble prediction (the mean of the
+seeds' predictions per measurement), whose MAE is given alongside.
+Under leave-one-subject-out, a predictor that regresses toward its training
+mean acquires a negative pooled correlation with the held-out labels (the null
+has $r=\m{mendMeanR}$ here), a known distributional bias of leave-one-out
+estimates~\cite{austin2025}; we therefore report the null's $r$ rather than
+hide it and add a 5-fold subject-grouped sensitivity row.
+
+\subsection{Controls}
+\label{sec:controls}
+Through the identical windows, views, model and protocol we regress
+quantities that must be recoverable (the window's own heart rate; subject
+age) and quantities that must not be (glucose labels permuted across
+recordings; white-noise input with the true labels).  A benchmark whose
+positive controls fail cannot support a negative result.
+
+\subsection{Clinical anchoring}
+\label{sec:clinical}
+Three quantities are reported next to every null: the \emph{reference-noise
+floor}, i.e.\ the MAE and MARD that a perfect estimator would score against a
+reference carrying the device's own error (ISO~15197:2013 meter limits for
+the fingerstick cohorts; MARD 9\%~\cite{shah2018g6} for the CGM cohort);
+event sensitivity and specificity for hypoglycaemia ($<70$~mg/dL) and
+hyperglycaemia ($>180$~mg/dL); and time-in-range agreement.  The intended
+use case of a spot-check estimator (calibration-free, no history) differs
+from that of a CGM replacement (history available), and the null that
+applies to each differs accordingly: train-mean for the former,
+subject-mean, time-of-day and persistence for the latter.
+
+\subsection{Availability}
+\label{sec:availability}
+The release comprises (i)~the \textsc{ppgbench} package: named split
+protocols whose leak assertion runs before any training, a
+\texttt{leak\_report} per fold, the full-file label-cycling detector,
+metrics, cluster-bootstrap and report code, and a command-line entry point;
+(ii)~frozen fold files (four Kermani--Esmaeili, five BIG~IDEAs and two STUBA
+protocols) with fingerprints, so that a third-party model is scored on
+exactly these folds or is flagged; (iii)~one out-of-fold prediction file per
+model, protocol and seed, from which every number in this paper is
+regenerated; (iv)~the loaders for the three public cohorts (none of which is
+redistributed) and the integrity test suite; and (v)~the TRIPOD+AI checklist
+and model information sheet of the supplement.
+
+% =============================================================================
+\section{Results}
+\label{sec:results}
+
+\subsection{Leakage ladder}
+\label{sec:ladder}
+Fig.~\ref{fig:ladder} and Table~\ref{tab:ladder} evaluate the same 1-D CNN
+under protocols that leak progressively less.  On the Kermani--Esmaeili
+recordings a random split over 5-s windows places overlapping windows of the
+same 10-s recording on both sides of the split and yields MAE
+\m{mendLadderWindowOneD}~mg/dL with $r=\m{mendLadderWindowOneDR}$ and zone~A
+\m{mendLadderWindowOneDZoneA}\%: numbers
+that read as a working sensor.  Separating recordings but sharing subjects
+gives \m{mendLadderRecordOneD}; separating subjects gives
+\m{mendLadderSubjectOneD}.  The fusion network follows the same ladder
+(\m{mendLadderWindowFusion}, \m{mendLadderRecordFusion} and
+\m{mendLadderSubjectFusion}~mg/dL, with $r=\m{mendLadderWindowFusionR}$ under
+the window split),
+so the inflation is a property of the split, not of the architecture.  The leaky subject-mean predictor, which simply
+knows the test subject's mean, scores \m{mendLadderRecordSubjMean} under the
+recording split, \emph{worse} than the train-mean, because \m{mendSubjectsLeTwo} subjects
+contribute at most two recordings; on this dataset window-neighbour leakage,
+not identity leakage, is the inflating mechanism.  The derivative-file rungs
+show the artefact at work: on windows cut from the Kaggle file, any
+predictor that can identify the subject scores near zero, because the labels
+are subject constants: under a random window split the leaky subject-mean
+reaches \m{derivOracleMAE}~mg/dL with $r=\m{derivOracleR}$ and
+\m{derivOracleZoneA}\% zone~A, the ``perfect sensor'' that a model with access to subject identity
+(or a per-subject calibration) would report on this file.  The 1-D CNN
+itself scores \m{mendLadderDerivativeRecordOneD} under that split and
+\m{mendLadderDerivativeSubjectOneD} under a correct subject split, against a
+null of \m{mendLadderDerivativeSubjectMean}: the derivative's waveform column
+carries too little identity for the network to exploit the leak in a fixed
+budget, but the null itself is lower than on the raw recordings because the
+collapsed labels have less variance, and a four-subject validation set whose
+means lie close together is the regime that produced the first draft's
+6.89~mg/dL.  On BIG~IDEAs the ladder is flat: a random split over CGM
+readings gives \m{bigLadderReadingOneD} (scored on all
+\m{bigNRecordsAll} pooled out-of-fold readings), a chronological split
+without a guard gap \m{bigLadderChronoNoGapOneD}, and the guarded split
+\m{bigLadderChronoOneD}, against subject-mean nulls of
+\m{bigLadderReadingMean}, \m{bigLadderChronoNoGapMean} and
+\m{bigLadderChronoMean}.  Reading-level leakage lowers the model's error by
+about 0.9~mg/dL but leaves it above the null, and the guard gap changes the
+chronological result by less than 0.01~mg/dL at this window length: no rung
+lets a PPG model beat the null on this cohort.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.95\textwidth]{fig_leakage_ladder.pdf}
+  \caption{Leakage ladder: MAE of the same models under progressively less
+           leaky protocols.  (a)~Kermani--Esmaeili recordings: random windows,
+           random recordings (subjects shared), subject-wise.  (b)~BIG~IDEAs:
+           random CGM readings, chronological without a guard gap,
+           chronological with a 1-h gap.  ``Subject mean (leaky)'' predicts
+           each test window with the test subject's own training mean; on
+           BIG~IDEAs the null is that same subject mean.  Error bars: std
+           over three seeds (1-D CNN, all Kermani--Esmaeili rungs; fusion,
+           subject-wise rung, which is the experiment of
+           Table~\ref{tab:mendeley}); all other bars are single runs.}
+  \label{fig:ladder}
+\end{figure*}
+
+\begin{table}[t]
+  \caption{Leakage ladder, 1-D CNN and nulls; MAE in mg/dL.  Null: train
+           mean for the Kermani--Esmaeili recordings and the Kaggle
+           derivative; each subject's own training-period mean for
+           BIG~IDEAs, which coincides with the leaky subject mean.  K--E
+           window, recording and LOSO rungs: three seeds (mean\,$\pm$\,std,
+           the LOSO rung being the experiment of Table~\ref{tab:mendeley});
+           all other rungs: one seed.  The BIG~IDEAs random-readings rung is
+           scored on all \m{bigNRecordsAll} pooled out-of-fold readings, the
+           chronological rungs on the \m{bigNRecords} held-out readings.}
+  \label{tab:ladder}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{llccc}
+    \toprule
+    \textbf{Cohort} & \textbf{Protocol} & \textbf{Null} & \textbf{Leaky subj.\ mean} & \textbf{1-D CNN} \\
+    \midrule
+    \multirow{4}{*}{K--E}
+      & random windows      & \m{mendLadderWindowMean}  & \m{mendLadderWindowSubjMean}  & \m{mendLadderWindowOneD} \\
+      & random recordings   & \m{mendLadderRecordMean}  & \m{mendLadderRecordSubjMean}  & \m{mendLadderRecordOneD} \\
+      & subject-wise (LOSO) & \m{mendLadderSubjectMean} & --                            & \m{mendLadderSubjectOneD} \\
+    \midrule
+    \multirow{2}{*}{Kaggle deriv.}
+      & random windows      & \m{mendLadderDerivativeRecordMean}  & \m{derivOracleMAE} & \m{mendLadderDerivativeRecordOneD} \\
+      & subject-wise (LOSO) & \m{mendLadderDerivativeSubjectMean} & --                                     & \m{mendLadderDerivativeSubjectOneD} \\
+    \midrule
+    \multirow{3}{*}{BIG~IDEAs}
+      & random readings     & \m{bigLadderReadingMean}     & \m{bigLadderReadingSubjMean} & \m{bigLadderReadingOneD} \\
+      & chronological, no gap & \m{bigLadderChronoNoGapMean} & --                        & \m{bigLadderChronoNoGapOneD} \\
+      & chronological, 1-h gap & \m{bigLadderChronoMean}    & --                          & \m{bigLadderChronoOneD} \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\subsection{Clarke Error Grid Analysis}
-The Clarke Error Grid (CEG)~\cite{clarke1987} partitions the reference--prediction
-plane into five clinical accuracy zones.  Zone~A predictions lead to correct
-clinical action; Zone~E predictions could lead to erroneous and potentially
-dangerous treatment.
+\subsection{Cross-subject estimation on the Kermani--Esmaeili recordings}
+\label{sec:mendeley_results}
+Table~\ref{tab:mendeley} and Fig.~\ref{fig:mendeley} give the
+leave-one-subject-out results with subject-cluster intervals.  The train-mean
+null scores MAE \m{mendMeanMAE}~mg/dL.  Ridge on PPG features
+(\m{mendRidgeMAE}) or on demographics (\m{mendDemoMAE}) and gradient
+boosting on PPG features (\m{mendGbmMAE}; $\Delta$ \m{mendGbmDiff}, CI
+\m{mendGbmDiffCI}, i.e.\ worse) or on PPG plus demographics
+(\m{mendGbmDemoMAE}) do not improve on it.  The pre-specified primary comparison
+gives a 1-D CNN MAE of \m{mendOneDMAE}~mg/dL over seeds
+(\m{mendOneDEnsMAE} for the seed-ensemble prediction), a paired difference
+of \m{mendOneDDiff}~mg/dL (95\%~CI \m{mendOneDDiffCI}) and $r=\m{mendOneDR}$
+(CI \m{mendOneDRCI}); the upper limit of the interval is
+\m{mendOneDDiffCIHi}~mg/dL, the model is worse than the null for
+\m{mendOneDWorseN} of \m{mendNSubjects} subjects (sign test
+$p=\m{mendOneDSignP}$), and the advantage is nominally significant for
+\m{mendOneDSeedSigN} of \m{mendOneDSeedN} seeds taken individually, so we
+report it as weak evidence.  Its correlation is partly leverage: dropping the \m{mendHighN}
+recordings above 140~mg/dL reduces $r$ to \m{mendOneDRLowOnly}.  Under a
+5-fold subject-grouped split, which reduces the leave-one-out
+distributional bias, the 1-D CNN scores \m{mendKfoldOneDMAE}~mg/dL with
+$r=\m{mendKfoldOneDR}$ against a null of \m{mendKfoldMeanMAE}
+($r=\m{mendKfoldMeanR}$): the null's negative correlation is the
+protocol's, not the model's, and the 1-D CNN's advantage shrinks to
+within noise, so its correlation should be read as 0.2--0.3 depending on
+the protocol rather than as a stable signal.  The 2-D
+scalogram branch (\m{mendTwoDMAE}), the 3-D phase-space branch
+(\m{mendThreeDMAE}), ResNet-1D (\m{mendResNetMAE}) and CNN--LSTM
+(\m{mendCnnLstmMAE}) have paired intervals that include zero (CNN--LSTM
+narrowly: \m{mendCnnLstmDiff}, \m{mendCnnLstmDiffCI}), as does the full fusion
+network (\m{mendFusionMAE} over seeds, \m{mendFusionEnsMAE} as an ensemble;
+$\Delta$ \m{mendFusionDiff}, CI \m{mendFusionDiffCI}).  Under the shared
+configuration the fusion of the three views is therefore not better than
+its 1-D branch; Sec.~\ref{sec:fairness} explains why no per-model tuning
+was attempted.  Ridge probes on frozen embeddings of the three pretrained
+PPG encoders (Table~\ref{tab:mendeley}, bottom) score \m{mendPapageiMAE}
+(PaPaGei-S; $\Delta$ \m{mendPapageiDiff}, CI \m{mendPapageiDiffCI}),
+\m{mendPulseMAE} (Pulse-PPG; \m{mendPulseDiff}, \m{mendPulseDiffCI}) and
+\m{mendAnyppgMAE}~mg/dL (AnyPPG; \m{mendAnyppgDiff}, \m{mendAnyppgDiffCI}):
+encoders pretrained on $10^4$--$10^5$ hours of PPG land on the null, like
+the networks trained from scratch.
 
-Fig.~\ref{fig:clarke} shows our CEG plot.  Of 280 validation predictions,
-277~(98.9\%) fall in Zone~A and 3~(1.1\%) in Zone~B.  Zero predictions fall
-in Zones~C, D, or E.  Of the 280 validation predictions, 277~(98.9\%) fall in Zone~A and 3~(1.1\%)
-in Zone~B --- demonstrating strong agreement with reference measurements under
-the evaluated conditions.
-
-Fig.~\ref{fig:overlay} further visualises the per-patient predicted versus
-reference scatter with residual distribution.  The residual histogram is
-approximately zero-centred (near-zero systematic bias) with 95\% of errors
-lying within $\pm15$~mg/dL.
-
-\subsection{Comprehensive Ablation Study}
-\label{sec:ablation}
-
-Table~\ref{tab:ablation} presents a three-tier evaluation: sanity baselines
-(no PPG signal), modality ablation (which branch combinations help), and
-re-implemented SOTA 1D architectures.
-
-\begin{table}[htbp]
-  \caption{Ablation Study: Val Set (280 Windows, Patients 19--22)}
-  \label{tab:ablation}
+\begin{table*}[t]
+  \caption{Leave-one-subject-out results on the Kermani--Esmaeili recordings
+           (\m{mendNRecords} recordings, \m{mendNSubjects} subjects, recording
+           level).  MAE and RMSE in mg/dL; A and A+B are Clarke fractions in
+           \%.  Networks: MAE, RMSE, $r$ and zones are mean\,$\pm$\,std over
+           \m{mendFusionSeeds} seeds; $\Delta$ and its 95\% subject-cluster
+           bootstrap interval are computed on the seed-ensemble prediction
+           (mean of the seeds' predictions per recording), whose MAE is
+           given in parentheses, against the train-mean null.  The primary
+           comparison is marked $\star$; other rows are exploratory.}
+  \label{tab:mendeley}
   \centering
   \small
-  \setlength{\tabcolsep}{4pt}
-  \begin{tabular}{llcc}
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{llcccccc}
     \toprule
-    \textbf{Group} & \textbf{Method} & \textbf{MAE} & \textbf{ZoneA} \\
+    & \textbf{Model} & \textbf{MAE} & \textbf{RMSE} & \textbf{$r$} & \textbf{A} & \textbf{A+B} & \textbf{$\Delta$ vs.\ null [95\% CI]} \\
     \midrule
-    \multirow{2}{*}{Sanity}
-      & Global Mean            & 10.48 & 100.0\% \\
-      & Vitals Ridge$^\dagger$ & 15.19 & 83.9\% \\
+    \multirow{5}{*}{\rotatebox{90}{\scriptsize baseline}}
+      & Train mean (null)        & \m{mendMeanMAE} & \m{mendMeanRMSE} & \m{mendMeanR} & \m{mendMeanZoneA} & \m{mendMeanZoneAB} & -- \\
+      & Reference-noise floor (ISO 15197) & \m{mendNoiseFloorMAE} & -- & -- & -- & -- & -- \\
+      & Ridge, demographics      & \m{mendDemoMAE} & \m{mendDemoRMSE} & \m{mendDemoR} & \m{mendDemoZoneA} & \m{mendDemoZoneAB} & \m{mendDemoDiff} \m{mendDemoDiffCI} \\
+      & Ridge, PPG features      & \m{mendRidgeMAE} & \m{mendRidgeRMSE} & \m{mendRidgeR} & \m{mendRidgeZoneA} & \m{mendRidgeZoneAB} & \m{mendRidgeDiff} \m{mendRidgeDiffCI} \\
+      & Gradient boosting, PPG + demogr. & \m{mendGbmDemoMAE} & \m{mendGbmDemoRMSE} & \m{mendGbmDemoR} & \m{mendGbmDemoZoneA} & \m{mendGbmDemoZoneAB} & \m{mendGbmDemoDiff} \m{mendGbmDemoDiffCI} \\
     \midrule
-    \multirow{6}{*}{Modality}
-      & 1D-Only                & 7.29  & 99.6\% \\
-      & 2D-Only                & 8.98  & 100.0\% \\
-      & 3D-Only                & 7.17  & 99.3\% \\
-      & 1D+2D (Concat)         & 8.43  & 100.0\% \\
-      & 1D+3D (Concat)         & 7.30  & 99.6\% \\
-      & 1D+2D+3D (Concat)      & 7.74  & 99.6\% \\
+    \multirow{5}{*}{\rotatebox{90}{\scriptsize network}}
+      & 1-D CNN $\star$          & \m{mendOneDMAE} (\m{mendOneDEnsMAE}) & \m{mendOneDRMSE} & \m{mendOneDR} & \m{mendOneDZoneA} & \m{mendOneDZoneAB} & \m{mendOneDDiff} \m{mendOneDDiffCI} \\
+      & 2-D CNN (CWT)            & \m{mendTwoDMAE} (\m{mendTwoDEnsMAE}) & \m{mendTwoDRMSE} & \m{mendTwoDR} & \m{mendTwoDZoneA} & \m{mendTwoDZoneAB} & \m{mendTwoDDiff} \m{mendTwoDDiffCI} \\
+      & PointNet (Takens)        & \m{mendThreeDMAE} (\m{mendThreeDEnsMAE}) & \m{mendThreeDRMSE} & \m{mendThreeDR} & \m{mendThreeDZoneA} & \m{mendThreeDZoneAB} & \m{mendThreeDDiff} \m{mendThreeDDiffCI} \\
+      & ResNet-1D~\cite{zeynali2025} & \m{mendResNetMAE} (\m{mendResNetEnsMAE}) & \m{mendResNetRMSE} & \m{mendResNetR} & \m{mendResNetZoneA} & \m{mendResNetZoneAB} & \m{mendResNetDiff} \m{mendResNetDiffCI} \\
+      & CNN--LSTM~\cite{syamsul2026} & \m{mendCnnLstmMAE} (\m{mendCnnLstmEnsMAE}) & \m{mendCnnLstmRMSE} & \m{mendCnnLstmR} & \m{mendCnnLstmZoneA} & \m{mendCnnLstmZoneAB} & \m{mendCnnLstmDiff} \m{mendCnnLstmDiffCI} \\
     \midrule
-    \multirow{2}{*}{SOTA}
-      & ResNet-1D              & 8.69  & 100.0\% \\
-      & CNN-LSTM               & 6.57  & 100.0\% \\
+      & 1D+2D+3D cross-attention & \m{mendFusionMAE} (\m{mendFusionEnsMAE}) & \m{mendFusionRMSE} & \m{mendFusionR} & \m{mendFusionZoneA} & \m{mendFusionZoneAB} & \m{mendFusionDiff} \m{mendFusionDiffCI} \\
     \midrule
-    \textbf{Ours}
-      & \textbf{1D+2D+3D Cross-Attn} & \textbf{6.89} & \textbf{98.9\%} \\
+    \multirow{3}{*}{\rotatebox{90}{\scriptsize probe}}
+      & PaPaGei-S + ridge~\cite{papagei2025} & \m{mendPapageiMAE} & \m{mendPapageiRMSE} & \m{mendPapageiR} & \m{mendPapageiZoneA} & \m{mendPapageiZoneAB} & \m{mendPapageiDiff} \m{mendPapageiDiffCI} \\
+      & Pulse-PPG + ridge~\cite{pulseppg2025} & \m{mendPulseMAE} & \m{mendPulseRMSE} & \m{mendPulseR} & \m{mendPulseZoneA} & \m{mendPulseZoneAB} & \m{mendPulseDiff} \m{mendPulseDiffCI} \\
+      & AnyPPG + ridge~\cite{anyppg2026} & \m{mendAnyppgMAE} & \m{mendAnyppgRMSE} & \m{mendAnyppgR} & \m{mendAnyppgZoneA} & \m{mendAnyppgZoneAB} & \m{mendAnyppgDiff} \m{mendAnyppgDiffCI} \\
     \bottomrule
-    \multicolumn{4}{l}{\footnotesize $^\dagger$HR, peaks, age, gender; MAE in mg/dL.}
   \end{tabular}
-\end{table}
+\end{table*}
 
-Three findings are noteworthy.
-First, na\"ive concatenation of 1D+2D (MAE~8.43) \emph{underperforms} 1D-only
-(7.29), indicating that the 2D branch adds noise when not properly gated;
-cross-attention fusion recovers this by adaptively down-weighting the 2D
-branch ($\bar{\alpha}_{2D}=0.18$).
-Second, 3D-only (7.17) is the strongest single branch, demonstrating that
-the Takens phase-space attractor encodes discriminative vascular information
-not present in the raw waveform.
-Third, CNN-LSTM achieves a competitive MAE of 6.57~mg/dL, marginally
-lower than our full model (6.89) on this small 280-window set.
-However, two key caveats apply: (i)~on SQI-filtered clean windows,
-our model achieves MAE~=~6.21~mg/dL, outperforming CNN-LSTM; and
-(ii)~our model is 5$\times$ more robust to waveform noise at 10~dB SNR
-(Table~\ref{tab:snr}), reflecting the value of the 2D and 3D branches in
-real-world wearable conditions where sensor quality varies.
-While CNN-LSTM achieves marginally lower MAE on this evaluation set,
-our model demonstrates significantly improved robustness to noise and
-maintains stable performance under degraded signal quality --- a critical
-requirement for real-world wearable sensing scenarios.
-
-\subsection{Cross-Attention Weight Analysis}
-Fig.~\ref{fig:attention} shows the distribution of per-sample attention weights
-$\alpha_{1D}$, $\alpha_{2D}$, $\alpha_{3D}$ across all 280 validation windows.
-Mean weights are:
-\begin{itemize}
-  \item 1D temporal branch: $0.515 \pm 0.124$
-  \item 3D phase-space branch: $0.303 \pm 0.075$
-  \item 2D CWT branch: $0.182 \pm 0.084$
-\end{itemize}
-The temporal branch receives the highest average attention, consistent with
-the physiological basis of PPG glucose sensing (the glucose-induced changes
-manifest most directly in the time-domain waveform shape).  However, the
-3D phase-space branch contributes a non-trivial 30.3\%, demonstrating that
-the cardiovascular attractor geometry provides genuinely complementary
-information.  The CWT branch contributes 18.2\%, reflecting that spectral
-features play a supporting role.
-
-\subsection{SNR Robustness}
-To assess robustness to noise---an important practical requirement for
-wearable deployment---we add additive white Gaussian noise to the 1D input
-signal at SNR levels from 20~dB to 0~dB and compare fusion versus 1D-only
-performance.
-
-\begin{table}[htbp]
-  \caption{RMSE (mg/dL) vs.\ SNR Level: Fusion vs.\ 1D-Only Baseline}
-  \label{tab:snr}
+\begin{figure*}[t]
   \centering
-  \begin{tabular}{rcc}
-    \toprule
-    \textbf{SNR (dB)} & \textbf{Fusion (1D+2D+3D)} & \textbf{1D-only} \\
-    \midrule
-    20  & 9.26  & 46.66 \\
-    15  & 9.53  & 47.16 \\
-    10  & 9.89  & 49.98 \\
-     5  & 13.18 & 57.69 \\
-     0  & 27.98 & 64.56 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+  \includegraphics[width=0.95\textwidth]{fig_mendeley_loso.pdf}
+  \caption{Leave-one-subject-out results on the Kermani--Esmaeili recordings.
+           (a)~Clarke error grid of the fusion network's out-of-fold
+           recording-level predictions: the predictions occupy a narrow band
+           around the training mean.  (b)~Recording-level MAE of every model;
+           grey bars are baselines that do not see the PPG waveform through a
+           network.}
+  \label{fig:mendeley}
+\end{figure*}
 
-As shown in Table~\ref{tab:snr}, the fusion model substantially outperforms
-the 1D-only baseline at all SNR levels tested.  At 10~dB SNR (a realistic
-wrist-worn scenario), the fusion RMSE increases only marginally to
-9.89~mg/dL versus the baseline 49.98~mg/dL --- a 5$\times$ improvement.
-This robustness directly arises from the 2D and 3D branches, which operate on
-transformed representations (the CWT scalogram and the phase-space point cloud)
-that are inherently less sensitive to additive white noise on the raw waveform.
-The multimodal design therefore mitigates noise sensitivity by leveraging
-complementary representations, which is precisely where the architecture's
-advantage over single-modality baselines is most pronounced.
+\subsection{Within-subject tracking on BIG~IDEAs}
+\label{sec:bigideas}
+Table~\ref{tab:bigideas} and Fig.~\ref{fig:bigideas} report the guarded
+chronological split over \m{bigNRecords} held-out readings.  Against a
+population model, each subject's own mean (MAE \m{bigMeanMAE}~mg/dL, MARD
+\m{bigMeanMARD}\%) is \emph{better} than every PPG model: the paired
+difference is \m{bigOneDDiff}~mg/dL (95\%~CI \m{bigOneDDiffCI}) for the 1-D
+CNN and \m{bigFusionDiff} (\m{bigFusionDiffCI}) for the fusion network, and
+the 1-D CNN is worse than the subject mean for \m{bigOneDWorse} of
+\m{bigNSubjects} subjects (two-sided sign test $p=\m{bigOneDSignP}$).  The
+pooled $r$ of \m{bigOneDR} decomposes into a between-subject component (the
+models partly learn subject offsets) and a within-subject median $r$ of
+\m{bigOneDWithinR}: the networks do not track excursions.  The time-of-day
+null scores \m{bigTodMAE} and persistence \m{bigPersistMAE}.
 
-\subsection{Signal Quality Index Filtering}
-\label{sec:sqi}
+The comparison above handicaps the models, which never see subject identity.
+The personalised arm removes that handicap: trained on the residual to the
+subject's training mean, ridge scores \m{bigRidgeResMAE}, the 1-D CNN
+\m{bigOneDResMAE} ($\Delta$ vs.\ subject mean \m{bigOneDResDiff}, CI
+\m{bigOneDResDiffCI}) and the fusion network \m{bigFusionResMAE}
+(\m{bigFusionResDiff}, \m{bigFusionResDiffCI}).  The three seeds of the
+residual 1-D CNN agree to within 0.02~mg/dL, so the result is not seed
+noise; it is simply that the 1-D CNN adds nothing measurable to the
+subject's own mean.
 
-A per-window Signal Quality Index (SQI) is computed as the standard deviation
-of the raw \texttt{PPG\_Signal} values within each 500-sample window.  A
-data-driven threshold (5th percentile of non-zero training-set SQIs,
-$\tau = 0.25$ ADC counts) classifies windows as \emph{pulsatile} (SQI
-$\geq\tau$) or \emph{flatline} (SQI $<\tau$).
+Frozen pretrained encoders behave the same way.  As population models they
+are worse than the subject mean (PaPaGei-S \m{bigPapageiMAE}, Pulse-PPG
+\m{bigPulseMAE}, AnyPPG \m{bigAnyppgMAE}~mg/dL; all intervals above zero).
+With the residual target they reach \m{bigPapageiResMAE}, \m{bigPulseResMAE}
+and \m{bigAnyppgResMAE}~mg/dL.  Among the \m{nExploratory} exploratory
+paired comparisons in this paper (all listed in the supplement), the
+Pulse-PPG residual probe is the only one whose interval lies entirely below
+zero, i.e.\ in the model's favour ($\Delta$ \m{bigPulseResDiff}~mg/dL, 95\%~CI
+\m{bigPulseResDiffCI}); \m{nSigWorse} lie entirely above zero, i.e.\ the model
+is worse than its null.  The effect is about 2\% of the error and an order
+of magnitude below the reference's own noise floor
+(\m{bigNoiseFloorMAE}~mg/dL), the model is worse than the subject mean for
+\m{bigPulseResWorseN} of \m{bigNSubjects} subjects (sign test
+$p=\m{bigPulseResSignP}$), its median within-subject correlation is
+\m{bigPulseResWithinR}, and it would not survive any correction for the
+number of comparisons.  We therefore read it as the largest benefit any
+frozen PPG encoder showed over a personal baseline on this cohort (within
+\m{bigPulseResDiffCI}~mg/dL), not as tracking.  The largest within-subject
+correlation of any model on BIG~IDEAs, AnyPPG's
+residual probe ($r_w=\m{bigAnyppgResWithinR}$), has a cluster-bootstrap
+interval of \m{bigAnyppgResWithinRCI} that includes zero.
+Fig.~\ref{fig:bigideas}a
+shows the typical behaviour: the network output stays within a few mg/dL of
+the subject's mean while the CGM trace moves by 40--80~mg/dL after meals.
 
-Of the 280 validation windows, 232 (82.9\%) pass the SQI filter while
-48 (17.1\%) are classified as flatlines.  Evaluating our model on
-SQI-clean windows only yields
-\textbf{MAE~=~6.21~mg/dL} and \textbf{RMSE~=~8.59~mg/dL},
-a 9.9\% improvement over the unfiltered baseline (6.89/9.08).
-Fig.~\ref{fig:sqi} visualises the SQI distribution, per-patient pass rates,
-and the scatter of SQI versus glucose label.
-
-\subsection{Latent Space Identity Ablation (t-SNE)}
-\label{sec:tsne}
-
-A key concern with any patient-level split is whether the model learns
-\emph{patient identity} rather than glucose-related PPG features.
-To quantify this, we extract the 768-dimensional fused representation
-$\mathbf{z}$ (Eq.~\ref{eq:attn}) for all 280 validation windows and
-visualise it with t-SNE (perplexity 30, 1000 iterations;
-Fig.~\ref{fig:tsne}).
-
-The patient-identity silhouette score on the t-SNE embedding is
-\textbf{$-$0.067} (range $[-1, 1]$; positive values indicate clustering).
-A score near zero confirms that the latent space does \emph{not} organise
-primarily by patient identity.  Colour-coding by glucose label reveals a
-diffuse glucose gradient, consistent with the model capturing cross-patient
-glucose-correlated morphological variation rather than memorising individual
-patient representations.
-
-\subsection{Cardiovascular Attractor Analysis}
-\label{sec:attractor}
-
-For each validation window we compute (i) the Grassberger--Procaccia
-correlation dimension $D_2$ and (ii) the Rosenstein largest Lyapunov
-exponent (LLE) of the 3D Takens attractor.  Pearson correlations with
-glucose are $r_{D_2}=-0.072$ and $r_{\mathrm{LLE}}=+0.085$
-(Fig.~\ref{fig:attractor}).
-The near-zero correlations are expected: with four validation patients whose
-glucose labels are essentially constant within each patient (see
-Sec.~\ref{sec:discussion}), any smooth function of glucose would appear
-near-zero correlated with attractor geometry.
-Despite this, the 3D branch remains the strongest single-modality
-contributor (MAE~7.17, Table~\ref{tab:ablation}), demonstrating that
-attractor-derived features encode cross-patient discriminative information
-even in the absence of within-patient glucose dynamics.
-
-\subsection{Cross-Dataset Generalisation}
-\label{sec:crossdataset}
-
-To test whether the pretrained branch encoders transfer to different
-PPG hardware, we conduct a linear probe experiment on the PhysioNet
-BIG~IDEAs dataset (Sec.~\ref{sec:bigideas}).  The three branch encoders
-(236,480 frozen parameters) are held fixed; only the CrossAttentionFusion
-layer and FC regression head (312,321 parameters, 57\% of total) are
-fine-tuned.  On-the-fly CWT and Takens preprocessing is identical to the
-original training pipeline to exclude any preprocessing domain gap.
-Fine-tuning uses Adam ($\eta=10^{-3}$, 15~epochs, batch size~32,
-gradient clipping max-norm~1.0), with an 80/20 window-level split
-(1,644 train / 411 test).
-
-\begin{table}[htbp]
-  \caption{Cross-Dataset Generalisation Results
-           (PhysioNet BIG~IDEAs Subject~001, 411~Test Windows)}
-  \label{tab:crossdataset}
+\begin{table*}[t]
+  \caption{Within-subject chronological split with 1-h guard gap on BIG~IDEAs
+           (\m{bigNRecords} held-out CGM readings, \m{bigNSubjects} subjects).
+           MAE and RMSE in mg/dL, MARD in \%; $r_w$: median within-subject
+           correlation.  $\Delta$: paired MAE difference against the
+           subject-mean null with its 95\% subject-cluster bootstrap interval,
+           computed on the readings both rows predict.  The encoder probes
+           exclude 7 of \m{bigNRecordsAll} readings that have no 10-s
+           segment passing the quality check, which moves the chronological
+           cut so that 4 of the \m{bigNRecords} held-out readings differ
+           (probe rows are scored on \m{bigPapageiN} readings).  1-D CNN,
+           residual: mean\,$\pm$\,std over \m{bigOneDResSeeds} seeds; all
+           other rows one run.}
+  \label{tab:bigideas}
   \centering
-  \begin{tabular}{lcc}
+  \small
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{llcccccc}
     \toprule
-    \textbf{Setting} & \textbf{MAE} & \textbf{RMSE} \\
+    & \textbf{Model} & \textbf{MAE} & \textbf{RMSE} & \textbf{MARD} & \textbf{$r$} & \textbf{$r_w$} & \textbf{$\Delta$ [95\% CI]} \\
     \midrule
-    In-distribution (Archive val, $n$=280) & 6.89 & 9.08 \\
-    Zero-shot (PhysioNet, all frozen)      & 15.20 & 18.29 \\
-    Fine-tuned (attn\,+\,head, 15 ep)      & \textbf{13.99} & \textbf{17.94} \\
+    \multirow{4}{*}{\rotatebox{90}{\scriptsize null}}
+      & Subject train mean      & \m{bigMeanMAE} & \m{bigMeanRMSE} & \m{bigMeanMARD} & \m{bigMeanR} & -- & -- \\
+      & Reference-noise floor (MARD 9\%) & \m{bigNoiseFloorMAE} & -- & \m{bigNoiseFloorMARD} & -- & -- & -- \\
+      & Time of day + subject   & \m{bigTodMAE} & \m{bigTodRMSE} & \m{bigTodMARD} & \m{bigTodR} & \m{bigTodWithinR} & \m{bigTodDiff} \m{bigTodDiffCI} \\
+      & Persistence             & \m{bigPersistMAE} & \m{bigPersistRMSE} & \m{bigPersistMARD} & \m{bigPersistR} & -- & \m{bigPersistDiff} \m{bigPersistDiffCI} \\
+    \midrule
+    \multirow{5}{*}{\rotatebox{90}{\scriptsize population}}
+      & Ridge, PPG features     & \m{bigRidgeMAE} & \m{bigRidgeRMSE} & \m{bigRidgeMARD} & \m{bigRidgeR} & \m{bigRidgeWithinR} & \m{bigRidgeDiff} \m{bigRidgeDiffCI} \\
+      & 1-D CNN                 & \m{bigOneDMAE} & \m{bigOneDRMSE} & \m{bigOneDMARD} & \m{bigOneDR} & \m{bigOneDWithinR} & \m{bigOneDDiff} \m{bigOneDDiffCI} \\
+      & 2-D CNN (CWT)           & \m{bigTwoDMAE} & \m{bigTwoDRMSE} & \m{bigTwoDMARD} & \m{bigTwoDR} & \m{bigTwoDWithinR} & \m{bigTwoDDiff} \m{bigTwoDDiffCI} \\
+      & PointNet (Takens)       & \m{bigThreeDMAE} & \m{bigThreeDRMSE} & \m{bigThreeDMARD} & \m{bigThreeDR} & \m{bigThreeDWithinR} & \m{bigThreeDDiff} \m{bigThreeDDiffCI} \\
+      & 1D+2D+3D cross-attention & \m{bigFusionMAE} & \m{bigFusionRMSE} & \m{bigFusionMARD} & \m{bigFusionR} & \m{bigFusionWithinR} & \m{bigFusionDiff} \m{bigFusionDiffCI} \\
+    \midrule
+    \multirow{3}{*}{\rotatebox{90}{\scriptsize personal.}}
+      & Ridge, residual         & \m{bigRidgeResMAE} & \m{bigRidgeResRMSE} & \m{bigRidgeResMARD} & \m{bigRidgeResR} & \m{bigRidgeResWithinR} & \m{bigRidgeResDiff} \m{bigRidgeResDiffCI} \\
+      & 1-D CNN, residual       & \m{bigOneDResMAE} & \m{bigOneDResRMSE} & \m{bigOneDResMARD} & \m{bigOneDResR} & \m{bigOneDResWithinR} & \m{bigOneDResDiff} \m{bigOneDResDiffCI} \\
+      & Fusion, residual        & \m{bigFusionResMAE} & \m{bigFusionResRMSE} & \m{bigFusionResMARD} & \m{bigFusionResR} & \m{bigFusionResWithinR} & \m{bigFusionResDiff} \m{bigFusionResDiffCI} \\
+    \midrule
+    \multirow{6}{*}{\rotatebox{90}{\scriptsize probe}}
+      & PaPaGei-S + ridge       & \m{bigPapageiMAE} & \m{bigPapageiRMSE} & \m{bigPapageiMARD} & \m{bigPapageiR} & \m{bigPapageiWithinR} & \m{bigPapageiDiff} \m{bigPapageiDiffCI} \\
+      & Pulse-PPG + ridge       & \m{bigPulseMAE} & \m{bigPulseRMSE} & \m{bigPulseMARD} & \m{bigPulseR} & \m{bigPulseWithinR} & \m{bigPulseDiff} \m{bigPulseDiffCI} \\
+      & AnyPPG + ridge          & \m{bigAnyppgMAE} & \m{bigAnyppgRMSE} & \m{bigAnyppgMARD} & \m{bigAnyppgR} & \m{bigAnyppgWithinR} & \m{bigAnyppgDiff} \m{bigAnyppgDiffCI} \\
+      & PaPaGei-S, residual     & \m{bigPapageiResMAE} & \m{bigPapageiResRMSE} & \m{bigPapageiResMARD} & \m{bigPapageiResR} & \m{bigPapageiResWithinR} & \m{bigPapageiResDiff} \m{bigPapageiResDiffCI} \\
+      & Pulse-PPG, residual     & \m{bigPulseResMAE} & \m{bigPulseResRMSE} & \m{bigPulseResMARD} & \m{bigPulseResR} & \m{bigPulseResWithinR} & \m{bigPulseResDiff} \m{bigPulseResDiffCI} \\
+      & AnyPPG, residual        & \m{bigAnyppgResMAE} & \m{bigAnyppgResRMSE} & \m{bigAnyppgResMARD} & \m{bigAnyppgResR} & \m{bigAnyppgResWithinR} & \m{bigAnyppgResDiff} \m{bigAnyppgResDiffCI} \\
     \bottomrule
-    \multicolumn{3}{l}{\footnotesize All values in mg/dL.}
+  \end{tabular}
+\end{table*}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.95\textwidth]{fig_bigideas_tracking.pdf}
+  \caption{Within-subject tracking on BIG~IDEAs.  (a)~Dexcom~G6 reference and
+           prediction of the population 1D--2D--3D fusion network over the
+           held-out final 30\% of one subject's
+           recording.  (b)~Per-subject MAE of the model against each
+           subject's own training-period mean.}
+  \label{fig:bigideas}
+\end{figure*}
+
+\subsection{STUBA ePPG replication}
+\label{sec:stuba_results}
+The ePPG cohort is the hardest case for cross-subject estimation: two of
+its \m{stubaNDiabetic} type-1 diabetic subjects contribute all
+\m{stubaHypoNAll} hypoglycaemic and all \m{stubaHyperNAll} hyperglycaemic
+references, which no other subject resembles, so under leave-one-subject-out even the train-mean null scores
+MAE \m{stubaMeanMAE}~mg/dL.  Ridge on PPG features (\m{stubaRidgeMAE};
+$\Delta$ \m{stubaRidgeDiff}, CI \m{stubaRidgeDiffCI}) and gradient boosting
+(\m{stubaGbmMAE}; \m{stubaGbmDiff}, \m{stubaGbmDiffCI}) are significantly
+\emph{worse} than the null, the 1-D CNN scores \m{stubaOneDMAE}
+(\m{stubaOneDDiff}, \m{stubaOneDDiffCI}), the 2-D branch \m{stubaTwoDMAE}
+(\m{stubaTwoDDiff}, \m{stubaTwoDDiffCI}), the 3-D branch \m{stubaThreeDMAE}
+(\m{stubaThreeDDiff}, \m{stubaThreeDDiffCI}), the fusion network
+\m{stubaFusionMAE} (\m{stubaFusionDiff}, \m{stubaFusionDiffCI}), and the
+frozen encoder probes \m{stubaPapageiMAE}
+(PaPaGei-S), \m{stubaPulseMAE} (Pulse-PPG; $\Delta$ \m{stubaPulseDiff}, CI
+\m{stubaPulseDiffCI}) and \m{stubaAnyppgMAE} (AnyPPG).  Only the 3-D
+branch, PaPaGei-S ($\Delta$ \m{stubaPapageiDiff}, CI \m{stubaPapageiDiffCI})
+and AnyPPG ($\Delta$ \m{stubaAnyppgDiff}, CI \m{stubaAnyppgDiffCI}) have
+intervals that include zero; nothing beats the null.  Table~\ref{tab:stuba_wl} repeats the classical rows
+for each wavelength and site and for the six-channel average: no
+wavelength carries cross-subject glucose information that the others lack.
+None of the \m{stubaHypoNAll} hypoglycaemic references is detected by any
+model (Sec.~\ref{sec:clinical_results}).
+
+\begin{table}[t]
+  \caption{STUBA ePPG, leave-one-subject-out, by channel; MAE in mg/dL.
+           Null: train mean.  1-D CNN: mean\,$\pm$\,std over
+           \m{stubaOneDSeeds} seeds; other cells one run.  Paired intervals
+           for the IR1 rows are given in Sec.~\ref{sec:stuba_results} and
+           all comparisons in supplementary Sec.~S4.}
+  \label{tab:stuba_wl}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    \textbf{Channel} & \textbf{Null} & \textbf{Ridge} & \textbf{GBM} & \textbf{1-D CNN} \\
+    \midrule
+    940 nm, site 1 (IR1) & \m{stubaMeanMAE} & \m{stubaRidgeMAE} & \m{stubaGbmMAE} & \m{stubaOneDMAE} \\
+    940 nm, site 2 (IR2) & \m{stubaIrBMeanMAE} & \m{stubaIrBRidgeMAE} & \m{stubaIrBGbmMAE} & -- \\
+    655 nm, site 1 (R1)  & \m{stubaRedAMeanMAE} & \m{stubaRedARidgeMAE} & \m{stubaRedAGbmMAE} & -- \\
+    655 nm, site 2 (R2)  & \m{stubaRedBMeanMAE} & \m{stubaRedBRidgeMAE} & \m{stubaRedBGbmMAE} & -- \\
+    530 nm, site 1 (G1)  & \m{stubaGreenAMeanMAE} & \m{stubaGreenARidgeMAE} & \m{stubaGreenAGbmMAE} & -- \\
+    530 nm, site 2 (G2)  & \m{stubaGreenBMeanMAE} & \m{stubaGreenBRidgeMAE} & \m{stubaGreenBGbmMAE} & -- \\
+    six-channel average  & \m{stubaAvgMeanMAE} & \m{stubaAvgRidgeMAE} & \m{stubaAvgGbmMAE} & -- \\
+    \bottomrule
   \end{tabular}
 \end{table}
 
-Results are shown in Table~\ref{tab:crossdataset} and
-Fig.~\ref{fig:crossdataset}.
-In zero-shot mode, the pretrained model achieves MAE~=~15.20~mg/dL on
-a hardware platform it has never encountered---only $2.2\times$ its
-in-distribution error (6.89~mg/dL), demonstrating that the branch
-encoders have internalised device-agnostic PPG morphological features.
+\subsection{Controls}
+\label{sec:controls_results}
+Table~\ref{tab:controls} shows that the pipeline recovers what it should and
+nothing it should not.  Heart rate, computed from the window's own spectral
+peak, is recovered with $r=\m{ctlHrR}$ and half the null's error
+(\m{ctlHrMAE} vs.\ \m{ctlHrNull}~bpm; the ceiling is set by the noisy
+peak-picked target), and on BIG~IDEAs with $r=\m{ctlBigHrR}$
+(\m{ctlBigHrMAE} vs.\ \m{ctlBigHrNull}~bpm).  Permuted glucose labels
+(MAE \m{ctlPermMAE} vs.\ null \m{ctlPermNull}) and white-noise input
+(\m{ctlNoiseMAE} vs.\ \m{ctlNoiseNull}) return to the null as they must.
+Age is not recovered ($r=\m{ctlAgeR}$), which is informative in its own
+right: a single z-scored 5-s window carries no usable demographic signal
+under leave-one-subject-out, so the weak glucose correlation of the 1-D CNN
+cannot be an age proxy.
 
-Fine-tuning the 312,321 attention and head parameters for 15~epochs
-reduces MAE to 13.99~mg/dL (RMSE~17.94~mg/dL), a $\Delta$MAE of
-$-1.21$~mg/dL ($-8.0\%$ relative).  The residual gap versus in-distribution
-error reflects genuine sensor-domain shift (optical wavelength, contact
-pressure, motion-rejection electronics) and the more demanding regression
-target: Subject~001 has within-patient glucose std~$=16.3$~mg/dL versus
-the near-constant per-patient labels in the Archive validation set.
-While this single-subject evaluation constitutes an architectural
-proof-of-concept for cross-hardware feature transfer, full clinical
-validation requires scaling this linear probe to the complete
-16-subject BIG~IDEAs cohort.
+\begin{table}[t]
+  \caption{Controls through the identical pipeline and protocol (1-D CNN;
+           Kermani--Esmaeili rows mean\,$\pm$\,std over three seeds,
+           BIG~IDEAs row one seed).  MAE in target units; $r$: Pearson.}
+  \label{tab:controls}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{2pt}
+  \begin{tabular}{@{}llcccc@{}}
+    \toprule
+    \textbf{Cohort} & \textbf{Target} & \textbf{Expected} & \textbf{MAE} & \textbf{Null} & \textbf{$r$} \\
+    \midrule
+    K--E & heart rate (bpm)   & recoverable & \m{ctlHrMAE}   & \m{ctlHrNull}   & \m{ctlHrR} \\
+    K--E & age (years)        & weak / none & \m{ctlAgeMAE}  & \m{ctlAgeNull}  & \m{ctlAgeR} \\
+    K--E & glucose            & (task)      & \m{ctlGlucoseMAE} & \m{ctlGlucoseNull} & \m{ctlGlucoseR} \\
+    K--E & glucose, permuted  & null        & \m{ctlPermMAE} & \m{ctlPermNull} & \m{ctlPermR} \\
+    K--E & glucose, noise input & null      & \m{ctlNoiseMAE} & \m{ctlNoiseNull} & \m{ctlNoiseR} \\
+    BIG~IDEAs & heart rate (bpm) & recoverable & \m{ctlBigHrMAE} & \m{ctlBigHrNull} & \m{ctlBigHrR} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Clinical anchoring}
+\label{sec:clinical_results}
+The reference-noise floors are MAE \m{mendNoiseFloorMAE}~mg/dL (ISO~15197
+meter, fingerstick cohort) and \m{bigNoiseFloorMAE}~mg/dL / MARD
+\m{bigNoiseFloorMARD}\% (CGM cohort): the subject-mean null's MARD of
+\m{bigMeanMARD}\% is within four points of the reference's own error, so the
+margin a PPG model would need to demonstrate clinical value is small in
+absolute terms but has to be shown against the subject mean, not against
+zero.  None of the PPG models of Table~\ref{tab:bigideas}, population or
+personalised, detects any of the \m{bigHypoN} hypoglycaemic or
+\m{bigHyperN} hyperglycaemic held-out readings, and all share the null's
+time-in-range agreement of \m{bigTirAgree}.  The only row with non-zero
+event sensitivity is the persistence null, which flags
+\m{bigAnyHyperDetected} hyperglycaemic readings by repeating a subject's
+last training value (specificity \m{bigPersistHyperSpec}); that is a
+property of the subject's history, not of the PPG.  Parkes
+zone~A fractions are \m{bigMeanParkesA}\% for the null and
+\m{bigOneDParkesA}\% for the 1-D CNN.
+
+\subsection{Preprocessing and configuration sensitivity}
+\label{sec:preproc}
+\label{sec:fairness}
+The common representation could hide glucose information that lives in the
+DC level, in slow vasomotion or in heart-rate variability.
+Table~\ref{tab:preproc} repeats the BIG~IDEAs personalised comparison (ridge
+and 1-D CNN on residual targets against the subject-mean null) with one
+window per reading of 5, 10, 30 and 60~s, with a 0.1--12~Hz band, with the
+per-subject amplitude retained instead of per-window z-scoring, and with
+log raw-window amplitude and, for windows of 30~s and longer, SDNN/RMSSD
+proxies from systolic-peak intervals added to the ridge features.  No
+representation moves either model by more than \m{bigMDERes}~mg/dL from the
+null (paired intervals were not computed for these single-seed ablations):
+the best configuration (60-s windows, 0.1--12~Hz, amplitude and HRV)
+reaches \m{preWSixtyAmpOneDMAE}~mg/dL for the 1-D CNN and
+\m{preWSixtyAmpRidgeMAE} for ridge against the null's
+\m{preDefaultMeanMAE}, i.e.\ a third of a mg/dL, and the median
+within-subject correlation does not exceed 0.1 in any configuration
+(largest: \m{preWSixtyAmpRidgeWithinR}, ridge on 60-s windows with
+amplitude and HRV features).  Longer windows help monotonically but by
+tenths of a mg/dL; the band and the amplitude make no difference.  The
+negative result is therefore not an artefact of the 5-s, DC-stripped
+window.  Hyper-parameters were shared across networks (one learning rate,
+budget and batch size) and no nested sweep was run.  The personalised
+comparison's interval half-width (about \m{bigMDERes}~mg/dL) approximates
+the gain a tuned model would need before it could be distinguished from
+the subject mean in this design; the largest gains observed,
+\m{bigPulseResDiff}~mg/dL for the Pulse-PPG probe and the 60-s 1-D CNN of
+Table~\ref{tab:preproc} (no paired interval computed), are of that order,
+so tuning could change a conclusion only for effects of this sub-mg/dL
+size, and the fusion-versus-1-D comparison is reported as an observation
+under the shared configuration rather than as a capacity claim.
+
+\begin{table}[t]
+  \caption{Representation sensitivity on BIG~IDEAs (guarded chronological
+           split, residual targets).  MAE in mg/dL; $r_w$: median
+           within-subject correlation.  One window per reading and one seed
+           per row (Table~\ref{tab:bigideas} uses two windows and three seeds,
+           hence the slightly different default row); longer windows keep
+           only readings with a gap-free window of that length.}
+  \label{tab:preproc}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{2pt}
+  \begin{tabular}{lccccc}
+    \toprule
+    \textbf{Representation} & \textbf{Null} & \textbf{Ridge} & \textbf{$r_w$} & \textbf{1-D CNN} & \textbf{$r_w$} \\
+    \midrule
+    5 s, 0.5--8 Hz, z-score (default) & \m{preDefaultMeanMAE} & \m{preDefaultRidgeMAE} & \m{preDefaultRidgeWithinR} & \m{preDefaultOneDMAE} & \m{preDefaultOneDWithinR} \\
+    10 s                              & \m{preWTenMeanMAE} & \m{preWTenRidgeMAE} & \m{preWTenRidgeWithinR} & \m{preWTenOneDMAE} & \m{preWTenOneDWithinR} \\
+    30 s (+ HRV features)             & \m{preWThirtyMeanMAE} & \m{preWThirtyRidgeMAE} & \m{preWThirtyRidgeWithinR} & \m{preWThirtyOneDMAE} & \m{preWThirtyOneDWithinR} \\
+    60 s (+ HRV features)             & \m{preWSixtyMeanMAE} & \m{preWSixtyRidgeMAE} & \m{preWSixtyRidgeWithinR} & \m{preWSixtyOneDMAE} & \m{preWSixtyOneDWithinR} \\
+    5 s, 0.1--12 Hz                   & \m{preBandWideMeanMAE} & \m{preBandWideRidgeMAE} & \m{preBandWideRidgeWithinR} & \m{preBandWideOneDMAE} & \m{preBandWideOneDWithinR} \\
+    5 s, amplitude retained           & \m{preAmpMeanMAE} & \m{preAmpRidgeMAE} & \m{preAmpRidgeWithinR} & \m{preAmpOneDMAE} & \m{preAmpOneDWithinR} \\
+    60 s, 0.1--12 Hz, amplitude, HRV  & \m{preWSixtyAmpMeanMAE} & \m{preWSixtyAmpRidgeMAE} & \m{preWSixtyAmpRidgeWithinR} & \m{preWSixtyAmpOneDMAE} & \m{preWSixtyAmpOneDWithinR} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 % =============================================================================
 \section{Discussion}
 \label{sec:discussion}
-% =============================================================================
 
-\textbf{Data quality caveat.}  A non-trivial fraction of the dataset
-($\sim$26\% of probed windows) contains constant PPG signals, indicating
-sensor saturation or recording artefacts.  For these windows, the CWT and
-phase-space representations carry no information, and the model effectively
-reduces to a 1D-CNN.  Our SQI filter (Sec.~\ref{sec:sqi}) identifies these
-windows automatically: restricting evaluation to the 82.9\% clean windows
-reduces MAE to 6.21~mg/dL.
+\textbf{What is new relative to the concurrent studies.}  Ramesh
+\emph{et~al.}~\cite{ramesh2026} established that random splits inflate
+PPG-glucose results and that Clarke zone A+B fractions above 90\% are
+reached by a mean predictor, and Seyedebrahimi
+\emph{et~al.}~\cite{seyedebrahimi2026} that wrist signals add nothing to a
+cohort-mean or time-of-day predictor under subject-grouped cross-validation.
+This paper contributes the artefact that defeats even subject-wise
+splitting, a ladder that measures each inflation mechanism on the same data,
+a benchmark harness that, beyond the pipeline of~\cite{ramesh2026}, asserts
+every protocol's guarantee before training, and a
+within-subject test that gives the models the same subject information as
+the null.  With those in place the conclusion is narrower and more useful:
+on \m{mendNSubjects}+\m{bigNSubjects}+\m{stubaNSubjects} subjects and under
+every representation and architecture tested, the information a
+5--60-s PPG segment carries about glucose is at most a weak, protocol-dependent
+cross-subject correlation ($r=\m{mendOneDR}$ under leave-one-subject-out,
+\m{mendKfoldOneDR} under 5-fold) and, with a personal baseline available, an
+improvement over that baseline of at most a few tenths of a mg/dL: the
+1-D CNN residual arm gives $\Delta$ \m{bigOneDResDiff}~mg/dL (95\%~CI
+\m{bigOneDResDiffCI}), and the best personalised model, a ridge probe on
+frozen Pulse-PPG embeddings, \m{bigPulseResDiff}~mg/dL (\m{bigPulseResDiffCI}),
+one of only \m{nSigBetter} of the \m{nPairedComparisons} paired intervals that
+lie entirely below zero (the other is the primary Kermani--Esmaeili
+comparison, \m{mendOneDDiff}~mg/dL, \m{mendOneDDiffCI}), and by a margin far
+below the reference's own noise.
 
-\textbf{Dataset label structure and per-patient oracle.}
-A sanity check reveals that the per-patient mean predictor---which predicts
-each validation window with the mean glucose of all windows from the same
-patient, exploiting validation labels unavailable at deployment---achieves
-MAE~=~0.072~mg/dL.  This near-perfect oracle score indicates that glucose
-labels are essentially \emph{constant within each validation patient}:
-each of the four held-out patients was assigned a single venous measurement
-broadcast across all their windows.  Consequently, the primary source of
-glucose variability in this evaluation is \emph{between patients},
-not within-patient dynamic tracking.
+\textbf{The first draft measured the artefact, not the model.}  With labels
+collapsed to subject means, a four-subject validation set whose means lie
+within 104--127~mg/dL cannot produce a large MAE for any reasonable model,
+and a per-subject oracle MAE of \m{derivOracleMAE}~mg/dL should have been
+read as a red flag.  We report this plainly because the derivative file is public and
+carries no provenance, and because subject-wise splitting, the standard
+remedy, does
+not detect this class of leak; only a test on the construction of the label
+column does.
 
-This finding has two implications.  First, our MAE~=~6.89~mg/dL reflects the
-error in predicting a new (unseen) patient's baseline glucose from raw PPG
-morphology alone --- a meaningful cross-patient generalisation task.
-Second, the t-SNE silhouette score of $-0.067$ confirms that our model is
-\emph{not} achieving this by memorising patient identities: the latent space
-lacks patient-clustered structure, meaning the model generalises via
-learned PPG-glucose feature correlations.
+\textbf{Which leak inflates what.}  The ladder separates mechanisms that are
+usually conflated.  Window-neighbour leakage (overlapping windows of one
+recording on both sides) produced the largest inflation here, turning the
+weak subject-wise correlation ($r=\m{mendOneDR}$) into
+$r=\m{mendLadderWindowOneDR}$; identity leakage (recordings
+separated, subjects shared) helped little on this dataset because most
+subjects have one or two recordings, and the leaky subject-mean was worse
+than the train-mean.  On the CGM cohort the ladder is flat: a random split
+over readings lowers the 1-D CNN's MAE by about 0.9~mg/dL
+(\m{bigLadderReadingOneD} vs.\ \m{bigLadderChronoOneD}) but leaves it above
+the subject-mean null, and the 1-h guard gap changes the chronological
+result by less than 0.01~mg/dL at this window length; reading-level leakage
+is measurable but not conclusion-changing here, and no rung lets any PPG
+model beat the null.  Reports should state which of these their split
+prevents~\cite{saeb2017,carlson2025nerve}.
 
-For clinical dynamic glucose tracking (monitoring meals, exercise, sleep), a
-dataset with documented intra-subject glucose excursions ($>$30~mg/dL range)
-from diabetic subjects is required.  We flag this as the primary limitation
-of the present study and a primary direction for future work.
+\textbf{Fusion and capacity.}  Under one shared configuration the 1D--2D--3D
+fusion network does not consistently improve on its 1-D branch: it is worse
+on the Kermani--Esmaeili recordings (\m{mendFusionMAE} vs.\ \m{mendOneDMAE})
+and in the BIG~IDEAs residual arm (\m{bigFusionResMAE} vs.\
+\m{bigOneDResMAE}), marginally better as a BIG~IDEAs population model
+(\m{bigFusionMAE} vs.\ \m{bigOneDMAE}) and on STUBA (\m{stubaFusionMAE} vs.\
+\m{stubaOneDMAE}), and no paired fusion-versus-1-D interval was computed.  It
+has \m{paramRatio}$\times$ the parameters (\m{fusionNParams} vs.\
+\m{oneDNParams}) and was trained on at most \m{mendNWindows} windows per
+Kermani--Esmaeili fold.  We did not
+tune per model; Sec.~\ref{sec:fairness} gives the reason, so part of that
+gap may be configuration.  We do not conclude that multi-view PPG
+representations are useless; we conclude that their benefit must be
+demonstrated against the 1-D branch and a null model under a subject-wise
+protocol.  The multi-view papers in this
+journal~\cite{chen2024mvcft,ali2025jbhi} report subject-wise or $k$-fold
+results but no null-model row, so the margin over a cohort mean cannot be
+recovered from them.
 
-\textbf{Validation glucose range.}  The four validation patients exhibit
-glucose values in the range 104.0--126.7~mg/dL (near-normal euglycaemic range).  While
-98.9\% Zone~A is a strong result, broader clinical deployment requires
-evaluation across hypoglycaemic ($<70$~mg/dL) and hyperglycaemic
-($>180$~mg/dL) ranges.  Data augmentation with synthetic glucose excursions
-or recruitment of diabetic subjects would address this in future work.
+\textbf{Reporting recommendations.}  (i)~Report a null model (train mean,
+or subject mean, time of day and persistence for within-subject tasks) and a
+classical feature baseline next to every network, with the reference-noise
+floor.  (ii)~Report at the level of independent reference measurements with
+subject-cluster intervals and a pre-specified primary comparison.
+(iii)~Name the split protocol and the leak it prevents; use a guard gap for
+time series; ship frozen folds.  (iv)~Report Clarke or Parkes zone~A together
+with the null model's zone~A.  (v)~Include positive controls.  (vi)~Test the
+construction of the label column, not only the split.  A TRIPOD+AI checklist
+and a model information sheet are provided as supplementary material.
 
-\textbf{Attention weight interpretation.}  The dominance of the 1D temporal
-branch (51.5\%) is consistent with the fact that classical PPG glucose methods
-are derived from time-domain features.  The non-trivial contribution of the 3D
-phase-space branch (30.3\%) motivates further theoretical investigation into
-which properties of the cardiovascular attractor encode glucose information.
-The strong performance of the 3D branch (MAE~7.17, best single modality)
-suggests that nonlinear cardiovascular dynamics encode subject-specific
-vascular characteristics correlated with glucose levels --- characteristics
-that are not captured by conventional time- or frequency-domain
-representations alone.
-
-\textbf{Lightweight architecture.}  At 548,801 parameters and 4~min training
-time on a consumer-grade Apple Silicon chip, the model is suitable for
-on-device deployment on next-generation smartwatches with neural engine
-co-processors.
-
-\textbf{Cross-dataset generalisation.}
-The linear probe experiment (Sec.~\ref{sec:crossdataset}) confirms that
-the architecture's branch encoders serve as a reusable PPG feature extractor
-across hardware platforms.  Zero-shot transfer to the Empatica~E4 (a
-different sensor wavelength, contact mechanism, and sampling rate than the
-training device) degrades MAE by only $2.2\times$ (6.89 to 15.20~mg/dL),
-and lightweight fine-tuning of just 57\% of parameters recovers to
-13.99~mg/dL.  This cross-hardware result strongly corroborates the t-SNE
-identity ablation (silhouette~$-0.067$): the model generalises via
-learned PPG-glucose feature correlations, not device-specific artefacts.
-
-\textbf{Study limitations.}
-Beyond the intra-subject glucose variability constraint, several additional
-limitations should be noted.
-First, the limited number of subjects ($n=22$) restricts generalisation and
-should be expanded in future studies to assess population-level robustness.
-Second, recordings were obtained under standardised resting conditions,
-leaving motion-artefact robustness under free-living scenarios unvalidated.
-Third, the evaluation is confined to a single sensor modality (reflective
-pulse oximeter); multi-site and multi-sensor validation is needed.
-
-\textbf{Scope of claims.}
-The proposed method should be interpreted as a \emph{framework for extracting
-glucose-correlated representations from PPG under constrained label
-variability}, rather than a complete clinical solution.
-Clinical translation requires evaluation on datasets with genuine
-intra-subject glucose dynamics from diabetic populations, cross-sensor
-validation at scale, and formal regulatory assessment.
+\textbf{Limitations.}  The fingerstick cohorts are small and, for
+Kermani--Esmaeili, of unstated diabetes status; BIG~IDEAs is prediabetic at
+most and free-living without signal-quality or accelerometer gating; E4 BVP
+is a vendor-processed signal.  The common representation discards DC
+amplitude, vasomotion and heart-rate variability, which Sec.~\ref{sec:preproc}
+only partly restores.  Hyper-parameters were shared across models and no
+model was tuned individually.  Pretrained encoders were probed linearly and
+frozen, and their inputs followed one shared preprocessing rather than each
+encoder's pretraining pipeline; fine-tuning them on
+\m{bigNSubjects}--\m{stubaNSubjects} subjects would add capacity the cohorts
+cannot constrain.  The benchmark cannot
+rule out that PPG carries glucose information at scales or in populations
+it does not cover; it bounds what can be claimed on the public data that
+exists.
 
 % =============================================================================
 \section{Conclusion}
 \label{sec:conclusion}
-% =============================================================================
+We documented a label-replication artefact in a public PPG-glucose
+derivative that subject-wise splitting cannot detect, measured a leakage
+ladder on the same data, and released a null-anchored benchmark harness
+with machine-checked protocols, frozen folds, controls and clinical
+anchoring.  Under those protocols, on \m{mendNSubjects}+\m{bigNSubjects}+\m{stubaNSubjects}
+subjects, no model from ridge regression and gradient boosting on
+hand-crafted features through a small CNN, re-implemented published
+regressors and a multi-view fusion network to frozen PPG foundation models
+improves on the appropriate null by more than a small fraction of the
+reference's own noise: the only gains whose intervals exclude zero are
+\m{mendOneDDiff}~mg/dL for the pre-specified 1-D CNN on the
+Kermani--Esmaeili recordings (95\%~CI \m{mendOneDDiffCI}, nominally
+significant for \m{mendOneDSeedSigN} of \m{mendOneDSeedN} seeds) and
+\m{bigPulseResDiff}~mg/dL for the Pulse-PPG residual probe on BIG~IDEAs,
+against noise floors of \m{mendNoiseFloorMAE} and
+\m{bigNoiseFloorMAE}~mg/dL; and none detects a single hypo- or
+hyperglycaemic reading.  The harness is the contribution we expect
+to outlast the result: any claim of PPG-based glucose estimation on public
+data can now be run through the same folds, nulls and intervals.
 
-We have presented a \textbf{Multimodal 1D+2D+3D Deep Fusion Network} as a
-framework for extracting glucose-correlated representations from PPG under
-constrained label variability.  By simultaneously
-exploiting temporal morphology (1D-CNN), time-frequency structure (2D-CNN on
-CWT scalogram), and nonlinear cardiovascular dynamics (PointNet on Takens
-phase-space embedding), our model captures complementary glucose-correlated
-information that no single modality exposes alone.
-
-A learnable cross-attention fusion module adaptively weights branch contributions
-per sample.  Crucially, na\"ive concatenation of all three branches yields
-MAE~7.74, while cross-attention fusion achieves MAE~6.89 --- demonstrating
-that adaptive weighting, not mere modality combination, drives the improvement.
-The strongest 1D-only SOTA baseline (CNN-LSTM) achieves a competitive MAE of
-6.57~mg/dL on the full validation set; however, our model achieves MAE~6.21
-on SQI-filtered clean windows and is five times more robust to sensor noise at
-10~dB SNR, confirming that the multimodal architecture's advantage materialises
-under realistic wearable-sensor conditions.
-
-Signal quality filtering (SQI threshold $\tau=0.25$) removes 17.1\% of
-flatline windows, improving MAE to 6.21~mg/dL on clean data.
-A t-SNE identity ablation confirms the latent space does not cluster by
-patient (silhouette~$-0.067$), ruling out memorisation as an explanation.
-Noise robustness experiments confirm a 5$\times$ RMSE improvement over a
-1D-only baseline at 10~dB SNR.
-A preliminary cross-dataset study on the PhysioNet BIG~IDEAs dataset
-(Empatica~E4, 64~Hz, Subject~001, $n$=411 test windows) confirms zero-shot
-MAE~15.20~mg/dL improving to 13.99~mg/dL after 15-epoch fine-tuning of the
-cross-attention and head alone (312,321 of 548,801 parameters), validating
-device-agnostic branch representations.
-
-An important dataset limitation was identified: glucose labels are essentially
-constant within each validation patient, limiting evaluation of dynamic
-within-patient glucose tracking.
-The proposed method should therefore be interpreted as a framework for
-extracting glucose-correlated representations from PPG under constrained
-label variability, rather than a complete clinical solution.
-All experiments are fully reproducible via the accompanying open-source code,
-saved checkpoint, and automated integrity test suite.
-
-Future work will investigate: (1) recruitment of diabetic subjects with
-documented glucose excursions for within-patient tracking validation;
-(2) extending cross-dataset validation to all 16~subjects in the
-PhysioNet BIG~IDEAs cohort and additional wearable hardware; and
-(3) on-device edge deployment profiling.
-
-% =============================================================================
-% Figures
-% =============================================================================
-
-\begin{figure*}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{architecture_diagram.pdf}
-  \caption{Proposed Multimodal 1D+2D+3D Fusion Network architecture.
-           The raw PPG signal is simultaneously transformed into three
-           heterogeneous representations feeding equal-dimension (256-d)
-           branch encoders.  A cross-attention module with a learnable
-           query vector fuses the branches into a 768-d representation
-           passed to the FC regression head.}
-  \label{fig:architecture}
-\end{figure*}
-
-\begin{figure*}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{Paper_Figure_1_Multimodal_Pipeline.png}
-  \caption{Example multimodal transformation of a single PPG window
-           (sample index 350, glucose $\approx$115~mg/dL).
-           \textbf{(A)} Z-score normalised 1D temporal signal;
-           \textbf{(B)} 2D CWT time-frequency scalogram ($64\times64$ pixels,
-           Mexican hat wavelet);
-           \textbf{(C)} 3D Takens delay-embedding phase-space attractor
-           ($\tau=5$, $N_p=256$ points), coloured by the third coordinate.}
-  \label{fig:pipeline}
-\end{figure*}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\columnwidth]{Paper_Figure_4_Loss_Curve.png}
-  \caption{Training convergence over 42 epochs (early stopped).
-           ReduceLROnPlateau halved the LR at epochs 19 and 33
-           (vertical arrows not shown).  Best validation MSE of
-           82.47~mg/dL² achieved at epoch~27.}
-  \label{fig:loss}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\columnwidth]{clarke_error_grid.png}
-  \caption{Clarke Error Grid for 280 validation predictions.
-           277 points (98.9\%) lie in Zone~A;
-           3 points (1.1\%) lie in Zone~B;
-           zero points in Zones C--E,
-           indicating strong estimation agreement under the evaluated conditions.}
-  \label{fig:clarke}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\columnwidth]{overlay_comparison.png}
-  \caption{Predicted vs.\ reference glucose scatter (left) and residual
-           histogram (right) for the 280-window validation set.
-           Points are colour-coded by patient (patients 19--22).
-           MAE~=~6.89~mg/dL, RMSE~=~9.08~mg/dL.
-           The residual distribution is approximately zero-centred,
-           indicating minimal systematic bias.}
-  \label{fig:overlay}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\columnwidth]{Paper_Figure_6_Attention.png}
-  \caption{Cross-attention branch weight distribution across 280 validation
-           windows.  Left: mean $\pm$ std bar chart; Right: violin plots.
-           The 1D temporal branch receives the highest mean weight
-           ($0.515\pm0.124$), followed by the 3D phase-space branch
-           ($0.303\pm0.075$) and the 2D CWT branch ($0.182\pm0.084$).}
-  \label{fig:attention}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\columnwidth]{Paper_SQI_Analysis.png}
-  \caption{Signal Quality Index analysis.  \textbf{Left}: distribution of
-           per-window raw PPG standard deviation across all windows
-           (threshold $\tau=0.25$, dashed red).
-           \textbf{Centre}: per-patient SQI pass rates (patients 19--22).
-           \textbf{Right}: SQI vs.\ glucose scatter; flatlines are not
-           glucose-biased, confirming artefact-random occurrence.}
-  \label{fig:sqi}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\columnwidth]{Paper_tSNE_Identity.png}
-  \caption{t-SNE of the 768-d fused latent space ($n=280$ val windows).
-           \textbf{Left}: coloured by patient ID; silhouette score $-0.067$
-           confirms no patient-identity clustering.
-           \textbf{Right}: coloured by glucose label, showing a diffuse
-           glucose gradient rather than sharp identity-driven boundaries.}
-  \label{fig:tsne}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\columnwidth]{Paper_Attractor_Analysis.png}
-  \caption{Cardiovascular attractor analysis for SQI-clean validation windows.
-           \textbf{Top row}: correlation dimension $D_2$ and largest Lyapunov
-           exponent (LLE) versus glucose (Pearson $r=-0.072$ / $r=+0.085$).
-           \textbf{Bottom row}: example 3D Takens attractors for low, mid, and
-           high glucose windows.}
-  \label{fig:attractor}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\columnwidth]{Paper_CrossDataset_Generalization.png}
-  \caption{Cross-dataset generalisation experiment
-           (PhysioNet BIG~IDEAs, Subject~001, Empatica~E4 BVP 64~Hz).
-           \textbf{(A)} MAE comparison: in-distribution Archive validation
-           (6.89~mg/dL, blue); zero-shot transfer with all weights frozen
-           (15.20~mg/dL, orange); fine-tuned cross-attention and head only
-           (13.99~mg/dL, green).  The $\Delta$MAE arrow shows $-1.21$~mg/dL
-           improvement from fine-tuning.
-           \textbf{(B)} Per-epoch validation MAE during 15-epoch fine-tuning
-           (Adam, $\eta$=$10^{-3}$, batch~32).  Best val MAE 13.25~mg/dL
-           at epoch~11; final reported MAE 13.99~mg/dL at epoch~15.
-           Orange dashed: zero-shot baseline (15.20~mg/dL).}
-  \label{fig:crossdataset}
-\end{figure}
-
-% =============================================================================
-% References
 % =============================================================================
 \begin{thebibliography}{99}
 
-\bibitem{idf2021}
-International Diabetes Federation,
-``IDF Diabetes Atlas, 10th Edition,''
-Brussels, Belgium: IDF, 2021.
-[Online]. Available: \url{https://diabetesatlas.org}
+\bibitem{idf2025}
+International Diabetes Federation, \emph{IDF Diabetes Atlas}, 11th ed.
+Brussels, Belgium: IDF, 2025.
 
 \bibitem{allen2007ppg}
-J.~Allen,
-``Photoplethysmography and its application in clinical physiological
-measurement,''
-\textit{Physiological Measurement}, vol.~28, no.~3, pp.~R1--R39, 2007.
+J.~Allen, ``Photoplethysmography and its application in clinical
+physiological measurement,'' \emph{Physiol.\ Meas.}, vol.~28, no.~3,
+pp.~R1--R39, 2007.
 
-\bibitem{hina2021noninvasive}
-A.~Hina and M.~R.~Mahfouz,
-``Noninvasive blood glucose monitoring systems using near-infrared technology
---- a review,''
-\textit{Sensors}, vol.~22, no.~1, p.~icz, 2022.
+\bibitem{soliman2024}
+A.~Y.~Soliman, A.~M.~Nor, O.~Fratu, S.~Halunga, O.~A.~Omer, and A.~S.~Mubark,
+``Non-invasive glucose level monitoring from PPG using a hybrid CNN--GRU
+deep learning network,'' arXiv:2411.11094, 2024.
 
-\bibitem{dinh2022ppg}
-T.-L.-A.~Dinh, N.-T.~Nguyen, B.-L.~Nguyen, and V.-T.~Tran,
-``Non-invasive blood glucose estimation using photoplethysmography and
-deep learning,''
-in \textit{Proc.\ IEEE Int.\ Conf.\ Biomed.\ Eng.\ (ICBME)}, 2022.
+\bibitem{syamsul2026}
+R.~Syamsul and D.-S.~Kim, ``Interpretable non-invasive glucose monitoring: An
+attention-based deep learning framework for visualizing hemodynamic
+correlates in PPG signals,'' \emph{Front.\ Bioeng.\ Biotechnol.}, vol.~14,
+p.~1843361, 2026, doi:10.3389/fbioe.2026.1843361.
 
-\bibitem{almarshad2021}
-M.~A.~Almarshad, M.~S.~Islam, S.~Al-Ahmadi, and A.~S.~BaHammam,
-``Diagnostic features and potential applications of PPG signal in healthcare:
-a systematic review,''
-\textit{Healthcare}, vol.~10, no.~3, p.~547, 2022.
+\bibitem{chen2024mvcft}
+S.~Chen, F.~Qin, X.~Ma, J.~Wei, Y.-T.~Zhang, Y.~Zhang, and E.~Jovanov,
+``Multi-view cross-fusion transformer based on
+kinetic features for non-invasive blood glucose measurement using PPG
+signal,'' \emph{IEEE J.\ Biomed.\ Health Inform.}, vol.~28, no.~4,
+pp.~1982--1992, 2024, doi:10.1109/JBHI.2024.3351867.
+
+\bibitem{ali2025jbhi}
+M.~Ali, J.-Z.~Li, B.~Fan, and Z.~Nie, ``PPG based noninvasive blood glucose monitoring using
+multi-view attention and cascaded BiLSTM hierarchical feature fusion
+approach,'' \emph{IEEE J.\ Biomed.\ Health Inform.}, vol.~29, no.~7,
+pp.~4692--4702, 2025, doi:10.1109/JBHI.2024.3464098.
+
+\bibitem{fda2024}
+U.S.\ Food and Drug Administration, ``Do not use smartwatches or smart rings
+to measure blood glucose levels: FDA safety communication,'' 21 Feb.\ 2024.
+
+\bibitem{ramesh2026}
+S.~Ramesh, M.~Neufeld, M.~K\"uttner, T.~R\"oddiger, and M.~Beigl,
+``Reassessing the feasibility of PPG-based non-invasive blood glucose level
+estimation,'' in \emph{Proc.\ ACM Int.\ Symp.\ Wearable Comput.\ (ISWC)},
+2026, pp.~127--133, doi:10.1145/3830727.3834821; arXiv:2608.01820.
+
+\bibitem{seyedebrahimi2026}
+M.~M.~Seyedebrahimi, C.~Ojeda, and P.~Zarrintaj, ``A leakage-controlled
+evaluation of multimodal sensor fusion for wrist-worn glucose estimation,''
+medRxiv, 2026, doi:10.64898/2026.08.03.26359550.
+
+\bibitem{kermani2023data}
+A.~Kermani and H.~Esmaeili, ``The dataset of photoplethysmography signals
+collected from a pulse sensor to measure blood glucose level,'' Mendeley
+Data, v3, 2023, doi:10.17632/37pm7jk7jn.3 (v4, 2025, doi:10.17632/37pm7jk7jn.4).
+
+\bibitem{kaggle_ppg}
+M.~Y.~Saleem, ``PPG signal with blood sugar level data,'' Kaggle dataset,
+file \texttt{clean-dataset.csv}, accessed Nov.\ 2026.
+[Online]. Available: \url{https://www.kaggle.com/datasets/muhammadyasirsaleem/ppg-signal-with-blood-sugar-level-data}
+
+\bibitem{kapoor2023leakage}
+S.~Kapoor and A.~Narayanan, ``Leakage and the reproducibility crisis in
+machine-learning-based science,'' \emph{Patterns}, vol.~4, no.~9,
+p.~100804, 2023, doi:10.1016/j.patter.2023.100804.
+
+\bibitem{yoshizawa2023}
+R.~Yoshizawa, K.~Yamamoto, and T.~Ohtsuki, ``Investigation of data leakage
+in deep-learning-based blood pressure estimation using
+photoplethysmogram/electrocardiogram,'' \emph{IEEE Sensors J.}, vol.~23,
+no.~12, pp.~13311--13318, 2023, doi:10.1109/JSEN.2023.3272921.
+
+\bibitem{mehta2024}
+S.~Mehta, N.~Kwatra, M.~Jain, and D.~McDuff, ``Examining the challenges of
+blood pressure estimation via photoplethysmogram,'' \emph{Sci.\ Rep.},
+vol.~14, p.~18318, 2024, doi:10.1038/s41598-024-68862-1.
+
+\bibitem{brookshire2024}
+G.~Brookshire \emph{et al.}, ``Data leakage in deep learning studies of
+translational EEG,'' \emph{Front.\ Neurosci.}, vol.~18, p.~1373515, 2024,
+doi:10.3389/fnins.2024.1373515.
+
+\bibitem{chu2021}
+J.~Chu, W.-T.~Yang, W.-R.~Lu, Y.-T.~Chang, T.-H.~Hsieh, and F.-L.~Yang,
+``90\% accuracy for photoplethysmography-based
+non-invasive blood glucose prediction by deep learning with cohort
+arrangement and quarterly measured HbA1c,'' \emph{Sensors}, vol.~21, no.~23,
+p.~7815, 2021.
+
+\bibitem{chu2025}
+J.~Chu, T.-H.~Hsieh, Y.-T.~Chang, S.-K.~Liaw, and F.-L.~Yang,
+``Improving non-invasive glucose estimation with
+monthly calibrated photoplethysmography and implicit HbA1c,''
+\emph{Commun.\ Med.}, vol.~5, p.~530, 2025, doi:10.1038/s43856-025-01210-0.
+
+\bibitem{bent2021}
+B.~Bent \emph{et al.}, ``Engineering digital biomarkers of interstitial
+glucose from noninvasive smartwatches,'' \emph{npj Digit.\ Med.}, vol.~4,
+p.~89, 2021, doi:10.1038/s41746-021-00465-w.
+
+\bibitem{kermani2025}
+A.~Kermani and H.~Esmaeili, ``Photoplethysmography based non-invasive blood
+glucose estimation using systolic-diastolic framing MFCC features and
+machine learning regression,'' \emph{BioImpacts}, vol.~15, p.~30589, 2025,
+doi:10.34172/bi.30589.
+
+\bibitem{zeynali2025}
+M.~Zeynali, H.~Alipour, B.~Tarvirdizadeh, and M.~Ghamari, ``Non-invasive
+blood glucose monitoring using PPG signals with various deep learning models
+and implementation using TinyML,'' \emph{Sci.\ Rep.}, vol.~15, p.~581, 2025,
+doi:10.1038/s41598-024-84265-8.
+
+\bibitem{cheung2024}
+M.~Y.~Cheung, A.~Sabharwal, G.~L.~Cot\'e, and A.~Veeraraghavan, ``Wearable
+blood pressure monitoring devices: Understanding heterogeneity in design and
+evaluation,'' \emph{IEEE Trans.\ Biomed.\ Eng.}, vol.~71,
+no.~12, pp.~3569--3592, 2024, doi:10.1109/TBME.2024.3434344.
+
+\bibitem{saeb2017}
+S.~Saeb, L.~Lonini, A.~Jayaraman, D.~C.~Mohr, and K.~P.~Kording, ``The need
+to approximate the use-case in clinical machine learning,''
+\emph{GigaScience}, vol.~6, no.~5, 2017, doi:10.1093/gigascience/gix019.
+
+\bibitem{chaibubneto2019}
+E.~Chaibub Neto \emph{et al.}, ``Detecting the impact of subject
+characteristics on machine learning-based diagnostic applications,''
+\emph{npj Digit.\ Med.}, vol.~2, p.~99, 2019, doi:10.1038/s41746-019-0178-x.
+
+\bibitem{varoquaux2018}
+G.~Varoquaux, ``Cross-validation failure: Small sample sizes lead to large
+error bars,'' \emph{NeuroImage}, vol.~180, pp.~68--77, 2018.
+
+\bibitem{austin2025}
+E.~Austin, I.~Pe'er, and T.~Korem, ``Distributional bias in leave-one-out
+cross-validation,'' \emph{Sci.\ Adv.}, vol.~11, no.~48, eadx6976, 2025,
+doi:10.1126/sciadv.adx6976.
+
+\bibitem{collins2024tripod}
+G.~S.~Collins \emph{et al.}, ``TRIPOD+AI statement: Updated guidance for
+reporting clinical prediction models that use regression or machine
+learning methods,'' \emph{BMJ}, vol.~385, e078378, 2024.
+
+\bibitem{carlson2025nerve}
+D.~E.~Carlson, R.~Chavarriaga, Y.~Liu, F.~Lotte, and B.~Lu, ``The NERVE-ML
+checklist,'' \emph{J.\ Neural Eng.}, vol.~22, no.~2, p.~021002, 2025,
+doi:10.1088/1741-2552/adbfbd.
 
 \bibitem{takens1981}
-F.~Takens,
-``Detecting strange attractors in turbulence,''
-in \textit{Dynamical Systems and Turbulence, Lecture Notes in Mathematics},
-D.~Rand and L.-S.~Young, Eds.
-Berlin: Springer, 1981, vol.~898, pp.~366--381.
+F.~Takens, ``Detecting strange attractors in turbulence,'' in
+\emph{Dynamical Systems and Turbulence}, ser.\ Lecture Notes in Mathematics,
+vol.~898.  Berlin, Germany: Springer, 1981, pp.~366--381.
 
 \bibitem{qi2017pointnet}
-C.~R.~Qi, H.~Su, K.~Mo, and L.~J.~Guibas,
-``PointNet: Deep learning on point sets for 3D classification and segmentation,''
-in \textit{Proc.\ IEEE Conf.\ Comput.\ Vision Pattern Recognit.\ (CVPR)},
-Honolulu, HI, USA, 2017, pp.~652--660.
+C.~R.~Qi, H.~Su, K.~Mo, and L.~J.~Guibas, ``PointNet: Deep learning on point
+sets for 3D classification and segmentation,'' in \emph{Proc.\ IEEE CVPR},
+2017, pp.~652--660.
 
 \bibitem{vaswani2017attention}
-A.~Vaswani, N.~Shazeer, N.~Parmar, J.~Uszkoreit, L.~Jones, A.~N.~Gomez,
-{\L}.~Kaiser, and I.~Polosukhin,
-``Attention is all you need,''
-in \textit{Proc.\ Adv.\ Neural Inf.\ Process.\ Syst.\ (NeurIPS)},
-Long Beach, CA, USA, 2017, pp.~5998--6008.
+A.~Vaswani \emph{et al.}, ``Attention is all you need,'' in \emph{Proc.\
+NeurIPS}, 2017, pp.~5998--6008.
 
-\bibitem{he2015init}
-K.~He, X.~Zhang, S.~Ren, and J.~Sun,
-``Delving deep into rectifiers: Surpassing human-level performance on
-ImageNet classification,''
-in \textit{Proc.\ IEEE Int.\ Conf.\ Comput.\ Vision (ICCV)},
-Santiago, Chile, 2015, pp.~1026--1034.
+\bibitem{papagei2025}
+A.~Pillai, D.~Spathis, F.~Kawsar, and M.~Malekzadeh, ``PaPaGei: Open foundation models for optical
+physiological signals,'' in \emph{Proc.\ ICLR}, 2025; arXiv:2410.20542.
 
-\bibitem{li2020ecg}
-X.~Li, X.~Qian, L.~Zhu, X.~Kong, Z.~Wen, and J.~Li,
-``Automatic staging of sleep disorders using a multi-scale CNN-LSTM
-architecture,''
-\textit{IEEE Trans.\ Neural Syst.\ Rehabil.\ Eng.}, vol.~28,
-no.~10, pp.~2245--2254, 2020.
+\bibitem{pulseppg2025}
+M.~Saha, M.~A.~Xu, W.~Mao, S.~Neupane, J.~M.~Rehg, and S.~Kumar,
+``Pulse-PPG: An open-source field-trained PPG foundation model for wearable
+applications across lab and field settings,'' \emph{Proc.\ ACM Interact.\
+Mob.\ Wearable Ubiquitous Technol.}, vol.~9, no.~3, Sep.\ 2025,
+doi:10.1145/3749494; arXiv:2502.01108.
+
+\bibitem{anyppg2026}
+G.~Nie \emph{et al.}, ``AnyPPG: An ECG-guided PPG foundation model
+trained on over 100,000 hours of recordings for holistic health profiling,''
+in \emph{Proc.\ ACM SIGKDD Conf.\ Knowl.\ Discov.\ Data Min.\ (KDD)}, 2026;
+arXiv:2511.01747.
+
+\bibitem{ppglm2026}
+X.~Wang, M.~Wang, M.~A.~Xu, \emph{et al.}, ``PPG-LM: A photoplethysmography-language
+model with multi-level clinical alignment,'' arXiv:2609.33516, 2026.
+
+\bibitem{cho2026bigideas}
+P.~Cho, J.~Kim, B.~Bent, and J.~Dunn, ``BIG IDEAs Lab glycemic variability
+and wearable device data (version 1.1.3),'' PhysioNet, 2026,
+doi:10.13026/aw6y-fc44.
+
+\bibitem{welsh2022lag}
+J.~B.~Welsh, S.~Psavko, X.~Zhang, P.~Gao, and A.~K.~Balo, ``Comparisons of
+fifth-, sixth-, and seventh-generation continuous glucose monitoring
+systems,'' \emph{J.\ Diabetes Sci.\ Technol.}, vol.~18, no.~1, pp.~143--147,
+2024, doi:10.1177/19322968221099879.
+
+\bibitem{stuba2026}
+M.~Berki and A.~Mateasik, ``Photoplethysmography (PPG) dataset for
+non-invasive blood glucose monitoring (version 1.1.1),'' Zenodo, 2026,
+doi:10.5281/zenodo.21978226.
 
 \bibitem{clarke1987}
-W.~L.~Clarke, D.~Cox, L.~A.~Gonder-Frederick, W.~Carter,
-and S.~L.~Pohl,
-``Evaluating clinical accuracy of systems for self-monitoring of blood glucose,''
-\textit{Diabetes Care}, vol.~10, no.~5, pp.~622--628, 1987.
+W.~L.~Clarke, D.~Cox, L.~A.~Gonder-Frederick, W.~Carter, and S.~L.~Pohl,
+``Evaluating clinical accuracy of systems for self-monitoring of blood
+glucose,'' \emph{Diabetes Care}, vol.~10, no.~5, pp.~622--628, 1987.
 
-\bibitem{ppgdataset2023}
-``PPG Glucose Dataset,''
-Kaggle, 2023.
-[Online]. Available: \url{https://www.kaggle.com/}
+\bibitem{parkes2000}
+J.~L.~Parkes, S.~L.~Slatin, S.~Pardo, and B.~H.~Ginsberg, ``A new consensus
+error grid to evaluate the clinical significance of inaccuracies in the
+measurement of blood glucose,'' \emph{Diabetes Care}, vol.~23, no.~8,
+pp.~1143--1148, 2000.
 
-\bibitem{vandermaaten2008tsne}
-L.~J.~P.~van der Maaten and G.~E.~Hinton,
-``Visualizing high-dimensional data using t-SNE,''
-\textit{J.\ Machine Learning Research}, vol.~9, pp.~2579--2605, 2008.
-
-\bibitem{bigideas2023}
-BIG IDEAs Lab,
-``BIG IDEAs Lab Glycemic Variability \& Wearable Device Dataset,"
-\textit{PhysioNet}, v1.1.3, 2023.
-[Online]. Available: \url{https://doi.org/10.13026/aw6y-fc44}
+\bibitem{shah2018g6}
+V.~N.~Shah \emph{et al.}, ``Performance of a factory-calibrated real-time
+continuous glucose monitoring system utilizing an automated sensor applicator,''
+\emph{Diabetes Technol.\ Ther.}, vol.~20, no.~6, pp.~428--433, 2018.
 
 \end{thebibliography}
 

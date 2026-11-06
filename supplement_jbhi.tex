@@ -1,0 +1,103 @@
+\documentclass[journal,onecolumn]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{longtable}
+\input{results_macros}
+\newcommand{\m}[1]{\ifcsname #1\endcsname\csname #1\endcsname\else\textcolor{red}{--}\fi}
+
+\begin{document}
+\title{Supplementary Material: A Label-Replication Artefact, a Measured
+Leakage Ladder and a Null-Anchored Benchmark for PPG-Based Blood Glucose
+Estimation}
+\author{Gaurav Verma}
+\maketitle
+
+\section*{S1. TRIPOD+AI checklist}
+Items of the TRIPOD+AI statement (Collins \emph{et al.}, BMJ 2024) and where
+each is addressed.  Items that do not apply to a benchmark of public data
+are marked n/a.
+
+\begin{longtable}{@{}p{0.9cm}p{4.6cm}p{2.6cm}@{}}
+\toprule
+\textbf{Item} & \textbf{Requirement} & \textbf{Where} \\
+\midrule
+1 & Title identifies study as developing/evaluating a prediction model & Title, Abstract \\
+2 & Abstract: objectives, data, methods, results, conclusions & Abstract \\
+3a--b & Background, rationale, objectives & Sec.~I \\
+4 & Data sources, dates, setting & Sec.~III-A, III-C, III-D \\
+5a & Participants: eligibility, recruitment & Sec.~III (as reported by dataset authors) \\
+5b--c & Treatment / care pathway & n/a \\
+6 & Data preparation: cleaning, windowing, missing data & Sec.~IV-A; loaders in code \\
+7 & Outcome definition and measurement & Sec.~III (fingerstick meter; Dexcom G6) \\
+8 & Predictors: definition and measurement & Sec.~IV-A, IV-C \\
+9 & Sample size justification & Sec.~IV-E (minimum detectable effect) \\
+10 & Missing-data handling & Sec.~IV-A (gap-free windows only) \\
+11 & Analytical methods: model type, hyper-parameters, selection & Sec.~IV-C, IV-D \\
+12a & Evaluation: splits, protocol, leakage control & Sec.~IV-B; frozen folds in code \\
+12b & Model performance measures & Sec.~IV-E \\
+12c & Model comparison and null models & Sec.~IV-C, IV-E \\
+12d & Uncertainty (CIs, tests) & Sec.~IV-E; Tables III--IV; Sec.~S4 \\
+12e & Fairness / subgroup analysis & Per-subject results (Fig.~5b); sex not analysed (n too small) \\
+13 & Class imbalance / outcome distribution & Sec.~III; glucose ranges reported \\
+14 & Open science: code, data, protocol & Footnote 1; README (incl.\ encoder weight sources and licences) \\
+15 & Patient and public involvement & n/a (public data) \\
+16--17 & Participant flow, characteristics & Sec.~III; Sec.~S3 (cohort table) \\
+18a--f & Model performance, comparisons, uncertainty, subgroups & Sec.~V \\
+19 & Model updating & n/a \\
+20 & Interpretation; comparison with prior work & Sec.~VI; Table~I \\
+21 & Limitations & Sec.~VI \\
+22 & Usability: inputs, outputs, intended use & Sec.~IV-G (intended use cases and their nulls) \\
+23 & Funding, conflicts & To be completed by the author \\
+\bottomrule
+\end{longtable}
+
+\section*{S2. Model information sheet}
+\begin{longtable}{@{}p{2.6cm}p{5.5cm}@{}}
+\toprule
+\textbf{Field} & \textbf{Value} \\
+\midrule
+Task & Regression of blood / interstitial glucose (mg/dL) from a 5-s PPG window (networks, classical) or 10--30-s segments (frozen encoders) \\
+Intended use & Benchmark only; no clinical use \\
+Inputs & 320 samples at 64 Hz, 0.5--8 Hz band-passed, z-scored per window (variants in Sec.~V-G) \\
+Outputs & One glucose value per window; averaged per reference measurement \\
+Training data & Kermani--Esmaeili recordings (LOSO folds); BIG~IDEAs training periods; STUBA ePPG (LOSO) \\
+Hyper-parameters & AdamW, lr $10^{-3}$, wd $10^{-4}$, one-cycle, \m{mendEpochs}/\m{bigEpochs} epochs, batch 16/64, grad-clip 1, smooth-L1 on standardised target \\
+Seeds & Kermani--Esmaeili networks: \m{mendFusionSeeds}; STUBA 1-D CNN: \m{stubaOneDSeeds}, other STUBA networks one; BIG~IDEAs residual 1-D CNN: \m{bigOneDResSeeds}, other BIG~IDEAs rows one; encoder probes and classical models are deterministic (one run) \\
+Null models & Train mean; subject train mean; time of day; persistence \\
+Leakage controls & Named protocols with asserted guarantees; frozen folds; guard gap; full-file label-construction test \\
+Known failure modes & Predicts near the (subject) mean; no event sensitivity \\
+Pretrained encoders & PaPaGei-S (\m{fmPapageiParams}, 125~Hz, 10-s), Pulse-PPG (\m{fmPulseParams}, 50~Hz, 10--30-s), AnyPPG (\m{fmAnyppgParams}, 125~Hz, 10-s); frozen released weights loaded weights-only; 0.5--12~Hz Chebyshev-II, resample, z-score; 512-d embeddings averaged per reference; RidgeCV ($\alpha\in[10^{-2},10^{4}]$) on training-fold-standardised features \\
+Licences & Data: Kermani--Esmaeili CC BY 4.0 (Mendeley Data); BIG~IDEAs PhysioNet ODC-By; STUBA ePPG CC0.  Encoders: PaPaGei code BSD-3-Clause, weights Zenodo 13983110 (no licence stated); Pulse-PPG MIT (code and weights, Zenodo 17345536); AnyPPG checkpoint from GitHub PKUDigitalHealth/AnyPPG (no licence file) \\
+\bottomrule
+\end{longtable}
+
+\section*{S3. Cohort characteristics}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+ & \textbf{Kermani--Esmaeili} & \textbf{BIG~IDEAs} & \textbf{STUBA ePPG} \\
+\midrule
+Subjects & \m{mendNSubjects} & \m{bigNSubjects} & \m{stubaNSubjects} \\
+Male / female & \m{mendNMale} / \m{mendNFemale} & \m{bigNMale} / \m{bigNFemale} & \m{stubaNMale} / \m{stubaNFemale} \\
+Age (years) & \m{mendAgeMin}--\m{mendAgeMax} & 35--65 (inclusion criterion) & \m{stubaAgeMin}--\m{stubaAgeMax} \\
+Diabetes & not stated & HbA1c \m{bigHbAOneCMin}--\m{bigHbAOneCMax}\% & \m{stubaNDiabetic} T1DM \\
+Reference & Accu-Chek Active & Dexcom G6 CGM & Beurer GL49 \\
+Reference measurements & \m{mendNRecords} & \m{bigNRecordsAll} & \m{stubaNRecords} \\
+Glucose range (mg/dL) & \m{mendGlucoseMinAll}--\m{mendGlucoseMaxAll} & \m{bigGlucoseMinAll}--\m{bigGlucoseMaxAll} & \m{stubaGlucoseMinAll}--\m{stubaGlucoseMaxAll} \\
+$<70$ / $>180$ mg/dL & \m{mendHypoNAll} / \m{mendHyperNAll} & \m{bigHypoNAll} / \m{bigHyperNAll} & \m{stubaHypoNAll} / \m{stubaHyperNAll} \\
+Sensor & finger, 550 nm, 2175 Hz & wrist E4 BVP, 64 Hz & finger, 530/655/940 nm, 100 Hz \\
+\bottomrule
+\end{tabular}
+
+\section*{S4. All paired comparisons against the null}
+Every model-versus-null comparison in the paper (\m{nPairedComparisons} in total; $\star$: the pre-specified primary
+comparison, all others exploratory).  MAE of the (seed-ensemble) prediction in mg/dL; $\Delta$: paired MAE difference
+against the cohort's null (train mean; subject training-period mean on BIG~IDEAs) with its 95\% subject-cluster
+bootstrap interval.  ``better''/``worse'': interval entirely below/above zero.  \m{nSigBetter} intervals lie below zero and
+\m{nSigWorse} above; no correction for multiplicity is applied.
+
+\input{results_comparisons}
+
+\end{document}

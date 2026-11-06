@@ -1,0 +1,92 @@
+23:28:51 BIG IDEAs sub_001: 2056/2561 CGM readings have gap-free BVP
+23:28:51 BIG IDEAs sub_002: 1877/2119 CGM readings have gap-free BVP
+23:28:51 BIG IDEAs sub_003: 1392/2302 CGM readings have gap-free BVP
+23:28:51 BIG IDEAs sub_004: 1355/2164 CGM readings have gap-free BVP
+23:28:51 BIG IDEAs sub_005: 2385/2558 CGM readings have gap-free BVP
+23:28:51 BIG IDEAs sub_006: 1639/2847 CGM readings have gap-free BVP
+23:28:52 BIG IDEAs sub_007: 2062/2207 CGM readings have gap-free BVP
+23:28:52 BIG IDEAs sub_008: 2142/2505 CGM readings have gap-free BVP
+23:28:52 BIG IDEAs sub_009: 2090/2306 CGM readings have gap-free BVP
+23:28:52 BIG IDEAs sub_010: 2025/2148 CGM readings have gap-free BVP
+23:28:52 BIG IDEAs sub_011: 2160/2843 CGM readings have gap-free BVP
+23:28:52 BIG IDEAs sub_012: 1935/2169 CGM readings have gap-free BVP
+23:28:52 BIG IDEAs sub_013: 1876/1979 CGM readings have gap-free BVP
+23:28:52 BIG IDEAs sub_014: 1554/2240 CGM readings have gap-free BVP
+23:28:52 BIG IDEAs sub_015: 495/1673 CGM readings have gap-free BVP
+23:28:53 BIG IDEAs sub_016: 1824/2277 CGM readings have gap-free BVP
+23:28:53 BIG IDEAs: 57727 windows, 28867 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+23:31:36 views computed in 163 s for 57727 windows
+23:31:36 mean    seed 0 fold 1/1  n_train 40022 n_test 17325  MAE(win) 15.3
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3038: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+23:31:36 RESULT within_mean_seed0    MAE 15.28 RMSE 21.62 MARD 12.8% R2 +0.167 r 0.429 zoneA 78.8% (0 s)
+23:31:36 ridge   seed 0 fold 1/1  n_train 40022 n_test 17325  MAE(win) 17.3
+23:31:36 RESULT within_ridge_seed0   MAE 17.32 RMSE 23.85 MARD 14.9% R2 -0.013 r 0.052 zoneA 73.6% (0 s)
+23:32:31 1d      seed 0 fold 1/1  n_train 40022 n_test 17325  MAE(win) 17.0
+23:32:31 RESULT within_1d_seed0      MAE 16.94 RMSE 23.75 MARD 14.2% R2 -0.005 r 0.212 zoneA 75.0% (55 s)
+23:36:18 3d      seed 0 fold 1/1  n_train 40022 n_test 17325  MAE(win) 17.0
+23:36:19 RESULT within_3d_seed0      MAE 16.98 RMSE 23.77 MARD 14.3% R2 -0.007 r 0.196 zoneA 74.5% (228 s)
+23:44:16 2d      seed 0 fold 1/1  n_train 40022 n_test 17325  MAE(win) 17.1
+23:44:16 RESULT within_2d_seed0      MAE 16.97 RMSE 23.81 MARD 14.3% R2 -0.010 r 0.189 zoneA 74.7% (477 s)

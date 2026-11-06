@@ -1,0 +1,81 @@
+09:07:46 loaded papagei (5785612 params, 125 Hz) in 0 s
+09:07:47 Mendeley: 201 windows, 67 records, 23 subjects, glucose 88-183 (mean 115.0 +/- 18.6) mg/dL
+09:07:49 RESULT mendeley  papagei_seed0          MAE 14.75  r -0.009  zoneA 83.6
+09:07:50 STUBA ePPG (IR1): 1375 windows, 125 records, 24 subjects, glucose 40-304 (mean 111.4 +/- 55.8) mg/dL
+09:07:56 RESULT stuba     stuba_IR1_papagei_seed0 MAE 43.93  r -0.126  zoneA 32.8
+09:07:56 BIG IDEAs sub_001: 2056/2561 CGM readings have gap-free BVP
+09:07:57 BIG IDEAs sub_002: 1877/2119 CGM readings have gap-free BVP
+09:07:57 BIG IDEAs sub_003: 1392/2302 CGM readings have gap-free BVP
+09:07:57 BIG IDEAs sub_004: 1355/2164 CGM readings have gap-free BVP
+09:07:58 BIG IDEAs sub_005: 2385/2558 CGM readings have gap-free BVP
+09:07:58 BIG IDEAs sub_006: 1639/2847 CGM readings have gap-free BVP
+09:07:59 BIG IDEAs sub_007: 2062/2207 CGM readings have gap-free BVP
+09:07:59 BIG IDEAs sub_008: 2142/2505 CGM readings have gap-free BVP
+09:08:00 BIG IDEAs sub_009: 2090/2306 CGM readings have gap-free BVP
+09:08:00 BIG IDEAs sub_010: 2025/2148 CGM readings have gap-free BVP
+09:08:01 BIG IDEAs sub_011: 2160/2843 CGM readings have gap-free BVP
+09:08:01 BIG IDEAs sub_012: 1935/2169 CGM readings have gap-free BVP
+09:08:01 BIG IDEAs sub_013: 1876/1979 CGM readings have gap-free BVP
+09:08:02 BIG IDEAs sub_014: 1554/2240 CGM readings have gap-free BVP
+09:08:02 BIG IDEAs sub_015: 495/1673 CGM readings have gap-free BVP
+09:08:02 BIG IDEAs sub_016: 1824/2277 CGM readings have gap-free BVP
+09:08:03 BIG IDEAs: 57727 windows, 28867 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+09:09:22 papagei BIG IDEAs: 28860 readings, 57706 segments
+09:31:56 RESULT bigideas within_papagei_seed0     MAE 17.24  r 0.075  within-r 0.02662738409776647
+09:31:58 RESULT bigideas within_papagei_res_seed0 MAE 15.07  r 0.433  within-r 0.03170688591761718
+09:31:58 loaded anyppg (4044272 params, 125 Hz) in 0 s
+09:31:58 Mendeley: 201 windows, 67 records, 23 subjects, glucose 88-183 (mean 115.0 +/- 18.6) mg/dL
+09:32:00 RESULT mendeley  anyppg_seed0           MAE 14.91  r -0.333  zoneA 85.1
+09:32:00 STUBA ePPG (IR1): 1375 windows, 125 records, 24 subjects, glucose 40-304 (mean 111.4 +/- 55.8) mg/dL
+09:32:04 RESULT stuba     stuba_IR1_anyppg_seed0 MAE 43.51  r 0.045  zoneA 30.4
+09:32:05 BIG IDEAs sub_001: 2056/2561 CGM readings have gap-free BVP
+09:32:05 BIG IDEAs sub_002: 1877/2119 CGM readings have gap-free BVP
+09:32:05 BIG IDEAs sub_003: 1392/2302 CGM readings have gap-free BVP
+09:32:05 BIG IDEAs sub_004: 1355/2164 CGM readings have gap-free BVP
+09:32:05 BIG IDEAs sub_005: 2385/2558 CGM readings have gap-free BVP
+09:32:05 BIG IDEAs sub_006: 1639/2847 CGM readings have gap-free BVP
+09:32:05 BIG IDEAs sub_007: 2062/2207 CGM readings have gap-free BVP
+09:32:06 BIG IDEAs sub_008: 2142/2505 CGM readings have gap-free BVP
+09:32:06 BIG IDEAs sub_009: 2090/2306 CGM readings have gap-free BVP
+09:32:06 BIG IDEAs sub_010: 2025/2148 CGM readings have gap-free BVP
+09:32:06 BIG IDEAs sub_011: 2160/2843 CGM readings have gap-free BVP
+09:32:06 BIG IDEAs sub_012: 1935/2169 CGM readings have gap-free BVP
+09:32:06 BIG IDEAs sub_013: 1876/1979 CGM readings have gap-free BVP
+09:32:06 BIG IDEAs sub_014: 1554/2240 CGM readings have gap-free BVP
+09:32:06 BIG IDEAs sub_015: 495/1673 CGM readings have gap-free BVP
+09:32:07 BIG IDEAs sub_016: 1824/2277 CGM readings have gap-free BVP
+09:32:07 BIG IDEAs: 57727 windows, 28867 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+09:32:52 anyppg BIG IDEAs: 28860 readings, 57706 segments
+10:23:48 RESULT bigideas within_anyppg_seed0      MAE 16.79  r 0.227  within-r 0.06527813752307524
+10:23:50 RESULT bigideas within_anyppg_res_seed0  MAE 15.08  r 0.445  within-r 0.16990443780653924
+10:23:51 loaded pulseppg (28497920 params, 50 Hz) in 0 s
+10:23:52 Mendeley: 201 windows, 67 records, 23 subjects, glucose 88-183 (mean 115.0 +/- 18.6) mg/dL
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/torch/nn/modules/module.py:1798: UserWarning: input's size at dim=1 does not match num_features. You can silence this warning by not passing in num_features, which is not used because affine=False
+  return forward_call(*args, **kwargs)
+10:23:53 RESULT mendeley  pulseppg_seed0         MAE 14.21  r 0.144  zoneA 80.6
+10:23:55 STUBA ePPG (IR1): 1375 windows, 125 records, 24 subjects, glucose 40-304 (mean 111.4 +/- 55.8) mg/dL
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/torch/nn/modules/module.py:1798: UserWarning: input's size at dim=1 does not match num_features. You can silence this warning by not passing in num_features, which is not used because affine=False
+  return forward_call(*args, **kwargs)
+10:23:59 RESULT stuba     stuba_IR1_pulseppg_seed0 MAE 44.58  r -0.161  zoneA 32.0
+10:24:00 BIG IDEAs sub_001: 2056/2561 CGM readings have gap-free BVP
+10:24:00 BIG IDEAs sub_002: 1877/2119 CGM readings have gap-free BVP
+10:24:00 BIG IDEAs sub_003: 1392/2302 CGM readings have gap-free BVP
+10:24:00 BIG IDEAs sub_004: 1355/2164 CGM readings have gap-free BVP
+10:24:00 BIG IDEAs sub_005: 2385/2558 CGM readings have gap-free BVP
+10:24:00 BIG IDEAs sub_006: 1639/2847 CGM readings have gap-free BVP
+10:24:01 BIG IDEAs sub_007: 2062/2207 CGM readings have gap-free BVP
+10:24:01 BIG IDEAs sub_008: 2142/2505 CGM readings have gap-free BVP
+10:24:01 BIG IDEAs sub_009: 2090/2306 CGM readings have gap-free BVP
+10:24:01 BIG IDEAs sub_010: 2025/2148 CGM readings have gap-free BVP
+10:24:01 BIG IDEAs sub_011: 2160/2843 CGM readings have gap-free BVP
+10:24:01 BIG IDEAs sub_012: 1935/2169 CGM readings have gap-free BVP
+10:24:02 BIG IDEAs sub_013: 1876/1979 CGM readings have gap-free BVP
+10:24:02 BIG IDEAs sub_014: 1554/2240 CGM readings have gap-free BVP
+10:24:02 BIG IDEAs sub_015: 495/1673 CGM readings have gap-free BVP
+10:24:02 BIG IDEAs sub_016: 1824/2277 CGM readings have gap-free BVP
+10:24:02 BIG IDEAs: 57727 windows, 28867 records, 16 subjects, glucose 40-261 (mean 114.5 +/- 22.8) mg/dL
+10:24:28 pulseppg BIG IDEAs: 28860 readings, 28860 segments
+/Users/namangarg/.venvs/ppgfusion/lib/python3.12/site-packages/torch/nn/modules/module.py:1798: UserWarning: input's size at dim=1 does not match num_features. You can silence this warning by not passing in num_features, which is not used because affine=False
+  return forward_call(*args, **kwargs)
+13:32:15 RESULT bigideas within_pulseppg_seed0    MAE 16.99  r 0.147  within-r 0.04481313274896312
+13:32:16 RESULT bigideas within_pulseppg_res_seed0 MAE 15.01  r 0.440  within-r 0.06762684420905085
