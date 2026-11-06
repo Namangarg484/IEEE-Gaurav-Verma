@@ -1,0 +1,4 @@
+23:59:42 67 signals, 23 subjects, 300 points at 30 Hz
+00:17:42 RESULT C seed 0: null 14.52 | 1-NN 17.90 | CNN-GRU 16.93 (R2 -0.62, zone A 72%) [1081 s]
+00:38:16 RESULT C seed 1: null 14.52 | 1-NN 19.10 | CNN-GRU 16.10 (R2 -0.48, zone A 75%) [1234 s]
+00:54:25 RESULT C seed 2: null 14.52 | 1-NN 18.31 | CNN-GRU 17.55 (R2 -0.67, zone A 72%) [969 s]

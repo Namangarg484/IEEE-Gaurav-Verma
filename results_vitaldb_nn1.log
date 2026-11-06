@@ -1,0 +1,14 @@
+00:59:17 VitalDB SBP: 64236 windows, 21412 segments, 558 cases, 556 patients
+00:59:19 RESULT sbp_segment_random_mean_seed0          MAE 16.21  ME +0.00 SD 20.40  r -0.014  wr -0.00  delta --
+01:00:16 RESULT sbp_segment_random_nn1_seed0           MAE 17.50  ME -0.89 SD 22.26  r 0.189  wr 0.18  delta +1.29 [+1.01,+1.55]
+01:00:16 RESULT sbp_subject_kfold_mean_seed0           MAE 16.22  ME -0.00 SD 20.41  r -0.053  wr --  delta --
+01:00:53 RESULT sbp_subject_kfold_nn1_seed0            MAE 17.96  ME -0.62 SD 22.74  r 0.154  wr 0.16  delta +1.74 [+1.47,+2.02]
+01:00:53 RESULT sbp_personal_mean_seed0                MAE 13.81  ME -2.32 SD 18.18  r 0.472  wr --  delta --
+01:01:06 RESULT sbp_personal_nn1_seed0                 MAE 18.04  ME -2.16 SD 22.85  r 0.147  wr 0.15  delta +4.24 [+3.65,+4.83]
+01:02:06 VitalDB DBP: 64236 windows, 21412 segments, 558 cases, 556 patients
+01:02:08 RESULT dbp_segment_random_mean_seed0          MAE 9.96  ME -0.00 SD 12.54  r -0.016  wr -0.01  delta --
+01:03:07 RESULT dbp_segment_random_nn1_seed0           MAE 10.80  ME -1.03 SD 13.71  r 0.192  wr 0.18  delta +0.84 [+0.64,+1.03]
+01:03:07 RESULT dbp_subject_kfold_mean_seed0           MAE 9.97  ME +0.00 SD 12.55  r -0.047  wr --  delta --
+01:03:58 RESULT dbp_subject_kfold_nn1_seed0            MAE 11.11  ME -0.85 SD 14.06  r 0.148  wr 0.17  delta +1.14 [+0.94,+1.33]
+01:03:58 RESULT dbp_personal_mean_seed0                MAE 7.40  ME -1.22 SD 9.71  r 0.632  wr --  delta --
+01:04:11 RESULT dbp_personal_nn1_seed0                 MAE 11.11  ME -1.42 SD 13.95  r 0.155  wr 0.14  delta +3.71 [+3.35,+4.08]

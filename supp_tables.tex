@@ -55,32 +55,214 @@ random windows (leaky) & GBM & 100.0\,\% (-9.3) & 100.0\,\% (-11.6) & 100.0\,\% 
 \textbf{Target} & \textbf{Split} & \textbf{Model} & \textbf{MAE} & \textbf{RMSE} & $r$ & $\Delta$ [95\% CI] \\
 \midrule
 SBP & random segments & Train mean (null) & 16.3 & 20.4 & -0.16 & -- \\
+SBP & random segments & 1-NN copy probe & 16.9 & 21.8 & 0.22 & +0.6 [-0.88, +2.09] \\
 SBP & random segments & Ridge, demographics & 13.7 & 18.0 & 0.47 & -2.6 [-3.65, -1.51] \\
 SBP & random segments & Ridge, PPG features & 15.0 & 19.1 & 0.35 & -1.3 [-1.84, -0.72] \\
 SBP & random segments & Ridge, PPG + demogr. & 13.6 & 17.5 & 0.51 & -2.7 [-3.71, -1.65] \\
+SBP & random segments & GBM, PPG features & 13.0 & 17.3 & 0.53 & -3.3 [-4.40, -2.16] \\
 SBP & random segments & GBM, PPG + demogr. & 9.4 & 11.9 & 0.82 & -6.8 [-8.28, -5.53] \\
 SBP & random segments & 1-D CNN & 12.2$\pm$0.2 & 15.7$\pm$0.2 & 0.64$\pm$0.01 & -4.1 [-5.14, -2.55] \\
 \midrule
 SBP & subject-wise & Train mean (null) & 16.2 & 20.4 & -0.12 & -- \\
+SBP & subject-wise & 1-NN copy probe & 17.1 & 22.4 & 0.17 & +0.8 [-0.71, +2.38] \\
 SBP & subject-wise & Ridge, demographics & 13.9 & 18.3 & 0.44 & -2.4 [-3.47, -1.30] \\
 SBP & subject-wise & Ridge, PPG features & 15.1 & 19.3 & 0.31 & -1.1 [-1.73, -0.55] \\
 SBP & subject-wise & Ridge, PPG + demogr. & 13.8 & 18.0 & 0.47 & -2.4 [-3.48, -1.35] \\
+SBP & subject-wise & GBM, PPG features & 14.5 & 18.9 & 0.38 & -1.7 [-2.82, -0.56] \\
 SBP & subject-wise & GBM, PPG + demogr. & 14.6 & 18.6 & 0.44 & -1.7 [-3.13, -0.30] \\
 SBP & subject-wise & 1-D CNN & 13.4$\pm$0.1 & 17.2$\pm$0.1 & 0.54$\pm$0.01 & -2.9 [-4.21, -1.36] \\
 \midrule
 DBP & random segments & Train mean (null) & 8.7 & 11.1 & -0.06 & -- \\
+DBP & random segments & 1-NN copy probe & 9.9 & 12.6 & 0.12 & +1.2 [+0.33, +2.07] \\
 DBP & random segments & Ridge, demographics & 8.4 & 10.7 & 0.26 & -0.3 [-0.65, +0.03] \\
 DBP & random segments & Ridge, PPG features & 8.6 & 10.9 & 0.17 & -0.1 [-0.25, +0.09] \\
 DBP & random segments & Ridge, PPG + demogr. & 8.1 & 10.4 & 0.35 & -0.6 [-1.01, -0.18] \\
+DBP & random segments & GBM, PPG features & 8.1 & 10.4 & 0.36 & -0.6 [-1.17, -0.04] \\
 DBP & random segments & GBM, PPG + demogr. & 5.5 & 7.2 & 0.78 & -3.2 [-3.89, -2.48] \\
 DBP & random segments & 1-D CNN & 7.2$\pm$0.1 & 9.3$\pm$0.2 & 0.55$\pm$0.03 & -1.5 [-2.02, -0.72] \\
 \midrule
 DBP & subject-wise & Train mean (null) & 8.7 & 11.1 & -0.05 & -- \\
+DBP & subject-wise & 1-NN copy probe & 10.2 & 13.1 & -0.00 & +1.4 [+0.62, +2.23] \\
 DBP & subject-wise & Ridge, demographics & 8.5 & 10.8 & 0.23 & -0.2 [-0.53, +0.16] \\
 DBP & subject-wise & Ridge, PPG features & 8.7 & 11.1 & 0.07 & +0.0 [-0.16, +0.19] \\
 DBP & subject-wise & Ridge, PPG + demogr. & 8.4 & 10.6 & 0.30 & -0.4 [-0.81, +0.07] \\
+DBP & subject-wise & GBM, PPG features & 8.6 & 11.0 & 0.21 & -0.1 [-0.64, +0.43] \\
 DBP & subject-wise & GBM, PPG + demogr. & 8.2 & 10.4 & 0.38 & -0.6 [-1.25, +0.12] \\
 DBP & subject-wise & 1-D CNN & 7.9$\pm$0.1 & 10.2$\pm$0.1 & 0.42$\pm$0.01 & -0.8 [-1.39, -0.05] \\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+
+\newcommand{\suppReauditTable}{
+\begin{table}[h!]
+\caption{Re-audit of Soliman \emph{et al.} (arXiv:2411.11094), every seed.  MAE and RMSE in mg/dL; $\Delta$: paired MAE difference against the null with its 95\,\% subject-cluster interval; A: Clarke zone A (\%).  Stated elements reproduced: 0.5--8 Hz band-pass, 30 Hz, Gaussian-noise augmentation (67 to 268 samples), shuffled 10-fold CV.  Unstated elements resolved as described in the main text.}
+\label{tab:s_reaudit}
+\centering
+\small
+\begin{tabular}{@{}lllccccc@{}}
+\toprule
+\textbf{Protocol} & \textbf{Seed} & \textbf{Model} & \textbf{MAE} & \textbf{RMSE} & $R^2$ & \textbf{A} & $\Delta$ [95\% CI] \\
+\midrule
+A: augment, then split samples & 0 & Null & 14.45 & 18.65 & -0.01 & 85 & -- \\
+A: augment, then split samples & 0 & 1-NN copy probe & 0.40 & 3.30 & 0.97 & 100 & -14.05 [-16.95, -11.74] \\
+A: augment, then split samples & 0 & CNN--GRU & 1.12 & 3.47 & 0.97 & 100 & -13.33 [-16.29, -11.05] \\
+A: augment, then split samples & 0, noise $\times$0.5 & Null & 14.45 & 18.65 & -0.01 & 85 & -- \\
+A: augment, then split samples & 0, noise $\times$0.5 & 1-NN copy probe & 0.40 & 3.30 & 0.97 & 100 & -14.05 [-16.95, -11.74] \\
+A: augment, then split samples & 0, noise $\times$0.5 & CNN--GRU & 0.74 & 2.76 & 0.98 & 100 & -13.71 [-16.67, -11.43] \\
+A: augment, then split samples & 0, noise $\times$2 & Null & 14.45 & 18.65 & -0.01 & 85 & -- \\
+A: augment, then split samples & 0, noise $\times$2 & 1-NN copy probe & 0.40 & 3.30 & 0.97 & 100 & -14.05 [-16.95, -11.74] \\
+A: augment, then split samples & 0, noise $\times$2 & CNN--GRU & 1.52 & 3.77 & 0.96 & 100 & -12.93 [-15.81, -10.69] \\
+A: augment, then split samples & 1 & Null & 14.51 & 18.70 & -0.01 & 84 & -- \\
+A: augment, then split samples & 1 & 1-NN copy probe & 0.00 & 0.00 & 1.00 & 100 & -14.51 [-17.23, -12.24] \\
+A: augment, then split samples & 1 & CNN--GRU & 1.60 & 6.17 & 0.89 & 98 & -12.91 [-16.29, -9.66] \\
+A: augment, then split samples & 2 & Null & 14.45 & 18.64 & -0.00 & 85 & -- \\
+A: augment, then split samples & 2 & 1-NN copy probe & 0.00 & 0.00 & 1.00 & 100 & -14.45 [-17.27, -12.15] \\
+A: augment, then split samples & 2 & CNN--GRU & 0.68 & 0.92 & 1.00 & 100 & -13.76 [-16.48, -11.46] \\
+\midrule
+B: split recordings, augment train & 0 & Null & 14.60 & 18.83 & -0.03 & 85 & -- \\
+B: split recordings, augment train & 0 & 1-NN copy probe & 18.25 & 25.07 & -0.82 & 66 & +3.65 [+0.72, +6.36] \\
+B: split recordings, augment train & 0 & CNN--GRU & 15.21 & 20.12 & -0.17 & 82 & +0.60 [-1.44, +2.75] \\
+B: split recordings, augment train & 1 & Null & 14.69 & 18.99 & -0.04 & 85 & -- \\
+B: split recordings, augment train & 1 & 1-NN copy probe & 18.51 & 25.22 & -0.84 & 66 & +3.81 [+0.83, +6.47] \\
+B: split recordings, augment train & 1 & CNN--GRU & 16.02 & 21.44 & -0.33 & 78 & +1.32 [-0.95, +3.95] \\
+B: split recordings, augment train & 2 & Null & 14.66 & 18.97 & -0.04 & 85 & -- \\
+B: split recordings, augment train & 2 & 1-NN copy probe & 18.69 & 25.29 & -0.85 & 66 & +4.03 [+1.23, +6.78] \\
+B: split recordings, augment train & 2 & CNN--GRU & 16.39 & 22.21 & -0.43 & 76 & +1.74 [-0.12, +3.81] \\
+\midrule
+C: split subjects, augment train & 0 & Null & 14.52 & 18.80 & -0.02 & 84 & -- \\
+C: split subjects, augment train & 0 & 1-NN copy probe & 18.22 & 24.90 & -0.79 & 69 & +3.70 [+0.84, +6.50] \\
+C: split subjects, augment train & 0 & CNN--GRU & 16.39 & 21.76 & -0.37 & 75 & +1.87 [+0.10, +3.81] \\
+C: split subjects, augment train & 1 & Null & 14.52 & 18.80 & -0.02 & 84 & -- \\
+C: split subjects, augment train & 1 & 1-NN copy probe & 17.90 & 24.70 & -0.76 & 70 & +3.37 [+0.65, +5.87] \\
+C: split subjects, augment train & 1 & CNN--GRU & 16.66 & 23.20 & -0.56 & 75 & +2.13 [-0.44, +4.83] \\
+C: split subjects, augment train & 2 & Null & 14.52 & 18.80 & -0.02 & 84 & -- \\
+C: split subjects, augment train & 2 & 1-NN copy probe & 18.28 & 24.91 & -0.79 & 69 & +3.76 [+0.98, +6.52] \\
+C: split subjects, augment train & 2 & CNN--GRU & 15.41 & 20.94 & -0.27 & 84 & +0.89 [-1.13, +2.90] \\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+
+\newcommand{\suppVitaldbTable}{
+\begin{table}[h!]
+\caption{VitalDB arterial-line blood pressure, all rows.  MAE, mean error (ME) and SD of error in mmHg (AAMI/ISO 81060-2 limits: $|$ME$|\le5$, SD $\le8$); $r$: pooled correlation; $r_w$: median within-case correlation; $\Delta$: paired MAE difference against the protocol's null with its 95\,\% patient-cluster interval.}
+\label{tab:s_vitaldb}
+\centering
+\scriptsize
+\begin{tabular}{@{}lllcccccc@{}}
+\toprule
+\textbf{Target} & \textbf{Split} & \textbf{Model} & \textbf{MAE} & \textbf{ME} & \textbf{SD} & $r$ & $r_w$ & $\Delta$ [95\% CI] \\
+\midrule
+SBP & random segments & Null (train mean; case mean if personal) & 16.2 & 0.0 & 20.4 & -0.01 & -0.00 & -- \\
+SBP & random segments & 1-NN copy probe & 17.5 & -0.9 & 22.3 & 0.19 & 0.18 & +1.29 [+1.01, +1.55] \\
+SBP & random segments & Ridge, demographics & 16.2 & -0.0 & 20.4 & 0.05 & -0.02 & -0.02 [-0.08, +0.03] \\
+SBP & random segments & Ridge, PPG features & 15.3 & 0.0 & 19.3 & 0.33 & 0.53 & -0.95 [-1.16, -0.74] \\
+SBP & random segments & Ridge, PPG + demogr. & 15.2 & 0.0 & 19.2 & 0.34 & 0.52 & -1.03 [-1.23, -0.83] \\
+SBP & random segments & GBM, PPG features & 14.5 & -0.0 & 18.5 & 0.43 & 0.58 & -1.66 [-1.92, -1.40] \\
+SBP & random segments & GBM, PPG + demogr. & 12.1 & -0.0 & 15.6 & 0.67 & 0.58 & -4.13 [-4.52, -3.76] \\
+SBP & random segments & 1-D CNN & 13.1 & -0.3 & 16.7 & 0.57 & 0.72 & -3.07 [-3.45, -2.69] \\
+\midrule
+SBP & subject-wise & Null (train mean; case mean if personal) & 16.2 & -0.0 & 20.4 & -0.05 & -- & -- \\
+SBP & subject-wise & 1-NN copy probe & 18.0 & -0.6 & 22.7 & 0.15 & 0.16 & +1.74 [+1.47, +2.02] \\
+SBP & subject-wise & Ridge, demographics & 16.2 & 0.0 & 20.4 & -0.00 & -- & +0.02 [-0.04, +0.07] \\
+SBP & subject-wise & Ridge, PPG features & 15.3 & 0.0 & 19.3 & 0.32 & 0.53 & -0.90 [-1.11, -0.69] \\
+SBP & subject-wise & Ridge, PPG + demogr. & 15.3 & 0.1 & 19.3 & 0.33 & 0.53 & -0.95 [-1.16, -0.74] \\
+SBP & subject-wise & GBM, PPG features & 14.9 & 0.1 & 18.9 & 0.38 & 0.56 & -1.35 [-1.63, -1.07] \\
+SBP & subject-wise & GBM, PPG + demogr. & 15.3 & 0.3 & 19.4 & 0.33 & 0.57 & -0.93 [-1.30, -0.56] \\
+SBP & subject-wise & 1-D CNN & 13.8 & -0.3 & 17.5 & 0.52 & 0.69 & -2.44 [-2.84, -2.07] \\
+\midrule
+SBP & personal, absolute & Null (train mean; case mean if personal) & 13.8 & -2.3 & 18.2 & 0.47 & -- & -- \\
+SBP & personal, absolute & 1-NN copy probe & 18.0 & -2.2 & 22.9 & 0.15 & 0.15 & +4.24 [+3.65, +4.83] \\
+SBP & personal, absolute & Ridge, demographics & 15.9 & -2.3 & 20.2 & 0.04 & -- & +2.08 [+1.48, +2.69] \\
+SBP & personal, absolute & Ridge, PPG features & 15.1 & -1.0 & 19.2 & 0.31 & 0.52 & +1.26 [+0.64, +1.91] \\
+SBP & personal, absolute & Ridge, PPG + demogr. & 15.0 & -1.0 & 19.1 & 0.32 & 0.52 & +1.18 [+0.58, +1.81] \\
+SBP & personal, absolute & GBM, PPG + demogr. & 12.8 & -0.9 & 16.6 & 0.57 & 0.53 & -0.99 [-1.44, -0.56] \\
+SBP & personal, absolute & 1-D CNN & 13.7 & -2.1 & 17.5 & 0.50 & 0.63 & -0.08 [-0.67, +0.52] \\
+\midrule
+SBP & personal, residual & Null (train mean; case mean if personal) & 13.8 & -2.3 & 18.2 & 0.47 & -- & -- \\
+SBP & personal, residual & Ridge, PPG features & 13.1 & -1.2 & 17.3 & 0.54 & 0.52 & -0.68 [-0.90, -0.47] \\
+SBP & personal, residual & GBM, PPG features & 12.8 & -1.0 & 16.9 & 0.57 & 0.52 & -0.99 [-1.24, -0.73] \\
+SBP & personal, residual & GBM, PPG + demogr. & 12.6 & -0.9 & 16.7 & 0.58 & 0.53 & -1.24 [-1.49, -1.00] \\
+SBP & personal, residual & 1-D CNN & 12.4 & -1.4 & 16.3 & 0.62 & 0.67 & -1.45 [-1.76, -1.14] \\
+\midrule
+DBP & random segments & Null (train mean; case mean if personal) & 10.0 & -0.0 & 12.5 & -0.02 & -0.01 & -- \\
+DBP & random segments & 1-NN copy probe & 10.8 & -1.0 & 13.7 & 0.19 & 0.18 & +0.84 [+0.64, +1.03] \\
+DBP & random segments & Ridge, demographics & 9.7 & -0.0 & 12.3 & 0.20 & -0.02 & -0.24 [-0.37, -0.11] \\
+DBP & random segments & Ridge, PPG features & 9.4 & -0.0 & 11.8 & 0.33 & 0.53 & -0.54 [-0.69, -0.40] \\
+DBP & random segments & Ridge, PPG + demogr. & 9.0 & 0.0 & 11.4 & 0.42 & 0.54 & -0.96 [-1.15, -0.76] \\
+DBP & random segments & GBM, PPG features & 9.0 & -0.0 & 11.4 & 0.42 & 0.52 & -0.97 [-1.16, -0.79] \\
+DBP & random segments & GBM, PPG + demogr. & 6.8 & -0.0 & 8.8 & 0.73 & 0.53 & -3.20 [-3.49, -2.92] \\
+DBP & random segments & 1-D CNN & 8.0 & -0.3 & 10.2 & 0.58 & 0.67 & -1.95 [-2.22, -1.70] \\
+\midrule
+DBP & subject-wise & Null (train mean; case mean if personal) & 10.0 & 0.0 & 12.5 & -0.05 & -- & -- \\
+DBP & subject-wise & 1-NN copy probe & 11.1 & -0.9 & 14.1 & 0.15 & 0.17 & +1.14 [+0.94, +1.33] \\
+DBP & subject-wise & Ridge, demographics & 9.8 & 0.0 & 12.3 & 0.18 & -- & -0.18 [-0.32, -0.05] \\
+DBP & subject-wise & Ridge, PPG features & 9.5 & 0.0 & 11.9 & 0.32 & 0.53 & -0.51 [-0.66, -0.35] \\
+DBP & subject-wise & Ridge, PPG + demogr. & 9.1 & 0.1 & 11.5 & 0.40 & 0.53 & -0.88 [-1.08, -0.69] \\
+DBP & subject-wise & GBM, PPG features & 9.3 & 0.1 & 11.7 & 0.36 & 0.51 & -0.71 [-0.91, -0.51] \\
+DBP & subject-wise & GBM, PPG + demogr. & 9.1 & 0.3 & 11.6 & 0.41 & 0.52 & -0.85 [-1.12, -0.57] \\
+DBP & subject-wise & 1-D CNN & 8.5 & -0.2 & 10.8 & 0.51 & 0.65 & -1.47 [-1.76, -1.21] \\
+\midrule
+DBP & personal, absolute & Null (train mean; case mean if personal) & 7.4 & -1.2 & 9.7 & 0.63 & -- & -- \\
+DBP & personal, absolute & 1-NN copy probe & 11.1 & -1.4 & 14.0 & 0.16 & 0.14 & +3.71 [+3.35, +4.08] \\
+DBP & personal, absolute & Ridge, demographics & 9.7 & -1.2 & 12.2 & 0.18 & -- & +2.27 [+1.91, +2.68] \\
+DBP & personal, absolute & Ridge, PPG features & 9.3 & -0.3 & 11.7 & 0.33 & 0.52 & +1.95 [+1.55, +2.37] \\
+DBP & personal, absolute & Ridge, PPG + demogr. & 9.0 & -0.3 & 11.4 & 0.40 & 0.50 & +1.59 [+1.20, +1.98] \\
+DBP & personal, absolute & GBM, PPG + demogr. & 7.2 & -0.1 & 9.3 & 0.67 & 0.51 & -0.19 [-0.45, +0.06] \\
+DBP & personal, absolute & 1-D CNN & 8.2 & -1.1 & 10.5 & 0.53 & 0.61 & +0.82 [+0.44, +1.22] \\
+\midrule
+DBP & personal, residual & Null (train mean; case mean if personal) & 7.4 & -1.2 & 9.7 & 0.63 & -- & -- \\
+DBP & personal, residual & Ridge, PPG features & 7.0 & -0.6 & 9.2 & 0.68 & 0.50 & -0.39 [-0.51, -0.27] \\
+DBP & personal, residual & GBM, PPG features & 6.9 & -0.5 & 9.1 & 0.69 & 0.51 & -0.51 [-0.64, -0.36] \\
+DBP & personal, residual & GBM, PPG + demogr. & 6.8 & -0.4 & 9.0 & 0.70 & 0.51 & -0.62 [-0.75, -0.48] \\
+DBP & personal, residual & 1-D CNN & 6.6 & -0.8 & 8.6 & 0.73 & 0.68 & -0.78 [-0.94, -0.61] \\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+
+\newcommand{\suppReviewTable}{
+\begin{table}[h!]
+\caption{Additional validation.  Detector stress tests (100 draws each); copy probe on the Kermani--Esmaeili ladder; decision-rule false-claim rate with no signal (exact binomial 95\,\% CI); detection rate of the blood-pressure signal when the honest predictions are subsampled to glucose-cohort sizes (500 draws; models trained on the full cohort); seed-ensemble decisions.}
+\label{tab:s_review}
+\centering
+\small
+\begin{tabular}{@{}p{7.2cm}p{6.8cm}@{}}
+\toprule
+\textbf{Analysis} & \textbf{Result} \\
+\midrule
+Shuffled cross-join, $k=3$ & sensitivity 0\,\% (whole column), 0\,\% (block scan) \\
+Shuffled cross-join, $k=7$ & sensitivity 0\,\% (whole column), 0\,\% (block scan) \\
+Shuffled cross-join, $k=10$ & sensitivity 0\,\% (whole column), 0\,\% (block scan) \\
+Genuine table stored window-major, 3 records & false alarm 100\,\% / 100\,\%; record order: clean \\
+Genuine table stored window-major, 10 records & false alarm 100\,\% / 100\,\%; record order: clean \\
+Genuine table stored window-major, 30 records & false alarm 100\,\% / 100\,\%; record order: clean \\
+Genuine table stored window-major, 60 records & false alarm 0\,\% / 0\,\%; record order: clean \\
+\midrule
+Copy probe (Euclidean), random windows & $\Delta$ +0.12 [-2.37, +2.27] mg/dL \\
+Copy probe (shift-invariant), random windows & $\Delta$ -2.70 [-5.35, +0.03] mg/dL \\
+Copy probe (Euclidean), random recordings & $\Delta$ +0.42 [-1.16, +2.19] mg/dL \\
+Copy probe (shift-invariant), random recordings & $\Delta$ -0.44 [-2.50, +1.86] mg/dL \\
+Copy probe (Euclidean), subject-wise & $\Delta$ +1.27 [-0.12, +2.76] mg/dL \\
+Copy probe (shift-invariant), subject-wise & $\Delta$ -0.51 [-3.03, +1.94] mg/dL \\
+\midrule
+No signal, subject-wise, ridge (1000 cohorts) & false claims 0.4\,\% [0.1, 1.0] \\
+No signal, subject-wise, gbm (1000 cohorts) & false claims 0.5\,\% [0.2, 1.2] \\
+No signal, random windows, ridge (1000 cohorts) & false claims 15.8\,\% [13.6, 18.2] \\
+No signal, random windows, gbm (1000 cohorts) & false claims 99.9\,\% [99.4, 100.0] \\
+\midrule
+VitalDB SBP, 23 patients $\times$ 3 segments (1-D CNN) & detected in 46\,\% of draws (mean $\Delta$ -2.45) \\
+VitalDB SBP, 16 patients $\times$ all (1-D CNN) & detected in 63\,\% of draws (mean $\Delta$ -2.46) \\
+PPG-BP SBP, 23 subjects (1-D CNN) & detected in 28\,\% of draws (mean $\Delta$ -2.95) \\
+VitalDB DBP, 23 patients $\times$ 3 segments (1-D CNN) & detected in 43\,\% of draws (mean $\Delta$ -1.52) \\
+VitalDB DBP, 16 patients $\times$ all (1-D CNN) & detected in 50\,\% of draws (mean $\Delta$ -1.45) \\
+PPG-BP DBP, 23 subjects (1-D CNN) & detected in 15\,\% of draws (mean $\Delta$ -0.86) \\
+\midrule
+PPG-BP SBP 1-D CNN, seed ensemble of 3 & MAE 13.31, $\Delta$ -2.94 [-4.37, -1.55] \\
+PPG-BP DBP 1-D CNN, seed ensemble of 3 & MAE 7.90, $\Delta$ -0.83 [-1.49, -0.16] \\
+Re-audit protocol B, CNN--GRU seed ensemble of 3 & MAE 15.44 (null 14.60), $\Delta$ +0.84 [-0.80, +2.63] \\
+Re-audit protocol C, CNN--GRU seed ensemble of 3 & MAE 15.67 (null 14.52), $\Delta$ +1.15 [-0.87, +3.11] \\
 \bottomrule
 \end{tabular}
 \end{table}

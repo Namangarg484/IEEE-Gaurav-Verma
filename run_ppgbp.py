@@ -93,6 +93,9 @@ def folds_for(ws, protocol, seed):
 def fit_classical(name, F, y, tr, te):
     if name == "mean":
         return np.full(len(te), y[tr].mean(), np.float32)
+    if name == "nn1":                                   # copy probe: 1-NN on the raw signal
+        from sklearn.neighbors import KNeighborsRegressor
+        return KNeighborsRegressor(n_neighbors=1, algorithm="brute").fit(F[tr], y[tr]).predict(F[te]).astype(np.float32)
     if name.startswith("gbm"):
         m = HistGradientBoostingRegressor(max_iter=300, learning_rate=0.05, max_leaf_nodes=15, min_samples_leaf=10,
                                           l2_regularization=1.0, random_state=0)
@@ -127,7 +130,7 @@ def main() -> None:
     for target in args.targets:
         ws, demo = load_ppgbp(target)
         feats = handcrafted_features(ws.X)
-        F = {"ridge": feats, "demo": demo, "ridge+demo": np.hstack([feats, demo]), "gbm+demo": np.hstack([feats, demo])}
+        F = {"ridge": feats, "demo": demo, "ridge+demo": np.hstack([feats, demo]), "gbm+demo": np.hstack([feats, demo]), "nn1": ws.X, "gbm": feats}
         views = make_views(ws.X, which=("x1",)) if "1d" in args.models else None
         for protocol in args.protocols:
             null_df = None

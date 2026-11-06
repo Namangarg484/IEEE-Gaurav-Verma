@@ -1,0 +1,6 @@
+02:27:54 B gain 0.0 subject_kfold  ridge claims 0.004  mean diff +2.18
+02:27:54 B gain 0.0 subject_kfold  gbm   claims 0.005  mean diff +3.60
+02:27:54 B gain 0.0 window_random  ridge claims 0.158  mean diff -1.76
+02:27:54 B gain 0.0 window_random  gbm   claims 0.999  mean diff -9.39
+02:27:54 gain 0.0 done in 2248 s
+02:27:54 null-only calibration done in 2248 s

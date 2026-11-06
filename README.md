@@ -55,6 +55,8 @@ from iCloud sync).
 | `run_foundation_probes.py` | Ridge probes on frozen PaPaGei-S, Pulse-PPG and AnyPPG embeddings under the same protocols (absolute and residual targets on BIG IDEAs). |
 | `run_ppgbp.py` | PPG-BP (Liang et al. 2018, 219 subjects) systolic/diastolic BP under a leaky random-segment and an honest subject-wise split: shows the audit detects real signal. |
 | `validate_detectors.py` | Validation on known ground truth: cross-join detector sensitivity/specificity (global vs block scan, plus real negative/positive controls) and false-claim rate / power of the null-anchored decision rule under honest vs leaky protocols. |
+| `run_reaudit.py` | Re-audit of a published PPG→glucose claim (Soliman et al., arXiv:2411.11094): its stated pipeline with augmentation before vs. after the split, sample/recording/subject folds, a 1-NN copy probe and a CNN–GRU re-implementation. |
+| `scripts/fetch_vitaldb.py`, `run_vitaldb_bp.py` | VitalDB (CC BY 4.0) arterial-line blood pressure: quality-controlled 10-s finger-PPG segments with beat-wise SBP/DBP from 600 random surgical cases; random-segment, subject-wise and calibration-based personal protocols. |
 | `bootstrap_ci.py`, `stats_extra.py`, `clinical_metrics.py` | Subject-cluster bootstrap CIs; r CIs, Wilcoxon, sign tests, MDE, leverage; event metrics and reference-noise floors. |
 | `make_dataset_stats.py`, `make_results_macros.py` | Cohort facts and every number in the paper → `results_macros.tex`. |
 | `make_paper_figures.py`, `draw_architecture.py` | Figures → `figures/`. |
@@ -103,6 +105,13 @@ $PY bootstrap_ci.py && $PY stats_extra.py && $PY clinical_metrics.py && $PY make
 # PPG-BP generalisation (download the CC0 PPG-BP release from figshare into data.nosync/ppgbp/):
 $PY run_ppgbp.py --models mean ridge demo ridge+demo gbm+demo          # deterministic, one seed
 $PY run_ppgbp.py --models 1d --seeds 0 1 2
+# re-audit of a published glucose claim (~20 min per protocol; protocols can run in parallel):
+OMP_NUM_THREADS=2 $PY run_reaudit.py --protocols A B C --seeds 0 1 2
+# VitalDB blood pressure (downloads ~600 cases through the official client into data.nosync/vitaldb/):
+$PY -I scripts/fetch_vitaldb.py --n-cases 600 --workers 4
+OMP_NUM_THREADS=1 $PY run_vitaldb_bp.py --targets sbp dbp --protocols segment_random subject_kfold personal \
+    --models mean nn1 ridge demo ridge+demo gbm+demo 1d                          # ~2 h, the 1-D CNN dominates
+$PY run_ppgbp.py --models mean nn1                                               # copy probe on PPG-BP
 # validation of the audit itself (~25 min):
 OMP_NUM_THREADS=1 $PY validate_detectors.py --reps-a 30 --reps 200
 $PY make_results_macros.py && $PY make_paper_figures.py && $PY draw_architecture.py

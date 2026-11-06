@@ -119,6 +119,38 @@ def part_a(reps, rng):
     return out
 
 
+def part_a_stress(reps, rng):
+    """Failure modes of the cross-join detector, reported as limitations.
+
+    shuffled_crossjoin : a corrupted subject's cross-joined rows are randomly
+        permuted (the label multiset is unchanged, the cycle is destroyed).
+    window_major_genuine : a *genuine* table (one label per record) stored
+        window-major, i.e. window 1 of every record, then window 2 of every
+        record ...; its label column cycles with period = number of records.
+    """
+    out = {"shuffled_crossjoin": [], "window_major_genuine": []}
+    for k in (3, 7, 10):
+        hit_g = hit_l = 0
+        for _ in range(reps):
+            vals = np.round(rng.normal(115, 18, size=k))
+            col = vals[np.arange(k * 200) % k]
+            rng.shuffle(col)
+            hit_g += bool(detect_label_cycling(col)["cycling"]); hit_l += bool(detect_label_cycling_local(col)["cycling"])
+        out["shuffled_crossjoin"].append({"k": k, "global_sensitivity": hit_g / reps, "local_sensitivity": hit_l / reps})
+    for n_rec in (3, 10, 30, 60):
+        fa_g = fa_l = 0
+        for _ in range(reps):
+            labs = np.round(rng.normal(115, 18, size=n_rec))
+            col = np.tile(labs, 40)                      # 40 windows per record, window-major order
+            fa_g += bool(detect_label_cycling(col)["cycling"]); fa_l += bool(detect_label_cycling_local(col)["cycling"])
+            # the same table in record order (what the audit requires) is clean
+        rec_order = np.repeat(labs, 40)
+        out["window_major_genuine"].append({"n_records": n_rec, "global_false_alarm": fa_g / reps,
+                                            "local_false_alarm": fa_l / reps,
+                                            "record_order_flagged": bool(detect_label_cycling_local(rec_order)["cycling"])})
+    return out
+
+
 # --------------------------------------------------------------------------- #
 # (B) decision-rule calibration
 # --------------------------------------------------------------------------- #
@@ -170,9 +202,9 @@ def fit(model, F, y, tr, te):
     return RidgeCV(alphas=np.logspace(-2, 3, 12)).fit(sc.transform(F[tr]), y[tr]).predict(sc.transform(F[te]))
 
 
-def part_b(reps, rng):
+def part_b(reps, rng, gains=GAINS):
     acc = {}
-    for gain in GAINS:
+    for gain in gains:
         t0 = time.time()
         for rep in range(reps):
             X, y, subj, rec = make_cohort(100_000 * int(round(gain * 10)) + rep, gain)
@@ -204,7 +236,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--reps", type=int, default=60)
     ap.add_argument("--reps-a", type=int, default=50)
-    ap.add_argument("--parts", nargs="+", default=["a", "b"])
+    ap.add_argument("--parts", nargs="+", default=["a", "b"], help="a, b, stress, null (g=0 only, --reps cohorts)")
     args = ap.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s", datefmt="%H:%M:%S")
     logging.getLogger("ppgbench.integrity").setLevel(logging.ERROR)
@@ -215,6 +247,14 @@ def main() -> None:
         out["label_construction"] = part_a(args.reps_a, rng)
         json.dump(out, open(OUT, "w"), indent=2)
         log.info("part A done in %.0f s", time.time() - t0)
+    if "stress" in args.parts:
+        out["detector_stress"] = part_a_stress(args.reps_a, rng)
+        json.dump(out, open(OUT, "w"), indent=2)
+        log.info("stress done: %s", json.dumps(out["detector_stress"]))
+    if "null" in args.parts:
+        out["decision_rule_null"] = part_b(args.reps, rng, gains=(0.0,))
+        json.dump(out, open(OUT, "w"), indent=2)
+        log.info("null-only calibration done in %.0f s", time.time() - t0)
     if "b" in args.parts:
         out["decision_rule"] = part_b(args.reps, rng)
         json.dump(out, open(OUT, "w"), indent=2)

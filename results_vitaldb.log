@@ -1,0 +1,38 @@
+00:08:57 VitalDB SBP: 64236 windows, 21412 segments, 558 cases, 556 patients
+00:08:59 RESULT sbp_segment_random_mean_seed0          MAE 16.21  ME +0.00 SD 20.40  r -0.014  wr -0.00  delta --
+00:09:00 RESULT sbp_segment_random_ridge_seed0         MAE 15.26  ME +0.00 SD 19.28  r 0.330  wr 0.53  delta -0.95 [-1.16,-0.74]
+00:09:00 RESULT sbp_segment_random_demo_seed0          MAE 16.19  ME -0.00 SD 20.38  r 0.047  wr -0.02  delta -0.02 [-0.08,+0.03]
+00:09:01 RESULT sbp_segment_random_ridge+demo_seed0    MAE 15.18  ME +0.00 SD 19.19  r 0.343  wr 0.52  delta -1.03 [-1.23,-0.83]
+00:09:14 RESULT sbp_segment_random_gbm+demo_seed0      MAE 12.08  ME -0.04 SD 15.57  r 0.674  wr 0.58  delta -4.13 [-4.52,-3.76]
+00:34:23 RESULT sbp_segment_random_1d_seed0            MAE 13.14  ME -0.35 SD 16.75  r 0.571  wr 0.72  delta -3.07 [-3.45,-2.69]
+00:34:23 RESULT sbp_subject_kfold_mean_seed0           MAE 16.22  ME -0.00 SD 20.41  r -0.053  wr --  delta --
+00:34:24 RESULT sbp_subject_kfold_ridge_seed0          MAE 15.32  ME +0.03 SD 19.35  r 0.319  wr 0.53  delta -0.90 [-1.11,-0.69]
+00:34:25 RESULT sbp_subject_kfold_demo_seed0           MAE 16.24  ME +0.03 SD 20.44  r -0.003  wr --  delta +0.02 [-0.04,+0.07]
+00:34:26 RESULT sbp_subject_kfold_ridge+demo_seed0     MAE 15.27  ME +0.05 SD 19.30  r 0.326  wr 0.53  delta -0.95 [-1.16,-0.74]
+00:34:37 RESULT sbp_subject_kfold_gbm+demo_seed0       MAE 15.29  ME +0.34 SD 19.43  r 0.332  wr 0.57  delta -0.93 [-1.30,-0.56]
+00:57:06 RESULT sbp_subject_kfold_1d_seed0             MAE 13.78  ME -0.31 SD 17.47  r 0.518  wr 0.69  delta -2.44 [-2.84,-2.07]
+00:57:06 RESULT sbp_personal_mean_seed0                MAE 13.81  ME -2.32 SD 18.18  r 0.472  wr --  delta --
+00:57:06 RESULT sbp_personal_ridge_seed0               MAE 15.07  ME -1.05 SD 19.18  r 0.313  wr 0.52  delta +1.26 [+0.64,+1.91]
+00:57:07 RESULT sbp_personal_demo_seed0                MAE 15.88  ME -2.33 SD 20.17  r 0.041  wr --  delta +2.08 [+1.48,+2.69]
+00:57:07 RESULT sbp_personal_ridge+demo_seed0          MAE 14.99  ME -1.03 SD 19.11  r 0.322  wr 0.52  delta +1.18 [+0.58,+1.81]
+00:57:09 RESULT sbp_personal_gbm+demo_seed0            MAE 12.82  ME -0.86 SD 16.63  r 0.573  wr 0.53  delta -0.99 [-1.44,-0.56]
+01:00:20 RESULT sbp_personal_1d_seed0                  MAE 13.73  ME -2.07 SD 17.52  r 0.498  wr 0.63  delta -0.08 [-0.67,+0.52]
+01:01:29 VitalDB DBP: 64236 windows, 21412 segments, 558 cases, 556 patients
+01:01:30 RESULT dbp_segment_random_mean_seed0          MAE 9.96  ME -0.00 SD 12.54  r -0.016  wr -0.01  delta --
+01:01:31 RESULT dbp_segment_random_ridge_seed0         MAE 9.42  ME -0.00 SD 11.84  r 0.333  wr 0.53  delta -0.54 [-0.69,-0.40]
+01:01:32 RESULT dbp_segment_random_demo_seed0          MAE 9.72  ME -0.00 SD 12.28  r 0.204  wr -0.02  delta -0.24 [-0.37,-0.11]
+01:01:33 RESULT dbp_segment_random_ridge+demo_seed0    MAE 9.00  ME +0.00 SD 11.39  r 0.421  wr 0.54  delta -0.96 [-1.15,-0.76]
+01:01:43 RESULT dbp_segment_random_gbm+demo_seed0      MAE 6.76  ME -0.04 SD 8.77  r 0.735  wr 0.53  delta -3.20 [-3.49,-2.92]
+01:20:10 RESULT dbp_segment_random_1d_seed0            MAE 8.01  ME -0.28 SD 10.23  r 0.578  wr 0.67  delta -1.95 [-2.22,-1.70]
+01:20:10 RESULT dbp_subject_kfold_mean_seed0           MAE 9.97  ME +0.00 SD 12.55  r -0.047  wr --  delta --
+01:20:10 RESULT dbp_subject_kfold_ridge_seed0          MAE 9.46  ME +0.04 SD 11.89  r 0.319  wr 0.53  delta -0.51 [-0.66,-0.35]
+01:20:11 RESULT dbp_subject_kfold_demo_seed0           MAE 9.78  ME +0.03 SD 12.35  r 0.178  wr --  delta -0.18 [-0.32,-0.05]
+01:20:11 RESULT dbp_subject_kfold_ridge+demo_seed0     MAE 9.08  ME +0.06 SD 11.49  r 0.403  wr 0.53  delta -0.88 [-1.08,-0.69]
+01:20:17 RESULT dbp_subject_kfold_gbm+demo_seed0       MAE 9.12  ME +0.28 SD 11.55  r 0.407  wr 0.52  delta -0.85 [-1.12,-0.57]
+01:36:02 RESULT dbp_subject_kfold_1d_seed0             MAE 8.49  ME -0.15 SD 10.82  r 0.508  wr 0.65  delta -1.47 [-1.76,-1.21]
+01:36:02 RESULT dbp_personal_mean_seed0                MAE 7.40  ME -1.22 SD 9.71  r 0.632  wr --  delta --
+01:36:02 RESULT dbp_personal_ridge_seed0               MAE 9.35  ME -0.32 SD 11.75  r 0.328  wr 0.52  delta +1.95 [+1.55,+2.37]
+01:36:02 RESULT dbp_personal_demo_seed0                MAE 9.67  ME -1.23 SD 12.23  r 0.184  wr --  delta +2.27 [+1.91,+2.68]
+01:36:02 RESULT dbp_personal_ridge+demo_seed0          MAE 8.98  ME -0.29 SD 11.38  r 0.400  wr 0.50  delta +1.59 [+1.20,+1.98]
+01:36:03 RESULT dbp_personal_gbm+demo_seed0            MAE 7.20  ME -0.12 SD 9.34  r 0.665  wr 0.51  delta -0.19 [-0.45,+0.06]
+01:38:04 RESULT dbp_personal_1d_seed0                  MAE 8.22  ME -1.11 SD 10.53  r 0.531  wr 0.61  delta +0.82 [+0.44,+1.22]

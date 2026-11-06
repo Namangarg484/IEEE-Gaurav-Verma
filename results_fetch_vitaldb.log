@@ -1,0 +1,28 @@
+/Users/namangarg/Desktop/Gaurav Verma/scripts/fetch_vitaldb.py:108: DeprecationWarning: find_cases() relies on the per-track 'trks' index, which is deprecated and may be removed in a future release.
+  ids = sorted(int(i) for i in vitaldb.find_cases(["SNUADC/PLETH", "SNUADC/ART"]))
+23:44:59 3459 eligible cases; sampling 600
+23:45:52 25/600 cases, 838 segments so far
+23:46:45 50/600 cases, 1715 segments so far
+23:47:34 75/600 cases, 2494 segments so far
+23:48:37 100/600 cases, 3414 segments so far
+23:49:38 125/600 cases, 4344 segments so far
+23:50:35 150/600 cases, 5334 segments so far
+23:51:27 175/600 cases, 6262 segments so far
+23:52:12 200/600 cases, 7090 segments so far
+23:53:10 225/600 cases, 8010 segments so far
+23:54:14 250/600 cases, 8930 segments so far
+23:55:12 275/600 cases, 9922 segments so far
+23:56:11 300/600 cases, 10857 segments so far
+23:57:06 325/600 cases, 11732 segments so far
+23:57:47 350/600 cases, 12647 segments so far
+23:58:46 375/600 cases, 13559 segments so far
+23:59:39 400/600 cases, 14474 segments so far
+00:00:37 425/600 cases, 15383 segments so far
+00:01:27 450/600 cases, 16268 segments so far
+00:02:25 475/600 cases, 17162 segments so far
+00:03:29 500/600 cases, 17957 segments so far
+00:04:39 525/600 cases, 18832 segments so far
+00:05:26 550/600 cases, 19627 segments so far
+00:06:21 575/600 cases, 20515 segments so far
+00:07:19 600/600 cases, 21412 segments so far
+00:07:19 done: 558 cases with segments, 556 patients, 21412 segments

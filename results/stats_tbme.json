@@ -1,0 +1,108 @@
+{
+  "ppgbp_sbp_subject_kfold_1d_ensemble": {
+    "n_seeds": 3,
+    "mae": 13.30616982496195,
+    "diff_vs_null": -2.9430431887366773,
+    "diff_ci": [
+      -4.365340980479452,
+      -1.5459915923135483
+    ],
+    "n_records": 219
+  },
+  "ppgbp_dbp_subject_kfold_1d_ensemble": {
+    "n_seeds": 3,
+    "mae": 7.90019501978691,
+    "diff_vs_null": -0.8256240943683422,
+    "diff_ci": [
+      -1.4900297203957402,
+      -0.1646638426560133
+    ],
+    "n_records": 219
+  },
+  "reaudit_B_ensemble": {
+    "cnngru": {
+      "n_seeds": 3,
+      "mae": 15.443059003425713,
+      "diff_vs_null": 0.8392991143465179,
+      "diff_ci": [
+        -0.8020961895698673,
+        2.629790681331814
+      ]
+    },
+    "nn1": {
+      "n_seeds": 3,
+      "mae": 18.402985074626866,
+      "diff_vs_null": 3.799225185547671,
+      "diff_ci": [
+        0.8596228938979965,
+        6.57839600885652
+      ]
+    },
+    "null_mae": 14.603759889079194
+  },
+  "reaudit_C_ensemble": {
+    "cnngru": {
+      "n_seeds": 3,
+      "mae": 15.673048503018789,
+      "diff_vs_null": 1.1499060187189747,
+      "diff_ci": [
+        -0.8729518983146144,
+        3.1079973618061514
+      ]
+    },
+    "nn1": {
+      "n_seeds": 3,
+      "mae": 18.094527363184078,
+      "diff_vs_null": 3.571384878884268,
+      "diff_ci": [
+        0.8868715970961849,
+        6.224766955302578
+      ]
+    },
+    "null_mae": 14.523142484299814
+  },
+  "power_at_glucose_sizes": {
+    "vitaldb_sbp_23x3": {
+      "n_subjects": 23,
+      "per_subject": 3,
+      "reps": 500,
+      "detection_rate": 0.458,
+      "mean_diff": -2.4486617864637683
+    },
+    "vitaldb_sbp_16xall": {
+      "n_subjects": 16,
+      "per_subject": "all",
+      "reps": 500,
+      "detection_rate": 0.632,
+      "mean_diff": -2.458137175636418
+    },
+    "ppgbp_sbp_23x1": {
+      "n_subjects": 23,
+      "per_subject": 1,
+      "reps": 500,
+      "detection_rate": 0.276,
+      "mean_diff": -2.9546860953333343
+    },
+    "vitaldb_dbp_23x3": {
+      "n_subjects": 23,
+      "per_subject": 3,
+      "reps": 500,
+      "detection_rate": 0.43,
+      "mean_diff": -1.5212596185797103
+    },
+    "vitaldb_dbp_16xall": {
+      "n_subjects": 16,
+      "per_subject": "all",
+      "reps": 500,
+      "detection_rate": 0.502,
+      "mean_diff": -1.4524899030263223
+    },
+    "ppgbp_dbp_23x1": {
+      "n_subjects": 23,
+      "per_subject": 1,
+      "reps": 500,
+      "detection_rate": 0.146,
+      "mean_diff": -0.8566974875072461
+    }
+  }
+}

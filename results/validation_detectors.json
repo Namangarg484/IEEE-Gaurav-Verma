@@ -795,5 +795,88 @@
       "mean_diff": -30.095388669175176,
       "sd_diff": 3.456069524446176
     }
+  ],
+  "detector_stress": {
+    "shuffled_crossjoin": [
+      {
+        "k": 3,
+        "global_sensitivity": 0.0,
+        "local_sensitivity": 0.0
+      },
+      {
+        "k": 7,
+        "global_sensitivity": 0.0,
+        "local_sensitivity": 0.0
+      },
+      {
+        "k": 10,
+        "global_sensitivity": 0.0,
+        "local_sensitivity": 0.0
+      }
+    ],
+    "window_major_genuine": [
+      {
+        "n_records": 3,
+        "global_false_alarm": 1.0,
+        "local_false_alarm": 1.0,
+        "record_order_flagged": false
+      },
+      {
+        "n_records": 10,
+        "global_false_alarm": 1.0,
+        "local_false_alarm": 1.0,
+        "record_order_flagged": false
+      },
+      {
+        "n_records": 30,
+        "global_false_alarm": 1.0,
+        "local_false_alarm": 1.0,
+        "record_order_flagged": false
+      },
+      {
+        "n_records": 60,
+        "global_false_alarm": 0.0,
+        "local_false_alarm": 0.0,
+        "record_order_flagged": false
+      }
+    ]
+  },
+  "decision_rule_null": [
+    {
+      "signal_gain": 0.0,
+      "protocol": "subject_kfold",
+      "model": "ridge",
+      "reps": 1000,
+      "rejection_rate": 0.004,
+      "mean_diff": 2.1841234064639825,
+      "sd_diff": 2.5030816715523883
+    },
+    {
+      "signal_gain": 0.0,
+      "protocol": "subject_kfold",
+      "model": "gbm",
+      "reps": 1000,
+      "rejection_rate": 0.005,
+      "mean_diff": 3.5988651448299604,
+      "sd_diff": 2.9596937561180914
+    },
+    {
+      "signal_gain": 0.0,
+      "protocol": "window_random",
+      "model": "ridge",
+      "reps": 1000,
+      "rejection_rate": 0.158,
+      "mean_diff": -1.7610689094279937,
+      "sd_diff": 1.3893238937927819
+    },
+    {
+      "signal_gain": 0.0,
+      "protocol": "window_random",
+      "model": "gbm",
+      "reps": 1000,
+      "rejection_rate": 0.999,
+      "mean_diff": -9.387426093091785,
+      "sd_diff": 2.3455007276234965
+    }
   ]
 }

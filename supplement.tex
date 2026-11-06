@@ -32,7 +32,7 @@ Blood-Pressure Estimation}
 
 \section*{S1. TRIPOD+AI checklist}
 Items of the TRIPOD+AI statement~\cite{collins2024tripod} and where each is
-addressed (main paper: Sec.~I--VI; supplement: S2--S8).  Items that do not
+addressed (main paper: Sec.~I--VI; supplement: S2--S11).  Items that do not
 apply to an evaluation of public data are marked n/a.
 
 \begin{longtable}{@{}p{1.2cm}p{7.2cm}p{6.5cm}@{}}
@@ -42,25 +42,25 @@ apply to an evaluation of public data are marked n/a.
 1 & Title identifies study as developing/evaluating prediction models & Title, Abstract \\
 2 & Abstract: objectives, data, methods, results, conclusions & Structured abstract \\
 3a--b & Background, rationale, objectives & Sec.~I \\
-4 & Data sources, dates, setting & Sec.~IV-A; S3 \\
+4 & Data sources, dates, setting & Sec.~IV-A; S3, S7 \\
 5a & Participants: eligibility, recruitment & Sec.~IV-A, S3 (as reported by dataset authors) \\
 5b--c & Treatment / care pathway & n/a \\
 6 & Data preparation: cleaning, windowing, missing data & Sec.~IV-A; S2; loaders in code \\
 7 & Outcome definition and measurement & Sec.~IV-A; S3 (fingerstick meter; Dexcom G6; cuff BP) \\
 8 & Predictors: definition and measurement & Sec.~IV-A; S2 \\
-9 & Sample size justification & Sec.~III (power of the decision rule); S5 \\
+9 & Sample size justification & Sec.~III, IV-D (power of the decision rule); S5, S9 \\
 10 & Missing-data handling & S2 (gap-free windows only) \\
 11 & Analytical methods: model type, hyper-parameters, selection & Sec.~IV-A; S2 \\
 12a & Evaluation: splits, protocol, leakage control & Sec.~II-C, II-D; Table~I; frozen folds in code \\
 12b & Model performance measures & Sec.~II-E \\
-12c & Model comparison and null models & Sec.~II-E; S8 \\
-12d & Uncertainty (CIs, tests) & Sec.~II-E; Tables~II--III; S6, S8 \\
+12c & Model comparison and null models & Sec.~II-E; S11 \\
+12d & Uncertainty (CIs, tests) & Sec.~II-E; Tables~II--V; S6--S9, S11 \\
 12e & Fairness / subgroup analysis & Per-subject results (Fig.~\ref{fig:bigideas}b); sex not analysed (n too small) \\
 13 & Class imbalance / outcome distribution & S3; glucose ranges and hypo-/hyperglycaemic counts \\
 14 & Open science: code, data, protocol & Title footnote; README (incl.\ encoder weight sources and licences) \\
 15 & Patient and public involvement & n/a (public data) \\
 16--17 & Participant flow, characteristics & Sec.~IV-A; S3 \\
-18a--f & Model performance, comparisons, uncertainty, subgroups & Sec.~IV-B, IV-C; S6--S8 \\
+18a--f & Model performance, comparisons, uncertainty, subgroups & Sec.~IV-B--IV-D; S6--S11 \\
 19 & Model updating & n/a \\
 20 & Interpretation; comparison with prior work & Sec.~V; Table~\ref{tab:prior} \\
 21 & Limitations & Sec.~V \\
@@ -137,7 +137,31 @@ record and scored with 2\,000 subject-cluster bootstrap draws.
 \section*{S6. PPG-BP: full results}
 \suppPpgbpTable
 
-\section*{S7. PPG $\to$ glucose: detailed results}
+\section*{S7. VitalDB arterial-line blood pressure: full results}
+Cohort: a seeded random sample of 600 of the 3\,459 VitalDB cases with both \texttt{SNUADC/PLETH} and
+\texttt{SNUADC/ART}~\cite{lee2022vitaldb}, read at 100~Hz with the official client; 10-s segments every 120~s
+from 10~min after the start to 10~min before the end; quality control and beat-wise labels as in
+\texttt{scripts/fetch\_vitaldb.py}; at most 40 segments per case.  Segments: \m{vdNSegments}; cases:
+\m{vdNCases}; patients: \m{vdNSubjects}.  Labels are the median beat systolic peak and the median inter-beat trough
+of the arterial trace over the 10-s segment.  Quality control has no arterial-line damping check and no PPG--arterial
+lag check; missing demographics were replaced by the cohort mean.  The personal protocols train on the first half of
+every case's segments and test on the second half; their null is each case's training-half mean.  In the absolute
+variant models predict pressure directly (they receive no calibration input); in the residual variant they learn the
+deviation from each case's training mean and add it back, so they receive the same calibration as the null.  All
+VitalDB models were run with one seed.
+
+\suppVitaldbTable
+
+\section*{S8. Re-audit of a published claim: every seed}
+\suppReauditTable
+
+\section*{S9. Additional validation}
+Stress tests of the cross-join detector, validation of the copy probe, the decision rule's false-claim rate on
+1\,000 additional no-signal cohorts, the power of the rule at glucose-cohort sizes, and seed-ensemble decisions.
+
+\suppReviewTable
+
+\section*{S10. PPG $\to$ glucose: detailed results}
 Tables and figures that support Sec.~IV-B of the main paper.  The fusion
 network is shown in Fig.~\ref{fig:architecture}; published results on the
 Kermani--Esmaeili recordings are in Table~\ref{tab:prior}; the full
@@ -335,7 +359,7 @@ leakage ladder is in Table~\ref{tab:ladder}.
            Null: train mean.  1-D CNN: mean\,$\pm$\,std over
            \m{stubaOneDSeeds} seeds; other cells one run.  Paired intervals
            for the IR1 rows are given in Table~II of the main paper and
-           all comparisons in Sec.~S8.}
+           all comparisons in Sec.~S11.}
   \label{tab:stuba_wl}
   \centering
   \scriptsize
@@ -404,7 +428,7 @@ leakage ladder is in Table~\ref{tab:ladder}.
 \end{table}
 
 \clearpage
-\section*{S8. All paired glucose comparisons against the null}
+\section*{S11. All paired glucose comparisons against the null}
 Every model-versus-null comparison in the paper (\m{nPairedComparisons} in total; $\star$: the pre-specified primary
 comparison, all others exploratory).  MAE of the (seed-ensemble) prediction in mg/dL; $\Delta$: paired MAE difference
 against the cohort's null (train mean; subject training-period mean on BIG~IDEAs) with its 95\% subject-cluster

@@ -217,7 +217,7 @@ def main() -> None:
     # --- PPG-BP generalisation (run_ppgbp.py) --------------------------------
     p = os.path.join(RES, "ppgbp_summary.json")
     if os.path.exists(p):
-        BPM = {"mean": "Mean", "ridge": "Ridge", "demo": "Demo", "ridge+demo": "RidgeDemo", "gbm+demo": "GbmDemo", "1d": "OneD"}
+        BPM = {"mean": "Mean", "ridge": "Ridge", "demo": "Demo", "ridge+demo": "RidgeDemo", "gbm+demo": "GbmDemo", "1d": "OneD", "nn1": "Nn", "gbm": "Gbm"}
         PRO = {"segment_random": "Seg", "subject_kfold": "Subj"}
         groups: dict[str, list[dict]] = {}
         for key, v in json.load(open(p)).items():
@@ -234,6 +234,55 @@ def main() -> None:
                 f2 = lambda x: f"{x:+.2f}" if abs(x) < 0.05 else f"{x:+.1f}"
                 out += _macro(f"{pre}DiffCI", f"[{f2(lo)}, {f2(hi)}]")
             out += _macro("bpNSubjects", str(r0["n_subjects"])) + _macro("bpNSegments", str(r0["n_segments"]))
+    # --- re-audit of a published claim (run_reaudit.py) ----------------------
+    p = os.path.join(RES, "reaudit_soliman.json")
+    if os.path.exists(p):
+        R = json.load(open(p))
+        PN = {"A": "Pub", "B": "Rec", "C": "Subj"}
+        MN = {"null": "Null", "nn1": "Nn", "cnngru": "Cg"}
+        for pr, pn in PN.items():
+            runs = [v for k, v in R.items() if re.fullmatch(pr + r"_seed\d+", k)]
+            if not runs:
+                continue
+            out += _macro(f"ra{pn}Seeds", str(len(runs)))
+            for mo, mn in MN.items():
+                out += _macro(f"ra{pn}{mn}MAE", _fmt([r[mo]["mae"] for r in runs], 1 if mo == "null" else 2 if pr == "A" else 1))
+                out += _macro(f"ra{pn}{mn}Rtwo", _fmt([r[mo]["r2"] for r in runs], 2))
+                out += _macro(f"ra{pn}{mn}ZoneA", _fmt([r[mo]["zone_A_pct"] for r in runs], 0))
+                if "diff_ci" in runs[0][mo]:
+                    out += _macro(f"ra{pn}{mn}Diff", _fmt([r[mo]["diff_vs_null"] for r in runs], 1))
+                    lo = min(r[mo]["diff_ci"][0] for r in runs); hi = max(r[mo]["diff_ci"][1] for r in runs)   # widest over seeds
+                    out += _macro(f"ra{pn}{mn}DiffCI", f"[{lo:+.1f}, {hi:+.1f}]")
+                    out += _macro(f"ra{pn}{mn}NSigWorse", str(sum(r[mo]["diff_ci"][0] > 0 for r in runs)))
+            out += _macro(f"ra{pn}NTest", str(runs[0]["cnngru"]["n_test"]))
+        for key, nm in (("A_seed0_noise0.5", "raNoiseHalf"), ("A_seed0_noise2", "raNoiseDouble")):
+            if key in R:
+                out += _macro(f"{nm}CgMAE", f"{R[key]['cnngru']['mae']:.2f}") + _macro(f"{nm}NnMAE", f"{R[key]['nn1']['mae']:.2f}")
+                out += _macro(f"{nm}CgRtwo", f"{R[key]['cnngru']['r2']:.2f}")
+    # --- VitalDB arterial-line BP (run_vitaldb_bp.py) -------------------------
+    p = os.path.join(RES, "vitaldb_summary.json")
+    if os.path.exists(p):
+        VM = {"mean": "Mean", "ridge": "Ridge", "demo": "Demo", "ridge+demo": "RidgeDemo", "gbm+demo": "GbmDemo", "1d": "OneD", "nn1": "Nn", "gbm": "Gbm"}
+        VP = {"segment_random": "Seg", "case_kfold": "Case", "subject_kfold": "Subj", "personal": "Pers", "personal_res": "PersRes"}
+        groups = {}
+        for key, v in json.load(open(p)).items():
+            groups.setdefault(key.rsplit("_seed", 1)[0], []).append(v)
+        for key, runs in groups.items():
+            r0 = runs[0]
+            pre = f"vd{r0['target'].capitalize()}{VP[r0['protocol']]}{VM[r0['model']]}"
+            out += _macro(f"{pre}MAE", _fmt([r["mae"] for r in runs], 1))
+            out += _macro(f"{pre}ME", _fmt([r["me"] for r in runs], 1))
+            out += _macro(f"{pre}SD", _fmt([r["sde"] for r in runs], 1))
+            out += _macro(f"{pre}R", _fmt([r.get("pearson_r") for r in runs], 2))
+            out += _macro(f"{pre}WR", _fmt([r.get("within_case_r_median") for r in runs], 2))
+            if "diff_ci" in r0:
+                out += _macro(f"{pre}Diff", _fmt([r["diff_vs_null"] for r in runs], 1))
+                lo = max(r["diff_ci"][0] for r in runs); hi = max(r["diff_ci"][1] for r in runs)
+                f2 = lambda x: f"{x:+.2f}" if abs(x) < 0.05 else f"{x:+.1f}"
+                out += _macro(f"{pre}DiffCI", f"[{f2(lo)}, {f2(hi)}]")
+            out += _macro("vdNSegments", str(r0["n_segments"])) if not r0["protocol"].startswith("personal") else ""
+            out += _macro("vdNSubjects", str(r0["n_subjects"])) if not r0["protocol"].startswith("personal") else ""
+            out += _macro("vdNCases", str(r0["n_cases"])) if not r0["protocol"].startswith("personal") else ""
     # --- synthetic validation of the audit (validate_detectors.py) ----------
     p = os.path.join(RES, "validation_detectors.json")
     if os.path.exists(p):
@@ -260,6 +309,57 @@ def main() -> None:
                 nm = f"val{'Honest' if r.protocol == 'subject_kfold' else 'Leaky'}{'Ridge' if r.model == 'ridge' else 'Gbm'}G{GW[int(round(r.signal_gain))]}"
                 out += _macro(f"{nm}Rej", f"{100 * r.rejection_rate:.0f}") + _macro(f"{nm}Diff", f"{r.mean_diff:+.1f}")
             out += _macro("valReps", str(int(D.reps.iloc[0])))
+    # --- review additions: detector stress, null calibration, power, ensembles, copy probe ---
+    p = os.path.join(RES, "validation_detectors.json")
+    if os.path.exists(p):
+        v = json.load(open(p))
+        st = v.get("detector_stress")
+        if st:
+            out += _macro("valShuffledMaxSens", f"{100 * max(max(r['global_sensitivity'], r['local_sensitivity']) for r in st['shuffled_crossjoin']):.0f}")
+            wm = st["window_major_genuine"]
+            flagged = [r["n_records"] for r in wm if r["local_false_alarm"] > 0.5]
+            out += _macro("valWindowMajorMaxRecords", str(max(flagged)) if flagged else "0")
+            out += _macro("valWindowMajorRecordOrderOK", "yes" if not any(r["record_order_flagged"] for r in wm) else "no")
+        nl = v.get("decision_rule_null")
+        if nl:
+            from scipy.stats import beta
+            for r in nl:
+                nm = f"valNull{'Honest' if r['protocol'] == 'subject_kfold' else 'Leaky'}{'Ridge' if r['model'] == 'ridge' else 'Gbm'}"
+                k = int(round(r["rejection_rate"] * r["reps"])); n = int(r["reps"])
+                hi = beta.ppf(0.975, k + 1, n - k) if k < n else 1.0
+                lo = beta.ppf(0.025, k, n - k + 1) if k > 0 else 0.0
+                out += _macro(f"{nm}Rej", f"{100 * r['rejection_rate']:.1f}") + _macro(f"{nm}RejHi", f"{100 * hi:.1f}")
+                out += _macro(f"{nm}RejLo", f"{100 * lo:.1f}")
+            out += _macro("valNullReps", str(int(nl[0]["reps"])))
+    p = os.path.join(RES, "stats_tbme.json")
+    if os.path.exists(p):
+        st = json.load(open(p))
+        for key, nm in (("vitaldb_sbp_23x3", "powVdSbpKE"), ("vitaldb_sbp_16xall", "powVdSbpBig"), ("ppgbp_sbp_23x1", "powBpSbpKE"),
+                        ("vitaldb_dbp_23x3", "powVdDbpKE"), ("vitaldb_dbp_16xall", "powVdDbpBig"), ("ppgbp_dbp_23x1", "powBpDbpKE")):
+            r = st.get("power_at_glucose_sizes", {}).get(key)
+            if r:
+                out += _macro(nm, f"{100 * r['detection_rate']:.0f}")
+        f2 = lambda x: f"{x:+.2f}" if abs(x) < 0.05 else f"{x:+.1f}"
+        for key, nm in (("ppgbp_sbp_subject_kfold_1d_ensemble", "ensBpSbpOneD"), ("ppgbp_dbp_subject_kfold_1d_ensemble", "ensBpDbpOneD")):
+            r = st.get(key)
+            if r:
+                out += _macro(f"{nm}MAE", f"{r['mae']:.1f}") + _macro(f"{nm}Diff", f"{r['diff_vs_null']:+.1f}")
+                out += _macro(f"{nm}DiffCI", f"[{f2(r['diff_ci'][0])}, {f2(r['diff_ci'][1])}]")
+        for pr, nm in (("B", "ensRaRec"), ("C", "ensRaSubj")):
+            r = st.get(f"reaudit_{pr}_ensemble")
+            if r:
+                out += _macro(f"{nm}CgMAE", f"{r['cnngru']['mae']:.1f}") + _macro(f"{nm}CgDiff", f"{r['cnngru']['diff_vs_null']:+.1f}")
+                out += _macro(f"{nm}CgDiffCI", f"[{f2(r['cnngru']['diff_ci'][0])}, {f2(r['cnngru']['diff_ci'][1])}]")
+                out += _macro(f"{nm}NullMAE", f"{r['null_mae']:.1f}")
+    p = os.path.join(RES, "copy_probe.json")
+    if os.path.exists(p):
+        cp = json.load(open(p))
+        f2 = lambda x: f"{x:+.2f}" if abs(x) < 0.05 else f"{x:+.1f}"
+        for key, nm in (("window_random_euclid", "cpWinEuc"), ("window_random_shift", "cpWinShift"),
+                        ("subject_euclid", "cpSubjEuc"), ("subject_shift", "cpSubjShift")):
+            r = cp.get(key)
+            if r:
+                out += _macro(f"{nm}Diff", f"{r['diff_vs_null']:+.1f}") + _macro(f"{nm}DiffCI", f"[{f2(r['diff_ci'][0])}, {f2(r['diff_ci'][1])}]")
     # --- pretrained encoders (run_foundation_probes.py) ---------------------
     p = os.path.join(RES, "foundation_encoders.json")
     if os.path.exists(p):
