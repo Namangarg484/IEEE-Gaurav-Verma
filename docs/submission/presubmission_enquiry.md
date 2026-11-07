@@ -7,7 +7,7 @@ the PDF.
 
 ---
 
-**Subject:** Pre-submission enquiry: a validated leakage audit for PPG-based physiological estimation
+**Subject:** Pre-submission enquiry: screening and auditing data leakage in PPG-based physiological estimation
 
 Dear Professor [Editor-in-Chief's surname],
 
@@ -21,8 +21,10 @@ in its own right. The method detects labels that were corrupted while a
 public table was built, flags augmented copies that cross a train/test split,
 measures how much each leakage mechanism inflates a metric, and decides
 whether a model beats a null model using subject-cluster bootstrap intervals.
-We validate each component on synthetic data of known ground truth and then
-apply the method to blood glucose and blood pressure:
+It also screens, before any model is trained, for how much a leaky split will
+inflate a result, from label clustering and how well the inputs identify a
+subject; a preregistered test of this screen is reported. We validate each component on synthetic data of known ground truth
+and then apply the method to blood glucose and blood pressure:
 
 - It finds a previously unreported label-replication error in a widely used
   public glucose table.
@@ -30,9 +32,11 @@ apply the method to blood glucose and blood pressure:
   precedes the train/test split. In that setting a nearest-neighbour
   memoriser scores better than the published model, and the model does not
   beat the mean once subjects are separated.
-- On 556 surgical patients from VitalDB with arterial-line references, it
-  measures how much a random split inflates cuffless blood-pressure accuracy
-  for flexible models, while confirming a genuine calibration-free signal.
+- On two blood-pressure cohorts the screen places the leak in demographic
+  inputs, and a preregistered test on five new model types confirmed it: a model given only age, sex, height and weight
+  reaches MAE 5.9 mmHg and r = 0.93 under a random split and is no better than
+  the mean once subjects are separated. On 556 VitalDB surgical patients it
+  still confirms a genuine calibration-free PPG signal.
 
 All code, frozen folds and predictions are public:
 https://github.com/Namangarg484/IEEE-Gaurav-Verma

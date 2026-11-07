@@ -24,8 +24,8 @@
 
 \begin{document}
 
-\title{A Validated Leakage Audit for Wearable Physiological Regression,
-       with Application to PPG-Based Glucose and Blood-Pressure Estimation}
+\title{Screening and Auditing Data Leakage in Wearable Physiological
+       Regression, with Application to PPG-Based Glucose and Blood Pressure}
 
 \author{Gaurav~Verma%
 \thanks{G.~Verma is with the Department of Electronics and Communication
@@ -33,37 +33,37 @@ Engineering, [Institution Name] (e-mail: [author.email@institution.edu]).
 Code, frozen folds, integrity tests and all out-of-fold predictions:
 \url{https://github.com/Namangarg484/IEEE-Gaurav-Verma}.}}
 
-\markboth{IEEE Transactions on Biomedical Engineering (submitted)}{Verma: A Validated Leakage Audit for Wearable Physiological Regression}
+\markboth{IEEE Transactions on Biomedical Engineering (submitted)}{Verma: Screening and Auditing Data Leakage in Wearable Physiological Regression}
 
 \maketitle
 
 \begin{abstract}
-\textit{Objective:} Reported accuracies of physiological estimation from
-photoplethysmography (PPG) are often inflated by data leakage that
-subject-wise splitting does not detect.  We develop and validate an audit
-that detects and measures such leakage.
-\textit{Methods:} The audit combines a detector for label-construction
-leaks, a copy probe, asserted split protocols, a leakage ladder that
-measures inflation per mechanism, and a null-anchored decision rule with
-subject-cluster bootstrap intervals and controls.  It was validated on
-synthetic cohorts with known truth, used to re-audit a published
-PPG$\to$glucose result, and applied to three glucose cohorts and two
-blood-pressure cohorts (\m{bpNSubjects} and \m{vdNSubjects} subjects).
-\textit{Results:} The detector found every corrupted subject for cycle
-lengths $k\ge3$ without false alarms on \m{valRealNegSubjects} real subjects
-and flagged \m{valRealPosFlagged}/\m{valRealPosEligible} patients of a public
-glucose derivative.  The decision rule's false-claim rate stayed below the nominal
-2.5\% under honest splits but reached \m{valNullLeakyRidgeRej}--\m{valNullLeakyGbmRej}\% under leaky ones.  A published accuracy (MAE 2.96~mg/dL) was matched (\m{raPubCgMAE})
-only when augmentation preceded the split, where a nearest-neighbour
-memoriser scored \m{raPubNnMAE}; under a subject split the model did not
-beat the mean.  On VitalDB a leaky split lowered gradient-boosting MAE from
-\m{vdSbpSubjGbmDemoMAE} to \m{vdSbpSegGbmDemoMAE}~mmHg, mostly through demographic
-quasi-identifiers; a genuine calibration-free waveform signal remained.  No glucose
-model, including PPG foundation models, beat the null by more than a
-fraction of the reference noise, a bound limited by cohort size.
-\textit{Conclusion:} Leakage-aware, null-anchored evaluation separates
-physiological signal from artefact.
-\textit{Significance:} The open audit lets wearable studies test for
+\textit{Objective:} Accuracies of physiological estimation from
+photoplethysmography (PPG) are often inflated by leakage that
+subject-wise splitting misses.  We develop a method to screen for,
+detect and measure such leakage.
+\textit{Methods:} The audit combines a label-construction detector, a copy
+probe, asserted split protocols, a leakage ladder, a null-anchored decision
+rule, and an a-priori screen for identity-leak inflation: label clustering
+(potential) times how well the inputs identify a subject (identifiability),
+computable before any model is trained.  Components were validated on
+synthetic cohorts and applied to three glucose cohorts, a published glucose
+result, and two blood-pressure cohorts (\m{bpNSubjects} and \m{vdNSubjects} subjects).
+\textit{Results:} In a preregistered test on \m{lrProN} new model--cohort pairs
+the screen flagged every leaking input set correctly and gave the inflation
+within a factor of two in \m{lrProWithinTwo}\% of pairs ($\rho=\m{lrProRho}$).  It
+placed the blood-pressure leak in demographic inputs: gradient boosting on
+age, sex, height and weight alone, without PPG, reached MAE
+\m{bpSbpSegGbmDemoOnlyMAE}~mmHg ($r=\m{bpSbpSegGbmDemoOnlyR}$) under a random split
+and no better than the mean with subjects separated.  The label detector flagged a public glucose derivative without false alarms
+on \m{valRealNegSubjects} real subjects.
+A published glucose accuracy (MAE 2.96~mg/dL) was matched only when
+augmentation preceded the split.  On \m{vdNSubjects} surgical patients a
+genuine calibration-free PPG signal remained ($\Delta$
+\m{vdSbpSubjOneDDiff}~mmHg); glucose effects stayed below the reference noise.
+\textit{Conclusion:} Identity leakage can be screened before training and
+audited after it.
+\textit{Significance:} The open method lets wearable studies test for
 leakage.
 \end{abstract}
 
@@ -90,17 +90,19 @@ magnitude of a leak depends on the model as well as on the protocol.
 This paper treats evaluation as an engineering problem with a method that can
 itself be validated.  Its contributions are:
 \begin{enumerate}
-  \item \textbf{An audit method} (Sec.~\ref{sec:method}) with four
+  \item \textbf{An audit method} (Sec.~\ref{sec:method}) with six
         components: a detector for label-construction leaks with a block-scan
         variant for partial corruption, a copy probe for augmented or
         duplicated samples, split protocols whose no-leak guarantee is
         asserted in code before training, a leakage ladder that measures
-        inflation mechanism by mechanism, and a null-anchored decision rule
-        with controls.
+        inflation mechanism by mechanism, a null-anchored decision rule
+        with controls, and an \emph{a-priori} screen for identity-leak
+        inflation from label clustering and input identifiability,
+        computable before any model is trained.
   \item \textbf{Validation on known ground truth} (Sec.~\ref{sec:validation}):
-        detector sensitivity and specificity under injected corruption and
-        its failure modes, and the false-claim rate and power of the decision
-        rule under honest and leaky protocols.
+        detector sensitivity, specificity and failure modes, the false-claim
+        rate and power of the decision rule, and the leak-risk screen on
+        synthetic cohorts and in a preregistered prospective test.
   \item \textbf{Applications} (Sec.~\ref{sec:apps}).  For PPG$\to$glucose
         the audit uncovers a previously unreported label-replication artefact
         in a public derivative, bounds what three cohorts support, and
@@ -211,6 +213,42 @@ time-shifted overlapping windows of quasi-periodic PPG (Sec.~\ref{sec:validation
 and identity leaks that act through features, both of which the ladder
 measures.
 
+\subsection{A-priori leak-risk screening}
+\label{sec:risk}
+The ladder measures inflation after the fact, for one trained model, as does
+the permutation test of Chaibub~Neto \emph{et~al.}~\cite{chaibubneto2019}, which
+detects whether a trained classifier has learnt subject identity.  We also
+estimate, before any target model is trained, how much a split that admits a
+subject's other samples into training can lower the error.  The
+\emph{potential} $P=\mathrm{MAE}_{\mathrm{null}}-\mathrm{MAE}_{\mathrm{oracle}}$ is
+the error removed by a subject oracle that predicts each test sample by the
+mean label of the same subject's training samples; it depends only on the
+labels and the split, and grows with the between-subject share of label
+variance (intraclass correlation, ICC).  The \emph{identifiability} $a(X)$ is
+the accuracy with which a 1-nearest-neighbour classifier on the standardised
+inputs $X$ recovers the subject of each test sample under the same split.
+Assume that (i)~the model carries no genuine signal and neither over- nor
+under-fits new subjects, (ii)~it scores like the oracle on samples whose
+subject it recognises and like the null on the rest, and (iii)~it can resolve
+a single subject, i.e.\ it does not average over more samples than a subject
+contributes.  Then the leaky error is
+$a\,\mathrm{MAE}_{\mathrm{oracle}}+(1-a)\,\mathrm{MAE}_{\mathrm{null}}$ and the
+predicted inflation is
+\begin{equation}
+  \hat{I}(X)=a(X)\,P .
+  \label{eq:risk}
+\end{equation}
+If the honest result is available, replacing $\mathrm{MAE}_{\mathrm{null}}$ by the
+honest model error drops assumption~(i):
+$\hat{I}_2=a\,(\mathrm{MAE}_{\mathrm{honest}}-\mathrm{MAE}_{\mathrm{oracle}})$.
+$a(X)$ is computed on the inputs the model receives, because auxiliary
+inputs such as demographics can identify subjects without carrying
+information about the target.  Eq.~\eqref{eq:risk} covers identity leakage
+only; neighbours in time add to it (Sec.~\ref{sec:bp}).  It is the analogue,
+for subject-clustered physiological data, of nearest-neighbour diagnostics of
+optimistic cross-validation in spatial
+modelling~\cite{mila2022nndm,meyer2019spatial}.
+
 % =============================================================================
 \section{Validation on Known Ground Truth}
 \label{sec:validation}
@@ -262,6 +300,35 @@ $g=4$, but was only \m{valHonestRidgeGOneRej}\% and \m{valHonestGbmGOneRej}\% at
 $g=1$: with 16 subjects small effects go undetected.  The generator has no
 confounder linking a nuisance variable to the label, a case the rule cannot
 distinguish from signal and the controls must address.
+
+\textbf{Leak-risk screening.}  We varied the between-subject label SD
+(5--40~mg/dL) and the strength of the subject fingerprint (none to full)
+independently, \m{lrSynN} cohorts in all (identifiability \m{lrSynAMin}--\m{lrSynAMax}\%),
+computed $\hat{I}$ from the labels and inputs alone, and then measured the
+inflation of gradient boosting.  $\hat{I}$ correlated with it ($r=\m{lrSynR}$,
+Spearman $\rho=\m{lrSynRho}$; Fig.~\ref{fig:risk}a), but this agreement is
+partly fortuitous: gradient boosting was worse than the null on new subjects
+(median honest gain \m{lrSynHonestGain}~mg/dL), a penalty that makes up about
+\m{lrSynPenaltyShare}\% of the observed inflation and that assumption~(i)
+excludes.  Against the leaky gain over the null, the quantity
+Eq.~\eqref{eq:risk} models, the correlation is \m{lrSynRGain}.  The two-stage
+form $\hat{I}_2$, which uses the honest error, accounts for the penalty
+($r=\m{lrSynTwoR}$; median observed/predicted \m{lrSynTwoRatio}; \m{lrSynTwoWithin}\%
+of cohorts within a factor of 1.5).
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.92\textwidth]{fig_leak_risk.pdf}
+  \caption{Leak-risk screening.  (a)~Synthetic cohorts: predicted inflation
+           $\hat{I}=a\,P$ (Eq.~\ref{eq:risk}) against observed inflation (honest
+           minus leaky MAE, blue) and against the leaky gain over the null
+           (grey).  (b)~Blood-pressure cohorts, flexible models, log scales:
+           filled markers were run before the predictor was formulated
+           (retrospective); open markers are model types whose predictions were
+           committed publicly before they were run (prospective).  Dashed:
+           identity; shaded: within a factor of two.}
+  \label{fig:risk}
+\end{figure*}
 
 \textbf{Copy probe.}  On the Kermani--Esmaeili random-window rung, where
 overlapping windows of one recording cross the split, the Euclidean probe did
@@ -344,7 +411,7 @@ unpublished draft of this work trained on the file and reported MAE
 \m{mendLadderWindowOneD}~mg/dL ($r=\m{mendLadderWindowOneDR}$) under random
 windows, but \m{mendLadderRecordOneD} and \m{mendLadderSubjectOneD} once
 recordings or subjects are separated, against a null of \m{mendMeanMAE}
-(Fig.~\ref{fig:ladder}a): on this cohort window-neighbour leakage, not
+(supplement, Fig.~S1): on this cohort window-neighbour leakage, not
 identity leakage, produces the inflation, because most subjects contribute
 one or two recordings.  On BIG~IDEAs the ladder is nearly flat
 (\m{bigLadderReadingOneD}, \m{bigLadderChronoNoGapOneD},
@@ -405,15 +472,6 @@ and noise inputs return to the null.
   \end{tabular}
 \end{table}
 
-\begin{figure*}[t]
-  \centering
-  \includegraphics[width=0.92\textwidth]{fig_leakage_ladder.pdf}
-  \caption{Leakage ladder for PPG$\to$glucose.  (a)~Kermani--Esmaeili: random
-           windows, random recordings, subject-wise.  (b)~BIG~IDEAs: random
-           readings, chronological, chronological with 1-h guard gap.
-           Error bars: std over three seeds where available.}
-  \label{fig:ladder}
-\end{figure*}
 
 \subsection{Re-audit of a published claim}
 \label{sec:reaudit}
@@ -554,6 +612,37 @@ where models learn each case's deviation from its own training mean, all
 models improve on that mean, but by little more than a millimetre of mercury
 (best: 1-D CNN, $\Delta$ \m{vdSbpPersResOneDDiff}~mmHg, \m{vdSbpPersResOneDDiffCI}).
 
+\textbf{Leak-risk screening.}  The order of work matters here.  The ladder
+first showed the demographic leak; Eq.~\eqref{eq:risk} was formulated
+afterwards, and its agreement with the seven model types run before any
+prediction was committed is a retrospective check ($r=\m{lrRetroR}$, $\rho=\m{lrRetroRho}$ over \m{lrRetroN}
+flexible model--cohort pairs).  We then committed predictions for five model
+types never run on these cohorts (random forest and $k$-nearest neighbours on
+demographics, random forest on PPG and demographics, extra-trees on PPG
+features, and a more regularised gradient boosting) to the public repository
+(commit \texttt{\m{lrPreregCommit}}) before running them.  On these \m{lrProN}
+prospective pairs agreement was moderate ($r=\m{lrProR}$, $\rho=\m{lrProRho}$;
+median observed/predicted \m{lrProRatio}; \m{lrProWithinTwo}\% within a factor of
+two; Fig.~\ref{fig:risk}b).  The screening decision held without exception:
+every prospective model whose inputs included demographics (identifiable in
+\m{lrBpSbpADemo}--\m{lrVdSbpADemo}\% of cases; $\hat{I}\ge2$~mmHg) inflated by at least
+\m{lrProHighMin}~mmHg, and the PPG-only model ($a=\m{lrVdSbpAPpg}\%$, $\hat{I}<1.6$) by at
+most \m{lrProLowMax}.  The size errors have identifiable causes.  On PPG-BP, models
+that average over at least five samples (forest leaves, $k=5$) realised a
+third to two-thirds of the prediction, because a subject contributes only
+about two training segments (assumption~iii).  On VitalDB, models exceeded it, partly because they fit new
+patients worse than the null (assumption~i), and, when PPG features are also
+input, because segments minutes apart in the same surgery add a temporal
+leak: an oracle that copies the nearest-in-time training segment of the
+same case has potential \m{lrVdSbpPTime}~mmHg against \m{lrVdSbpP} for the subject
+oracle.  Linear models, which cannot express per-subject offsets,
+realised at most \m{lrLinMax}~mmHg.  The sharpest case is gradient boosting on
+age, sex, height and weight alone: on PPG-BP this PPG-free model scores MAE
+\m{bpSbpSegGbmDemoOnlyMAE}~mmHg with $r=\m{bpSbpSegGbmDemoOnlyR}$ under the random
+split, numbers that, reported alone, would suggest an accurate cuffless
+estimator, and \m{bpSbpSubjGbmDemoOnlyMAE}~mmHg, no better than the mean, with
+subjects separated.
+
 \textbf{Power at glucose-cohort sizes.}  Drawing 23 VitalDB patients with
 three segments each (the Kermani--Esmaeili design) from the honest
 predictions, the rule detected the CNN's systolic signal in \m{powVdSbpKE}\%
@@ -637,7 +726,17 @@ identity leakage inflated flexible models, mostly through demographic
 inputs that act as quasi-identifiers, and on VitalDB it reversed which
 model looked best.  Because the inflation depends on the model and its
 inputs, a protocol cannot be certified once for all models; the ladder has
-to be run for the model being reported.  Under honest protocols the
+to be run for the model being reported.  The leak-risk screen turns part of this
+into a design check: label clustering and input identifiability, both
+computable before training, flagged correctly in a preregistered test which
+inputs would carry the identity leak, including demographics that carry no
+information about the target, and gave its size to within a factor of two
+in most cases.  Identity confounding has been detected after
+training~\cite{chaibubneto2019}, and nearest-neighbour distances are used to
+diagnose optimistic cross-validation in spatial
+modelling~\cite{mila2022nndm,meyer2019spatial}; we are not aware of an earlier
+estimate of identity-leak magnitude made before training and tested
+prospectively.  Under honest protocols the
 null-anchored rule kept its false-claim rate below nominal in simulation; on
 real data it declared the blood-pressure signals and, narrowly, the
 pre-specified Kermani--Esmaeili glucose comparison, an effect a fifth of
@@ -658,8 +757,9 @@ be missed at the glucose cohorts' sizes, these are bounds on the effect in
 small, largely non-diabetic public cohorts, not proof that PPG carries no
 glucose information.
 
-\textbf{Recommendations.}  Run a construction-leak check on every derived
-table, in acquisition order; augment only after splitting and run a copy
+\textbf{Recommendations.}  Before training, compute the leak risk
+$\hat{I}=a\,P$ for every input set; run a construction-leak check on every
+derived table, in acquisition order; augment only after splitting and run a copy
 probe; name the protocol and the leak it removes, and freeze folds; measure
 the ladder for the reported model, with and without quasi-identifying
 inputs; report a null and the reference noise floor next to every result,
@@ -676,16 +776,27 @@ models were run with one seed.  The detector targets order-preserving
 cycling; shuffled cross-joins need the record-label check, and other
 construction errors (e.g.\ shifted joins) need their own tests.  The copy
 probe misses time-shifted copies of quasi-periodic signals.  The synthetic
-validation is moderate in size and has no confounders.  Networks shared one
+validation is moderate in size and has no confounders.  The leak-risk
+screen gives magnitude only to within about a factor of two, assumes the
+model can resolve single subjects, covers identity but not copy or temporal
+leaks, and was formulated after the retrospective cases; its
+identifiability term is a single-sample nearest-neighbour test, not
+monotone in the inputs, and underestimates what a network extracts from
+the raw waveform.  Networks shared one
 configuration; encoder probes were linear and used one common
 preprocessing.  The glucose cohorts contain few diabetic subjects and few
 hypoglycaemic references.
 
 % =============================================================================
 \section{Conclusion}
-We presented an audit for leakage in wearable physiological regression and
-validated its components on known ground truth, including their failure
-modes.  Applied to public PPG data it uncovered a label-construction leak in
+We presented a method to predict and audit leakage in wearable
+physiological regression and validated its components on known ground
+truth, including their failure modes.  Its a-priori screen, computed from
+label clustering and input identifiability before any model is trained,
+identified in a preregistered test which inputs carried an identity leak
+and estimated its size to within about a factor of two; a PPG-free model
+using the flagged demographic inputs looked like an accurate cuffless
+estimator under a random split.  Applied to public PPG data it uncovered a label-construction leak in
 a glucose derivative, attributed a published glucose accuracy to a copy
 leak, measured how a random split inflates and reorders cuffless
 blood-pressure models on \m{vdNSubjects} surgical patients, mostly through

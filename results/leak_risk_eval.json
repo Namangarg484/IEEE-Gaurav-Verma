@@ -1,0 +1,482 @@
+{
+  "prospective": {
+    "n": 20,
+    "pearson": 0.6628477183952324,
+    "spearman": 0.6787361198704365,
+    "median_ratio": 0.8502846471089781,
+    "within_x2": 0.6,
+    "within_x1_5": 0.35
+  },
+  "retrospective": {
+    "n": 16,
+    "pearson": 0.98665229270509,
+    "spearman": 0.9147058823529413,
+    "median_ratio": 1.0250846925932622,
+    "within_x2": 0.875,
+    "within_x1_5": 0.6875
+  },
+  "all_flexible": {
+    "n": 36,
+    "pearson": 0.8057223158701459,
+    "spearman": 0.8464935100494968,
+    "median_ratio": 1.0218949129265054,
+    "within_x2": 0.7222222222222222,
+    "within_x1_5": 0.5
+  },
+  "prospective_two_stage": {
+    "n": 20,
+    "pearson": 0.7285477400587492,
+    "spearman": 0.7563909774436091,
+    "median_ratio": 0.7081478021860429,
+    "within_x2": 0.55,
+    "within_x1_5": 0.25
+  },
+  "linear_max_observed": 0.2526206970214844,
+  "prospective_low_risk_max_observed": 0.566431999206543,
+  "prospective_high_risk_min_observed": 1.3236980438232422,
+  "rows": [
+    {
+      "cohort": "vitaldb_sbp",
+      "model": "ridge",
+      "flexible": false,
+      "prospective": false,
+      "observed": 0.060059547424316406,
+      "predicted": 0.3711023229944082,
+      "two_stage": 0.2779068867110883
+    },
+    {
+      "cohort": "vitaldb_sbp",
+      "model": "gbm",
+      "flexible": true,
+      "prospective": false,
+      "observed": 0.32747554779052734,
+      "predicted": 0.3711023229944082,
+      "two_stage": 0.23158640650372742
+    },
+    {
+      "cohort": "vitaldb_sbp",
+      "model": "1d",
+      "flexible": true,
+      "prospective": false,
+      "observed": 0.6388959884643555,
+      "predicted": 0.12226303623016488,
+      "two_stage": 0.03867112174393789
+    },
+    {
+      "cohort": "vitaldb_sbp",
+      "model": "demo",
+      "flexible": false,
+      "prospective": false,
+      "observed": 0.05115699768066406,
+      "predicted": 3.552097872130652,
+      "two_stage": 3.5811190296061213
+    },
+    {
+      "cohort": "vitaldb_sbp",
+      "model": "ridge+demo",
+      "flexible": false,
+      "prospective": false,
+      "observed": 0.09244823455810547,
+      "predicted": 2.400137867270048,
+      "two_stage": 1.765614177367277
+    },
+    {
+      "cohort": "vitaldb_sbp",
+      "model": "gbm+demo",
+      "flexible": true,
+      "prospective": false,
+      "observed": 3.207188606262207,
+      "predicted": 2.400137867270048,
+      "two_stage": 1.7788248946267675
+    },
+    {
+      "cohort": "vitaldb_sbp",
+      "model": "gbm_demo",
+      "flexible": true,
+      "prospective": false,
+      "observed": 3.583878517150879,
+      "predicted": 3.552097872130652,
+      "two_stage": 4.204932658756512
+    },
+    {
+      "cohort": "vitaldb_sbp",
+      "model": "rf_demo",
+      "flexible": true,
+      "prospective": true,
+      "observed": 4.691100120544434,
+      "predicted": 3.552097872130652,
+      "two_stage": 4.69230410345866
+    },
+    {
+      "cohort": "vitaldb_sbp",
+      "model": "knn_demo",
+      "flexible": true,
+      "prospective": true,
+      "observed": 5.240152359008789,
+      "predicted": 3.552097872130652,
+      "two_stage": 10.035464732731121
+    },
+    {
+      "cohort": "vitaldb_sbp",
+      "model": "rf+demo",
+      "flexible": true,
+      "prospective": true,
+      "observed": 5.023447036743164,
+      "predicted": 2.400137867270048,
+      "two_stage": 1.9321815971152825
+    },
+    {
+      "cohort": "vitaldb_sbp",
+      "model": "et",
+      "flexible": true,
+      "prospective": true,
+      "observed": 0.566431999206543,
+      "predicted": 0.3711023229944082,
+      "two_stage": 0.23702354941549625
+    },
+    {
+      "cohort": "vitaldb_sbp",
+      "model": "gbm+demo_l50",
+      "flexible": true,
+      "prospective": true,
+      "observed": 3.208439826965332,
+      "predicted": 2.400137867270048,
+      "two_stage": 1.7674423225731293
+    },
+    {
+      "cohort": "vitaldb_dbp",
+      "model": "ridge",
+      "flexible": false,
+      "prospective": false,
+      "observed": 0.044144630432128906,
+      "predicted": 0.3316717971895623,
+      "two_stage": 0.27940684323881565
+    },
+    {
+      "cohort": "vitaldb_dbp",
+      "model": "gbm",
+      "flexible": true,
+      "prospective": false,
+      "observed": 0.27134132385253906,
+      "predicted": 0.3316717971895623,
+      "two_stage": 0.25850924807392717
+    },
+    {
+      "cohort": "vitaldb_dbp",
+      "model": "1d",
+      "flexible": true,
+      "prospective": false,
+      "observed": 0.48786163330078125,
+      "predicted": 0.10927229080407126,
+      "two_stage": 0.05879059927924458
+    },
+    {
+      "cohort": "vitaldb_dbp",
+      "model": "demo",
+      "flexible": false,
+      "prospective": false,
+      "observed": 0.05925750732421875,
+      "predicted": 3.1746788204840897,
+      "two_stage": 2.997565354272938
+    },
+    {
+      "cohort": "vitaldb_dbp",
+      "model": "ridge+demo",
+      "flexible": false,
+      "prospective": false,
+      "observed": 0.08134841918945312,
+      "predicted": 2.1451173722568564,
+      "two_stage": 1.5530612833729707
+    },
+    {
+      "cohort": "vitaldb_dbp",
+      "model": "gbm+demo",
+      "flexible": true,
+      "prospective": false,
+      "observed": 2.3568992614746094,
+      "predicted": 2.1451173722568564,
+      "two_stage": 1.5780083448813802
+    },
+    {
+      "cohort": "vitaldb_dbp",
+      "model": "gbm_demo",
+      "flexible": true,
+      "prospective": false,
+      "observed": 2.8182196617126465,
+      "predicted": 3.1746788204840897,
+      "two_stage": 3.3637963189335824
+    },
+    {
+      "cohort": "vitaldb_dbp",
+      "model": "rf_demo",
+      "flexible": true,
+      "prospective": true,
+      "observed": 3.8011860847473145,
+      "predicted": 3.1746788204840897,
+      "two_stage": 3.801973427698231
+    },
+    {
+      "cohort": "vitaldb_dbp",
+      "model": "knn_demo",
+      "flexible": true,
+      "prospective": true,
+      "observed": 3.2852935791015625,
+      "predicted": 3.1746788204840897,
+      "two_stage": 6.005741204187489
+    },
+    {
+      "cohort": "vitaldb_dbp",
+      "model": "rf+demo",
+      "flexible": true,
+      "prospective": true,
+      "observed": 3.8397960662841797,
+      "predicted": 2.1451173722568564,
+      "two_stage": 1.7192452888109715
+    },
+    {
+      "cohort": "vitaldb_dbp",
+      "model": "et",
+      "flexible": true,
+      "prospective": true,
+      "observed": 0.4577178955078125,
+      "predicted": 0.3316717971895623,
+      "two_stage": 0.2672261525874553
+    },
+    {
+      "cohort": "vitaldb_dbp",
+      "model": "gbm+demo_l50",
+      "flexible": true,
+      "prospective": true,
+      "observed": 2.377157688140869,
+      "predicted": 2.1451173722568564,
+      "two_stage": 1.575510674519067
+    },
+    {
+      "cohort": "ppgbp_sbp",
+      "model": "ridge",
+      "flexible": false,
+      "prospective": false,
+      "observed": 0.12693023681640625,
+      "predicted": 1.4909331496559584,
+      "two_stage": 1.3811467274452096
+    },
+    {
+      "cohort": "ppgbp_sbp",
+      "model": "gbm",
+      "flexible": true,
+      "prospective": false,
+      "observed": 1.5523929595947266,
+      "predicted": 1.4909331496559584,
+      "two_stage": 1.3261058715149334
+    },
+    {
+      "cohort": "ppgbp_sbp",
+      "model": "1d",
+      "flexible": true,
+      "prospective": false,
+      "observed": 1.0442895889282227,
+      "predicted": 0.615305744302459,
+      "two_stage": 0.5048288555700303
+    },
+    {
+      "cohort": "ppgbp_sbp",
+      "model": "demo",
+      "flexible": false,
+      "prospective": false,
+      "observed": 0.17432022094726562,
+      "predicted": 14.483350596657882,
+      "two_stage": 12.254510023255818
+    },
+    {
+      "cohort": "ppgbp_sbp",
+      "model": "ridge+demo",
+      "flexible": false,
+      "prospective": false,
+      "observed": 0.2526206970214844,
+      "predicted": 4.922445954419672,
+      "two_stage": 4.157939548489383
+    },
+    {
+      "cohort": "ppgbp_sbp",
+      "model": "gbm+demo",
+      "flexible": true,
+      "prospective": false,
+      "observed": 5.138562202453613,
+      "predicted": 4.922445954419672,
+      "two_stage": 4.381783498967111
+    },
+    {
+      "cohort": "ppgbp_sbp",
+      "model": "gbm_demo",
+      "flexible": true,
+      "prospective": false,
+      "observed": 10.768252849578857,
+      "predicted": 14.483350596657882,
+      "two_stage": 14.889564781406103
+    },
+    {
+      "cohort": "ppgbp_sbp",
+      "model": "rf_demo",
+      "flexible": true,
+      "prospective": true,
+      "observed": 5.752175331115723,
+      "predicted": 14.483350596657882,
+      "two_stage": 14.364128171014407
+    },
+    {
+      "cohort": "ppgbp_sbp",
+      "model": "knn_demo",
+      "flexible": true,
+      "prospective": true,
+      "observed": 5.631050109863281,
+      "predicted": 14.483350596657882,
+      "two_stage": 15.936827730892404
+    },
+    {
+      "cohort": "ppgbp_sbp",
+      "model": "rf+demo",
+      "flexible": true,
+      "prospective": true,
+      "observed": 2.912764549255371,
+      "predicted": 4.922445954419672,
+      "two_stage": 4.208290858301978
+    },
+    {
+      "cohort": "ppgbp_sbp",
+      "model": "et",
+      "flexible": true,
+      "prospective": true,
+      "observed": 0.5494375228881836,
+      "predicted": 1.4909331496559584,
+      "two_stage": 1.2968704235921353
+    },
+    {
+      "cohort": "ppgbp_sbp",
+      "model": "gbm+demo_l50",
+      "flexible": true,
+      "prospective": true,
+      "observed": 3.006394386291504,
+      "predicted": 4.922445954419672,
+      "two_stage": 4.151638086655586
+    },
+    {
+      "cohort": "ppgbp_dbp",
+      "model": "ridge",
+      "flexible": false,
+      "prospective": false,
+      "observed": 0.10346317291259766,
+      "predicted": 0.8020494810666581,
+      "two_stage": 0.8041258819884547
+    },
+    {
+      "cohort": "ppgbp_dbp",
+      "model": "gbm",
+      "flexible": true,
+      "prospective": false,
+      "observed": 0.49521636962890625,
+      "predicted": 0.8020494810666581,
+      "two_stage": 0.7923978303978618
+    },
+    {
+      "cohort": "ppgbp_dbp",
+      "model": "1d",
+      "flexible": true,
+      "prospective": false,
+      "observed": 0.6261715888977051,
+      "predicted": 0.3310045477417954,
+      "two_stage": 0.30193470184925775
+    },
+    {
+      "cohort": "ppgbp_dbp",
+      "model": "demo",
+      "flexible": false,
+      "prospective": false,
+      "observed": 0.13188457489013672,
+      "predicted": 7.791337816076107,
+      "two_stage": 7.626268958914173
+    },
+    {
+      "cohort": "ppgbp_dbp",
+      "model": "ridge+demo",
+      "flexible": false,
+      "prospective": false,
+      "observed": 0.24332809448242188,
+      "predicted": 2.648036381934363,
+      "two_stage": 2.536546839251825
+    },
+    {
+      "cohort": "ppgbp_dbp",
+      "model": "gbm+demo",
+      "flexible": true,
+      "prospective": false,
+      "observed": 2.640857696533203,
+      "predicted": 2.648036381934363,
+      "two_stage": 2.47380697201676
+    },
+    {
+      "cohort": "ppgbp_dbp",
+      "model": "gbm_demo",
+      "flexible": true,
+      "prospective": false,
+      "observed": 6.592819929122925,
+      "predicted": 7.791337816076107,
+      "two_stage": 9.218490101408689
+    },
+    {
+      "cohort": "ppgbp_dbp",
+      "model": "rf_demo",
+      "flexible": true,
+      "prospective": true,
+      "observed": 3.5009546279907227,
+      "predicted": 7.791337816076107,
+      "two_stage": 8.655367730936995
+    },
+    {
+      "cohort": "ppgbp_dbp",
+      "model": "knn_demo",
+      "flexible": true,
+      "prospective": true,
+      "observed": 3.252664089202881,
+      "predicted": 7.791337816076107,
+      "two_stage": 9.501774693710566
+    },
+    {
+      "cohort": "ppgbp_dbp",
+      "model": "rf+demo",
+      "flexible": true,
+      "prospective": true,
+      "observed": 1.3236980438232422,
+      "predicted": 2.648036381934363,
+      "two_stage": 2.4010305375698184
+    },
+    {
+      "cohort": "ppgbp_dbp",
+      "model": "et",
+      "flexible": true,
+      "prospective": true,
+      "observed": 0.25521373748779297,
+      "predicted": 0.8020494810666581,
+      "two_stage": 0.7904711078059914
+    },
+    {
+      "cohort": "ppgbp_dbp",
+      "model": "gbm+demo_l50",
+      "flexible": true,
+      "prospective": true,
+      "observed": 1.7628679275512695,
+      "predicted": 2.648036381934363,
+      "two_stage": 2.4289186802876648
+    }
+  ],
+  "synthetic": {
+    "n": 128,
+    "pearson": 0.9686713818777902,
+    "spearman": 0.9418375755356161,
+    "pearson_vs_leaky_gain": 0.8730631862224407,
+    "median_honest_gain": -2.1407289598830204,
+    "share_inflation_from_honest_penalty": 0.5707748744522627,
+    "two_stage_pearson": 0.9866618567101073,
+    "two_stage_median_ratio": 1.1266049891220775,
+    "two_stage_within_x1_5": 0.796875
+  }
+}

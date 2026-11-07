@@ -1,0 +1,54 @@
+  vitaldb_sbp  ridge           observed  +0.06  predicted  +0.37  (max-block  +0.37)
+  vitaldb_sbp  gbm             observed  +0.33  predicted  +0.37  (max-block  +0.37)
+  vitaldb_sbp  1d              observed  +0.64  predicted  +0.12  (max-block  +0.12)
+  vitaldb_sbp  demo            observed  +0.05  predicted  +3.55  (max-block  +3.55)
+  vitaldb_sbp  ridge+demo      observed  +0.09  predicted  +2.40  (max-block  +3.55)
+  vitaldb_sbp  gbm+demo        observed  +3.21  predicted  +2.40  (max-block  +3.55)
+  vitaldb_sbp  gbm_demo        observed  +3.58  predicted  +3.55  (max-block  +3.55)
+  vitaldb_dbp  ridge           observed  +0.04  predicted  +0.33  (max-block  +0.33)
+  vitaldb_dbp  gbm             observed  +0.27  predicted  +0.33  (max-block  +0.33)
+  vitaldb_dbp  1d              observed  +0.49  predicted  +0.11  (max-block  +0.11)
+  vitaldb_dbp  demo            observed  +0.06  predicted  +3.17  (max-block  +3.17)
+  vitaldb_dbp  ridge+demo      observed  +0.08  predicted  +2.15  (max-block  +3.17)
+  vitaldb_dbp  gbm+demo        observed  +2.36  predicted  +2.15  (max-block  +3.17)
+  vitaldb_dbp  gbm_demo        observed  +2.82  predicted  +3.17  (max-block  +3.17)
+  ppgbp_sbp    ridge           observed  +0.13  predicted  +1.49  (max-block  +1.49)
+  ppgbp_sbp    gbm             observed  +1.55  predicted  +1.49  (max-block  +1.49)
+  ppgbp_sbp    1d              observed  +1.04  predicted  +0.62  (max-block  +0.62)
+  ppgbp_sbp    demo            observed  +0.17  predicted +14.48  (max-block +14.48)
+  ppgbp_sbp    ridge+demo      observed  +0.25  predicted  +4.92  (max-block +14.48)
+  ppgbp_sbp    gbm+demo        observed  +5.14  predicted  +4.92  (max-block +14.48)
+  ppgbp_sbp    gbm_demo        observed +10.77  predicted +14.48  (max-block +14.48)
+  ppgbp_sbp    rf_demo       P observed  +5.75  predicted +14.48  (max-block +14.48)
+  ppgbp_sbp    knn_demo      P observed  +5.63  predicted +14.48  (max-block +14.48)
+  ppgbp_sbp    rf+demo       P observed  +2.91  predicted  +4.92  (max-block +14.48)
+  ppgbp_sbp    et            P observed  +0.55  predicted  +1.49  (max-block  +1.49)
+  ppgbp_sbp    gbm+demo_l50  P observed  +3.01  predicted  +4.92  (max-block +14.48)
+  ppgbp_dbp    ridge           observed  +0.10  predicted  +0.80  (max-block  +0.80)
+  ppgbp_dbp    gbm             observed  +0.50  predicted  +0.80  (max-block  +0.80)
+  ppgbp_dbp    1d              observed  +0.63  predicted  +0.33  (max-block  +0.33)
+  ppgbp_dbp    demo            observed  +0.13  predicted  +7.79  (max-block  +7.79)
+  ppgbp_dbp    ridge+demo      observed  +0.24  predicted  +2.65  (max-block  +7.79)
+  ppgbp_dbp    gbm+demo        observed  +2.64  predicted  +2.65  (max-block  +7.79)
+  ppgbp_dbp    gbm_demo        observed  +6.59  predicted  +7.79  (max-block  +7.79)
+  ppgbp_dbp    rf_demo       P observed  +3.50  predicted  +7.79  (max-block  +7.79)
+  ppgbp_dbp    knn_demo      P observed  +3.25  predicted  +7.79  (max-block  +7.79)
+  ppgbp_dbp    rf+demo       P observed  +1.32  predicted  +2.65  (max-block  +7.79)
+  ppgbp_dbp    et            P observed  +0.26  predicted  +0.80  (max-block  +0.80)
+  ppgbp_dbp    gbm+demo_l50  P observed  +1.76  predicted  +2.65  (max-block  +7.79)
+  sweep bsd    5 fp 0.00: a 0.08  P  2.24  predicted +0.19  observed +0.31  leaky gain -0.85  honest gain -0.87
+  sweep bsd    5 fp 0.25: a 0.33  P  2.52  predicted +0.86  observed +1.25  leaky gain +0.22  honest gain -0.78
+  sweep bsd    5 fp 0.50: a 0.47  P  2.31  predicted +1.09  observed +2.37  leaky gain +0.84  honest gain -1.24
+  sweep bsd    5 fp 1.00: a 0.61  P  1.84  predicted +1.08  observed +1.83  leaky gain +0.89  honest gain -0.67
+  sweep bsd   10 fp 0.00: a 0.08  P  5.89  predicted +0.45  observed +0.89  leaky gain -1.06  honest gain -1.48
+  sweep bsd   10 fp 0.25: a 0.35  P  5.29  predicted +1.82  observed +3.01  leaky gain +0.55  honest gain -2.13
+  sweep bsd   10 fp 0.50: a 0.49  P  5.87  predicted +2.80  observed +4.84  leaky gain +1.72  honest gain -2.45
+  sweep bsd   10 fp 1.00: a 0.61  P  4.99  predicted +3.08  observed +5.60  leaky gain +2.30  honest gain -2.89
+  sweep bsd   20 fp 0.00: a 0.09  P 12.01  predicted +1.08  observed +1.05  leaky gain -1.68  honest gain -2.22
+  sweep bsd   20 fp 0.25: a 0.33  P 13.38  predicted +4.40  observed +7.28  leaky gain +2.85  honest gain -3.35
+  sweep bsd   20 fp 0.50: a 0.46  P 10.82  predicted +5.07  observed +7.47  leaky gain +3.04  honest gain -3.78
+  sweep bsd   20 fp 1.00: a 0.58  P 14.35  predicted +8.27  observed +12.99  leaky gain +7.75  honest gain -4.40
+  sweep bsd   40 fp 0.00: a 0.09  P 31.11  predicted +2.78  observed +2.76  leaky gain -6.93  honest gain -6.61
+  sweep bsd   40 fp 0.25: a 0.34  P 29.01  predicted +10.02  observed +14.58  leaky gain +4.83  honest gain -8.19
+  sweep bsd   40 fp 0.50: a 0.47  P 28.43  predicted +13.46  observed +21.97  leaky gain +10.60  honest gain -8.76
+  sweep bsd   40 fp 1.00: a 0.63  P 31.76  predicted +20.07  observed +30.98  leaky gain +17.21  honest gain -11.78

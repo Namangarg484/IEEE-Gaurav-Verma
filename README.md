@@ -55,6 +55,7 @@ from iCloud sync).
 | `run_foundation_probes.py` | Ridge probes on frozen PaPaGei-S, Pulse-PPG and AnyPPG embeddings under the same protocols (absolute and residual targets on BIG IDEAs). |
 | `run_ppgbp.py` | PPG-BP (Liang et al. 2018, 219 subjects) systolic/diastolic BP under a leaky random-segment and an honest subject-wise split: shows the audit detects real signal. |
 | `validate_detectors.py` | Validation on known ground truth: cross-join detector sensitivity/specificity (global vs block scan, plus real negative/positive controls) and false-claim rate / power of the null-anchored decision rule under honest vs leaky protocols. |
+| `leak_risk.py`, `ppgbench/risk.py` | A-priori leak-risk prediction: potential (label clustering) × identifiability (1-NN subject recovery from the model's inputs) = predicted identity-leak inflation, computed before training; validated on a synthetic sweep and on PPG-BP / VitalDB, including gradient boosting on demographics alone. |
 | `run_reaudit.py` | Re-audit of a published PPG→glucose claim (Soliman et al., arXiv:2411.11094): its stated pipeline with augmentation before vs. after the split, sample/recording/subject folds, a 1-NN copy probe and a CNN–GRU re-implementation. |
 | `scripts/fetch_vitaldb.py`, `run_vitaldb_bp.py` | VitalDB (CC BY 4.0) arterial-line blood pressure: quality-controlled 10-s finger-PPG segments with beat-wise SBP/DBP from 600 random surgical cases; random-segment, subject-wise and calibration-based personal protocols. |
 | `bootstrap_ci.py`, `stats_extra.py`, `clinical_metrics.py` | Subject-cluster bootstrap CIs; r CIs, Wilcoxon, sign tests, MDE, leverage; event metrics and reference-noise floors. |
@@ -112,6 +113,9 @@ $PY -I scripts/fetch_vitaldb.py --n-cases 600 --workers 4
 OMP_NUM_THREADS=1 $PY run_vitaldb_bp.py --targets sbp dbp --protocols segment_random subject_kfold personal \
     --models mean nn1 ridge demo ridge+demo gbm+demo 1d                          # ~2 h, the 1-D CNN dominates
 $PY run_ppgbp.py --models mean nn1                                               # copy probe on PPG-BP
+# a-priori leak risk (needs the PPG-BP and VitalDB runs above for the observed inflation; ~30 min incl. synthetic sweep):
+$PY run_ppgbp.py --models mean gbm gbm_demo && OMP_NUM_THREADS=1 $PY run_vitaldb_bp.py --protocols segment_random subject_kfold --models mean gbm gbm_demo
+$PY leak_risk.py
 # validation of the audit itself (~25 min):
 OMP_NUM_THREADS=1 $PY validate_detectors.py --reps-a 30 --reps 200
 $PY make_results_macros.py && $PY make_paper_figures.py && $PY draw_architecture.py

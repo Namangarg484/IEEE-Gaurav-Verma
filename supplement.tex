@@ -24,15 +24,15 @@
 \renewcommand{\thefigure}{S\arabic{figure}}
 
 \begin{document}
-\title{Supplementary Material: A Validated Leakage Audit for Wearable
-Physiological Regression, with Application to PPG-Based Glucose and
-Blood-Pressure Estimation}
+\title{Supplementary Material: Predicting and Auditing Data Leakage in
+Wearable Physiological Regression, with Application to PPG-Based Glucose
+and Blood Pressure}
 \author{Gaurav Verma}
 \maketitle
 
 \section*{S1. TRIPOD+AI checklist}
 Items of the TRIPOD+AI statement~\cite{collins2024tripod} and where each is
-addressed (main paper: Sec.~I--VI; supplement: S2--S11).  Items that do not
+addressed (main paper: Sec.~I--VI; supplement: S2--S12).  Items that do not
 apply to an evaluation of public data are marked n/a.
 
 \begin{longtable}{@{}p{1.2cm}p{7.2cm}p{6.5cm}@{}}
@@ -53,14 +53,14 @@ apply to an evaluation of public data are marked n/a.
 11 & Analytical methods: model type, hyper-parameters, selection & Sec.~IV-A; S2 \\
 12a & Evaluation: splits, protocol, leakage control & Sec.~II-C, II-D; Table~I; frozen folds in code \\
 12b & Model performance measures & Sec.~II-E \\
-12c & Model comparison and null models & Sec.~II-E; S11 \\
-12d & Uncertainty (CIs, tests) & Sec.~II-E; Tables~II--V; S6--S9, S11 \\
+12c & Model comparison and null models & Sec.~II-E; S12 \\
+12d & Uncertainty (CIs, tests) & Sec.~II-E; Tables~II--V; S6--S10, S12 \\
 12e & Fairness / subgroup analysis & Per-subject results (Fig.~\ref{fig:bigideas}b); sex not analysed (n too small) \\
 13 & Class imbalance / outcome distribution & S3; glucose ranges and hypo-/hyperglycaemic counts \\
 14 & Open science: code, data, protocol & Title footnote; README (incl.\ encoder weight sources and licences) \\
 15 & Patient and public involvement & n/a (public data) \\
 16--17 & Participant flow, characteristics & Sec.~IV-A; S3 \\
-18a--f & Model performance, comparisons, uncertainty, subgroups & Sec.~IV-B--IV-D; S6--S11 \\
+18a--f & Model performance, comparisons, uncertainty, subgroups & Sec.~IV-B--IV-D; S6--S12 \\
 19 & Model updating & n/a \\
 20 & Interpretation; comparison with prior work & Sec.~V; Table~\ref{tab:prior} \\
 21 & Limitations & Sec.~V \\
@@ -161,7 +161,21 @@ Stress tests of the cross-join detector, validation of the copy probe, the decis
 
 \suppReviewTable
 
-\section*{S10. PPG $\to$ glucose: detailed results}
+\section*{S10. A-priori leak-risk prediction}
+Per-cohort inputs and per-model predictions of Eq.~(1) of the main paper, and the synthetic sweep of Sec.~III.
+
+\suppLeakRiskTable
+
+\section*{S11. PPG $\to$ glucose: detailed results}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.9\textwidth]{fig_leakage_ladder.pdf}
+  \caption{Leakage ladder for PPG$\to$glucose.  (a)~Kermani--Esmaeili: random windows, random recordings,
+           subject-wise.  (b)~BIG~IDEAs: random readings, chronological, chronological with 1-h guard gap.
+           Error bars: std over three seeds where available.}
+  \label{fig:s_ladder}
+\end{figure}
+
 Tables and figures that support Sec.~IV-B of the main paper.  The fusion
 network is shown in Fig.~\ref{fig:architecture}; published results on the
 Kermani--Esmaeili recordings are in Table~\ref{tab:prior}; the full
@@ -359,7 +373,7 @@ leakage ladder is in Table~\ref{tab:ladder}.
            Null: train mean.  1-D CNN: mean\,$\pm$\,std over
            \m{stubaOneDSeeds} seeds; other cells one run.  Paired intervals
            for the IR1 rows are given in Table~II of the main paper and
-           all comparisons in Sec.~S11.}
+           all comparisons in Sec.~S12.}
   \label{tab:stuba_wl}
   \centering
   \scriptsize
@@ -428,7 +442,7 @@ leakage ladder is in Table~\ref{tab:ladder}.
 \end{table}
 
 \clearpage
-\section*{S11. All paired glucose comparisons against the null}
+\section*{S12. All paired glucose comparisons against the null}
 Every model-versus-null comparison in the paper (\m{nPairedComparisons} in total; $\star$: the pre-specified primary
 comparison, all others exploratory).  MAE of the (seed-ensemble) prediction in mg/dL; $\Delta$: paired MAE difference
 against the cohort's null (train mean; subject training-period mean on BIG~IDEAs) with its 95\% subject-cluster

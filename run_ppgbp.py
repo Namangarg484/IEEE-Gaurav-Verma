@@ -93,6 +93,23 @@ def folds_for(ws, protocol, seed):
 def fit_classical(name, F, y, tr, te):
     if name == "mean":
         return np.full(len(te), y[tr].mean(), np.float32)
+    # models added for the prospective leak-risk test (predictions preregistered before they were run)
+    if name in ("rf_demo", "rf+demo"):
+        from sklearn.ensemble import RandomForestRegressor
+        m = RandomForestRegressor(n_estimators=200, min_samples_leaf=5, n_jobs=4, random_state=0)
+        return m.fit(F[tr], y[tr]).predict(F[te]).astype(np.float32)
+    if name == "et":
+        from sklearn.ensemble import ExtraTreesRegressor
+        m = ExtraTreesRegressor(n_estimators=200, min_samples_leaf=5, n_jobs=4, random_state=0)
+        return m.fit(F[tr], y[tr]).predict(F[te]).astype(np.float32)
+    if name == "knn_demo":
+        from sklearn.neighbors import KNeighborsRegressor
+        sc = StandardScaler().fit(F[tr])
+        return KNeighborsRegressor(n_neighbors=5).fit(sc.transform(F[tr]), y[tr]).predict(sc.transform(F[te])).astype(np.float32)
+    if name == "gbm+demo_l50":
+        m = HistGradientBoostingRegressor(max_iter=300, learning_rate=0.05, max_leaf_nodes=15, min_samples_leaf=50,
+                                          l2_regularization=1.0, random_state=0)
+        return m.fit(F[tr], y[tr]).predict(F[te]).astype(np.float32)
     if name == "nn1":                                   # copy probe: 1-NN on the raw signal
         from sklearn.neighbors import KNeighborsRegressor
         return KNeighborsRegressor(n_neighbors=1, algorithm="brute").fit(F[tr], y[tr]).predict(F[te]).astype(np.float32)
@@ -130,7 +147,7 @@ def main() -> None:
     for target in args.targets:
         ws, demo = load_ppgbp(target)
         feats = handcrafted_features(ws.X)
-        F = {"ridge": feats, "demo": demo, "ridge+demo": np.hstack([feats, demo]), "gbm+demo": np.hstack([feats, demo]), "nn1": ws.X, "gbm": feats}
+        F = {"ridge": feats, "demo": demo, "ridge+demo": np.hstack([feats, demo]), "gbm+demo": np.hstack([feats, demo]), "gbm_demo": demo, "rf_demo": demo, "knn_demo": demo, "rf+demo": np.hstack([feats, demo]), "et": feats, "gbm+demo_l50": np.hstack([feats, demo]), "nn1": ws.X, "gbm": feats}
         views = make_views(ws.X, which=("x1",)) if "1d" in args.models else None
         for protocol in args.protocols:
             null_df = None

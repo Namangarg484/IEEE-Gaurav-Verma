@@ -158,7 +158,7 @@ GAINS = (0.0, 1.0, 2.0, 3.0, 4.0)
 
 
 def make_cohort(seed, gain, n_subjects=16, n_records=12, n_windows=3, between_sd=20.0, hr_within_sd=8.0,
-                label_noise_sd=3.0):
+                label_noise_sd=3.0, fp_scale=1.0):
     """Synthetic cohort with known ground truth.
 
     label = subject offset (unlearnable, SD ``between_sd``) + gain * (HR - 70) + noise.
@@ -174,7 +174,9 @@ def make_cohort(seed, gain, n_subjects=16, n_records=12, n_windows=3, between_sd
     X, y, subj, rec = [], [], [], []
     for s in range(n_subjects):
         offset = rng.normal(120.0, between_sd); hr_rest = rng.uniform(60.0, 85.0)
-        harmonic = rng.uniform(0.15, 0.75); notch = rng.uniform(0.05, 0.45)
+        # fp_scale shrinks the per-subject pulse-shape fingerprint towards a common shape (0 = no fingerprint);
+        # the rng draws are identical for every fp_scale, so fp_scale=1 reproduces the original cohorts exactly
+        harmonic = 0.45 + fp_scale * (rng.uniform(0.15, 0.75) - 0.45); notch = 0.25 + fp_scale * (rng.uniform(0.05, 0.45) - 0.25)
         for i in range(n_records):
             hr = float(np.clip(hr_rest + rng.normal(0.0, hr_within_sd), 40.0, 160.0))
             lab = offset + gain * (hr - 70.0) + rng.normal(0.0, label_noise_sd)

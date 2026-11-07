@@ -217,7 +217,7 @@ def main() -> None:
     # --- PPG-BP generalisation (run_ppgbp.py) --------------------------------
     p = os.path.join(RES, "ppgbp_summary.json")
     if os.path.exists(p):
-        BPM = {"mean": "Mean", "ridge": "Ridge", "demo": "Demo", "ridge+demo": "RidgeDemo", "gbm+demo": "GbmDemo", "1d": "OneD", "nn1": "Nn", "gbm": "Gbm"}
+        BPM = {"mean": "Mean", "ridge": "Ridge", "demo": "Demo", "ridge+demo": "RidgeDemo", "gbm+demo": "GbmDemo", "1d": "OneD", "nn1": "Nn", "gbm": "Gbm", "gbm_demo": "GbmDemoOnly", "rf_demo": "RfDemoOnly", "knn_demo": "KnnDemoOnly", "rf+demo": "RfDemo", "et": "Et", "gbm+demo_l50": "GbmDemoLfifty"}
         PRO = {"segment_random": "Seg", "subject_kfold": "Subj"}
         groups: dict[str, list[dict]] = {}
         for key, v in json.load(open(p)).items():
@@ -262,7 +262,7 @@ def main() -> None:
     # --- VitalDB arterial-line BP (run_vitaldb_bp.py) -------------------------
     p = os.path.join(RES, "vitaldb_summary.json")
     if os.path.exists(p):
-        VM = {"mean": "Mean", "ridge": "Ridge", "demo": "Demo", "ridge+demo": "RidgeDemo", "gbm+demo": "GbmDemo", "1d": "OneD", "nn1": "Nn", "gbm": "Gbm"}
+        VM = {"mean": "Mean", "ridge": "Ridge", "demo": "Demo", "ridge+demo": "RidgeDemo", "gbm+demo": "GbmDemo", "1d": "OneD", "nn1": "Nn", "gbm": "Gbm", "gbm_demo": "GbmDemoOnly", "rf_demo": "RfDemoOnly", "knn_demo": "KnnDemoOnly", "rf+demo": "RfDemo", "et": "Et", "gbm+demo_l50": "GbmDemoLfifty"}
         VP = {"segment_random": "Seg", "case_kfold": "Case", "subject_kfold": "Subj", "personal": "Pers", "personal_res": "PersRes"}
         groups = {}
         for key, v in json.load(open(p)).items():
@@ -360,6 +360,47 @@ def main() -> None:
             r = cp.get(key)
             if r:
                 out += _macro(f"{nm}Diff", f"{r['diff_vs_null']:+.1f}") + _macro(f"{nm}DiffCI", f"[{f2(r['diff_ci'][0])}, {f2(r['diff_ci'][1])}]")
+    # --- a-priori leak-risk prediction (leak_risk.py, leak_risk_eval.json) -----
+    p = os.path.join(RES, "leak_risk.json")
+    if os.path.exists(p):
+        L = json.load(open(p))
+        CO = {"vitaldb_sbp": "VdSbp", "vitaldb_dbp": "VdDbp", "ppgbp_sbp": "BpSbp", "ppgbp_dbp": "BpDbp"}
+        MO = {"ridge": "Ridge", "gbm": "Gbm", "1d": "OneD", "demo": "Demo", "ridge+demo": "RidgeDemo", "gbm+demo": "GbmDemo",
+              "gbm_demo": "GbmDemoOnly", "rf_demo": "RfDemoOnly", "knn_demo": "KnnDemoOnly", "rf+demo": "RfDemo", "et": "Et",
+              "gbm+demo_l50": "GbmDemoLfifty"}
+        for key, nm in CO.items():
+            d = L.get("cohorts", {}).get(key)
+            if not d:
+                continue
+            out += _macro(f"lr{nm}Icc", f"{d['icc']:.2f}") + _macro(f"lr{nm}P", f"{d['potential']:.1f}")
+            if "potential_temporal" in d:
+                out += _macro(f"lr{nm}PTime", f"{d['potential_temporal']:.1f}")
+            for inp, inm in (("ppg", "Ppg"), ("demo", "Demo"), ("ppg+demo", "Both"), ("raw", "Raw")):
+                out += _macro(f"lr{nm}A{inm}", f"{100 * d['identifiability'][inp]:.0f}")
+            for m, r in d.get("models", {}).items():
+                out += _macro(f"lr{nm}{MO[m]}Pred", f"{r['predicted_inflation']:.1f}") + _macro(f"lr{nm}{MO[m]}Obs", f"{r['inflation']:.1f}")
+    p = os.path.join(RES, "leak_risk_eval.json")
+    if os.path.exists(p):
+        E = json.load(open(p))
+        for k, nm in (("prospective", "Pro"), ("retrospective", "Retro"), ("all_flexible", "All"), ("prospective_two_stage", "ProTwo")):
+            e = E[k]
+            out += _macro(f"lr{nm}N", str(e["n"])) + _macro(f"lr{nm}R", f"{e['pearson']:.2f}") + _macro(f"lr{nm}Rho", f"{e['spearman']:.2f}")
+            out += _macro(f"lr{nm}Ratio", f"{e['median_ratio']:.2f}") + _macro(f"lr{nm}WithinTwo", f"{100 * e['within_x2']:.0f}")
+        out += _macro("lrLinMax", f"{E['linear_max_observed']:.1f}")
+        out += _macro("lrProLowMax", f"{E['prospective_low_risk_max_observed']:.1f}")
+        out += _macro("lrProHighMin", f"{E['prospective_high_risk_min_observed']:.1f}")
+        sy = E["synthetic"]
+        out += _macro("lrSynN", str(sy["n"])) + _macro("lrSynR", f"{sy['pearson']:.2f}") + _macro("lrSynRho", f"{sy['spearman']:.2f}")
+        out += _macro("lrSynRGain", f"{sy['pearson_vs_leaky_gain']:.2f}")
+        out += _macro("lrSynHonestGain", f"{sy['median_honest_gain']:.1f}")
+        out += _macro("lrSynPenaltyShare", f"{100 * sy['share_inflation_from_honest_penalty']:.0f}")
+        out += _macro("lrSynTwoR", f"{sy['two_stage_pearson']:.2f}") + _macro("lrSynTwoRatio", f"{sy['two_stage_median_ratio']:.2f}")
+        out += _macro("lrSynTwoWithin", f"{100 * sy['two_stage_within_x1_5']:.0f}")
+        sw = json.load(open(os.path.join(RES, "leak_risk.json"))).get("synthetic_sweep", [])
+        if sw:
+            out += _macro("lrSynAMin", f"{100 * min(r['identifiability'] for r in sw):.0f}")
+            out += _macro("lrSynAMax", f"{100 * max(r['identifiability'] for r in sw):.0f}")
+    out += _macro("lrPreregCommit", "47d6ae2")
     # --- pretrained encoders (run_foundation_probes.py) ---------------------
     p = os.path.join(RES, "foundation_encoders.json")
     if os.path.exists(p):

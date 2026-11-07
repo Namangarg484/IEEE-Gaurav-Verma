@@ -295,7 +295,58 @@ def fig_bp_ladder():
     _save(fig, "fig_bp_ladder")
 
 
+def fig_leak_risk():
+    """(a) synthetic: predicted a*P vs observed inflation and leaky gain; (b) real cohorts, log-log, retrospective vs
+    preregistered prospective models."""
+    path = os.path.join(RES, "leak_risk_eval.json")
+    if not os.path.exists(path):
+        print("no leak-risk evaluation"); return
+    E = json.load(open(path)); L = json.load(open(os.path.join(RES, "leak_risk.json")))
+    fig, (a, b) = plt.subplots(1, 2, figsize=(7.0, 2.9), gridspec_kw={"wspace": 0.32})
+    sw = L.get("synthetic_sweep", [])
+    px = [r["predicted_inflation"] for r in sw]
+    a.scatter(px, [r["observed_inflation"] for r in sw], s=9, color=C[0], alpha=0.7, lw=0, label="observed inflation")
+    a.scatter(px, [r["leaky_gain"] for r in sw], s=9, color="#b3b2ad", alpha=0.8, lw=0, label="leaky gain over null")
+    lim = max(max(px), max(r["observed_inflation"] for r in sw)) * 1.05
+    a.plot([0, lim], [0, lim], color=MUTED, lw=0.8, ls="--")
+    a.axhline(0, color=GRID, lw=0.8)
+    a.set_xlabel("Predicted inflation $a\\,P$ (mg/dL)"); a.set_ylabel("Observed (mg/dL)")
+    a.set_title("(a) Synthetic cohorts, gradient boosting", loc="left", color=INK)
+    a.grid(True); a.set_axisbelow(True); a.legend(frameon=False, fontsize=6, loc="upper left")
+    shape = {"demo": "D", "ppg+demo": "s", "ppg": "o", "raw": "^"}
+    cols = {"vitaldb": C[0], "ppgbp": C[1]}
+    for r in E["rows"]:
+        if not r["flexible"] or r["observed"] <= 0 or r["predicted"] <= 0:
+            continue
+        coh = r["cohort"].split("_")[0]
+        inp = L["cohorts"][r["cohort"]]["models"][r["model"]]["inputs"]
+        kw = dict(marker=shape.get(inp, "o"), s=30, zorder=3)
+        if r["prospective"]:
+            b.scatter(r["predicted"], r["observed"], facecolor="white", edgecolor=cols[coh], lw=1.2, **kw)
+        else:
+            b.scatter(r["predicted"], r["observed"], color=cols[coh], edgecolor="white", lw=0.4, **kw)
+    b.set_xscale("log"); b.set_yscale("log")
+    lo, hi = 0.08, 25
+    b.plot([lo, hi], [lo, hi], color=MUTED, lw=0.8, ls="--")
+    b.fill_between([lo, hi], [lo / 2, hi / 2], [lo * 2, hi * 2], color=GRID, alpha=0.6, lw=0, zorder=0)
+    b.set_xlim(lo, hi); b.set_ylim(0.15, hi)
+    b.set_xlabel("Predicted inflation $a\\,P$ (mmHg)"); b.set_ylabel("Observed inflation (mmHg)")
+    b.set_title("(b) Blood-pressure cohorts, flexible models", loc="left", color=INK)
+    b.grid(True, which="major"); b.set_axisbelow(True)
+    g = "#6b6a66"
+    h = [plt.Line2D([], [], marker="D", ls="", color=g, ms=4), plt.Line2D([], [], marker="s", ls="", color=g, ms=4),
+         plt.Line2D([], [], marker="o", ls="", color=g, ms=4), plt.Line2D([], [], marker="^", ls="", color=g, ms=4),
+         plt.Line2D([], [], marker="o", ls="", color=g, ms=5),
+         plt.Line2D([], [], marker="o", ls="", markerfacecolor="white", markeredgecolor=g, ms=5),
+         plt.Line2D([], [], marker="s", ls="", color=C[0], ms=5), plt.Line2D([], [], marker="s", ls="", color=C[1], ms=5)]
+    l = ["demographics", "PPG + demographics", "PPG features", "raw waveform", "retrospective", "preregistered",
+         "VitalDB", "PPG-BP"]
+    b.legend(h, l, frameon=False, fontsize=5.5, loc="upper left", ncol=2)
+    _save(fig, "fig_leak_risk")
+
+
 if __name__ == "__main__":
+    fig_leak_risk()
     fig_validation()
     fig_bp_ladder()
     fig_label_artifact()

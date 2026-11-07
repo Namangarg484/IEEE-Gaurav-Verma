@@ -12,9 +12,9 @@ IEEE Transactions on Biomedical Engineering
 
 Dear Professor [surname],
 
-Please consider the enclosed manuscript, **"A Validated Leakage Audit for
+Please consider the enclosed manuscript, **"Screening and Auditing Data Leakage in
 Wearable Physiological Regression, with Application to PPG-Based Glucose and
-Blood-Pressure Estimation,"** for publication in IEEE Transactions on
+Blood Pressure,"** for publication in IEEE Transactions on
 Biomedical Engineering as a regular paper.
 
 **The problem.** Cuffless estimation of glucose and blood pressure from
@@ -26,9 +26,20 @@ augmented, and the size of a leak depends on the model as well as the
 split.
 
 **The contribution.** We present an evaluation method for this problem and
-validate it as a method:
+validate it as a method. Its most novel part is an *a-priori* screen for
+identity-leak inflation: label clustering times how well the model's inputs
+identify a subject, computable before any model is trained. We tested it
+prospectively: predictions for five new model types were committed to the
+public repository before the models were run. The screen flagged every
+leaking input set correctly and gave the size of the inflation within a
+factor of two in 60% of the 20 new model–cohort pairs. It placed the
+blood-pressure leak in demographic inputs: a model given only age, sex,
+height and weight, without any PPG, reaches MAE 5.9 mmHg and r = 0.93 under a
+random split, and is no better than the mean once subjects are separated.
 
-1. **A leakage audit** with five parts: a detector for label-construction
+The full method:
+
+1. **A leakage audit** with six parts, the screen plus: a detector for label-construction
    errors, including a block-scan variant for partial corruption; a copy
    probe that flags augmented or duplicated samples crossing the split;
    split protocols whose no-leak guarantees are asserted in code; a leakage

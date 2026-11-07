@@ -279,6 +279,54 @@ def main() -> None:
     if "sweep" in args.parts:
         out["synthetic_sweep"] = synthetic_sweep()
     json.dump(out, open(OUT, "w"), indent=2)
+    if "synthetic_sweep" in out:
+        ev = evaluate()
+        print("prospective:", {k: round(v, 2) for k, v in ev["prospective"].items()})
+
+
+
+def evaluate() -> dict:
+    """Agreement statistics (primary: the preregistered rule a*P vs observed inflation, flexible models)."""
+    from scipy.stats import pearsonr, spearmanr
+    L = json.load(open(OUT))
+    S = {}
+    for f, pre in (("vitaldb_summary.json", "vitaldb"), ("ppgbp_summary.json", "ppgbp")):
+        for k, v in json.load(open(os.path.join(RES, f))).items():
+            S[(pre, k)] = v
+    rows = []
+    for key, st in L["cohorts"].items():
+        pre, tgt = key.split("_")
+        for m, r in st.get("models", {}).items():
+            hon = S[(pre, f"{tgt}_subject_kfold_{m}_seed0")]["mae"]
+            rows.append({"cohort": key, "model": m, "flexible": r["flexible"], "prospective": r["prospective"],
+                         "observed": r["inflation"], "predicted": r["predicted_inflation"],
+                         "two_stage": r["identifiability"] * (hon - st["mae_subject_oracle"])})
+
+    def stats(sel, key="predicted"):
+        o = np.array([r["observed"] for r in sel]); p = np.array([r[key] for r in sel])
+        ratio = o / p
+        return {"n": len(sel), "pearson": float(pearsonr(p, o)[0]), "spearman": float(spearmanr(p, o)[0]),
+                "median_ratio": float(np.median(ratio)), "within_x2": float(np.mean((ratio > 0.5) & (ratio < 2))),
+                "within_x1_5": float(np.mean((ratio > 1 / 1.5) & (ratio < 1.5)))}
+    flex = [r for r in rows if r["flexible"]]
+    pro = [r for r in flex if r["prospective"]]
+    ev = {"prospective": stats(pro), "retrospective": stats([r for r in flex if not r["prospective"]]),
+          "all_flexible": stats(flex), "prospective_two_stage": stats(pro, "two_stage"),
+          "linear_max_observed": float(max(r["observed"] for r in rows if not r["flexible"])),
+          "prospective_low_risk_max_observed": float(max(r["observed"] for r in pro if r["predicted"] < 1.6)),
+          "prospective_high_risk_min_observed": float(min(r["observed"] for r in pro if r["predicted"] >= 1.6)),
+          "rows": rows}
+    sw = L["synthetic_sweep"]
+    o = np.array([r["observed_inflation"] for r in sw]); p = np.array([r["predicted_inflation"] for r in sw])
+    g = np.array([r["leaky_gain"] for r in sw]); h = np.array([r["honest_gain"] for r in sw])
+    two = np.array([r["identifiability"] * (r["mae_model_honest"] - r["mae_oracle"]) for r in sw])
+    ev["synthetic"] = {"n": len(sw), "pearson": float(pearsonr(p, o)[0]), "spearman": float(spearmanr(p, o)[0]),
+                       "pearson_vs_leaky_gain": float(pearsonr(p, g)[0]), "median_honest_gain": float(np.median(h)),
+                       "share_inflation_from_honest_penalty": float(np.median(-h / o)),
+                       "two_stage_pearson": float(pearsonr(two, o)[0]), "two_stage_median_ratio": float(np.median(o / two)),
+                       "two_stage_within_x1_5": float(np.mean((o / two > 1 / 1.5) & (o / two < 1.5)))}
+    json.dump(ev, open(os.path.join(RES, "leak_risk_eval.json"), "w"), indent=2)
+    return ev
 
 
 if __name__ == "__main__":

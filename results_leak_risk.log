@@ -1,0 +1,48 @@
+vitaldb sbp: ICC 0.36  null 16.21  oracle 12.66  P 3.55  a(ppg) 0.10 a(demo) 1.00 a(both) 0.68
+    ridge      observed +0.06  predicted +0.37
+    gbm        observed +0.33  predicted +0.37
+    1d         observed +0.64  predicted +0.37
+    demo       observed +0.05  predicted +3.55
+    ridge+demo observed +0.09  predicted +2.40
+    gbm+demo   observed +3.21  predicted +2.40
+    gbm_demo   observed +3.58  predicted +3.55
+vitaldb dbp: ICC 0.50  null 9.96  oracle 6.79  P 3.17  a(ppg) 0.10 a(demo) 1.00 a(both) 0.68
+    ridge      observed +0.04  predicted +0.33
+    gbm        observed +0.27  predicted +0.33
+    1d         observed +0.49  predicted +0.33
+    demo       observed +0.06  predicted +3.17
+    ridge+demo observed +0.08  predicted +2.15
+    gbm+demo   observed +2.36  predicted +2.15
+    gbm_demo   observed +2.82  predicted +3.17
+ppgbp sbp: ICC 1.00  null 16.26  oracle 0.71  P 15.55  a(ppg) 0.10 a(demo) 0.93 a(both) 0.32
+    ridge      observed +0.13  predicted +1.49
+    gbm        observed +1.55  predicted +1.49
+    1d         observed +1.04  predicted +1.49
+    demo       observed +0.17  predicted +14.48
+    ridge+demo observed +0.25  predicted +4.92
+    gbm+demo   observed +5.14  predicted +4.92
+    gbm_demo   observed +10.77  predicted +14.48
+ppgbp dbp: ICC 1.00  null 8.72  oracle 0.35  P 8.36  a(ppg) 0.10 a(demo) 0.93 a(both) 0.32
+    ridge      observed +0.10  predicted +0.80
+    gbm        observed +0.50  predicted +0.80
+    1d         observed +0.63  predicted +0.80
+    demo       observed +0.13  predicted +7.79
+    ridge+demo observed +0.24  predicted +2.65
+    gbm+demo   observed +2.64  predicted +2.65
+    gbm_demo   observed +6.59  predicted +7.79
+  sweep bsd    5 fp 0.00: a 0.08  P  2.24  predicted +0.19  observed +0.31
+  sweep bsd    5 fp 0.25: a 0.33  P  2.52  predicted +0.86  observed +1.47
+  sweep bsd    5 fp 0.50: a 0.47  P  2.31  predicted +1.09  observed +2.36
+  sweep bsd    5 fp 1.00: a 0.61  P  1.84  predicted +1.08  observed +1.95
+  sweep bsd   10 fp 0.00: a 0.08  P  5.89  predicted +0.45  observed +0.55
+  sweep bsd   10 fp 0.25: a 0.35  P  5.29  predicted +1.82  observed +3.18
+  sweep bsd   10 fp 0.50: a 0.49  P  5.87  predicted +2.80  observed +4.86
+  sweep bsd   10 fp 1.00: a 0.61  P  4.99  predicted +3.08  observed +5.03
+  sweep bsd   20 fp 0.00: a 0.09  P 12.01  predicted +1.08  observed +2.08
+  sweep bsd   20 fp 0.25: a 0.33  P 13.38  predicted +4.40  observed +7.19
+  sweep bsd   20 fp 0.50: a 0.46  P 10.82  predicted +5.07  observed +7.58
+  sweep bsd   20 fp 1.00: a 0.58  P 14.35  predicted +8.27  observed +11.87
+  sweep bsd   40 fp 0.00: a 0.09  P 31.11  predicted +2.78  observed +2.55
+  sweep bsd   40 fp 0.25: a 0.34  P 29.01  predicted +10.02  observed +14.70
+  sweep bsd   40 fp 0.50: a 0.47  P 28.43  predicted +13.46  observed +20.77
+  sweep bsd   40 fp 1.00: a 0.63  P 31.76  predicted +20.07  observed +26.97

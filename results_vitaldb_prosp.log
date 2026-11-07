@@ -1,0 +1,26 @@
+00:45:48 VitalDB SBP: 64236 windows, 21412 segments, 558 cases, 556 patients
+00:45:50 RESULT sbp_segment_random_mean_seed0          MAE 16.21  ME +0.00 SD 20.40  r -0.014  wr -0.00  delta --
+00:46:08 RESULT sbp_segment_random_rf_demo_seed0       MAE 12.66  ME -0.02 SD 16.64  r 0.579  wr -0.30  delta -3.55 [-4.03,-3.10]
+00:46:09 RESULT sbp_segment_random_knn_demo_seed0      MAE 17.45  ME -2.34 SD 22.54  r 0.346  wr -0.05  delta +1.24 [+0.62,+1.86]
+00:48:44 RESULT sbp_segment_random_rf+demo_seed0       MAE 10.49  ME -0.04 SD 14.02  r 0.744  wr 0.62  delta -5.72 [-6.14,-5.32]
+00:49:14 RESULT sbp_segment_random_et_seed0            MAE 14.36  ME -0.00 SD 18.31  r 0.445  wr 0.55  delta -1.85 [-2.12,-1.58]
+00:49:25 RESULT sbp_segment_random_gbm+demo_l50_seed0  MAE 12.06  ME -0.03 SD 15.58  r 0.673  wr 0.57  delta -4.14 [-4.53,-3.78]
+00:49:25 RESULT sbp_subject_kfold_mean_seed0           MAE 16.22  ME -0.00 SD 20.41  r -0.053  wr --  delta --
+00:49:42 RESULT sbp_subject_kfold_rf_demo_seed0        MAE 17.35  ME +0.18 SD 22.01  r 0.036  wr --  delta +1.13 [+0.68,+1.57]
+00:49:43 RESULT sbp_subject_kfold_knn_demo_seed0       MAE 22.69  ME -1.55 SD 28.55  r -0.037  wr --  delta +6.47 [+5.64,+7.42]
+00:52:12 RESULT sbp_subject_kfold_rf+demo_seed0        MAE 15.52  ME +1.14 SD 19.62  r 0.327  wr 0.51  delta -0.70 [-1.09,-0.32]
+00:52:41 RESULT sbp_subject_kfold_et_seed0             MAE 14.92  ME +0.14 SD 18.93  r 0.373  wr 0.53  delta -1.29 [-1.58,-1.00]
+00:52:51 RESULT sbp_subject_kfold_gbm+demo_l50_seed0   MAE 15.27  ME +0.31 SD 19.41  r 0.336  wr 0.58  delta -0.95 [-1.32,-0.57]
+00:53:52 VitalDB DBP: 64236 windows, 21412 segments, 558 cases, 556 patients
+00:53:54 RESULT dbp_segment_random_mean_seed0          MAE 9.96  ME -0.00 SD 12.54  r -0.016  wr -0.01  delta --
+00:54:06 RESULT dbp_segment_random_rf_demo_seed0       MAE 6.79  ME -0.01 SD 9.03  r 0.694  wr -0.30  delta -3.17 [-3.54,-2.86]
+00:54:07 RESULT dbp_segment_random_knn_demo_seed0      MAE 9.51  ME -1.53 SD 12.34  r 0.465  wr -0.05  delta -0.45 [-0.87,-0.06]
+00:56:13 RESULT dbp_segment_random_rf+demo_seed0       MAE 5.49  ME -0.03 SD 7.48  r 0.810  wr 0.59  delta -4.47 [-4.79,-4.17]
+00:56:38 RESULT dbp_segment_random_et_seed0            MAE 8.89  ME +0.01 SD 11.29  r 0.439  wr 0.51  delta -1.07 [-1.27,-0.88]
+00:56:51 RESULT dbp_segment_random_gbm+demo_l50_seed0  MAE 6.74  ME -0.03 SD 8.74  r 0.736  wr 0.52  delta -3.22 [-3.51,-2.94]
+00:56:52 RESULT dbp_subject_kfold_mean_seed0           MAE 9.97  ME +0.00 SD 12.55  r -0.047  wr --  delta --
+00:57:03 RESULT dbp_subject_kfold_rf_demo_seed0        MAE 10.59  ME -0.34 SD 13.41  r 0.165  wr --  delta +0.62 [+0.26,+1.00]
+00:57:04 RESULT dbp_subject_kfold_knn_demo_seed0       MAE 12.79  ME -1.37 SD 15.90  r 0.086  wr --  delta +2.82 [+2.27,+3.36]
+00:59:07 RESULT dbp_subject_kfold_rf+demo_seed0        MAE 9.33  ME +0.65 SD 11.79  r 0.385  wr 0.49  delta -0.64 [-0.93,-0.34]
+00:59:32 RESULT dbp_subject_kfold_et_seed0             MAE 9.34  ME +0.14 SD 11.81  r 0.339  wr 0.48  delta -0.62 [-0.83,-0.42]
+00:59:45 RESULT dbp_subject_kfold_gbm+demo_l50_seed0   MAE 9.12  ME +0.29 SD 11.54  r 0.409  wr 0.53  delta -0.85 [-1.12,-0.57]

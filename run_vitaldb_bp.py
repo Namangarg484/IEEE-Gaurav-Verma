@@ -132,7 +132,7 @@ def main() -> None:
         log.info("VitalDB %s: %d windows, %d segments, %d cases, %d patients", target.upper(), len(ws),
                  len(np.unique(ws.record)), len(np.unique(case)), len(np.unique(ws.subject)))
         feats = handcrafted_features(ws.X)
-        F = {"ridge": feats, "demo": demo, "ridge+demo": np.hstack([feats, demo]), "gbm+demo": np.hstack([feats, demo]), "nn1": ws.X,
+        F = {"ridge": feats, "demo": demo, "ridge+demo": np.hstack([feats, demo]), "gbm+demo": np.hstack([feats, demo]), "gbm_demo": demo, "rf_demo": demo, "knn_demo": demo, "rf+demo": np.hstack([feats, demo]), "et": feats, "gbm+demo_l50": np.hstack([feats, demo]), "nn1": ws.X,
              "gbm": feats}
         views = make_views(ws.X, which=("x1",)) if "1d" in args.models else None
         for protocol in args.protocols:
