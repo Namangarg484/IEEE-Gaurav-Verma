@@ -1,0 +1,146 @@
+{
+  "written_utc": "2026-11-07T19:13:11+00:00",
+  "rule": "predicted inflation = a(joint inputs) * P on the random-segment folds; a = 1-NN subject identification accuracy; P = MAE(train-mean null) - MAE(subject oracle). Observed inflation will be subject-wise MAE minus random-segment MAE from run_ppgbp.py / run_vitaldb_bp.py.",
+  "predictions": {
+    "vitaldb_sbp/rf_demo": {
+      "inputs": "demo",
+      "identifiability": 1.0,
+      "identifiability_max_block": 1.0,
+      "predicted_inflation": 3.552097872130652,
+      "predicted_inflation_max_block": 3.552097872130652
+    },
+    "vitaldb_sbp/knn_demo": {
+      "inputs": "demo",
+      "identifiability": 1.0,
+      "identifiability_max_block": 1.0,
+      "predicted_inflation": 3.552097872130652,
+      "predicted_inflation_max_block": 3.552097872130652
+    },
+    "vitaldb_sbp/rf+demo": {
+      "inputs": "ppg+demo",
+      "identifiability": 0.6756958714739398,
+      "identifiability_max_block": 1.0,
+      "predicted_inflation": 2.400137867270048,
+      "predicted_inflation_max_block": 3.552097872130652
+    },
+    "vitaldb_sbp/et": {
+      "inputs": "ppg",
+      "identifiability": 0.10447412665794881,
+      "identifiability_max_block": 0.10447412665794881,
+      "predicted_inflation": 0.3711023229944082,
+      "predicted_inflation_max_block": 0.3711023229944082
+    },
+    "vitaldb_sbp/gbm+demo_l50": {
+      "inputs": "ppg+demo",
+      "identifiability": 0.6756958714739398,
+      "identifiability_max_block": 1.0,
+      "predicted_inflation": 2.400137867270048,
+      "predicted_inflation_max_block": 3.552097872130652
+    },
+    "vitaldb_dbp/rf_demo": {
+      "inputs": "demo",
+      "identifiability": 1.0,
+      "identifiability_max_block": 1.0,
+      "predicted_inflation": 3.1746788204840897,
+      "predicted_inflation_max_block": 3.1746788204840897
+    },
+    "vitaldb_dbp/knn_demo": {
+      "inputs": "demo",
+      "identifiability": 1.0,
+      "identifiability_max_block": 1.0,
+      "predicted_inflation": 3.1746788204840897,
+      "predicted_inflation_max_block": 3.1746788204840897
+    },
+    "vitaldb_dbp/rf+demo": {
+      "inputs": "ppg+demo",
+      "identifiability": 0.6756958714739398,
+      "identifiability_max_block": 1.0,
+      "predicted_inflation": 2.1451173722568564,
+      "predicted_inflation_max_block": 3.1746788204840897
+    },
+    "vitaldb_dbp/et": {
+      "inputs": "ppg",
+      "identifiability": 0.10447412665794881,
+      "identifiability_max_block": 0.10447412665794881,
+      "predicted_inflation": 0.3316717971895623,
+      "predicted_inflation_max_block": 0.3316717971895623
+    },
+    "vitaldb_dbp/gbm+demo_l50": {
+      "inputs": "ppg+demo",
+      "identifiability": 0.6756958714739398,
+      "identifiability_max_block": 1.0,
+      "predicted_inflation": 2.1451173722568564,
+      "predicted_inflation_max_block": 3.1746788204840897
+    },
+    "ppgbp_sbp/rf_demo": {
+      "inputs": "demo",
+      "identifiability": 0.9315068493150684,
+      "identifiability_max_block": 0.9315068493150684,
+      "predicted_inflation": 14.483350596657882,
+      "predicted_inflation_max_block": 14.483350596657882
+    },
+    "ppgbp_sbp/knn_demo": {
+      "inputs": "demo",
+      "identifiability": 0.9315068493150684,
+      "identifiability_max_block": 0.9315068493150684,
+      "predicted_inflation": 14.483350596657882,
+      "predicted_inflation_max_block": 14.483350596657882
+    },
+    "ppgbp_sbp/rf+demo": {
+      "inputs": "ppg+demo",
+      "identifiability": 0.3165905631659056,
+      "identifiability_max_block": 0.9315068493150684,
+      "predicted_inflation": 4.922445954419672,
+      "predicted_inflation_max_block": 14.483350596657882
+    },
+    "ppgbp_sbp/et": {
+      "inputs": "ppg",
+      "identifiability": 0.0958904109589041,
+      "identifiability_max_block": 0.0958904109589041,
+      "predicted_inflation": 1.4909331496559584,
+      "predicted_inflation_max_block": 1.4909331496559584
+    },
+    "ppgbp_sbp/gbm+demo_l50": {
+      "inputs": "ppg+demo",
+      "identifiability": 0.3165905631659056,
+      "identifiability_max_block": 0.9315068493150684,
+      "predicted_inflation": 4.922445954419672,
+      "predicted_inflation_max_block": 14.483350596657882
+    },
+    "ppgbp_dbp/rf_demo": {
+      "inputs": "demo",
+      "identifiability": 0.9315068493150684,
+      "identifiability_max_block": 0.9315068493150684,
+      "predicted_inflation": 7.791337816076107,
+      "predicted_inflation_max_block": 7.791337816076107
+    },
+    "ppgbp_dbp/knn_demo": {
+      "inputs": "demo",
+      "identifiability": 0.9315068493150684,
+      "identifiability_max_block": 0.9315068493150684,
+      "predicted_inflation": 7.791337816076107,
+      "predicted_inflation_max_block": 7.791337816076107
+    },
+    "ppgbp_dbp/rf+demo": {
+      "inputs": "ppg+demo",
+      "identifiability": 0.3165905631659056,
+      "identifiability_max_block": 0.9315068493150684,
+      "predicted_inflation": 2.648036381934363,
+      "predicted_inflation_max_block": 7.791337816076107
+    },
+    "ppgbp_dbp/et": {
+      "inputs": "ppg",
+      "identifiability": 0.0958904109589041,
+      "identifiability_max_block": 0.0958904109589041,
+      "predicted_inflation": 0.8020494810666581,
+      "predicted_inflation_max_block": 0.8020494810666581
+    },
+    "ppgbp_dbp/gbm+demo_l50": {
+      "inputs": "ppg+demo",
+      "identifiability": 0.3165905631659056,
+      "identifiability_max_block": 0.9315068493150684,
+      "predicted_inflation": 2.648036381934363,
+      "predicted_inflation_max_block": 7.791337816076107
+    }
+  }
+}
